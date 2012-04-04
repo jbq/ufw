@@ -1,0 +1,111 @@
+# Slovak translation of ufw.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the ufw package.
+# Ivan MasÃ¡r <helix84@centrum.sk>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ufw\n"
+"Report-Msgid-Bugs-To: ufw@packages.debian.org\n"
+"POT-Creation-Date: 2009-06-16 23:11+0100\n"
+"PO-Revision-Date: 2009-06-24 14:52+0100\n"
+"Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
+"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "Existing configuration found"
+msgstr "Nájdená existujúca konfigurácia"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid ""
+"An existing configuration for ufw has been found. Existing rules must be "
+"managed manually."
+msgstr ""
+"Našla sa existujúca konfigurácia ufw. Existujúce pravidlá je potrebné "
+"spravovať manuálne."
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "You should read the ufw(8) manpage for details about ufw configuration."
+msgstr ""
+"Mali by ste si prečítať podrobnosti o konfigurácii v manuálovej stránke ufw"
+"(8)."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "Start ufw automatically?"
+msgstr "Spúšťať ufw automaticky?"
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid ""
+"If you choose this option, the rules you are about to set will be enabled "
+"during system startup so that this host is protected as early as possible."
+msgstr ""
+"Ak zvolíte túto možnosť, pravidlá, ktoré sa chystáte nastaviť budú zapnuté "
+"pri spustení systému aby bol tento počítač chránený čo najskôr."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "To protect this host immediately, you must start ufw manually."
+msgstr "Ak chcete tento počítač chrániť okamžite, musíte spustiť ufw ručne."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Authorized services:"
+msgstr "Oprávnené služby:"
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid ""
+"Please choose the services that should be available for incoming connections."
+msgstr "Zvoľte prosím služby, ktoré budú dostupné pre prichádzajúce spojenia."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Other services may be specified in the next configuration step."
+msgstr "Ďalšie služby možno uviesť v nasledovnom kroku konfigurácie."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid "Additional authorized services:"
+msgstr "Ďalšie oprávnené služby:"
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Please enter a space separated list of any additional ports you would like "
+"to open. You may use a service name (as found in /etc/services), a port "
+"number, or a port number with protocol."
+msgstr ""
+"Zadajte prosím zoznam hodnôt oddelených medzerami ďalších portov, ktoré "
+"chcete otvoriť. Môžete použiť názov služby (podľa definície v /etc/"
+"services), číslo portu alebo číslo portu a protokol."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Example: to allow a web server, port 53 and tcp port 22, you should enter "
+"\"www 53 22/tcp\"."
+msgstr ""
+"Príklad: ak chcete povoliť webový server, port 53 a tcp port 22, mali by ste "
+"zadať „www 53 22/tcp“."

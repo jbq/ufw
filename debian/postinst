@@ -1,0 +1,123 @@
+#!/bin/sh -e
+
+# Only source /usr/share/debconf/confmodule when not called with 'triggered'
+# to avoid LP: #618410.
+if [ "$1" != "triggered" ]; then
+    . /usr/share/debconf/confmodule
+fi
+
+RULES_PATH="/etc/ufw"
+USER_PATH="/lib/ufw"
+TEMPLATE_PATH="/usr/share/ufw"
+
+enable_ufw() {
+    ans=""
+    if [ "$1" = "true" ]; then
+        ans="yes"
+    elif [ "$1" = "false" ]; then
+        ans="no"
+    else
+        return 1
+    fi
+
+    test -f /etc/ufw/ufw.conf && sed -i "s/^ENABLED=.*/ENABLED=$ans/" /etc/ufw/ufw.conf
+}
+
+allow_port() {
+    ufw allow "$@" >/dev/null || true
+}
+
+allow_service() {
+    service=`echo "$@" | sed 's/#/ /g'`
+    if [ "$service" = "CUPS" ]; then
+        allow_port 631
+    elif [ "$service" = "DNS" ]; then
+        allow_port 53
+    elif [ "$service" = "IMAPS" ]; then
+        allow_port 993/tcp
+    elif [ "$service" = "POP3S" ]; then
+        allow_port 995/tcp
+    elif [ "$service" = "SSH" ]; then
+        allow_port 22/tcp
+    elif [ "$service" = "CIFS (Samba)" ]; then
+        allow_port 137/udp
+        allow_port 138/udp
+        allow_port 139/tcp
+        allow_port 445/tcp
+    elif [ "$service" = "SMTP" ]; then
+        allow_port 25/tcp
+    elif [ "$service" = "HTTP" ]; then
+        allow_port 80/tcp
+    elif [ "$service" = "HTTPS" ]; then
+        allow_port 443/tcp
+    fi
+}
+
+case "$1" in
+    configure)
+        # these files are required, but don't want to change them if
+        # the user modified them
+        for f in before.rules before6.rules after.rules after6.rules
+        do
+            ucf --debconf-ok $TEMPLATE_PATH/$f $RULES_PATH/$f
+            test -f $RULES_PATH/$f && chmod 640 $RULES_PATH/$f
+        done
+
+        for f in user.rules user6.rules
+        do
+            if [ ! -e "$USER_PATH/$f" ]; then
+                # if no config, copy the template
+                cp $TEMPLATE_PATH/$f $USER_PATH/$f
+                chmod 640 $USER_PATH/$f
+            fi
+        done
+
+        if [ ! -e "/etc/ufw/ufw.conf" ]; then
+            cp $TEMPLATE_PATH/ufw.conf /etc/ufw
+        fi
+
+        # configure ufw with debconf values
+        db_get ufw/enable
+        enabled="$RET"
+
+        db_fget ufw/existing_configuration seen
+        seen_warning="$RET"
+        if [ "$enabled" = "true" ] && [ "$seen_warning" = "false" ] ; then
+            db_get ufw/allow_known_ports
+            CHOICES="$RET"
+            for service in `echo "$CHOICES" | sed 's/, /\n/g' | sed 's/ /#/g'`; do
+                allow_service "$service"
+            done
+
+            db_get ufw/allow_custom_ports
+            PORTS="$RET"
+            for port in $PORTS ; do
+                allow_port "$port"
+            done
+
+            db_fset ufw/existing_configuration seen true
+        fi
+
+        # need to do this after all 'allow_service' calls, otherwise ufw may
+        # try to use iptables, which breaks the installer
+        enable_ufw "$enabled"
+
+        # reload the firewall for IPv6 enabled by default
+        if [ "$enabled" = "true" ] && [ ! -z "$2" ] && dpkg --compare-versions "$2" lt "0.30.1-2" ; then
+            /lib/ufw/ufw-init stop || true
+            /lib/ufw/ufw-init start || true
+        fi
+        ;;
+    triggered)
+        ufw app update all || echo "Processing ufw triggers failed. Ignoring."
+        exit 0
+        ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+    *)
+        echo "postinst called with unknown argument '$1'" >&2
+        exit 1
+        ;;
+esac
+
+#DEBHELPER#

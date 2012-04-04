@@ -1,0 +1,2 @@
+# Don't need to supply 'stop' for a firewall
+ufw binary: init.d-script-possible-missing-stop

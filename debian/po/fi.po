@@ -1,0 +1,110 @@
+# Copyright (C) 2009
+# This file is distributed under the same license as the ufw package.
+#
+# Esko Arajärvi <edu@iki.fi>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: ufw\n"
+"Report-Msgid-Bugs-To: ufw@packages.debian.org\n"
+"POT-Creation-Date: 2009-06-16 23:11+0100\n"
+"PO-Revision-Date: 2009-06-17 21:39+0300\n"
+"Last-Translator: Esko Arajärvi <edu@iki.fi>\n"
+"Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "Existing configuration found"
+msgstr "Asetustiedosto löytyi"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid ""
+"An existing configuration for ufw has been found. Existing rules must be "
+"managed manually."
+msgstr ""
+"Järjestelmästä löytyi ufw:n asetustiedosto. Olemassa olevia sääntöjä täytyy "
+"pitää yllä käsin."
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "You should read the ufw(8) manpage for details about ufw configuration."
+msgstr "Lisätietoja ufw:n asetuksista löytyy man-ohjesivulta ufw(8)."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "Start ufw automatically?"
+msgstr "Käynnistetäänkö ufw automaattisesti?"
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid ""
+"If you choose this option, the rules you are about to set will be enabled "
+"during system startup so that this host is protected as early as possible."
+msgstr ""
+"Jos valitset tämän vaihtoehdon, asetettavat säännöt otetaan käyttöön "
+"järjestelmän käynnistyessä siten, että kone on suojattuna mahdollisimman "
+"aikaisin."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "To protect this host immediately, you must start ufw manually."
+msgstr "Jos haluat suojata tämän koneen heti, ufw täytyy käynnistää käsin."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Authorized services:"
+msgstr "Sallitut palvelut:"
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid ""
+"Please choose the services that should be available for incoming connections."
+msgstr "Valitse palvelut, joihin voidaan ottaa yhteyksiä ulkopuolelta."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Other services may be specified in the next configuration step."
+msgstr "Voit seuraavassa vaiheessa määritellä muita palveluita."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid "Additional authorized services:"
+msgstr "Muut sallitut palvelut:"
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Please enter a space separated list of any additional ports you would like "
+"to open. You may use a service name (as found in /etc/services), a port "
+"number, or a port number with protocol."
+msgstr ""
+"Anna välilyönnein eroteltu lista porteista, jotka haluat avata. Voit käyttää "
+"palvelun nimeä (tiedostosta /etc/services löytyvässä muodossa), portin "
+"numeroa tai portin numeroa ja protokollaa."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Example: to allow a web server, port 53 and tcp port 22, you should enter "
+"\"www 53 22/tcp\"."
+msgstr ""
+"Esimerkki: Salliaksesi www-palvelimen, portin 53 ja TCP-portin 22, syötä "
+"”www 53 22/tcp”."

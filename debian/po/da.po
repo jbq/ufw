@@ -1,0 +1,112 @@
+# Danish translation ufw.
+# Copyright (C) 2012 ufw & nedenstående oversættere.
+# This file is distributed under the same license as the ufw package.
+# Joe Hansen (joedalton2@yahoo.dk), 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ufw\n"
+"Report-Msgid-Bugs-To: ufw@packages.debian.org\n"
+"POT-Creation-Date: 2009-06-16 23:11+0100\n"
+"PO-Revision-Date: 2012-03-31 12:42+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "Existing configuration found"
+msgstr "Eksisterende konfiguration fundet"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid ""
+"An existing configuration for ufw has been found. Existing rules must be "
+"managed manually."
+msgstr ""
+"Der er fundet en eksisterende konfiguration for ufw. Eksisterende regler "
+"skal håndteres manuelt."
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "You should read the ufw(8) manpage for details about ufw configuration."
+msgstr "Du bør læse manualsiden ufw(8) for detaljer om ufw-konfiguration."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "Start ufw automatically?"
+msgstr "Start ufw automatisk?"
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid ""
+"If you choose this option, the rules you are about to set will be enabled "
+"during system startup so that this host is protected as early as possible."
+msgstr ""
+"Hvis du vælger denne indstilling, så vil reglerne du er ved at angive blive "
+"aktiveret ved systemopstart, så at denne vært bliver beskyttet så tidlig "
+"som muligt."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "To protect this host immediately, you must start ufw manually."
+msgstr ""
+"For at beskytte denne vært øjeblikkelig, så skal du starte ufw manuelt."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Authorized services:"
+msgstr "Autoriserede tjenester:"
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid ""
+"Please choose the services that should be available for incoming connections."
+msgstr ""
+"Vælg venligst de tjenester som skal være tilgængelige for indgående forbindelser."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Other services may be specified in the next configuration step."
+msgstr "Andre tjenester kan angives i det næste konfigurationstrin."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid "Additional authorized services:"
+msgstr "Yderligere autoriserede tjenester:"
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Please enter a space separated list of any additional ports you would like "
+"to open. You may use a service name (as found in /etc/services), a port "
+"number, or a port number with protocol."
+msgstr ""
+"Indtast venligst en mellemrumsadskilt liste over yderligere porte du ønsker "
+"at åbne. Du kan bruge et tjenestenavn (som fundet i /etc/services), et "
+"portnummer eller et portnummer med protokol."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Example: to allow a web server, port 53 and tcp port 22, you should enter "
+"\"www 53 22/tcp\"."
+msgstr ""
+"Eksempel: For at tillade en internetserver, port 53 og tcp port 22, skal "
+"du indtaste »www 53 22/tcp«."
+

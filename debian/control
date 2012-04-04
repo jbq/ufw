@@ -1,0 +1,21 @@
+Source: ufw
+Section: admin
+XS-Python-Version: >= 2.5
+Priority: optional
+Maintainer: Jamie Strandboge <jamie@ubuntu.com>
+Build-Depends-Indep: sed (>= 3.95), netbase, iptables, lsb-release
+Build-Depends: debhelper (>= 7.3.15ubuntu2), po-debconf, python (>= 2.6.6-3~)
+Standards-Version: 3.9.3
+Homepage: https://launchpad.net/ufw
+Vcs-Bzr: https://bazaar.launchpad.net/~jdstrand/ufw/ufw-debian
+
+Package: ufw
+Architecture: all
+Suggests: rsyslog
+Depends: debconf, ${python:Depends}, ${misc:Depends}, iptables, ucf
+XB-Python-Version: ${python:Versions}
+Description: program for managing a Netfilter firewall
+ The Uncomplicated FireWall is a front-end for iptables, to make managing a
+ Netfilter firewall easier. It provides a command line interface with syntax
+ similar to OpenBSD's Packet Filter. It is particularly well-suited as a
+ host-based firewall.

@@ -1,0 +1,123 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+PYTHON  := /usr/bin/python
+PYVERS  := $(shell pyversions -vr)
+PKGVERS := $(shell dpkg-parsechangelog | grep ^Version: | cut -d ' ' -f 2)
+DISTRIB := $(shell lsb_release -i -s)
+
+ifneq (,$(filter $(DISTRIB),Ubuntu))
+  DISTRIB_VERSION_MAJOR := $(shell lsb_release -s -r | cut -d '.' -f 1)
+  DISTRIB_VERSION_MINOR := $(shell lsb_release -s -r | cut -d '.' -f 2)
+endif
+
+build-arch: build-stamp
+
+build-indep: build-stamp
+
+build: build-arch build-indep
+
+build-stamp:
+	dh_testdir
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	make clean
+	rm -f $(CURDIR)/debian/ufw.init $(CURDIR)/debian/ufw.upstart $(CURDIR)/debian/ufw.logrotate
+	-find . -name '*.py[co]' | xargs rm -f
+	dh_clean
+	debconf-updatepo
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	# make sure the version is in sync with our changelog
+	sed -i "s/^ufw_version = .*/ufw_version = '$(PKGVERS)'/" ./setup.py
+
+ifeq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
+	./run_tests.sh -i $(PYTHON)
+endif
+
+	$(PYTHON) ./setup.py install --root=$(CURDIR)/debian/ufw
+
+	# these shouldn't be conffiles
+	mv $(CURDIR)/debian/ufw/etc/ufw/*.rules $(CURDIR)/debian/ufw/usr/share/ufw
+	mv $(CURDIR)/debian/ufw/etc/ufw/ufw.conf $(CURDIR)/debian/ufw/usr/share/ufw
+	mv $(CURDIR)/debian/ufw/lib/ufw/*.rules $(CURDIR)/debian/ufw/usr/share/ufw
+
+	# Rename and install the shell-completion file
+	cp $(CURDIR)/shell-completion/bash $(CURDIR)/debian/ufw/etc/bash_completion.d/ufw
+
+binary-arch: build
+
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installchangelogs ChangeLog
+	dh_installdocs
+	dh_installdocs README
+	dh_installexamples doc/skel-ui.example
+	dh_install
+
+	: # only use upstart in Ubuntu 9.10 and higher
+	if [ "$(DISTRIB)" != "Ubuntu" ]; then \
+		cp $(CURDIR)/debian/ufw.logrotate.debian $(CURDIR)/debian/ufw.logrotate ; \
+		cp $(CURDIR)/debian/ufw.init.debian $(CURDIR)/debian/ufw.init ; \
+		dh_installinit --no-start --no-restart-on-upgrade --update-rcd-params="start 39 S . stop 39 1 ." ; \
+	else \
+		cp $(CURDIR)/debian/ufw.logrotate.ubuntu $(CURDIR)/debian/ufw.logrotate ; \
+		if [ "$(DISTRIB_VERSION_MAJOR)" = "9" ] && \
+			[ "$(DISTRIB_VERSION_MINOR)" = "10" ] || \
+			[ "$(DISTRIB_VERSION_MAJOR)" -gt "9" ]; then \
+			cp $(CURDIR)/debian/ufw.upstart.ubuntu $(CURDIR)/debian/ufw.upstart ; \
+			dh_installinit --no-start --no-restart-on-upgrade ; \
+		else \
+			cp $(CURDIR)/debian/ufw.init.debian $(CURDIR)/debian/ufw.init ; \
+			dh_installinit --no-start --no-restart-on-upgrade --update-rcd-params="start 39 S . stop 39 1 ." ; \
+		fi \
+	fi
+	dh_installlogrotate
+	dh_installman
+	dh_installdebconf
+	dh_lintian
+
+	: # Replace all '#!' calls to python with $(PYTHON)
+	: # and make them executable
+	for i in `find debian -mindepth 3 -type f`; do \
+		sed '1s,#!.*python[^ ]*\(.*\),#! $(PYTHON)\1,' \
+			$$i > $$i.temp; \
+		if cmp --quiet $$i $$i.temp; then \
+			rm -f $$i.temp; \
+		else \
+			mv -f $$i.temp $$i; \
+			chmod 755 $$i; \
+			echo "fixed interpreter: $$i"; \
+		fi; \
+	done
+	# Don't install profiles on Ubuntu
+	if [ "$(DISTRIB)" = "Ubuntu" ]; then \
+		profiles="$(wildcard ./debian/ufw/etc/ufw/applications.d/ufw-*)";\
+		for p in $$profiles; do \
+	    	rm -f $$p; \
+		done \
+	fi
+	dh_python2
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary install

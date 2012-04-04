@@ -1,0 +1,138 @@
+# ufw po-debconf translation to Spanish
+# Copyright (C) 2009 Software in the Public Interest
+# This file is distributed under the same license as the ufw package.
+#
+# Changes:
+#   - Initial translation
+#       Francisco Javier Cuadrado <fcocuadrado@gmail.com>, 2009
+#
+# Traductores, si no conocen el formato PO, merece la pena leer la
+# documentación de gettext, especialmente las secciones dedicadas a este
+# formato, por ejemplo ejecutando:
+#       info -n '(gettext)PO Files'
+#       info -n '(gettext)Header Entry'
+#
+# Equipo de traducción al español, por favor, lean antes de traducir
+# los siguientes documentos:
+#
+#   - El proyecto de traducción de Debian al español
+#     http://www.debian.org/intl/spanish/
+#     especialmente las notas de traducción en
+#     http://www.debian.org/intl/spanish/notas
+#
+#   - La guía de traducción de po's de debconf:
+#     /usr/share/doc/po-debconf/README-trans
+#     o http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ufw 0.27.1-2\n"
+"Report-Msgid-Bugs-To: ufw@packages.debian.org\n"
+"POT-Creation-Date: 2009-06-16 23:11+0100\n"
+"PO-Revision-Date: 2009-06-17 13:05+0200\n"
+"Last-Translator: Francisco Javier Cuadrado <fcocuadrado@gmail.com>\n"
+"Language-Team: Debian l10n Spanish <debian-l10n-spanish@lists.debian.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "Existing configuration found"
+msgstr "Se ha encontrado la configuración existente"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid ""
+"An existing configuration for ufw has been found. Existing rules must be "
+"managed manually."
+msgstr ""
+"Se ha encontrado una configuración de ufw existente. Las reglas existentes "
+"se deberán gestionar manualmente."
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "You should read the ufw(8) manpage for details about ufw configuration."
+msgstr ""
+"Debería leer la página del manual ufw(8) para los detalles sobre la "
+"configuración de ufw."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "Start ufw automatically?"
+msgstr "¿Desea iniciar ufw automáticamente?"
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid ""
+"If you choose this option, the rules you are about to set will be enabled "
+"during system startup so that this host is protected as early as possible."
+msgstr ""
+"Si escoge esta opción, las reglas que está a punto de configurar se "
+"activarán durante el inicio del sistema de modo que esta máquina este "
+"protegida lo antes posible."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "To protect this host immediately, you must start ufw manually."
+msgstr ""
+"Para proteger esta máquina inmediatamente, debe iniciar ufw manualmente."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Authorized services:"
+msgstr "Servicios autorizados:"
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid ""
+"Please choose the services that should be available for incoming connections."
+msgstr ""
+"Escoja los servicios que deberían estar disponibles para las conexiones "
+"entrantes."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Other services may be specified in the next configuration step."
+msgstr ""
+"Se pueden especificar otros servicios en el siguiente paso de la "
+"configuración."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid "Additional authorized services:"
+msgstr "Servicios autorizados adicionales:"
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Please enter a space separated list of any additional ports you would like "
+"to open. You may use a service name (as found in /etc/services), a port "
+"number, or a port number with protocol."
+msgstr ""
+"Introduzca una lista de los puertos que querría abrir, separados por "
+"espacios. Debe utilizar un nombre de servicio (se puede encontrar en el "
+"archivo «/etc/services»), un número de puerto o un número de puerto con un "
+"protocolo."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Example: to allow a web server, port 53 and tcp port 22, you should enter "
+"\"www 53 22/tcp\"."
+msgstr ""
+"Por ejemplo: para permitir un servidor web, el puerto 53 y el puerto 22 de "
+"TCP, debería introducir «www 53 22/tcp»."

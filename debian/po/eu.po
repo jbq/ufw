@@ -1,0 +1,114 @@
+# translation of templates(2).po to Euskara
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Piarres Beobide EGaña <pi@beobide.net>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: templates(2)\n"
+"Report-Msgid-Bugs-To: ufw@packages.debian.org\n"
+"POT-Creation-Date: 2009-06-16 23:11+0100\n"
+"PO-Revision-Date: 2009-07-28 22:35+0200\n"
+"Last-Translator: Piarres Beobide <pi@beobide.net>\n"
+"Language-Team: Basque <debian-l10n-eu@debian.lists.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "Existing configuration found"
+msgstr "Konfigurazioa aurkituta"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid ""
+"An existing configuration for ufw has been found. Existing rules must be "
+"managed manually."
+msgstr ""
+"Aurreko ufw konfigurazio bat aurkitu da. Dauden arauak eskuz kudeatu behar "
+"dira."
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "You should read the ufw(8) manpage for details about ufw configuration."
+msgstr ""
+"ufw(8) manual orria irakurri beharko zenuke ufw konfigurazio "
+"xehetasunetarako."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "Start ufw automatically?"
+msgstr "Abiarazi ufw automatikoki?"
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid ""
+"If you choose this option, the rules you are about to set will be enabled "
+"during system startup so that this host is protected as early as possible."
+msgstr ""
+"Aukera hau hautatzen baduzu ezartzen dituzun arauak sistema abioan gaituko "
+"dira, honela sistema hala bezain azkar babesteko."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "To protect this host immediately, you must start ufw manually."
+msgstr "Ostalari hau berehala babesteko ufw eskuz abiarazi beharko duzu."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Authorized services:"
+msgstr "Autorizatutako zerbitzuak:"
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid ""
+"Please choose the services that should be available for incoming connections."
+msgstr ""
+"Mesedez hautatu zein zerbitzu baimendu behar dira kanpoaldetik konektatzeko."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Other services may be specified in the next configuration step."
+msgstr ""
+"Beste zerbitzu batzuek hurrengo konfigurazio urratsean zehaztu daitezke."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid "Additional authorized services:"
+msgstr "Autorizatutako zerbitzu gehigarriak:"
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Please enter a space separated list of any additional ports you would like "
+"to open. You may use a service name (as found in /etc/services), a port "
+"number, or a port number with protocol."
+msgstr ""
+"Mesedez idatzi zuriunez bereizirik irekitzea nahi dituzun ataka gehigarrien "
+"zerrenda. Zerbitzu izen bat (/etc/services-en zehazturikoak), ataka zenbaki "
+"bat edo ataka zenbakia protokolo batez erabili ditzakezu."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Example: to allow a web server, port 53 and tcp port 22, you should enter "
+"\"www 53 22/tcp\"."
+msgstr ""
+"Adibidez: web zerbitzari bat, 53 ataka eta 22 atakako tcp onartzeko \"www 53 "
+"22/tcp\" idatzi beharko duzu."

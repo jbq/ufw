@@ -1,0 +1,44 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
+Template: ufw/existing_configuration
+Type: error
+_Description: Existing configuration found
+ An existing configuration for ufw has been found.
+ Existing rules must be managed manually.
+ .
+ You should read the ufw(8) manpage for details about ufw configuration.
+
+Template: ufw/enable
+Type: boolean
+Default: false
+_Description: Start ufw automatically?
+ If you choose this option, the rules you are about to set
+ will be enabled during system startup so that this host is protected
+ as early as possible.
+ .
+ To protect this host immediately, you must start ufw manually.
+
+Template: ufw/allow_known_ports
+Type: multiselect
+Choices: CUPS, DNS, IMAPS, POP3S, SSH, CIFS (Samba), SMTP, HTTP, HTTPS
+_Description: Authorized services:
+ Please choose the services that should be available for incoming connections.
+ .
+ Other services may be specified in the next configuration step.
+
+Template: ufw/allow_custom_ports
+Type: string
+_Description: Additional authorized services:
+ Please enter a space separated list of any additional ports you would like to
+ open. You may use a service name (as found in /etc/services), a
+ port number, or a port number with protocol.
+ .
+ Example: to allow a web server, port 53
+ and tcp port 22, you should enter "www 53 22/tcp".

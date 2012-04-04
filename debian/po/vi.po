@@ -1,0 +1,109 @@
+# Vietnamese translation for UFW.
+# Copyright © 2009 Free Software Foundation, Inc.
+# Clytie Siddall <clytie@riverland.net.au>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ufw 0.28-1\n"
+"Report-Msgid-Bugs-To: ufw@packages.debian.org\n"
+"POT-Creation-Date: 2009-06-16 23:11+0100\n"
+"PO-Revision-Date: 2009-09-23 00:31+0930\n"
+"Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
+"Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: LocFactoryEditor 1.8\n"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "Existing configuration found"
+msgstr "Tìm thấy cấu hình đã có"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid ""
+"An existing configuration for ufw has been found. Existing rules must be "
+"managed manually."
+msgstr ""
+"Một cấu hình ufw đã tồn tại đã được tìm. Bạn cần tự thao tác những quy tắc "
+"đã có."
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "You should read the ufw(8) manpage for details about ufw configuration."
+msgstr "Hãy đọc trang hướng dẫn ufw(8) để tìm chi tiết về cấu hình ufw."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "Start ufw automatically?"
+msgstr "Tự động khởi chạy ufw ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid ""
+"If you choose this option, the rules you are about to set will be enabled "
+"during system startup so that this host is protected as early as possible."
+msgstr ""
+"Bật tùy chọn này thì những quy tắc sắp đặt sẽ được hiệu lực trong khi khởi "
+"chạy hệ thống, để bảo vệ máy này vào lúc sớm nhất có thể."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "To protect this host immediately, you must start ufw manually."
+msgstr "Để bảo vệ máy này ngay lập tức, bạn cần phải tự khởi chạy ufw."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Authorized services:"
+msgstr "Dịch vụ được phép:"
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid ""
+"Please choose the services that should be available for incoming connections."
+msgstr "Hãy chọn những dịch vụ nên sẵn sàng cho kết nối gửi đến."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Other services may be specified in the next configuration step."
+msgstr "Dịch vụ khác có thể được xác định trong bước cấu hình kế tiếp."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid "Additional authorized services:"
+msgstr "Dịch vụ bổ sung được phép:"
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Please enter a space separated list of any additional ports you would like "
+"to open. You may use a service name (as found in /etc/services), a port "
+"number, or a port number with protocol."
+msgstr ""
+"Hãy nhập một danh sách định giới bằng dấu cách chứa những cổng bổ sung nào "
+"bạn muốn mở. Có thể dùng một tên dịch vụ (như được ghi trong « /etc/services "
+"»), một số thứ tự cộng, hay một số thứ tự cộng với giao thức."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Example: to allow a web server, port 53 and tcp port 22, you should enter "
+"\"www 53 22/tcp\"."
+msgstr ""
+"Ví dụ, để cho phép một trình phục vụ Web, cổng 53 và cổng TCP 22, bạn nên gõ "
+"« www 53 22/tcp »."

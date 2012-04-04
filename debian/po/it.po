@@ -1,0 +1,117 @@
+# Italian translation of ufw
+# Copyright (C) 2009 Software in the Public Interest
+# This file is distributed under the same license as the ufw package.
+# Luca Monducci <luca.mo@tiscali.it>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ufw 0.28\n"
+"Report-Msgid-Bugs-To: ufw@packages.debian.org\n"
+"POT-Creation-Date: 2009-06-16 23:11+0100\n"
+"PO-Revision-Date: 2009-08-06 16:33+0200\n"
+"Last-Translator: Luca Monducci <luca.mo@tiscali.it>\n"
+"Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "Existing configuration found"
+msgstr "Trovata una configurazione già esistente"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid ""
+"An existing configuration for ufw has been found. Existing rules must be "
+"managed manually."
+msgstr ""
+"È stata trovata una configurazione per ufw già esistente. Le regole "
+"esistenti devono essere gestite manualmente."
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "You should read the ufw(8) manpage for details about ufw configuration."
+msgstr ""
+"Si veda la pagina man di ufw(8) per i dettagli sulla configurazione di ufw."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "Start ufw automatically?"
+msgstr "Avviare ufw automaticamente?"
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid ""
+"If you choose this option, the rules you are about to set will be enabled "
+"during system startup so that this host is protected as early as possible."
+msgstr ""
+"Se si accetta, le regole che si stanno per impostare verranno attivate "
+"durante l'avvio del sistema, così facendo questo host sarà protetto il prima "
+"possibile."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "To protect this host immediately, you must start ufw manually."
+msgstr ""
+"Per proteggere questo host immediatamente è necessario avviare ufw "
+"manualmente."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Authorized services:"
+msgstr "Servizi autorizzati:"
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid ""
+"Please choose the services that should be available for incoming connections."
+msgstr ""
+"Scegliere quali servizi devono essere disponibili per le connessioni "
+"entranti."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Other services may be specified in the next configuration step."
+msgstr ""
+"Nel prossimo passo di configurazione è possibile specificare anche altri "
+"servizi."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid "Additional authorized services:"
+msgstr "Altri servizi autorizzati:"
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Please enter a space separated list of any additional ports you would like "
+"to open. You may use a service name (as found in /etc/services), a port "
+"number, or a port number with protocol."
+msgstr ""
+"Inserire l'elenco di tutte le ulteriori porte che si vuole aprire usando uno "
+"spazio come separatore. Si può usare il nome di un servizio (come elencato "
+"in /etc/services), il numero di una porta oppure il numero e il protocollo "
+"di una porta."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Example: to allow a web server, port 53 and tcp port 22, you should enter "
+"\"www 53 22/tcp\"."
+msgstr ""
+"Esempio: per permettere su server web, la porta 53 e la porta tcp 22, si "
+"deve inserire \"www 53 22/tcp\"."

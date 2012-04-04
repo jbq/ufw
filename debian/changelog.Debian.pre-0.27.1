@@ -1,0 +1,394 @@
+ufw (0.28-0ubuntu1) UNRELEASED; urgency=low
+
+  * new upstream release
+    - properly return translated string with formatted text (LP: #346563)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 03 Apr 2009 08:57:25 -0500
+
+ufw (0.27-0ubuntu1) jaunty; urgency=low
+
+  * new upstream release (bug fix only)
+    - insert rules in proper order when ufw is enabled (LP: #344971)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 18 Mar 2009 22:10:08 -0500
+
+ufw (0.27~r416-0ubuntu5) jaunty; urgency=low
+
+  * Don't traceback when ufw modules aren't available (LP: #337705)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 04 Mar 2009 15:10:13 -0600
+
+ufw (0.27~r416-0ubuntu4) jaunty; urgency=low
+
+  * debian/templates: rephrase boolean description so it works with both cli
+    yes/no question and gui checkbox (LP: #337890)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 04 Mar 2009 13:29:15 -0600
+
+ufw (0.27~r416-0ubuntu3) jaunty; urgency=low
+
+  * debian/rules: adjust dh_pycentral call to make sure dist-package symlinks
+    are available at dpkg unpack. Patch thanks to Michael Vogt (LP: #337705)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 04 Mar 2009 09:20:11 -0600
+
+ufw (0.27~r416-0ubuntu2) jaunty; urgency=low
+
+  * debian/templates: fix lintian error
+  * get rid of DeprecationWarnings from 2.6 transition, which cause a FTBFS
+    due to tests failing (grab commits 420-422 from trunk)
+  * debian/control: update Vcs-Bzr url
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 02 Mar 2009 14:44:48 -0600
+
+ufw (0.27~r416-0ubuntu1) jaunty; urgency=low
+
+  * new upstream release
+    - don't do symlink check anymore (LP: #317700)
+    - don't do hidden file check anymore (LP: #319226)
+    - add insert rule support (LP: #260745)
+    - clear up status output (LP: #262975)
+    - add log level support
+    - add per rule logging
+  * debian/ufw.init: use mountall for Required-Start rather than mountall.sh
+  * added allow_custom_ports debconf option
+  * debian/postinst: don't exit on ufw error
+  * ship debian/sysctl.conf instead of upstream. This file now only lists
+    settings that do are non-default in Ubuntu
+  * adjust initscript to tell it is using /etc/ufw/sysctl.conf
+  * debian/*md5sums: updated for new upstream defaults
+  * debian/config: update has_existing() to also check old md5sums
+  * debian/postinst: don't error out when processing triggers, as this causes
+    dpkg errors (LP: #270285, #328728)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 18 Feb 2009 16:53:15 -0600
+
+ufw (0.26-0ubuntu1) jaunty; urgency=low
+
+  * new upstream release, which fixes:
+    - formatting of dpkg output incorrect on upgrades (LP: #300726)
+    - new REJECT functionality (LP: #197322)
+    - ufw shouldn't flush built-in chains by default. New MANAGE_BUILTINS
+      configuration option can be used to restore the old (flush) behavior
+  * debian/control:
+    - Build-Depends-Indep on iptables (required for iptables version check in
+      setup.py)
+    - add ${misc:Depends} to Depends and bump Standards-Version to 3.8.0
+    - update Description
+    - move po-debconf to Build-Depends
+  * added debian/watch
+  * debian/source.lintian-overrides: don't complain about
+    no-complete-debconf-translation
+  * debian/rules:
+    - rename and gzip upstream changelogs
+    - rename initscript.ubuntu to ufw.init and use dh_installinit (but
+      continue to use /etc/defaults/ufw installed via setup.py for now)
+    - cleanup dh_installdirs
+    - use dh_installexamples for example files
+    - run debconf-updatepo in clean target
+  * debian/postinst: remove old ufw.rules check because ufw.rules existed for
+    only a short time during the Hardy development cycle, it's ignored by ufw
+    and its existence is harmless.
+  * debian/config and debian/templates: remove ufw/oldrules
+  * provide debconf mechanism for enabling the firewall and setting some basic
+    rules (LP: #307715)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 16 Jan 2009 08:02:36 -0600
+
+ufw (0.25-0ubuntu1) jaunty; urgency=low
+
+  * new upstream release (no longer a native package)
+    - fixes LP: #311066 (initscript flushes rules on stop when not enabled)
+  * add debian/initscript.ubuntu since upstream doesn't ship an initscript
+    anymore
+  * dirs: add etc/init.d
+  * debian/rules: install initscript.ubuntu, examples from doc/ and
+    upstream changelogs
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 22 Dec 2008 08:45:59 -0600
+
+ufw (0.24.1) jaunty; urgency=low
+
+  * remove existing stop links for runlevels 0 and 6, thus completing the fix
+    for LP: #298736.
+  * adjust tarball Makefile target
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Sun, 21 Dec 2008 11:47:45 -0600
+
+ufw (0.24) jaunty; urgency=low
+
+  * debian/rules: check for 'nocheck' in DEB_BUILD_OPTIONS
+  * debian/postrm: don't fail if iptables or ip6tables fails (LP: #278670)
+  * fix typo in error message (LP: #280348)
+  * allow case-insensitive matches for application rules (LP: #263757). Based
+    on work by Didier Roche
+  * add skel-ui for UI example
+  * debian/postinst: don't stop in runlevels 0 and 6 (LP: #298736)
+  * before6.rules: adjust hop limit to 255 for NDP messages (LP: #299268) per
+    RFC 4890 secton 4.2. Thanks to Ryan Giobbi
+  * before6.rules: restrict multicast (LP: #304216). Thanks to Ryan Giobbi
+  * before.rules: don't use ctstate as it is not supported on all kernels and
+    we don't use the extra information anyway (LP: #289906)
+  * fix translations for input strings (LP: #302426)
+  * update ucf md5sums for before.rules and before6.rules
+  * adjust root/destructive tests for when we can't unmount /proc
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 12 Dec 2008 13:43:11 -0500
+
+ufw (0.23) intrepid; urgency=low
+
+  * show protocol in status when no ports are specified (LP: #263308)
+  * update after*.rules when setting default policy (LP: #273278)
+  * give useful message when trying to delete a non-existent rule (LP: #251136)
+  * don't print useless newlines
+  * add 'translations' support to Makefile (but don't use it in build yet)
+  * updated README for advanced usage
+  * updated TODO
+  * References
+    LP: #275984
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 29 Sep 2008 11:52:53 -0500
+
+ufw (0.22) intrepid; urgency=low
+
+  * fix confusing output of 'app update' command (LP: #261932)
+  * only reload during 'app update' if the profile name is used in
+    the current ruleset (LP: #261323)
+  * don't reload user rules if not enabled and don't toggle ENABLED=yes if
+    failure in starting the firewall (LP: #262451)
+  * don't traceback if /proc not mounted (LP: #268084)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 27 Aug 2008 11:51:14 -0500
+
+ufw (0.21) intrepid; urgency=low
+
+  * add confirmation on enable when running under ssh (LP: #253840)
+  * don't reload the firewall on 'app update' when running under ssh
+  * update ufw.pot
+  * fix some pygettext errors
+  * warn if profile name is found in /etc/services
+  * don't delete application rules when the action doesn't match
+    (LP: #260881)
+  * add reload command
+  * added debian/triggers and update debian/postinst for use with dpkg
+    triggers (thanks Colin Watson for the suggestion)
+  * add 'app update all' command
+  * update man page for reload and 'app update all'
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 18 Aug 2008 20:22:32 -0400
+
+ufw (0.20) intrepid; urgency=low
+
+  * add 'verbose' option to status command
+  * implement application (package) integration
+  * update run_tests.sh to honor subclass
+  * debian/control: Depends on iptables >= 1.4.0 for ipv6 comment support
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Thu, 07 Aug 2008 12:04:05 -0400
+
+ufw (0.19) intrepid; urgency=low
+
+  * don't modify the chains when --dry-run is specified (LP: #247352)
+  * add dotted netmask support
+  * don't have util.py import common.py
+  * normalize rules so what is added to chains and what is displayed to the
+    user is consistent (LP: #237446)
+  * documentation updates (LP: #247177)
+  * implement port ranges (LP: #231103)
+  * fix initscript to properly set default DROP when ipv6 is available and
+    set to 'no' in /etc/default/ufw (LP: #251355)
+  * don't give confusing output when ipv6 and/or ip6_tables is not
+    available (LP: #194844)
+  * update ucf historical checksums to include those in 0.16.2
+  * update manpage for 'status' clarifications (LP: #251153)
+  * update before*.rules to count outgoing packets on lo (LP: #255092)
+  * update status output so it is more consistent with rule syntax
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 07 Jul 2008 16:22:45 -0400
+
+ufw (0.18) intrepid; urgency=low
+
+  * bump version
+  * src/ufw: make reusable
+  * src/ufw: show default policy and logging in 'status' (LP: #240271)
+  * refactor code and split out into modules:
+    - updated src/*
+    - updated setup.py
+    - updated run_tests.sh
+    - updated README
+    - updated README.translations and messages/ufw.pot
+    - updated README.Design
+  * properly implement --root and --home (LP: #231771):
+    - setup.py: --root works as expected now (eg as DESTDIR in Debian)
+    - updated run_test.sh for new setup.py
+    - updated README.Debian for now setup.py
+  * add new 'limit' command for connection rate limiting:
+    - updated src/*
+    - updated README and ufw.8
+    - updated messages/ufw.pot
+    - updated tests for limit
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Thu, 12 Jun 2008 10:28:36 -0400
+
+ufw (0.17) intrepid; urgency=low
+
+  * implement status in initscript
+  * warn on group/world writable and wrong owner files in _do_checks()
+  * debian/rules: use 'g' with sed when stripping paths (LP: #207476)
+  * debian/control: Standards-Version: 3.7.3
+  * don't log INVALID packets by default (LP: #207156)
+  * don't log noisy services by default (LP: #209709)
+  * consult /etc/services for protocol (LP: #209845)
+  * manpage updates
+  * add internationalization support
+  * prevent traceback with dotted decimal netmasks (LP: #224842)
+  * update tests to test for more valid and invalid netmasks
+  * adjust conf/sysctl.conf to have clear message regarding /etc/sysctl.conf
+  * adjust conf/sysctl.conf to have explanations for the tunables (taken from
+    procps)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 12 Mar 2008 16:11:22 -0400
+
+ufw (0.16) hardy; urgency=low
+
+  * bump version
+  * fix tests for when ipv6 is blacklisted (fix FTBFS on Ubuntu buildd)
+  * adjust root tests for new output
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Tue, 11 Mar 2008 16:11:59 -0400
+
+ufw (0.15) hardy; urgency=low
+
+  * fix man page typo
+  * debian/control: added Homepage (LP: #199722)
+  * fix python version check (upstream #199790)
+  * properly handle when ipv6 is not loaded or blacklisted (LP: #199724)
+  * man page fixes
+  * clarify 'status' output (LP: #199873)
+  * fix ipv6 stateless autoconfiguration (upstream #200921)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Sat, 08 Mar 2008 07:36:04 -0500
+
+ufw (0.14) hardy; urgency=low
+
+  * conf/initscript
+    - move sysctl to after rules load (LP: #192123)
+    - don't make sysctl and modprobe failures fatal (LP: #197285)
+    - make output less verbose and fix formatting (LP: #198211)
+  * debian/rules: update setup.py version with changelog version
+  * debian/control
+    - update maintainer to Ubuntu Core Developers
+    - add Vcs-Bzr url
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 15 Feb 2008 08:56:24 -0500
+
+ufw (0.13) hardy; urgency=low
+
+  * added ipv6 and (commented out) forwarding entries in sysctl.conf
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 13 Feb 2008 22:31:47 -0500
+
+ufw (0.12) hardy; urgency=low
+
+  * new upstream version:
+    - initscript implements 'stop' as default ACCEPT
+    - initscript restart and force-reload now use 'stop' and 'start'
+  * debian/postinst: stop on runlevels 0, 1 and 6
+  * debian/postrm: default ACCEPT on purge
+  * debian/README.Debian: provide useful notes
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Thu, 07 Feb 2008 09:47:10 -0500
+
+ufw (0.11) hardy; urgency=low
+
+  * comply with Ubuntu policy of syncookies off (LP: 189565) 
+  * debian/control: Build-Depends on debhelper (>= 5.0.38)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 06 Feb 2008 14:08:36 -0500
+
+ufw (0.10) hardy; urgency=low
+
+  * new upstream version:
+    - ipv6 support (LP: 188934)
+    - added more tests
+    - updated docs
+  * updated packaging for ipv6 files
+  * fixed email typo (LP: 189418)
+  * use ucf for /etc/ufw/*.rules files
+  * move ENABLED to ufw.conf
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Tue, 05 Feb 2008 22:24:51 -0500
+
+ufw (0.9) hardy; urgency=low
+
+  * new upstream version:
+    - bugfix for logging
+    - bugfix for default policy
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Tue, 29 Jan 2008 06:37:01 -0500
+
+ufw (0.8) hardy; urgency=low
+
+  * new upstream version:
+    - use PF-style syntax for extended rule syntax
+    - migrate ufw.rules to separate chains and files
+  * added debconf note about ufw.rules
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 28 Jan 2008 13:26:10 -0500
+
+ufw (0.7) hardy; urgency=low
+
+  * new version
+    - fix two lintian warnings
+    - manpage updates
+    - fix for buggy get_status
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Thu, 24 Jan 2008 11:27:30 +0000
+
+ufw (0.6) hardy; urgency=low
+
+  * debian/control: Build-Depends-Indep on netbase so tests can run in
+    buildds
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 23 Jan 2008 16:24:58 +0000
+
+ufw (0.5) hardy; urgency=low
+
+  * update tests for better failure reporting and maintainability 
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 23 Jan 2008 13:14:20 +0000
+
+ufw (0.4) hardy; urgency=low
+
+  * new upstream version
+    - supports specifying service from /etc/services
+    - requires python 2.5
+    - put rules in ufw-* chains
+    - status is more user-friendly (but not complete)
+    - bug fixes
+    - ufw.rules fine-tuning
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Tue, 22 Jan 2008 08:01:06 +0000
+
+ufw (0.3) hardy; urgency=low
+
+  * new upstream version:
+    - fix licensing
+    - PEP8 compliant
+    - uses distutils to install
+    - now supports /etc/services names
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Sun, 20 Jan 2008 17:43:03 -0500
+
+ufw (0.2) hardy; urgency=low
+
+  * ufw: actually use DROP instead of DENY
+  * typo in README.Debian
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 16 Jan 2008 14:32:06 -0500
+
+ufw (0.1) hardy; urgency=low
+
+  * Initial release
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 07 Jan 2008 20:44:16 -0500

@@ -1,0 +1,111 @@
+# Dutch translation of ufw debconf templates.
+# Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the ufw package.
+# Jeroen Schot <schot@a-eskwadraat.nl>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ufw 0.30.1-2\n"
+"Report-Msgid-Bugs-To: ufw@packages.debian.org\n"
+"POT-Creation-Date: 2009-06-16 23:11+0100\n"
+"PO-Revision-Date: 2012-02-03 15:22+0100\n"
+"Last-Translator: Jeroen Schot <schot@a-eskwadraat.nl>\n"
+"Language-Team: Debian l10n Dutch <debian-l10n-dutch@lists.debian.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "Existing configuration found"
+msgstr "Bestaande configuratie gevonden"
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid ""
+"An existing configuration for ufw has been found. Existing rules must be "
+"managed manually."
+msgstr ""
+"Er is een bestaande configuratie voor ufw gevonden. De bestaande regels "
+"moeten handmatig beheerd worden."
+
+#. Type: error
+#. Description
+#: ../templates:2001
+msgid "You should read the ufw(8) manpage for details about ufw configuration."
+msgstr ""
+"Lees de man-pagina van ufw(8) voor details over de configuratie van ufw."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "Start ufw automatically?"
+msgstr "Ufw automatisch opstarten?"
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid ""
+"If you choose this option, the rules you are about to set will be enabled "
+"during system startup so that this host is protected as early as possible."
+msgstr ""
+"Als u voor deze optie kiest, dan worden de regels die u straks instelt "
+"ingeschakeld tijdens de systeemstart zodat deze computer zo snel mogelijk "
+"wordt beschermd."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "To protect this host immediately, you must start ufw manually."
+msgstr "Om deze computer direct te beschermen moet u ufw handmatig starten."
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Authorized services:"
+msgstr "Geautoriseerde diensten:"
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid ""
+"Please choose the services that should be available for incoming connections."
+msgstr ""
+"Welke diensten moeten beschikbaar zijn voor binnenkomende verbindingen?"
+
+#. Type: multiselect
+#. Description
+#: ../templates:4001
+msgid "Other services may be specified in the next configuration step."
+msgstr "U kunt bij de volgende configuratiestap andere diensten aangeven."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid "Additional authorized services:"
+msgstr "Aanvullende geautoriseerde diensten:"
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Please enter a space separated list of any additional ports you would like "
+"to open. You may use a service name (as found in /etc/services), a port "
+"number, or a port number with protocol."
+msgstr ""
+"Voer alstublieft een door spaties gescheiden lijst van extra poorten die u "
+"wilt openen. U kunt een dienstnaam (zoals in /etc/services), poortnummer of "
+"poortnummer met protocol gebruiken."
+
+#. Type: string
+#. Description
+#: ../templates:5001
+msgid ""
+"Example: to allow a web server, port 53 and tcp port 22, you should enter "
+"\"www 53 22/tcp\"."
+msgstr ""
+"Voorbeeld: Om een webserver, poort 53 en TCP-poort 22 toe te staan moet u "
+"\"www 53 22/tcp\" opgeven."

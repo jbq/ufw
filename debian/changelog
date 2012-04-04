@@ -1,0 +1,300 @@
+ufw (0.31.1-1) unstable; urgency=low
+
+  * New upstream release (Closes: 663677, Closes: 625681)
+  * debian/control: update to standards 3.9.3
+  * convert to source format 3.0 (quilt)
+  * 0001-optimize-boot.patch: only read in /etc/ufw/ufw.conf when disabled
+  * debian/rules: adjust to only install the application profiles when not
+    Ubuntu
+  * debian/po/nl.po: add Dutch translation of debconf templates. Thanks to
+    Jeroen Schot (Closes: 658495)
+  * debian/po/da.po: add Danish translation of debconf templates. Thanks to
+    Joe Dalton (Closes: 666557)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 04 Apr 2012 12:12:25 -0500
+
+ufw (0.30.1-2) unstable; urgency=low
+
+  * debian/control: make lintian clean:
+    - update Standards-Version to 3.9.2
+    - Build-Depends on python (>= 2.6.6-3~)
+  * conf/ufw.defaults:
+    - remove IRC connection tracking, which is only required for DCC.
+      Cherrypick r741 from trunk
+    - allow nf_conntrack_netbios_ns (Samba). Cherrypick r744 from trunk.
+      LP: #360975 (Closes: 631737)
+  * enable IPv6 by default and fix 'allow to any ipv6' when IPv6 is enabled.
+    Cherrypick r742 from trunk.
+  * update manpage references to ufw and ufw-framework to include the section.
+    Cherrypick r743 from trunk.
+  * ACCEPT UPnP (239.255.255.250 for IPv4 and ff02::f for IPv6) for service
+    discovery just like we do for mDNS (ie, allow discovery, but not
+    connections to the services). LP: #764933
+  * debian/ufw.logrotate.debian, debian/ufw.logrotate.ubuntu, debian/rules:
+    use 'rotate' option in Debian logrotate file and split out ufw.logrotate
+    like we do the initscript since because Ubuntu's rsyslog doesn't have the
+    'rotate' option yet. (Closes: 628605)
+  * Cherrypick r746 from trunk to update check-requirements to prompt to
+    continue with tests that may autoload modules. Add '-f' option to
+    check-requirements and update test suite accordingly (LP: #782816)
+  * Cherrypick r747 from trunk to not fail when running 'show listening' under
+    fakeroot (LP: #812516)
+  * debian/postinst:
+    - remove some old upgrade transition code for unsupported upgrade paths
+    - reload ufw if it is enabled and we are upgrading to this version since
+      this is needed after enabling IPv6
+  * debian/rules: add build-arch and build-indep targets
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 18 Jul 2011 16:35:57 -0500
+
+ufw (0.30.1-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Rebuild to add Python 2.7 support
+
+ -- Piotr Ożarowski <piotr@debian.org>  Sun, 08 May 2011 16:45:46 +0200
+
+ufw (0.30.1-1) unstable; urgency=low
+
+  * New upstream release which fixes the following:
+    - LP: #501140
+    - LP: #740249
+    - LP: #740256
+    - LP: #720605
+  * debian/ufw.logrotate: remove upstartism thanks to Michael Biebl
+    (Closes: 607696)
+  * debian/sysctl.conf: merge in upstream (commented out) changes surrounding
+    ipv6 forwarding and privacy addresses
+  * debian/before*.rules.md5sum: updated for recent changes
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 21 Mar 2011 14:45:03 -0500
+
+ufw (0.30.0-3) unstable; urgency=low
+
+  * convert to dh_python2:
+    - debian/control: remove python-central dependency
+    - debian/rules: use dh_python2 instead of dh_pycentral
+  * debian/rules: run 'make clean' in the clean target
+  * debian/ufw.init.debian: look for /lib/ufw, not /usr/sbin/ufw to see if we
+    should quit (ie, when ufw is removed and not purged). Also, only have
+    /bin and /sbin in PATH
+  * add lintian override
+    - debian/rules: add dh_lintian
+    - debian/dirs: add usr/share/lintian/overrides
+    - ignore init.d-script-possible-missing-stop
+  * debian/install, debian/rules: update to use debian/install primarily
+  * renamed debian/changelog.pre-0.27.1 to debian/changelog.Debian.pre-0.27.1
+  * no longer install upstream ChangeLog.pre-0.25
+  * grab man page updates from upstream:
+    - mention quoting of application profile names with spaces. Upstream
+      r714. (LP: #715676)
+    - fix man-page hyphenation in ufw.8. Upstream r716.
+    - fix manpage reference to /etc/defaults/ufw. Upstream r713.
+      (Closes: 601111)
+  * fix typo in warning. Upstream r711. (LP: #637876)
+  * run_tests.sh: adjust PATH if iptables can't be found. Upstream r717.
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 23 Feb 2011 08:10:55 -0600
+
+ufw (0.30.0-2) unstable; urgency=low
+
+  * src/frontend.py: display unicode error messages properly. Thanks to
+    Serguey Basalaev.
+    - upstream commit r700
+    - LP: #580032
+  * src/backend_iptables.py: fix gettext warning
+    - upstream commit r701
+  * run debconf-updatepo, but adjust debian/po/de.po and debian/po/es.po to
+    add correct "Language:" tag
+  * profiles/ufw-mailserver: remove Postfix specific language
+    - upstream commit r705, r707
+  * debian/rules: do install the upstream application profiles now
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 30 Aug 2010 13:50:15 -0500
+
+ufw (0.30.0-1) unstable; urgency=low
+
+  * New upstream release. Use 0.30.0 as the version even though upstream uses
+    0.30 in order to sync to Ubuntu. Fixes:
+    - LP: #568877
+    - LP: #611982
+    - LP: #606997
+    - LP: #624199
+    - LP: #625340
+    - LP: #521359
+    - LP: #436608
+  * don't flush chains if ufw is not enabled (LP: #581744)
+  * debian/postinst: don't source /usr/share/debconf/confmodule when $1 =
+    triggered. Fix thanks to Colin Watson. (LP: #618410)
+  * debian/control:
+    - drop versioned depends on iptables. This helps with backporting now that
+      the test suite can handle it
+    - updated Standards-Version
+  * debian/rules:
+    - pass interpreter to run_tests.sh
+    - don't install upstream application profiles for now
+  * add rsyslog support
+  * add debian/source/format
+  * debian/before6.rules.md5sum: updated for ucf
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 27 Aug 2010 15:44:18 -0500
+
+ufw (0.29.3-1) unstable; urgency=low
+
+  * New upstream release. Fixes:
+    LP: #490366
+    LP: #512131
+    LP: #488032
+    LP: #513387
+  * debian/ufw.upstart.ubuntu: start before an interface receives traffic
+  * debian/postinst: don't sed or chmod a file that doesn't exist
+    (LP: #503039)
+  * debian/after*.rules.md5sum: updated for ucf (added additional sums for
+    people using the workaround in LP: #488032)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Thu, 28 Jan 2010 17:30:37 -0600
+
+ufw (0.29.1-1) unstable; urgency=low
+
+  * new upstream release, fixing LP: #459925 and LP: #480789
+  * debian/postinst: run 'ufw logging <log level>' to update the user
+    rules for logging (this action does nothing when ufw is not enabled)
+  * debian/ufw.upstart.ubuntu: don't use 'quiet' since we also now look for
+    QUIET
+  * debian/rules:
+    - only install upstart on Ubuntu 9.10 and later
+    - use $(PYTHON) with setup.py
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 11 Nov 2009 14:26:56 -0600
+
+ufw (0.29-5) unstable; urgency=low
+
+  * reduce console output when using Upstart so that ufw is quiet when
+    ufw is disabled or enabled and no errors
+    - src/ufw-init: add add 'quiet' option on start
+    - debian/ufw.upstart.ubuntu: use 'quiet' option on start
+  * Debconf translation updates:
+    - Vietnamese (thanks to Clytie Siddall. closes: #547919)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 23 Sep 2009 18:06:56 -0500
+
+ufw (0.29-4) unstable; urgency=low
+
+  * debian/rules: add missing dot for update-rc.d invocation (closes: #547330)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 18 Sep 2009 13:26:53 -0500
+
+ufw (0.29-3) unstable; urgency=low
+
+  * use upstart instead of sysv initscript on Ubuntu (LP: #431804)
+    - debian/control: Bump build-dependency on debhelper for Upstart-aware
+      dh_installinit. Add Build-Dep on lsb-release
+    - add debian/ufw.upstart.ubuntu
+    - move debian/ufw.init to debian/ufw.init.debian
+    - debian/ufw.init: rename to debian/ufw.init.debian and update insserv
+      info to reflect reality
+    - debian/rules: use upstart if Ubuntu and sysv if Debian
+    - debian/postinst and debian/postrm: remove calls to update-rc.d
+  * error out when filesystem is read-only. Merge from trunk (LP: #430053)
+  * catch exception if can't find parent pid when refreshing application
+    profiles. Merge from trunk (LP: #424528)
+  * add doc/upstart.example and update README for Debian users who want to
+    use upstart
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 16 Sep 2009 13:32:39 -0500
+
+ufw (0.29-2) unstable; urgency=low
+
+  * Debconf translation updates:
+    - unfuzzied Italian (closes: #540204)
+    - ran debconf-updatepo
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Tue, 01 Sep 2009 16:26:07 -0500
+
+ufw (0.29-1) unstable; urgency=low
+
+  * new upstream release:
+    - adds egress filtering support (LP: #382932)
+    - new translations
+    - new man page: ufw-framework.8
+    - new check-requirements to help debug systems with custom kernels
+    - fixes deletion of non-existent application rules (LP: #407810)
+  * Debconf translation updates:
+    - Galician (thanks to Marce Villarino. closes: #538383)
+    - Japanese (thanks to Hideki Yamane. closes: #539595)
+    - Italian (thanks to Luca Monducci. closes: #540204)
+    - Portuguese (thanks to Américo Monteiro. closes: #538908)
+    - Basque (thanks to Piarres Beobide. closes: #539077)
+    - Czech (thanks to Michal Simunek)
+    - Slovak (thanks to Ivan Masár. closes: #534450)
+    - Swedish (thanks to Martin Bagge. closes: #538336)
+    - verify/update the above to fix typo in template (closes: #534231)
+  * debian/rules: install tests/check-requirements into /usr/share/ufw
+  * update ucf md5sums for before.rules and before6.rules
+  * remove no longer used lintian override
+  * debian/dirs: remove unused /var/lib/ufw
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Tue, 25 Aug 2009 09:12:26 -0500
+
+ufw (0.28-2) unstable; urgency=low
+
+  * debian/templates: also fix typo in master template
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Sat, 25 Jul 2009 07:01:56 -0500
+
+ufw (0.28-1) unstable; urgency=low
+
+  * new upstream release. Fixes:
+    - filtering by interface (LP: #247450)
+    - ufw help does not mention 'limit' command (LP: #358964)
+    - install rules files 0640 (LP: #393187)
+  * install user rules and init script helper to /lib/ufw (LP: #400208)
+    - debian/config: update USER_PATH and migrate user rules files from
+      /var/lib/ufw to /lib/ufw
+    - debian/dirs: use lib/ufw
+    - debian/postinst: update USER_PATH
+    - debian/postrm: update USER_PATH
+    - debian/rules: update for new path
+    - debian/ufw.init: update for new path
+  * debian/po: fix typo in translations
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 24 Jul 2009 15:34:57 -0500
+
+ufw (0.27.1-2) unstable; urgency=low
+
+  [ Jonathan Wiltshire ]
+  * Debconf templates and debian/control reviewed by the debian-l10n-
+    english team as part of the Smith review project. Closes: #530956
+    - LP: #379591
+  * Debconf translation updates:
+    - Slovak (closes: #531782)
+    - Swedish (closes: #533375)
+    - Finnish (closes: #533454)
+    - Czech (closes: #533552)
+    - Portuguese (closes: #534098)
+    - German (closes: #534230)
+    - Basque (closes: #534298, #534298)
+    - Russian (closes: #534720)
+    - Spanish (closes: #534859)
+    - French (closes: #535032)
+
+  [ Jamie Strandboge ]
+  * debian/postinst: update for translation fixes
+  * add bash completion. Based on work by Didier Roche
+    - shell-completion/bash: process app and regular commands
+    - debian/dirs: add etc/bash_completion.d
+    - debian/rules: install bash_completion.ufw
+  * install rules files 0640 (LP: #393187)
+  * debian/postinst: make allow_custom_ports actually work and set
+    existing_configuration as seen after doing initial configuration, to
+    prevent calling ufw on already added rules
+  * debian/control: bump Standards-Version
+  * debian/control: update Vcs-Bzr
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 10 Jul 2009 22:34:38 -0500
+
+ufw (0.27.1-1) unstable; urgency=low
+
+  * Initial release. (closes: #506215)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 08 May 2009 10:39:30 -0500

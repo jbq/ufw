@@ -1,0 +1,2 @@
+version=3
+http://launchpad.net/ufw/+download/ http://launchpad.net/ufw/.*/ufw-(.*)\.tar\.gz
