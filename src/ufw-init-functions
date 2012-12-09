@@ -248,21 +248,6 @@ ufw_start() {
 "COMMIT\n" | $exe-restore -n || error="yes"
             fi
 
-            # add tracking policy
-            if [ "$DEFAULT_INPUT_POLICY" = "ACCEPT" ]; then
-                printf "*filter\n"\
-"-A ufw${type}-track-input -p tcp -m state --state NEW -j ACCEPT\n"\
-"-A ufw${type}-track-input -p udp -m state --state NEW -j ACCEPT\n"\
-"COMMIT\n" | $exe-restore -n || error="yes"
-            fi
-
-            if [ "$DEFAULT_OUTPUT_POLICY" = "ACCEPT" ]; then
-                printf "*filter\n"\
-"-A ufw${type}-track-output -p tcp -m state --state NEW -j ACCEPT\n"\
-"-A ufw${type}-track-output -p udp -m state --state NEW -j ACCEPT\n"\
-"COMMIT\n" | $exe-restore -n || error="yes"
-            fi
-
             # now setup the secondary 'logging-deny' chains
             if ! $exe -L ufw${type}-logging-deny -n >/dev/null 2>&1 ; then
                 printf "*filter\n"\

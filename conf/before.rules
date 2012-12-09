@@ -21,14 +21,6 @@
 -A ufw-before-input -i lo -j ACCEPT
 -A ufw-before-output -o lo -j ACCEPT
 
-# quickly process packets for which we already have a connection
--A ufw-before-input -m state --state RELATED,ESTABLISHED -j ACCEPT
--A ufw-before-output -m state --state RELATED,ESTABLISHED -j ACCEPT
-
-# drop INVALID packets (logs these in loglevel medium and higher)
--A ufw-before-input -m state --state INVALID -j ufw-logging-deny
--A ufw-before-input -m state --state INVALID -j DROP
-
 # ok icmp codes
 -A ufw-before-input -p icmp --icmp-type destination-unreachable -j ACCEPT
 -A ufw-before-input -p icmp --icmp-type source-quench -j ACCEPT

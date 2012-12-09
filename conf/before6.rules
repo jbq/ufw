@@ -33,17 +33,9 @@
 -A ufw6-before-input -p icmpv6 --icmpv6-type router-solicitation -m hl --hl-eq 255 -j ACCEPT
 -A ufw6-before-input -p icmpv6 --icmpv6-type router-advertisement -m hl --hl-eq 255 -j ACCEPT
 
-# quickly process packets for which we already have a connection
--A ufw6-before-input -m state --state RELATED,ESTABLISHED -j ACCEPT
--A ufw6-before-output -m state --state RELATED,ESTABLISHED -j ACCEPT
-
 # for multicast ping replies from link-local addresses (these don't have an
 # associated connection and would otherwise be marked INVALID)
 -A ufw6-before-input -p icmpv6 --icmpv6-type echo-reply -s fe80::/10 -j ACCEPT
-
-# drop INVALID packets (logs these in loglevel medium and higher)
--A ufw6-before-input -m state --state INVALID -j ufw6-logging-deny
--A ufw6-before-input -m state --state INVALID -j DROP
 
 # ok icmp codes
 -A ufw6-before-input -p icmpv6 --icmpv6-type destination-unreachable -j ACCEPT
