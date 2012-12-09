@@ -23,6 +23,7 @@ build: build-arch build-indep
 build-stamp:
 	dh_testdir
 	touch $@
+	make mo
 
 clean:
 	dh_testdir

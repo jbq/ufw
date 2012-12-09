@@ -1,4 +1,5 @@
 all:
+	mkdir mo
 	for pofile in `ls po/*.po`; do \
 		lang=$$(basename $$pofile .po); \
 		echo "msgfmt -c -o mo/$$lang.mo po/$$lang.po"; \
