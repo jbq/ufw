@@ -43,10 +43,6 @@ install: build
 	# make sure the version is in sync with our changelog
 	sed -i "s/^ufw_version = .*/ufw_version = '$(PKGVERS)'/" ./setup.py
 
-ifeq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
-	./run_tests.sh -i $(PYTHON)
-endif
-
 	$(PYTHON) ./setup.py install --root=$(CURDIR)/debian/ufw
 
 	# these shouldn't be conffiles
