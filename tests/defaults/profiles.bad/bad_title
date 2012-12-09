@@ -1,0 +1,10 @@
+[bad-title1]
+titl=Example profile for a custom web application
+description=Some nice descriptive text here
+ports=8080/tcp
+
+[bad-title2]
+title=
+description=Some nice descriptive text here
+ports=8080/tcp
+

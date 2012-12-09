@@ -1,0 +1,91 @@
+TESTING ARGS (logging)
+0: --dry-run logging on
+WARN: Checks disabled
+Logging enabled
+
+
+1: --dry-run logging off
+WARN: Checks disabled
+Logging disabled
+
+
+2: --dry-run LOGGING ON
+WARN: Checks disabled
+Logging enabled
+
+
+3: --dry-run LOGGING OFF
+WARN: Checks disabled
+Logging disabled
+
+
+TESTING ARGS (default)
+4: --dry-run default allow
+WARN: Checks disabled
+Default incoming policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+5: --dry-run default deny
+WARN: Checks disabled
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+6: --dry-run default reject
+WARN: Checks disabled
+Default incoming policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+
+7: --dry-run DEFAULT ALLOW
+WARN: Checks disabled
+Default incoming policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+8: --dry-run DEFAULT DENY
+WARN: Checks disabled
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+9: --dry-run DEFAULT REJECT
+WARN: Checks disabled
+Default incoming policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+
+TESTING ARGS (enable/disable)
+10: --dry-run enable
+WARN: Checks disabled
+> running ufw-init
+Firewall is active and enabled on system startup
+
+
+11: --dry-run disable
+WARN: Checks disabled
+> running ufw-init
+Firewall stopped and disabled on system startup
+
+
+12: --dry-run ENABLE
+WARN: Checks disabled
+> running ufw-init
+Firewall is active and enabled on system startup
+
+
+13: --dry-run DISABLE
+WARN: Checks disabled
+> running ufw-init
+Firewall stopped and disabled on system startup
+
+
+TESTING ARGS (status)
+14: --dry-run status
+WARN: Checks disabled
+> Checking iptables
+> Checking ip6tables
+
+
+

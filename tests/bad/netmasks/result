@@ -1,0 +1,131 @@
+TESTING INVALID CIDR
+0: --dry-run allow to 10.0.0.1/16a
+
+
+1: --dry-run allow from 10.0.0.1/16a
+
+
+2: --dry-run allow to 10.0.0.1/33
+
+
+3: --dry-run allow from 10.0.0.1/33
+
+
+4: --dry-run allow to 10.0.0.1/-1
+
+
+5: --dry-run allow from 10.0.0.1/-1
+
+
+TESTING INVALID DOTTED
+6: --dry-run allow to 192.168.0.0/256.255.255.255
+
+
+7: --dry-run allow to 192.168.0.0/255.256.255.255
+
+
+8: --dry-run allow to 192.168.0.0/255.256.256.255
+
+
+9: --dry-run allow to 192.168.0.0/255.255.255.256
+
+
+10: --dry-run allow to 192.168.0.0/256.256.256.256
+
+
+11: --dry-run allow from 192.168.0.0/256.255.255.255
+
+
+12: --dry-run allow from 192.168.0.0/255.256.255.255
+
+
+13: --dry-run allow from 192.168.0.0/255.256.256.255
+
+
+14: --dry-run allow from 192.168.0.0/255.255.255.256
+
+
+15: --dry-run allow from 192.168.0.0/256.256.256.256
+
+
+16: --dry-run allow from 192.168.0.0/33 to 192.168.0.0/256.256.256.256
+
+
+17: --dry-run allow to 192.168.0.0/.255.255.255
+
+
+18: --dry-run allow to 192.168.0.0/255.255.255.
+
+
+19: --dry-run allow to 192.168.0.0/255.255.255
+
+
+20: --dry-run allow to 192.168.0.0/s55.255.255.255
+
+
+21: --dry-run allow to 192.168.0.0/255.2s5.255.255
+
+
+22: --dry-run allow to 192.168.0.0/255.255.25s.255
+
+
+23: --dry-run allow to 192.168.0.0/255.255.255.s55
+
+
+24: --dry-run allow to 192.168.0.0/s55.s55.s55.s55
+
+
+25: --dry-run allow to 192.168.0.0/-1.255.255.255
+
+
+26: --dry-run allow to 192.168.0.0/255.-1.255.255
+
+
+27: --dry-run allow to 192.168.0.0/255.255.-1.255
+
+
+28: --dry-run allow to 192.168.0.0/255.255.255.-1
+
+
+29: --dry-run allow to 192.168.0.0/-1.-1.-1.-1
+
+
+30: --dry-run allow from 192.168.0.0/.255.255.255
+
+
+31: --dry-run allow from 192.168.0.0/255.255.255.
+
+
+32: --dry-run allow from 192.168.0.0/255.255.255
+
+
+33: --dry-run allow from 192.168.0.0/s55.255.255.255
+
+
+34: --dry-run allow from 192.168.0.0/255.2s5.255.255
+
+
+35: --dry-run allow from 192.168.0.0/255.255.25s.255
+
+
+36: --dry-run allow from 192.168.0.0/255.255.255.s55
+
+
+37: --dry-run allow from 192.168.0.0/s55.s55.s55.s55
+
+
+38: --dry-run allow from 192.168.0.0/-1.255.255.255
+
+
+39: --dry-run allow from 192.168.0.0/255.-1.255.255
+
+
+40: --dry-run allow from 192.168.0.0/255.255.-1.255
+
+
+41: --dry-run allow from 192.168.0.0/255.255.255.-1
+
+
+42: --dry-run allow from 192.168.0.0/-1.-1.-1.-1
+
+

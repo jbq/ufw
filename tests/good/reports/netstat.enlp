@@ -1,0 +1,16 @@
+tcp   0.0.0.0:22                                     LISTEN      0     4301        1029/sshd
+tcp   127.0.0.1:631                                  LISTEN      0     5242        1334/cupsd
+tcp6  :::22                                          LISTEN      0     4303        1029/sshd
+tcp6  ::1:631                                        LISTEN      0     5241        1334/cupsd
+udp   0.0.0.0:68                                     NA          0     9482        1925/dhclient3
+udp   0.0.0.0:68                                     NA          0     4938        1149/dhclient3
+udp   0.0.0.0:33257                                  NA          105   4774        1052/avahi-daemon
+udp   0.0.0.0:5353                                   NA          105   4773        1052/avahi-daemon
+udp   10.0.2.101:123                                 NA          0     9795        2043/ntpd
+udp   10.0.2.9:123                                   NA          0     9794        2043/ntpd
+udp   127.0.0.1:123                                  NA          0     9793        2043/ntpd
+udp   0.0.0.0:123                                    NA          0     9785        2043/ntpd
+udp6  2001::212:cccc:dddd:e243:123                   NA          0     9792        2043/ntpd
+udp6  2001::211:aaaa:bbbb:d54c:123                   NA          0     9791        2043/ntpd
+udp6  ::1:123                                        NA          0     9790        2043/ntpd
+udp6  :::123                                         NA          0     9786        2043/ntpd

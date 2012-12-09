@@ -1,0 +1,25 @@
+[bad-ports1]
+title=Example title
+description=Example description
+port=80
+
+[bad-ports2]
+title=Example title
+description=Example description
+ports=8o
+
+[bad-ports3]
+title=Example title
+description=Example description
+ports=:80
+
+[bad-ports4]
+title=Example title
+description=Example description
+ports=80/tcp 53/udp
+
+[bad-ports5]
+title=Example title
+description=Example description
+ports=
+

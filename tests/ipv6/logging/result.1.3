@@ -1,0 +1,1347 @@
+TESTING LOG RULES
+0: allow log 23
+
+
+1: allow log Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### allow_log any 23 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-logging-input -p tcp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw-user-input -p tcp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p tcp --dport 23 -j ACCEPT
+-A ufw-user-logging-input -p udp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw-user-input -p udp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p udp --dport 23 -j ACCEPT
+
+### tuple ### allow_log udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -j RETURN
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-logging-input
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow_log tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -j RETURN
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-logging-input
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### allow_log any 23 ::/0 any ::/0 in
+-A ufw6-user-logging-input -p tcp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw6-user-input -p tcp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp --dport 23 -j ACCEPT
+-A ufw6-user-logging-input -p udp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw6-user-input -p udp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p udp --dport 23 -j ACCEPT
+
+### END RULES ###
+COMMIT
+2: delete allow log 23
+
+
+3: delete allow log Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+4: allow log from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### allow_log tcp 25 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 in
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ACCEPT
+
+### END RULES ###
+COMMIT
+5: delete allow log from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+6: allow log-all 23
+
+
+7: allow log-all Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### allow_log-all any 23 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-logging-input -p tcp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw-user-input -p tcp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p tcp --dport 23 -j ACCEPT
+-A ufw-user-logging-input -p udp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw-user-input -p udp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p udp --dport 23 -j ACCEPT
+
+### tuple ### allow_log-all udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -j RETURN
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-logging-input
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow_log-all tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -j RETURN
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-logging-input
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### allow_log-all any 23 ::/0 any ::/0 in
+-A ufw6-user-logging-input -p tcp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw6-user-input -p tcp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp --dport 23 -j ACCEPT
+-A ufw6-user-logging-input -p udp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw6-user-input -p udp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p udp --dport 23 -j ACCEPT
+
+### END RULES ###
+COMMIT
+8: delete allow log-all 23
+
+
+9: delete allow log-all Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+10: allow log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### allow_log-all tcp 25 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 in
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ACCEPT
+
+### END RULES ###
+COMMIT
+11: delete allow log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+12: deny log 23
+
+
+13: deny log Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### deny_log any 23 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-logging-input -p tcp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw-user-input -p tcp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p tcp --dport 23 -j DROP
+-A ufw-user-logging-input -p udp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw-user-input -p udp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p udp --dport 23 -j DROP
+
+### tuple ### deny_log udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -j RETURN
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-logging-input
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j DROP -m comment --comment 'dapp_Samba'
+
+### tuple ### deny_log tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -j RETURN
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-logging-input
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j DROP -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### deny_log any 23 ::/0 any ::/0 in
+-A ufw6-user-logging-input -p tcp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw6-user-input -p tcp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp --dport 23 -j DROP
+-A ufw6-user-logging-input -p udp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw6-user-input -p udp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p udp --dport 23 -j DROP
+
+### END RULES ###
+COMMIT
+14: delete deny log 23
+
+
+15: delete deny log Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+16: deny log from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### deny_log tcp 25 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 in
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j DROP
+
+### END RULES ###
+COMMIT
+17: delete deny log from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+18: deny log-all 23
+
+
+19: deny log-all Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### deny_log-all any 23 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-logging-input -p tcp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw-user-input -p tcp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p tcp --dport 23 -j DROP
+-A ufw-user-logging-input -p udp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw-user-input -p udp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p udp --dport 23 -j DROP
+
+### tuple ### deny_log-all udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -j RETURN
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-logging-input
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j DROP -m comment --comment 'dapp_Samba'
+
+### tuple ### deny_log-all tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -j RETURN
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-logging-input
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j DROP -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### deny_log-all any 23 ::/0 any ::/0 in
+-A ufw6-user-logging-input -p tcp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw6-user-input -p tcp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp --dport 23 -j DROP
+-A ufw6-user-logging-input -p udp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw6-user-input -p udp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p udp --dport 23 -j DROP
+
+### END RULES ###
+COMMIT
+20: delete deny log-all 23
+
+
+21: delete deny log-all Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+22: deny log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### deny_log-all tcp 25 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 in
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j DROP
+
+### END RULES ###
+COMMIT
+23: delete deny log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+24: limit log 23
+
+
+25: limit log Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### limit_log any 23 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-logging-input -p tcp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW LIMIT] "
+-A ufw-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw-user-input -p tcp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p tcp --dport 23 -m state --state NEW -m recent --set
+-A ufw-user-input -p tcp --dport 23 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+-A ufw-user-input -p tcp --dport 23 -j ufw-user-limit-accept
+-A ufw-user-logging-input -p udp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW LIMIT] "
+-A ufw-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw-user-input -p udp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p udp --dport 23 -m state --state NEW -m recent --set
+-A ufw-user-input -p udp --dport 23 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+-A ufw-user-input -p udp --dport 23 -j ufw-user-limit-accept
+
+### tuple ### limit_log udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW LIMIT] "
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -j RETURN
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-logging-input
+-A ufw-user-input -p udp -m multiport --dports 137,138 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-input -p udp -m multiport --dports 137,138 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+
+### tuple ### limit_log tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW LIMIT] "
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -j RETURN
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-logging-input
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+26: delete limit log 23
+
+
+27: delete limit log Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+28: limit log from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+29: delete limit log from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+30: limit log-all 23
+
+
+31: limit log-all Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### limit_log-all any 23 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-logging-input -p tcp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW LIMIT] "
+-A ufw-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw-user-input -p tcp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p tcp --dport 23 -m state --state NEW -m recent --set
+-A ufw-user-input -p tcp --dport 23 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+-A ufw-user-input -p tcp --dport 23 -j ufw-user-limit-accept
+-A ufw-user-logging-input -p udp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW LIMIT] "
+-A ufw-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw-user-input -p udp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p udp --dport 23 -m state --state NEW -m recent --set
+-A ufw-user-input -p udp --dport 23 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+-A ufw-user-input -p udp --dport 23 -j ufw-user-limit-accept
+
+### tuple ### limit_log-all udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW LIMIT] "
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -j RETURN
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-logging-input
+-A ufw-user-input -p udp -m multiport --dports 137,138 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-input -p udp -m multiport --dports 137,138 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+
+### tuple ### limit_log-all tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW LIMIT] "
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -j RETURN
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-logging-input
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+32: delete limit log-all 23
+
+
+33: delete limit log-all Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+34: limit log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+35: delete limit log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+36: reject log 23
+
+
+37: reject log Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### reject_log any 23 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-logging-input -p tcp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw-user-input -p tcp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p tcp --dport 23 -j REJECT --reject-with tcp-reset
+-A ufw-user-logging-input -p udp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw-user-input -p udp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p udp --dport 23 -j REJECT
+
+### tuple ### reject_log udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -j RETURN
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-logging-input
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j REJECT -m comment --comment 'dapp_Samba'
+
+### tuple ### reject_log tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -j RETURN
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-logging-input
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j REJECT --reject-with tcp-reset -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### reject_log any 23 ::/0 any ::/0 in
+-A ufw6-user-logging-input -p tcp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw6-user-input -p tcp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp --dport 23 -j REJECT --reject-with tcp-reset
+-A ufw6-user-logging-input -p udp --dport 23 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw6-user-input -p udp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p udp --dport 23 -j REJECT
+
+### END RULES ###
+COMMIT
+38: delete reject log 23
+
+
+39: delete reject log Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+40: reject log from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### reject_log tcp 25 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 in
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j REJECT --reject-with tcp-reset
+
+### END RULES ###
+COMMIT
+41: delete reject log from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+42: reject log-all 23
+
+
+43: reject log-all Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### reject_log-all any 23 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-logging-input -p tcp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw-user-input -p tcp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p tcp --dport 23 -j REJECT --reject-with tcp-reset
+-A ufw-user-logging-input -p udp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw-user-input -p udp --dport 23 -j ufw-user-logging-input
+-A ufw-user-input -p udp --dport 23 -j REJECT
+
+### tuple ### reject_log-all udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -j RETURN
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-logging-input
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j REJECT -m comment --comment 'dapp_Samba'
+
+### tuple ### reject_log-all tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -j RETURN
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-logging-input
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j REJECT --reject-with tcp-reset -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### reject_log-all any 23 ::/0 any ::/0 in
+-A ufw6-user-logging-input -p tcp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p tcp --dport 23 -j RETURN
+-A ufw6-user-input -p tcp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp --dport 23 -j REJECT --reject-with tcp-reset
+-A ufw6-user-logging-input -p udp --dport 23 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p udp --dport 23 -j RETURN
+-A ufw6-user-input -p udp --dport 23 -j ufw6-user-logging-input
+-A ufw6-user-input -p udp --dport 23 -j REJECT
+
+### END RULES ###
+COMMIT
+44: delete reject log-all 23
+
+
+45: delete reject log-all Samba
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+46: reject log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### reject_log-all tcp 25 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 in
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j REJECT --reject-with tcp-reset
+
+### END RULES ###
+COMMIT
+47: delete reject log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+TESTING LOG RULES (updating)
+48: allow log Samba
+
+
+49: deny log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### allow_log udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -j RETURN
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-logging-input
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow_log tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -j RETURN
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-logging-input
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### deny_log-all tcp 25 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 in
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j DROP
+
+### END RULES ###
+COMMIT
+50: deny log Samba
+
+
+51: reject log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### deny_log udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p udp -m multiport --dports 137,138 -j RETURN
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ufw-user-logging-input
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j DROP -m comment --comment 'dapp_Samba'
+
+### tuple ### deny_log tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -p tcp -m multiport --dports 139,445 -j RETURN
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ufw-user-logging-input
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j DROP -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### reject_log-all tcp 25 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 in
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ufw6-user-logging-input
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j REJECT --reject-with tcp-reset
+
+### END RULES ###
+COMMIT
+52: delete deny log Samba
+
+
+53: delete reject log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### END RULES ###
+COMMIT
+TESTING LOG RULES (interfaces)
+54: allow in on eth0 log
+
+
+55: allow in on eth0 log from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port 24 proto tcp
+
+
+56: deny in on eth0 log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port 25 proto tcp
+
+
+57: allow out on eth0 log
+
+
+58: allow out on eth0 log from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port 24 proto tcp
+
+
+59: deny out on eth0 log-all from 2001:db8::/32 to 2001:db8:3:4:5:6:7:8 port 25 proto tcp
+
+
+contents of user*.rules:
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### allow_log any any 0.0.0.0/0 any 0.0.0.0/0 in_eth0
+-A ufw-user-logging-input -i eth0 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -i eth0 -j RETURN
+-A ufw-user-input -i eth0 -j ufw-user-logging-input
+-A ufw-user-input -i eth0 -j ACCEPT
+
+### tuple ### allow_log any any 0.0.0.0/0 any 0.0.0.0/0 out_eth0
+-A ufw-user-logging-output -o eth0 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-output -o eth0 -j RETURN
+-A ufw-user-output -o eth0 -j ufw-user-logging-output
+-A ufw-user-output -o eth0 -j ACCEPT
+
+### END RULES ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+### RULES ###
+
+### tuple ### allow_log any any ::/0 any ::/0 in_eth0
+-A ufw6-user-logging-input -i eth0 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-input -i eth0 -j RETURN
+-A ufw6-user-input -i eth0 -j ufw6-user-logging-input
+-A ufw6-user-input -i eth0 -j ACCEPT
+
+### tuple ### allow_log tcp 24 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 in_eth0
+-A ufw6-user-logging-input -i eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 24 -s 2001:db8::/32 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-input -i eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 24 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-input -i eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 24 -s 2001:db8::/32 -j ufw6-user-logging-input
+-A ufw6-user-input -i eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 24 -s 2001:db8::/32 -j ACCEPT
+
+### tuple ### deny_log-all tcp 25 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 in_eth0
+-A ufw6-user-logging-input -i eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-input -i eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-input -i eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ufw6-user-logging-input
+-A ufw6-user-input -i eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j DROP
+
+### tuple ### allow_log any any ::/0 any ::/0 out_eth0
+-A ufw6-user-logging-output -o eth0 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-output -o eth0 -j RETURN
+-A ufw6-user-output -o eth0 -j ufw6-user-logging-output
+-A ufw6-user-output -o eth0 -j ACCEPT
+
+### tuple ### allow_log tcp 24 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 out_eth0
+-A ufw6-user-logging-output -o eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 24 -s 2001:db8::/32 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-output -o eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 24 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-output -o eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 24 -s 2001:db8::/32 -j ufw6-user-logging-output
+-A ufw6-user-output -o eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 24 -s 2001:db8::/32 -j ACCEPT
+
+### tuple ### deny_log-all tcp 25 2001:db8:3:4:5:6:7:8 any 2001:db8::/32 out_eth0
+-A ufw6-user-logging-output -o eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw6-user-logging-output -o eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j RETURN
+-A ufw6-user-output -o eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j ufw6-user-logging-output
+-A ufw6-user-output -o eth0 -p tcp -d 2001:db8:3:4:5:6:7:8 --dport 25 -s 2001:db8::/32 -j DROP
+
+### END RULES ###
+COMMIT

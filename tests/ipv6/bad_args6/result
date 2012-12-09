@@ -1,0 +1,981 @@
+TESTING ARGS (logging)
+0: --dry-run logging
+
+
+1: --dry-run logging foo
+
+
+2: --dry-run loggin on
+
+
+TESTING ARGS (default)
+3: --dry-run default
+
+
+4: --dry-run default foo
+
+
+5: --dry-run default accept
+
+
+6: --dry-run defaul allow
+
+
+7: --dry-run default limit
+
+
+TESTING ARGS (enable/disable)
+8: --dry-run enabled
+
+
+9: --dry-run disabled
+
+
+TESTING ARGS (allow/deny/limit)
+10: --dry-run allow
+
+
+11: --dry-run deny
+
+
+12: --dry-run limit
+
+
+TESTING ARGS (allow/deny/limit bad port)
+13: --dry-run alow 25
+
+
+14: --dry-run dny 25
+
+
+15: --dry-run limt 25
+
+
+16: --dry-run allow 25a
+
+
+17: --dry-run deny 25a
+
+
+18: --dry-run limit 25a
+
+
+19: --dry-run allow 65536
+
+
+20: --dry-run deny 65536
+
+
+21: --dry-run limit 65536
+
+
+22: --dry-run allow 0
+
+
+23: --dry-run deny 0
+
+
+24: --dry-run limit 0
+
+
+25: --dry-run deny XXX
+
+
+26: --dry-run deny foobar
+
+
+TESTING ARGS (allow/deny/limit bad to/from)
+27: --dry-run allow prot tcp from any
+
+
+28: --dry-run allow proto tcp fro any
+
+
+29: --dry-run allow proto tcp top any
+
+
+30: --dry-run allow proto tcp to any por 25
+
+
+31: --dry-run allow port 25
+
+
+32: --dry-run allow to anu
+
+
+33: --dry-run allow proto tcq to any port 25
+
+
+34: --dry-run allow proto tcp proto udp to any port 25
+
+
+35: --dry-run allow to
+
+
+36: --dry-run allow to port 25
+
+
+37: --dry-run allow from
+
+
+38: --dry-run allow from port 25
+
+
+39: --dry-run allow to any port
+
+
+40: --dry-run allow to port 25
+
+
+41: --dry-run allow from 2001:db8:3:4:5:6:7:8 to
+
+
+42: --dry-run allow from 2001:db8:3:4:5:6:7:8 from
+
+
+43: --dry-run allow from 2001:db8:3:4:5:6:7:8 port 25 to
+
+
+44: --dry-run allow from 2001:db8:3:4:5:6:7:8 port 25 from
+
+
+45: --dry-run allow to 2001:db8:3:4:5:6:7:8 from
+
+
+46: --dry-run allow to 2001:db8:3:4:5:6:7:8 to
+
+
+47: --dry-run allow to 2001:db8:3:4:5:6:7:8 port smtp from
+
+
+48: --dry-run allow to 2001:db8:3:4:5:6:7:8 port smtp to
+
+
+49: --dry-run allow to from 2001:db8:3:4:5:6:7:8
+
+
+50: --dry-run allow from to 2001:db8:3:4:5:6:7:8
+
+
+51: --dry-run allow to from 2001:db8:3:4:5:6:7:8 port 25
+
+
+52: --dry-run allow from to 2001:db8:3:4:5:6:7:8 port 25
+
+
+53: --dry-run allow from from 2001:db8:3:4:5:6:7:8
+
+
+54: --dry-run allow to to 2001:db8:3:4:5:6:7:8
+
+
+55: --dry-run allow from from 2001:db8:3:4:5:6:7:8 port smtp
+
+
+56: --dry-run allow to to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+57: --dry-run deny prot tcp from any
+
+
+58: --dry-run deny proto tcp fro any
+
+
+59: --dry-run deny proto tcp top any
+
+
+60: --dry-run deny proto tcp to any por 25
+
+
+61: --dry-run deny port 25
+
+
+62: --dry-run deny to anu
+
+
+63: --dry-run deny proto tcq to any port 25
+
+
+64: --dry-run deny proto tcp proto udp to any port 25
+
+
+65: --dry-run deny to
+
+
+66: --dry-run deny to port 25
+
+
+67: --dry-run deny from
+
+
+68: --dry-run deny from port 25
+
+
+69: --dry-run deny to any port
+
+
+70: --dry-run deny to port 25
+
+
+71: --dry-run deny from 2001:db8:3:4:5:6:7:8 to
+
+
+72: --dry-run deny from 2001:db8:3:4:5:6:7:8 from
+
+
+73: --dry-run deny from 2001:db8:3:4:5:6:7:8 port 25 to
+
+
+74: --dry-run deny from 2001:db8:3:4:5:6:7:8 port 25 from
+
+
+75: --dry-run deny to 2001:db8:3:4:5:6:7:8 from
+
+
+76: --dry-run deny to 2001:db8:3:4:5:6:7:8 to
+
+
+77: --dry-run deny to 2001:db8:3:4:5:6:7:8 port smtp from
+
+
+78: --dry-run deny to 2001:db8:3:4:5:6:7:8 port smtp to
+
+
+79: --dry-run deny to from 2001:db8:3:4:5:6:7:8
+
+
+80: --dry-run deny from to 2001:db8:3:4:5:6:7:8
+
+
+81: --dry-run deny to from 2001:db8:3:4:5:6:7:8 port 25
+
+
+82: --dry-run deny from to 2001:db8:3:4:5:6:7:8 port 25
+
+
+83: --dry-run deny from from 2001:db8:3:4:5:6:7:8
+
+
+84: --dry-run deny to to 2001:db8:3:4:5:6:7:8
+
+
+85: --dry-run deny from from 2001:db8:3:4:5:6:7:8 port smtp
+
+
+86: --dry-run deny to to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+87: --dry-run limit prot tcp from any
+
+
+88: --dry-run limit proto tcp fro any
+
+
+89: --dry-run limit proto tcp top any
+
+
+90: --dry-run limit proto tcp to any por 25
+
+
+91: --dry-run limit port 25
+
+
+92: --dry-run limit to anu
+
+
+93: --dry-run limit proto tcq to any port 25
+
+
+94: --dry-run limit proto tcp proto udp to any port 25
+
+
+95: --dry-run limit to
+
+
+96: --dry-run limit to port 25
+
+
+97: --dry-run limit from
+
+
+98: --dry-run limit from port 25
+
+
+99: --dry-run limit to any port
+
+
+100: --dry-run limit to port 25
+
+
+101: --dry-run limit from 2001:db8:3:4:5:6:7:8 to
+
+
+102: --dry-run limit from 2001:db8:3:4:5:6:7:8 from
+
+
+103: --dry-run limit from 2001:db8:3:4:5:6:7:8 port 25 to
+
+
+104: --dry-run limit from 2001:db8:3:4:5:6:7:8 port 25 from
+
+
+105: --dry-run limit to 2001:db8:3:4:5:6:7:8 from
+
+
+106: --dry-run limit to 2001:db8:3:4:5:6:7:8 to
+
+
+107: --dry-run limit to 2001:db8:3:4:5:6:7:8 port smtp from
+
+
+108: --dry-run limit to 2001:db8:3:4:5:6:7:8 port smtp to
+
+
+109: --dry-run limit to from 2001:db8:3:4:5:6:7:8
+
+
+110: --dry-run limit from to 2001:db8:3:4:5:6:7:8
+
+
+111: --dry-run limit to from 2001:db8:3:4:5:6:7:8 port 25
+
+
+112: --dry-run limit from to 2001:db8:3:4:5:6:7:8 port 25
+
+
+113: --dry-run limit from from 2001:db8:3:4:5:6:7:8
+
+
+114: --dry-run limit to to 2001:db8:3:4:5:6:7:8
+
+
+115: --dry-run limit from from 2001:db8:3:4:5:6:7:8 port smtp
+
+
+116: --dry-run limit to to 2001:db8:3:4:5:6:7:8 port smtp
+
+
+TESTING ARGS (bad ip)
+117: --dry-run allow to 2001:db8:::/32
+
+
+118: --dry-run allow to 2001:db8::/129
+
+
+119: --dry-run allow to 2001:gb8::/32
+
+
+120: --dry-run allow to 2001:db8:3:4:5:6:7:8:9
+
+
+121: --dry-run allow to foo
+
+
+122: --dry-run allow to xxx:xxx:xxx:xx:xxx:xxx:xxx:xxx
+
+
+123: --dry-run allow to g001:db8:3:4:5:6:7:8
+
+
+124: --dry-run allow to 2001:gb8:3:4:5:6:7:8
+
+
+125: --dry-run allow to 2001:db8:g:4:5:6:7:8
+
+
+126: --dry-run allow to 2001:db8:3:g:5:6:7:8
+
+
+127: --dry-run allow to 2001:db8:3:4:g:6:7:8
+
+
+128: --dry-run allow to 2001:db8:3:4:5:g:7:8
+
+
+129: --dry-run allow to 2001:db8:3:4:5:6:g:8
+
+
+130: --dry-run allow to 2001:db8:3:4:5:6:7:g
+
+
+131: --dry-run allow to 2001:0db8:0000:0000:0000:0000:0000:0000/129
+
+
+132: --dry-run allow to 2001:0db8:0000:0000:0000:0000:0000:00000/128
+
+
+133: --dry-run allow to 2001:0db8:0000:0000:0000:0000:0000:00000/12a
+
+
+TESTING ARGS (delete)
+134: --dry-run delete
+
+
+TESTING ARGS (allow/deny/limit mixed ipv4/ipv6)
+135: --dry-run allow to 10.0.0.1 from 2001:db8::/32
+
+
+136: --dry-run deny to 10.0.0.1 port 25 from 2001:db8::/32 proto tcp
+
+
+137: --dry-run limit to 10.0.0.1 port 25 from 2001:db8::/32 proto tcp
+
+
+138: --dry-run allow to 2001:db8::/32 port 25 from 10.0.0.1 proto udp
+
+
+139: --dry-run deny to 2001:db8::/32 from 10.0.0.1
+
+
+140: --dry-run limit to 2001:db8::/32 from 10.0.0.1
+
+
+TESTING BAD SERVICES
+141: --dry-run allow smtp/udp
+
+
+142: --dry-run allow tftp/tcp
+
+
+143: --dry-run allow to any port smtp from any port tftp
+
+
+144: --dry-run allow to any port tftp from any port smtp
+
+
+145: --dry-run allow to any port smtp from any port 23 proto udp
+
+
+146: --dry-run allow to any port 23 from any port smtp proto udp
+
+
+147: --dry-run allow to any port tftp from any port 23 proto tcp
+
+
+148: --dry-run allow to any port 23 from any port tftp proto tcp
+
+
+149: --dry-run allow to any port smtp from any port ssh proto udp
+
+
+150: --dry-run allow to any port tftp from any port ssh proto tcp
+
+
+TESTING BAD MULTIPORTS
+151: --dry-run allow from any port 20,21
+
+
+152: --dry-run allow from any port 20,2L proto udp
+
+
+153: --dry-run allow from any port 2o,21 proto tcp
+
+
+154: --dry-run allow from any port 20, proto udp
+
+
+155: --dry-run allow from any port ,20 proto tcp
+
+
+156: --dry-run allow from any port ,20, proto udp
+
+
+157: --dry-run allow from any port 20: proto tcp
+
+
+158: --dry-run allow from any port :20 proto udp
+
+
+159: --dry-run allow from any port :20: proto tcp
+
+
+160: --dry-run allow from any port 20:65536 proto udp
+
+
+161: --dry-run allow from any port 0:65 proto tcp
+
+
+162: --dry-run allow from any port ,20:24 proto udp
+
+
+163: --dry-run allow from any port 20:24, proto tcp
+
+
+164: --dry-run allow from any port ,20:24, proto udp
+
+
+165: --dry-run allow from any port 24:20 proto tcp
+
+
+166: --dry-run allow from any port 2A:20 proto tcp
+
+
+167: --dry-run allow from any port 24:2o proto tcp
+
+
+168: --dry-run allow from any port http,smtp proto tcp
+
+
+169: --dry-run allow from any port 80,smtp proto tcp
+
+
+170: --dry-run allow from any port http,25 proto tcp
+
+
+171: --dry-run allow to any port 20,21
+
+
+172: --dry-run allow to any port 20,2L proto udp
+
+
+173: --dry-run allow to any port 2o,21 proto tcp
+
+
+174: --dry-run allow to any port 20, proto udp
+
+
+175: --dry-run allow to any port ,20 proto tcp
+
+
+176: --dry-run allow to any port ,20, proto udp
+
+
+177: --dry-run allow to any port 20: proto tcp
+
+
+178: --dry-run allow to any port :20 proto udp
+
+
+179: --dry-run allow to any port :20: proto tcp
+
+
+180: --dry-run allow to any port 20:65536 proto udp
+
+
+181: --dry-run allow to any port 0:65 proto tcp
+
+
+182: --dry-run allow to any port ,20:24 proto udp
+
+
+183: --dry-run allow to any port 20:24, proto tcp
+
+
+184: --dry-run allow to any port ,20:24, proto udp
+
+
+185: --dry-run allow to any port 24:20 proto tcp
+
+
+186: --dry-run allow to any port 2A:20 proto tcp
+
+
+187: --dry-run allow to any port 24:2o proto tcp
+
+
+188: --dry-run allow to any port http,smtp proto tcp
+
+
+189: --dry-run allow to any port 80,smtp proto tcp
+
+
+190: --dry-run allow to any port http,25 proto tcp
+
+
+191: --dry-run allow to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 proto tcp
+
+
+192: --dry-run allow to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 proto udp
+
+
+193: --dry-run allow from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 proto tcp
+
+
+194: --dry-run allow from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 proto udp
+
+
+195: --dry-run deny from any port 20,21
+
+
+196: --dry-run deny from any port 20,2L proto udp
+
+
+197: --dry-run deny from any port 2o,21 proto tcp
+
+
+198: --dry-run deny from any port 20, proto udp
+
+
+199: --dry-run deny from any port ,20 proto tcp
+
+
+200: --dry-run deny from any port ,20, proto udp
+
+
+201: --dry-run deny from any port 20: proto tcp
+
+
+202: --dry-run deny from any port :20 proto udp
+
+
+203: --dry-run deny from any port :20: proto tcp
+
+
+204: --dry-run deny from any port 20:65536 proto udp
+
+
+205: --dry-run deny from any port 0:65 proto tcp
+
+
+206: --dry-run deny from any port ,20:24 proto udp
+
+
+207: --dry-run deny from any port 20:24, proto tcp
+
+
+208: --dry-run deny from any port ,20:24, proto udp
+
+
+209: --dry-run deny from any port 24:20 proto tcp
+
+
+210: --dry-run deny from any port 2A:20 proto tcp
+
+
+211: --dry-run deny from any port 24:2o proto tcp
+
+
+212: --dry-run deny from any port http,smtp proto tcp
+
+
+213: --dry-run deny from any port 80,smtp proto tcp
+
+
+214: --dry-run deny from any port http,25 proto tcp
+
+
+215: --dry-run deny to any port 20,21
+
+
+216: --dry-run deny to any port 20,2L proto udp
+
+
+217: --dry-run deny to any port 2o,21 proto tcp
+
+
+218: --dry-run deny to any port 20, proto udp
+
+
+219: --dry-run deny to any port ,20 proto tcp
+
+
+220: --dry-run deny to any port ,20, proto udp
+
+
+221: --dry-run deny to any port 20: proto tcp
+
+
+222: --dry-run deny to any port :20 proto udp
+
+
+223: --dry-run deny to any port :20: proto tcp
+
+
+224: --dry-run deny to any port 20:65536 proto udp
+
+
+225: --dry-run deny to any port 0:65 proto tcp
+
+
+226: --dry-run deny to any port ,20:24 proto udp
+
+
+227: --dry-run deny to any port 20:24, proto tcp
+
+
+228: --dry-run deny to any port ,20:24, proto udp
+
+
+229: --dry-run deny to any port 24:20 proto tcp
+
+
+230: --dry-run deny to any port 2A:20 proto tcp
+
+
+231: --dry-run deny to any port 24:2o proto tcp
+
+
+232: --dry-run deny to any port http,smtp proto tcp
+
+
+233: --dry-run deny to any port 80,smtp proto tcp
+
+
+234: --dry-run deny to any port http,25 proto tcp
+
+
+235: --dry-run deny to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 proto tcp
+
+
+236: --dry-run deny to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 proto udp
+
+
+237: --dry-run deny from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 proto tcp
+
+
+238: --dry-run deny from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 proto udp
+
+
+239: --dry-run limit from any port 20,21
+
+
+240: --dry-run limit from any port 20,2L proto udp
+
+
+241: --dry-run limit from any port 2o,21 proto tcp
+
+
+242: --dry-run limit from any port 20, proto udp
+
+
+243: --dry-run limit from any port ,20 proto tcp
+
+
+244: --dry-run limit from any port ,20, proto udp
+
+
+245: --dry-run limit from any port 20: proto tcp
+
+
+246: --dry-run limit from any port :20 proto udp
+
+
+247: --dry-run limit from any port :20: proto tcp
+
+
+248: --dry-run limit from any port 20:65536 proto udp
+
+
+249: --dry-run limit from any port 0:65 proto tcp
+
+
+250: --dry-run limit from any port ,20:24 proto udp
+
+
+251: --dry-run limit from any port 20:24, proto tcp
+
+
+252: --dry-run limit from any port ,20:24, proto udp
+
+
+253: --dry-run limit from any port 24:20 proto tcp
+
+
+254: --dry-run limit from any port 2A:20 proto tcp
+
+
+255: --dry-run limit from any port 24:2o proto tcp
+
+
+256: --dry-run limit from any port http,smtp proto tcp
+
+
+257: --dry-run limit from any port 80,smtp proto tcp
+
+
+258: --dry-run limit from any port http,25 proto tcp
+
+
+259: --dry-run limit to any port 20,21
+
+
+260: --dry-run limit to any port 20,2L proto udp
+
+
+261: --dry-run limit to any port 2o,21 proto tcp
+
+
+262: --dry-run limit to any port 20, proto udp
+
+
+263: --dry-run limit to any port ,20 proto tcp
+
+
+264: --dry-run limit to any port ,20, proto udp
+
+
+265: --dry-run limit to any port 20: proto tcp
+
+
+266: --dry-run limit to any port :20 proto udp
+
+
+267: --dry-run limit to any port :20: proto tcp
+
+
+268: --dry-run limit to any port 20:65536 proto udp
+
+
+269: --dry-run limit to any port 0:65 proto tcp
+
+
+270: --dry-run limit to any port ,20:24 proto udp
+
+
+271: --dry-run limit to any port 20:24, proto tcp
+
+
+272: --dry-run limit to any port ,20:24, proto udp
+
+
+273: --dry-run limit to any port 24:20 proto tcp
+
+
+274: --dry-run limit to any port 2A:20 proto tcp
+
+
+275: --dry-run limit to any port 24:2o proto tcp
+
+
+276: --dry-run limit to any port http,smtp proto tcp
+
+
+277: --dry-run limit to any port 80,smtp proto tcp
+
+
+278: --dry-run limit to any port http,25 proto tcp
+
+
+279: --dry-run limit to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 proto tcp
+
+
+280: --dry-run limit to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 proto udp
+
+
+281: --dry-run limit from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 proto tcp
+
+
+282: --dry-run limit from any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 to any port 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34:39 proto udp
+
+
+TESTING BAD INTERFACES
+283: --dry-run allow in on e%th0 to 2001:db8:3:4:5:6:7:8
+
+
+284: --dry-run allow in eth0 to 2001:db8:3:4:5:6:7:8
+
+
+285: --dry-run allow ina eth0 to 2001:db8:3:4:5:6:7:8
+
+
+286: --dry-run allow on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+287: --dry-run allow log in on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+288: --dry-run deny in on e%th0 to 2001:db8:3:4:5:6:7:8
+
+
+289: --dry-run deny in eth0 to 2001:db8:3:4:5:6:7:8
+
+
+290: --dry-run deny ina eth0 to 2001:db8:3:4:5:6:7:8
+
+
+291: --dry-run deny on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+292: --dry-run deny log in on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+293: --dry-run limit in on e%th0 to 2001:db8:3:4:5:6:7:8
+
+
+294: --dry-run limit in eth0 to 2001:db8:3:4:5:6:7:8
+
+
+295: --dry-run limit ina eth0 to 2001:db8:3:4:5:6:7:8
+
+
+296: --dry-run limit on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+297: --dry-run limit log in on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+298: --dry-run reject in on e%th0 to 2001:db8:3:4:5:6:7:8
+
+
+299: --dry-run reject in eth0 to 2001:db8:3:4:5:6:7:8
+
+
+300: --dry-run reject ina eth0 to 2001:db8:3:4:5:6:7:8
+
+
+301: --dry-run reject on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+302: --dry-run reject log in on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+303: --dry-run allow out on e%th0 to 2001:db8:3:4:5:6:7:8
+
+
+304: --dry-run allow out eth0 to 2001:db8:3:4:5:6:7:8
+
+
+305: --dry-run allow ina eth0 to 2001:db8:3:4:5:6:7:8
+
+
+306: --dry-run allow on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+307: --dry-run allow log out on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+308: --dry-run deny out on e%th0 to 2001:db8:3:4:5:6:7:8
+
+
+309: --dry-run deny out eth0 to 2001:db8:3:4:5:6:7:8
+
+
+310: --dry-run deny ina eth0 to 2001:db8:3:4:5:6:7:8
+
+
+311: --dry-run deny on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+312: --dry-run deny log out on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+313: --dry-run limit out on e%th0 to 2001:db8:3:4:5:6:7:8
+
+
+314: --dry-run limit out eth0 to 2001:db8:3:4:5:6:7:8
+
+
+315: --dry-run limit ina eth0 to 2001:db8:3:4:5:6:7:8
+
+
+316: --dry-run limit on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+317: --dry-run limit log out on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+318: --dry-run reject out on e%th0 to 2001:db8:3:4:5:6:7:8
+
+
+319: --dry-run reject out eth0 to 2001:db8:3:4:5:6:7:8
+
+
+320: --dry-run reject ina eth0 to 2001:db8:3:4:5:6:7:8
+
+
+321: --dry-run reject on eth0 to 2001:db8:3:4:5:6:7:8
+
+
+322: --dry-run reject log out on eth0 to 2001:db8:3:4:5:6:7:8
+
+

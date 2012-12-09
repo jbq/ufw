@@ -1,0 +1,30 @@
+[POP3]
+title=Mail server (POP3)
+description=Mail server (POP3)
+ports=110/tcp
+
+[POP3S]
+title=Secure mail server (POP3S)
+description=Secure mail server (POP3S)
+ports=995/tcp
+
+[IMAP]
+title=Mail server (IMAP)
+description=Mail server (IMAP)
+ports=143/tcp
+
+[IMAPS]
+title=Secure mail server (IMAPS)
+description=Secure mail server (IMAPS)
+ports=993/tcp
+
+[SMTP]
+title=Mail server (SMTP)
+description=Mail server (SMTP)
+ports=25/tcp
+
+[Mail submission]
+title=Mail server (Submission)
+description=Mail server (Submission)
+ports=587/tcp
+

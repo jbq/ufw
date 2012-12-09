@@ -1,0 +1,642 @@
+0: disable
+
+
+1: enable
+
+
+Bug #247352
+2: --dry-run allow http/tcp
+WARN: Checks disabled
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-before-logging-input - [0:0]
+:ufw-before-logging-output - [0:0]
+:ufw-before-logging-forward - [0:0]
+:ufw-user-logging-input - [0:0]
+:ufw-user-logging-output - [0:0]
+:ufw-user-logging-forward - [0:0]
+:ufw-after-logging-input - [0:0]
+:ufw-after-logging-output - [0:0]
+:ufw-after-logging-forward - [0:0]
+:ufw-logging-deny - [0:0]
+:ufw-logging-allow - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### allow tcp 80 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 80 -j ACCEPT
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+
+### RATE LIMITING ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+### END RATE LIMITING ###
+COMMIT
+Rules updated
+
+
+iptables -L -n:
+3: delete allow http/tcp
+WARN: Checks disabled
+Could not delete non-existent rule
+
+
+Bug #251355
+Setting IPV6 to no
+4: disable
+
+
+/lib/ufw/ufw-init flush-all:
+5: enable
+
+
+/lib/ufw/ufw-init force-reload:
+ip6tables -L -n:
+Chain INPUT (policy DROP)
+target     prot opt source               destination         
+ACCEPT     all      ::/0                 ::/0                
+
+Chain FORWARD (policy DROP)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy DROP)
+target     prot opt source               destination         
+ACCEPT     all      ::/0                 ::/0                
+Bug #260881
+Setting IPV6 to no
+6: disable
+
+
+7: enable
+
+
+8: allow Apache
+WARN: Checks disabled
+Rule added
+
+
+9: delete deny Apache
+WARN: Checks disabled
+Could not delete non-existent rule
+
+
+iptables -L -n:
+ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0           tcp dpt:80 /* 'dapp_Apache' */ 
+
+Chain ufw-user-limit (0 references)
+10: delete allow Apache
+WARN: Checks disabled
+Rule deleted
+
+
+iptables -L -n:
+Bug #263308
+Setting IPV6 to yes
+11: disable
+
+
+12: enable
+
+
+13: allow to any from any
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+14: allow proto tcp to any from any
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+15: allow to 192.168.1.1
+WARN: Checks disabled
+Rule added
+
+
+16: allow proto udp from 192.168.1.1 to any
+WARN: Checks disabled
+Rule added
+
+
+17: allow from 192.168.1.1 to 192.168.1.2
+WARN: Checks disabled
+Rule added
+
+
+18: allow proto udp from 192.168.1.1 to 192.168.1.2
+WARN: Checks disabled
+Rule added
+
+
+19: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+Anywhere                   ALLOW       Anywhere
+Anywhere/tcp               ALLOW       Anywhere/tcp
+192.168.1.1                ALLOW       Anywhere
+Anywhere                   ALLOW       192.168.1.1/udp
+192.168.1.2                ALLOW       192.168.1.1
+192.168.1.2/udp            ALLOW       192.168.1.1/udp
+Anywhere (v6)              ALLOW       Anywhere (v6)
+Anywhere/tcp (v6)          ALLOW       Anywhere/tcp (v6)
+
+
+
+20: delete allow to any from any
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+21: delete allow proto tcp to any from any
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+22: delete allow to 192.168.1.1
+WARN: Checks disabled
+Rule deleted
+
+
+23: delete allow proto udp from 192.168.1.1 to any
+WARN: Checks disabled
+Rule deleted
+
+
+24: delete allow from 192.168.1.1 to 192.168.1.2
+WARN: Checks disabled
+Rule deleted
+
+
+25: delete allow proto udp from 192.168.1.1 to 192.168.1.2
+WARN: Checks disabled
+Rule deleted
+
+
+26: status
+WARN: Checks disabled
+Status: active
+
+
+Bug #273278
+Setting IPV6 to yes
+27: disable
+
+
+28: enable
+
+
+29: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+
+30: default allow
+WARN: Checks disabled
+Default incoming policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+31: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: allow (incoming), allow (outgoing)
+New profiles: skip
+
+
+32: default deny
+WARN: Checks disabled
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+33: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+
+Bug #251136
+Setting IPV6 to yes
+34: disable
+
+
+35: enable
+
+
+36: status
+WARN: Checks disabled
+Status: active
+
+
+37: delete allow 22
+WARN: Checks disabled
+Could not delete non-existent rule
+Could not delete non-existent rule (v6)
+
+
+38: delete allow Apache
+WARN: Checks disabled
+Could not delete non-existent rule
+Could not delete non-existent rule (v6)
+
+
+39: delete allow to 127.0.0.1 port 22
+WARN: Checks disabled
+Could not delete non-existent rule
+
+
+40: delete allow to 127.0.0.1 app Apache
+WARN: Checks disabled
+Could not delete non-existent rule
+
+
+41: delete allow to ::1 port 22
+WARN: Checks disabled
+Could not delete non-existent rule (v6)
+
+
+42: delete allow to ::1 app Apache
+WARN: Checks disabled
+Could not delete non-existent rule (v6)
+
+
+43: status
+WARN: Checks disabled
+Status: active
+
+
+Bug #344971
+Setting IPV6 to yes
+44: disable
+
+
+45: enable
+
+
+46: allow 3
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+47: allow 4
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+48: insert 1 allow 1
+WARN: Checks disabled
+Rule inserted
+Rule inserted (v6)
+
+
+49: insert 2 allow 2
+WARN: Checks disabled
+Rule inserted
+Rule inserted (v6)
+
+
+50: status numbered
+WARN: Checks disabled
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 1                          ALLOW IN    Anywhere
+[ 2] 2                          ALLOW IN    Anywhere
+[ 3] 3                          ALLOW IN    Anywhere
+[ 4] 4                          ALLOW IN    Anywhere
+[ 5] 1                          ALLOW IN    Anywhere (v6)
+[ 6] 2                          ALLOW IN    Anywhere (v6)
+[ 7] 3                          ALLOW IN    Anywhere (v6)
+[ 8] 4                          ALLOW IN    Anywhere (v6)
+
+
+
+51: delete allow 4
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+52: delete allow 3
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+53: delete allow 2
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+54: delete allow 1
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+55: status
+WARN: Checks disabled
+Status: active
+
+
+Bug #407810
+56: app info bug407810
+WARN: Checks disabled
+Profile: bug407810
+Title: LanManager-like file and printer server for Unix
+Description: The bug407810 software suite is a collection of programs that
+implements the SMB/CIFS protocol for unix systems, allowing you to serve
+files and printers to Windows, NT, OS/2 and DOS clients. This protocol is
+sometimes also referred to as the LanManager or NetBIOS protocol.
+
+Ports:
+  137,138/udp
+  139,445/tcp
+
+
+57: allow bug407810
+
+
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_bug407810'
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_bug407810'
+58: delete allow bug407810
+
+
+Bug #459925
+Setting IPV6 to yes
+59: disable
+
+
+60: enable
+
+
+61: tests/testarea/lib/ufw/ufw-init stop
+
+
+62: tests/testarea/lib/ufw/ufw-init start
+
+
+63: disable
+
+
+64: logging off
+
+
+65: enable
+
+
+66: tests/testarea/lib/ufw/ufw-init stop
+
+
+67: tests/testarea/lib/ufw/ufw-init start
+
+
+68: disable
+
+
+69: logging on
+
+
+70: enable
+
+
+71: tests/testarea/lib/ufw/ufw-init stop
+
+
+72: tests/testarea/lib/ufw/ufw-init start
+
+
+73: disable
+
+
+74: logging low
+
+
+75: enable
+
+
+76: tests/testarea/lib/ufw/ufw-init stop
+
+
+77: tests/testarea/lib/ufw/ufw-init start
+
+
+78: disable
+
+
+79: logging medium
+
+
+80: enable
+
+
+81: tests/testarea/lib/ufw/ufw-init stop
+
+
+82: tests/testarea/lib/ufw/ufw-init start
+
+
+83: disable
+
+
+84: logging high
+
+
+85: enable
+
+
+86: tests/testarea/lib/ufw/ufw-init stop
+
+
+87: tests/testarea/lib/ufw/ufw-init start
+
+
+88: disable
+
+
+89: logging full
+
+
+90: enable
+
+
+91: tests/testarea/lib/ufw/ufw-init stop
+
+
+92: tests/testarea/lib/ufw/ufw-init start
+
+
+Setting IPV6 to no
+93: disable
+
+
+94: enable
+
+
+95: tests/testarea/lib/ufw/ufw-init stop
+
+
+96: tests/testarea/lib/ufw/ufw-init start
+
+
+97: disable
+
+
+98: logging off
+
+
+99: enable
+
+
+100: tests/testarea/lib/ufw/ufw-init stop
+
+
+101: tests/testarea/lib/ufw/ufw-init start
+
+
+102: disable
+
+
+103: logging on
+
+
+104: enable
+
+
+105: tests/testarea/lib/ufw/ufw-init stop
+
+
+106: tests/testarea/lib/ufw/ufw-init start
+
+
+107: disable
+
+
+108: logging low
+
+
+109: enable
+
+
+110: tests/testarea/lib/ufw/ufw-init stop
+
+
+111: tests/testarea/lib/ufw/ufw-init start
+
+
+112: disable
+
+
+113: logging medium
+
+
+114: enable
+
+
+115: tests/testarea/lib/ufw/ufw-init stop
+
+
+116: tests/testarea/lib/ufw/ufw-init start
+
+
+117: disable
+
+
+118: logging high
+
+
+119: enable
+
+
+120: tests/testarea/lib/ufw/ufw-init stop
+
+
+121: tests/testarea/lib/ufw/ufw-init start
+
+
+122: disable
+
+
+123: logging full
+
+
+124: enable
+
+
+125: tests/testarea/lib/ufw/ufw-init stop
+
+
+126: tests/testarea/lib/ufw/ufw-init start
+
+
+Bug #512131
+127: logging low
+
+
+128: logging on
+
+
+129: logging medium
+
+
+130: logging high
+
+
+131: logging full
+
+
+132: logging off
+
+
+133: logging off
+
+
+Bug #513387
+134: disable
+
+
+135: enable
+
+
+136: iptables -L INPUT -n | egrep -q 'ufw-after-logging-input'
+
+
+137: iptables -L OUTPUT -n | egrep -q 'ufw-after-logging-output'
+
+
+138: iptables -L FORWARD -n | egrep -q 'ufw-after-logging-forward'
+
+
+139: disable
+
+

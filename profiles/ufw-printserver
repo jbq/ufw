@@ -1,0 +1,9 @@
+[IPP]
+title=Cups server (IPP)
+description=Cups server (IPP)
+ports=631
+
+[LPD]
+title=LPD server
+description=LPD server
+ports=515/tcp

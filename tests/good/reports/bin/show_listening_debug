@@ -1,0 +1,69 @@
+#!/bin/bash
+
+make clean
+make evaluate
+sudo ufw disable
+
+export TESTPATH="/home/jamie/bzr-pulls/ufw-trunk/tmp/ufw"
+cp $TESTPATH/../../tests/good/args/orig/profiles/openntpd $TESTPATH/etc/ufw/applications.d/openntpd
+
+sed -i "s#netstat_output = get_netstat_output.*#rc, netstat_output = cmd(['cat', '$TESTPATH/../../tests/good/reports/netstat.enlp'])#" $TESTPATH/lib/python/ufw/util.py
+sed -i "s#proc = '/proc/net/if_inet6'#proc = '$TESTPATH/../../tests/good/reports/proc_net_if_inet6'#" $TESTPATH/lib/python/ufw/util.py
+sed -i "s#proc = '/proc/net/dev'#proc = '$TESTPATH/../../tests/good/reports/proc_net_dev'#" $TESTPATH/lib/python/ufw/util.py
+sed -i "s#\(.*\)\(addr = .* 0x8915,.*\)#\\1if ifname == 'eth0':\n\\1\\1addr = '10.0.2.9'\n\\1elif ifname == 'eth1':\n\\1\\1addr = '10.0.2.101'\n\\1else:\n\\1\\1raise IOError\n    return normalize_address(addr, v6)[0]\n    \\2#" $TESTPATH/lib/python/ufw/util.py
+
+sed -i "s/IPV6=.*/IPV6=yes/" $TESTPATH/etc/default/ufw
+
+do_cmd() {
+    shift 2
+    sudo sh -c "PYTHONPATH=$PYTHONPATH:$TESTPATH/lib/python $TESTPATH/usr/sbin/ufw $*" 2>&1 | grep -v "WARN: Checks disabled" | grep -v "Rules updated"
+}
+
+for i in "" "in on eth0" ; do
+    if [ -z "$i" ]; then
+        do_cmd "0" null allow in 123
+        do_cmd "0" null allow in OpenNTPD
+        do_cmd "0" null allow in 123/tcp
+    else
+        do_cmd "0" null allow out 123
+        do_cmd "0" null allow out 123/udp
+        do_cmd "0" null allow out 123/tcp
+    fi
+
+    do_cmd "0" null allow $i to any
+    do_cmd "0" null allow $i to any proto udp
+    do_cmd "0" null allow $i to any proto tcp
+
+    do_cmd "0" null allow $i to 10.0.2.101
+    do_cmd "0" null allow $i to 10.0.2.9
+    do_cmd "0" null allow $i to 10.0.0.0/16
+    do_cmd "0" null allow $i to 10.0.2.0/24
+    do_cmd "0" null allow $i to 10.0.3.0/24
+    do_cmd "0" null allow $i to 2001::211:aaaa:bbbb:d54c
+    do_cmd "0" null allow $i to 2001::211:aaaa:bbbb:d54c/112
+
+    do_cmd "0" null allow $i to 10.0.2.101 port 123
+    do_cmd "0" null allow $i to 10.0.0.0/16 port 123
+    do_cmd "0" null allow $i to 10.0.2.0/24 port 123
+    do_cmd "0" null allow $i to 10.0.3.0/24 port 123
+    do_cmd "0" null allow $i to 2001::211:aaaa:bbbb:d54c port 123
+    do_cmd "0" null allow $i to 2001::211:aaaa:bbbb:d54c/112 port 123
+
+    do_cmd "0" null allow $i to 10.0.2.101 port 123 proto udp
+    do_cmd "0" null allow $i to 10.0.0.0/16 app OpenNTPD
+    do_cmd "0" null allow $i to 10.0.2.0/24 port 123 proto udp
+    do_cmd "0" null allow $i to 10.0.3.0/24 port 123 proto udp
+    do_cmd "0" null allow $i to 2001::211:aaaa:bbbb:d54c port 123 proto udp
+    do_cmd "0" null allow $i to 2001::211:aaaa:bbbb:d54c/112 port 123 proto udp
+
+    do_cmd "0" null allow $i to 10.0.2.101 port 123 proto tcp
+    do_cmd "0" null allow $i to 10.0.0.0/16 port 123 proto tcp
+    do_cmd "0" null allow $i to 10.0.2.0/24 port 123 proto tcp
+    do_cmd "0" null allow $i to 10.0.3.0/24 port 123 proto tcp
+    do_cmd "0" null allow $i to 2001::211:aaaa:bbbb:d54c port 123 proto tcp
+    do_cmd "0" null allow $i to 2001::211:aaaa:bbbb:d54c/112 port 123 proto tcp
+done
+
+sed -i 's/DEBUGGING = False/DEBUGGING = True/' ./tmp/ufw/lib/python/ufw/util.py
+do_cmd "0" null show listening
+

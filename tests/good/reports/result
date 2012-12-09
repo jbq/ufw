@@ -1,0 +1,608 @@
+show listening
+(update util.py to use our cached output)
+show listening with no rules
+0: show listening
+WARN: Checks disabled
+tcp:
+  22 * (sshd)
+tcp6:
+  22 * (sshd)
+udp:
+  123 10.0.2.101 (ntpd)
+  123 10.0.2.9 (ntpd)
+  123 * (ntpd)
+  33257 * (avahi-daemon)
+  5353 * (avahi-daemon)
+  68 * (dhclient3)
+  68 * (dhclient3)
+udp6:
+  123 2001::212:cccc:dddd:e243 (ntpd)
+  123 2001::211:aaaa:bbbb:d54c (ntpd)
+  123 * (ntpd)
+
+
+
+Add rules for test
+1: allow in 123
+
+
+2: allow in OpenNTPD
+
+
+3: allow in 123/tcp
+
+
+4: allow to any
+
+
+5: allow to any proto udp
+
+
+6: allow to any proto tcp
+
+
+7: allow to 10.0.2.101
+
+
+8: allow to 10.0.2.9
+
+
+9: allow to 10.0.0.0/16
+
+
+10: allow to 10.0.2.0/24
+
+
+11: allow to 10.0.3.0/24
+
+
+12: allow to 2001::211:aaaa:bbbb:d54c
+
+
+13: allow to 2001::211:aaaa:bbbb:d54c/112
+
+
+14: allow to 10.0.2.101 port 123
+
+
+15: allow to 10.0.0.0/16 port 123
+
+
+16: allow to 10.0.2.0/24 port 123
+
+
+17: allow to 10.0.3.0/24 port 123
+
+
+18: allow to 2001::211:aaaa:bbbb:d54c port 123
+
+
+19: allow to 2001::211:aaaa:bbbb:d54c/112 port 123
+
+
+20: allow to 10.0.2.101 port 123 proto udp
+
+
+21: allow to 10.0.0.0/16 app OpenNTPD
+
+
+22: allow to 10.0.2.0/24 port 123 proto udp
+
+
+23: allow to 10.0.3.0/24 port 123 proto udp
+
+
+24: allow to 2001::211:aaaa:bbbb:d54c port 123 proto udp
+
+
+25: allow to 2001::211:aaaa:bbbb:d54c/112 port 123 proto udp
+
+
+26: allow to 10.0.2.101 port 123 proto tcp
+
+
+27: allow to 10.0.0.0/16 port 123 proto tcp
+
+
+28: allow to 10.0.2.0/24 port 123 proto tcp
+
+
+29: allow to 10.0.3.0/24 port 123 proto tcp
+
+
+30: allow to 2001::211:aaaa:bbbb:d54c port 123 proto tcp
+
+
+31: allow to 2001::211:aaaa:bbbb:d54c/112 port 123 proto tcp
+
+
+32: allow out 123
+
+
+33: allow out 123/udp
+
+
+34: allow out 123/tcp
+
+
+35: allow in on eth0 to any
+
+
+36: allow in on eth0 to any proto udp
+
+
+37: allow in on eth0 to any proto tcp
+
+
+38: allow in on eth0 to 10.0.2.101
+
+
+39: allow in on eth0 to 10.0.2.9
+
+
+40: allow in on eth0 to 10.0.0.0/16
+
+
+41: allow in on eth0 to 10.0.2.0/24
+
+
+42: allow in on eth0 to 10.0.3.0/24
+
+
+43: allow in on eth0 to 2001::211:aaaa:bbbb:d54c
+
+
+44: allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112
+
+
+45: allow in on eth0 to 10.0.2.101 port 123
+
+
+46: allow in on eth0 to 10.0.0.0/16 port 123
+
+
+47: allow in on eth0 to 10.0.2.0/24 port 123
+
+
+48: allow in on eth0 to 10.0.3.0/24 port 123
+
+
+49: allow in on eth0 to 2001::211:aaaa:bbbb:d54c port 123
+
+
+50: allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112 port 123
+
+
+51: allow in on eth0 to 10.0.2.101 port 123 proto udp
+
+
+52: allow in on eth0 to 10.0.0.0/16 app OpenNTPD
+
+
+53: allow in on eth0 to 10.0.2.0/24 port 123 proto udp
+
+
+54: allow in on eth0 to 10.0.3.0/24 port 123 proto udp
+
+
+55: allow in on eth0 to 2001::211:aaaa:bbbb:d54c port 123 proto udp
+
+
+56: allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112 port 123 proto udp
+
+
+57: allow in on eth0 to 10.0.2.101 port 123 proto tcp
+
+
+58: allow in on eth0 to 10.0.0.0/16 port 123 proto tcp
+
+
+59: allow in on eth0 to 10.0.2.0/24 port 123 proto tcp
+
+
+60: allow in on eth0 to 10.0.3.0/24 port 123 proto tcp
+
+
+61: allow in on eth0 to 2001::211:aaaa:bbbb:d54c port 123 proto tcp
+
+
+62: allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112 port 123 proto tcp
+
+
+show listening with rules
+63: show listening
+WARN: Checks disabled
+tcp:
+  22 * (sshd)
+   [ 4] allow to any
+   [ 6] allow to any proto tcp
+   [ 7] allow to 10.0.2.101
+   [ 8] allow to 10.0.2.9
+   [ 9] allow to 10.0.0.0/16
+   [10] allow to 10.0.2.0/24
+   [11] allow to 10.0.3.0/24
+   [27] allow in on eth0
+   [29] allow in on eth0 proto tcp
+   [31] allow in on eth0 to 10.0.2.9
+   [32] allow in on eth0 to 10.0.0.0/16
+   [33] allow in on eth0 to 10.0.2.0/24
+
+tcp6:
+  22 * (sshd)
+   [50] allow to any
+   [52] allow to any proto tcp
+   [53] allow to 2001::211:aaaa:bbbb:d54c
+   [54] allow to 2001::211:aaaa:bbbb:d54c/112
+   [64] allow in on eth0
+   [66] allow in on eth0 proto tcp
+   [68] allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112
+
+udp:
+  123 10.0.2.101 (ntpd)
+   [ 1] allow 123
+   [ 2] allow OpenNTPD
+   [ 4] allow to any
+   [ 5] allow to any proto udp
+   [ 7] allow to 10.0.2.101
+   [ 9] allow to 10.0.0.0/16
+   [10] allow to 10.0.2.0/24
+   [12] allow to 10.0.2.101 port 123
+   [13] allow to 10.0.0.0/16 port 123
+   [14] allow to 10.0.2.0/24 port 123
+   [16] allow to 10.0.2.101 port 123 proto udp
+   [17] allow to 10.0.0.0/16 app OpenNTPD
+   [18] allow to 10.0.2.0/24 port 123 proto udp
+
+  123 10.0.2.9 (ntpd)
+   [ 1] allow 123
+   [ 2] allow OpenNTPD
+   [ 4] allow to any
+   [ 5] allow to any proto udp
+   [ 8] allow to 10.0.2.9
+   [ 9] allow to 10.0.0.0/16
+   [10] allow to 10.0.2.0/24
+   [13] allow to 10.0.0.0/16 port 123
+   [14] allow to 10.0.2.0/24 port 123
+   [17] allow to 10.0.0.0/16 app OpenNTPD
+   [18] allow to 10.0.2.0/24 port 123 proto udp
+   [27] allow in on eth0
+   [28] allow in on eth0 proto udp
+   [31] allow in on eth0 to 10.0.2.9
+   [32] allow in on eth0 to 10.0.0.0/16
+   [33] allow in on eth0 to 10.0.2.0/24
+   [36] allow in on eth0 to 10.0.0.0/16 port 123
+   [37] allow in on eth0 to 10.0.2.0/24 port 123
+   [40] allow in on eth0 to 10.0.0.0/16 app OpenNTPD
+   [41] allow in on eth0 to 10.0.2.0/24 port 123 proto udp
+
+  123 * (ntpd)
+   [ 1] allow 123
+   [ 2] allow OpenNTPD
+   [ 4] allow to any
+   [ 5] allow to any proto udp
+   [ 7] allow to 10.0.2.101
+   [ 8] allow to 10.0.2.9
+   [ 9] allow to 10.0.0.0/16
+   [10] allow to 10.0.2.0/24
+   [11] allow to 10.0.3.0/24
+   [12] allow to 10.0.2.101 port 123
+   [13] allow to 10.0.0.0/16 port 123
+   [14] allow to 10.0.2.0/24 port 123
+   [15] allow to 10.0.3.0/24 port 123
+   [16] allow to 10.0.2.101 port 123 proto udp
+   [17] allow to 10.0.0.0/16 app OpenNTPD
+   [18] allow to 10.0.2.0/24 port 123 proto udp
+   [19] allow to 10.0.3.0/24 port 123 proto udp
+   [27] allow in on eth0
+   [28] allow in on eth0 proto udp
+   [31] allow in on eth0 to 10.0.2.9
+   [32] allow in on eth0 to 10.0.0.0/16
+   [33] allow in on eth0 to 10.0.2.0/24
+   [36] allow in on eth0 to 10.0.0.0/16 port 123
+   [37] allow in on eth0 to 10.0.2.0/24 port 123
+   [40] allow in on eth0 to 10.0.0.0/16 app OpenNTPD
+   [41] allow in on eth0 to 10.0.2.0/24 port 123 proto udp
+
+  33257 * (avahi-daemon)
+   [ 4] allow to any
+   [ 5] allow to any proto udp
+   [ 7] allow to 10.0.2.101
+   [ 8] allow to 10.0.2.9
+   [ 9] allow to 10.0.0.0/16
+   [10] allow to 10.0.2.0/24
+   [11] allow to 10.0.3.0/24
+   [27] allow in on eth0
+   [28] allow in on eth0 proto udp
+   [31] allow in on eth0 to 10.0.2.9
+   [32] allow in on eth0 to 10.0.0.0/16
+   [33] allow in on eth0 to 10.0.2.0/24
+
+  5353 * (avahi-daemon)
+   [ 4] allow to any
+   [ 5] allow to any proto udp
+   [ 7] allow to 10.0.2.101
+   [ 8] allow to 10.0.2.9
+   [ 9] allow to 10.0.0.0/16
+   [10] allow to 10.0.2.0/24
+   [11] allow to 10.0.3.0/24
+   [27] allow in on eth0
+   [28] allow in on eth0 proto udp
+   [31] allow in on eth0 to 10.0.2.9
+   [32] allow in on eth0 to 10.0.0.0/16
+   [33] allow in on eth0 to 10.0.2.0/24
+
+  68 * (dhclient3)
+   [ 4] allow to any
+   [ 5] allow to any proto udp
+   [ 7] allow to 10.0.2.101
+   [ 8] allow to 10.0.2.9
+   [ 9] allow to 10.0.0.0/16
+   [10] allow to 10.0.2.0/24
+   [11] allow to 10.0.3.0/24
+   [27] allow in on eth0
+   [28] allow in on eth0 proto udp
+   [31] allow in on eth0 to 10.0.2.9
+   [32] allow in on eth0 to 10.0.0.0/16
+   [33] allow in on eth0 to 10.0.2.0/24
+
+  68 * (dhclient3)
+   [ 4] allow to any
+   [ 5] allow to any proto udp
+   [ 7] allow to 10.0.2.101
+   [ 8] allow to 10.0.2.9
+   [ 9] allow to 10.0.0.0/16
+   [10] allow to 10.0.2.0/24
+   [11] allow to 10.0.3.0/24
+   [27] allow in on eth0
+   [28] allow in on eth0 proto udp
+   [31] allow in on eth0 to 10.0.2.9
+   [32] allow in on eth0 to 10.0.0.0/16
+   [33] allow in on eth0 to 10.0.2.0/24
+
+udp6:
+  123 2001::212:cccc:dddd:e243 (ntpd)
+   [47] allow 123
+   [48] allow OpenNTPD
+   [50] allow to any
+   [51] allow to any proto udp
+
+  123 2001::211:aaaa:bbbb:d54c (ntpd)
+   [47] allow 123
+   [48] allow OpenNTPD
+   [50] allow to any
+   [51] allow to any proto udp
+   [53] allow to 2001::211:aaaa:bbbb:d54c
+   [54] allow to 2001::211:aaaa:bbbb:d54c/112
+   [55] allow to 2001::211:aaaa:bbbb:d54c port 123
+   [56] allow to 2001::211:aaaa:bbbb:d54c/112 port 123
+   [57] allow to 2001::211:aaaa:bbbb:d54c port 123 proto udp
+   [58] allow to 2001::211:aaaa:bbbb:d54c/112 port 123 proto udp
+   [64] allow in on eth0
+   [65] allow in on eth0 proto udp
+   [68] allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112
+   [70] allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112 port 123
+   [71] allow in on eth0 to 2001::211:aaaa:bbbb:d54c port 123 proto udp
+   [72] allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112 port 123 proto udp
+
+  123 * (ntpd)
+   [47] allow 123
+   [48] allow OpenNTPD
+   [50] allow to any
+   [51] allow to any proto udp
+   [53] allow to 2001::211:aaaa:bbbb:d54c
+   [54] allow to 2001::211:aaaa:bbbb:d54c/112
+   [55] allow to 2001::211:aaaa:bbbb:d54c port 123
+   [56] allow to 2001::211:aaaa:bbbb:d54c/112 port 123
+   [57] allow to 2001::211:aaaa:bbbb:d54c port 123 proto udp
+   [58] allow to 2001::211:aaaa:bbbb:d54c/112 port 123 proto udp
+   [64] allow in on eth0
+   [65] allow in on eth0 proto udp
+   [68] allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112
+   [70] allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112 port 123
+   [72] allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112 port 123 proto udp
+
+
+
+
+64: delete allow in 123
+
+
+65: delete allow in OpenNTPD
+
+
+66: delete allow in 123/tcp
+
+
+67: delete allow to any
+
+
+68: delete allow to any proto udp
+
+
+69: delete allow to any proto tcp
+
+
+70: delete allow to 10.0.2.101
+
+
+71: delete allow to 10.0.2.9
+
+
+72: delete allow to 10.0.0.0/16
+
+
+73: delete allow to 10.0.2.0/24
+
+
+74: delete allow to 10.0.3.0/24
+
+
+75: delete allow to 2001::211:aaaa:bbbb:d54c
+
+
+76: delete allow to 2001::211:aaaa:bbbb:d54c/112
+
+
+77: delete allow to 10.0.2.101 port 123
+
+
+78: delete allow to 10.0.0.0/16 port 123
+
+
+79: delete allow to 10.0.2.0/24 port 123
+
+
+80: delete allow to 10.0.3.0/24 port 123
+
+
+81: delete allow to 2001::211:aaaa:bbbb:d54c port 123
+
+
+82: delete allow to 2001::211:aaaa:bbbb:d54c/112 port 123
+
+
+83: delete allow to 10.0.2.101 port 123 proto udp
+
+
+84: delete allow to 10.0.0.0/16 app OpenNTPD
+
+
+85: delete allow to 10.0.2.0/24 port 123 proto udp
+
+
+86: delete allow to 10.0.3.0/24 port 123 proto udp
+
+
+87: delete allow to 2001::211:aaaa:bbbb:d54c port 123 proto udp
+
+
+88: delete allow to 2001::211:aaaa:bbbb:d54c/112 port 123 proto udp
+
+
+89: delete allow to 10.0.2.101 port 123 proto tcp
+
+
+90: delete allow to 10.0.0.0/16 port 123 proto tcp
+
+
+91: delete allow to 10.0.2.0/24 port 123 proto tcp
+
+
+92: delete allow to 10.0.3.0/24 port 123 proto tcp
+
+
+93: delete allow to 2001::211:aaaa:bbbb:d54c port 123 proto tcp
+
+
+94: delete allow to 2001::211:aaaa:bbbb:d54c/112 port 123 proto tcp
+
+
+95: delete allow out 123
+
+
+96: delete allow out 123/udp
+
+
+97: delete allow out 123/tcp
+
+
+98: delete allow in on eth0 to any
+
+
+99: delete allow in on eth0 to any proto udp
+
+
+100: delete allow in on eth0 to any proto tcp
+
+
+101: delete allow in on eth0 to 10.0.2.101
+
+
+102: delete allow in on eth0 to 10.0.2.9
+
+
+103: delete allow in on eth0 to 10.0.0.0/16
+
+
+104: delete allow in on eth0 to 10.0.2.0/24
+
+
+105: delete allow in on eth0 to 10.0.3.0/24
+
+
+106: delete allow in on eth0 to 2001::211:aaaa:bbbb:d54c
+
+
+107: delete allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112
+
+
+108: delete allow in on eth0 to 10.0.2.101 port 123
+
+
+109: delete allow in on eth0 to 10.0.0.0/16 port 123
+
+
+110: delete allow in on eth0 to 10.0.2.0/24 port 123
+
+
+111: delete allow in on eth0 to 10.0.3.0/24 port 123
+
+
+112: delete allow in on eth0 to 2001::211:aaaa:bbbb:d54c port 123
+
+
+113: delete allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112 port 123
+
+
+114: delete allow in on eth0 to 10.0.2.101 port 123 proto udp
+
+
+115: delete allow in on eth0 to 10.0.0.0/16 app OpenNTPD
+
+
+116: delete allow in on eth0 to 10.0.2.0/24 port 123 proto udp
+
+
+117: delete allow in on eth0 to 10.0.3.0/24 port 123 proto udp
+
+
+118: delete allow in on eth0 to 2001::211:aaaa:bbbb:d54c port 123 proto udp
+
+
+119: delete allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112 port 123 proto udp
+
+
+120: delete allow in on eth0 to 10.0.2.101 port 123 proto tcp
+
+
+121: delete allow in on eth0 to 10.0.0.0/16 port 123 proto tcp
+
+
+122: delete allow in on eth0 to 10.0.2.0/24 port 123 proto tcp
+
+
+123: delete allow in on eth0 to 10.0.3.0/24 port 123 proto tcp
+
+
+124: delete allow in on eth0 to 2001::211:aaaa:bbbb:d54c port 123 proto tcp
+
+
+125: delete allow in on eth0 to 2001::211:aaaa:bbbb:d54c/112 port 123 proto tcp
+
+
+show listening (live) with rules
+126: allow 22/tcp
+
+
+127: allow 123/udp
+
+
+128: show listening
+
+
+129: delete allow 22/tcp
+
+
+130: delete allow 123/udp
+
+

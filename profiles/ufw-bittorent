@@ -1,0 +1,20 @@
+[Transmission]
+title=Transmission
+description=Transmission BitTorrent client
+ports=51413/tcp
+
+[Deluge]
+title=Deluge
+description=Deluge BitTorrent client
+ports=6881:6891/tcp
+
+[KTorrent]
+title=KTorrent
+description=KTorrent BitTorrent client
+ports=6881/tcp|4444/udp
+
+[qBittorent]
+title=qBittorent
+description=qBittorent BitTorrent client
+ports=6881/tcp
+

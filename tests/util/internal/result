@@ -1,0 +1,134 @@
+TEST REVERSE NETMASK CONVERSIONS
+TEST IPv6 CIDR
+0: no 0
+orig = '0', dotted = '0.0.0.0', reverse = '0'
+
+
+1: no 1
+orig = '1', dotted = '128.0.0.0', reverse = '1'
+
+
+2: no 2
+orig = '2', dotted = '192.0.0.0', reverse = '2'
+
+
+3: no 3
+orig = '3', dotted = '224.0.0.0', reverse = '3'
+
+
+4: no 4
+orig = '4', dotted = '240.0.0.0', reverse = '4'
+
+
+5: no 5
+orig = '5', dotted = '248.0.0.0', reverse = '5'
+
+
+6: no 6
+orig = '6', dotted = '252.0.0.0', reverse = '6'
+
+
+7: no 7
+orig = '7', dotted = '254.0.0.0', reverse = '7'
+
+
+8: no 8
+orig = '8', dotted = '255.0.0.0', reverse = '8'
+
+
+9: no 9
+orig = '9', dotted = '255.128.0.0', reverse = '9'
+
+
+10: no 10
+orig = '10', dotted = '255.192.0.0', reverse = '10'
+
+
+11: no 11
+orig = '11', dotted = '255.224.0.0', reverse = '11'
+
+
+12: no 12
+orig = '12', dotted = '255.240.0.0', reverse = '12'
+
+
+13: no 13
+orig = '13', dotted = '255.248.0.0', reverse = '13'
+
+
+14: no 14
+orig = '14', dotted = '255.252.0.0', reverse = '14'
+
+
+15: no 15
+orig = '15', dotted = '255.254.0.0', reverse = '15'
+
+
+16: no 16
+orig = '16', dotted = '255.255.0.0', reverse = '16'
+
+
+17: no 17
+orig = '17', dotted = '255.255.128.0', reverse = '17'
+
+
+18: no 18
+orig = '18', dotted = '255.255.192.0', reverse = '18'
+
+
+19: no 19
+orig = '19', dotted = '255.255.224.0', reverse = '19'
+
+
+20: no 20
+orig = '20', dotted = '255.255.240.0', reverse = '20'
+
+
+21: no 21
+orig = '21', dotted = '255.255.248.0', reverse = '21'
+
+
+22: no 22
+orig = '22', dotted = '255.255.252.0', reverse = '22'
+
+
+23: no 23
+orig = '23', dotted = '255.255.254.0', reverse = '23'
+
+
+24: no 24
+orig = '24', dotted = '255.255.255.0', reverse = '24'
+
+
+25: no 25
+orig = '25', dotted = '255.255.255.128', reverse = '25'
+
+
+26: no 26
+orig = '26', dotted = '255.255.255.192', reverse = '26'
+
+
+27: no 27
+orig = '27', dotted = '255.255.255.224', reverse = '27'
+
+
+28: no 28
+orig = '28', dotted = '255.255.255.240', reverse = '28'
+
+
+29: no 29
+orig = '29', dotted = '255.255.255.248', reverse = '29'
+
+
+30: no 30
+orig = '30', dotted = '255.255.255.252', reverse = '30'
+
+
+31: no 31
+orig = '31', dotted = '255.255.255.254', reverse = '31'
+
+
+32: no 32
+orig = '32', dotted = '255.255.255.255', reverse = '32'
+
+

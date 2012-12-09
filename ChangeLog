@@ -1,0 +1,247 @@
+ufw (0.31.1) RELEASED; urgency=low
+
+  * src/util.py: revert revert r752 which introduced problems with other
+    locales (LP: #953372)
+  * add tests/check-locales. This is Debian/Ubuntu specific, but will help
+    avoid commits like r752.
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 12 Mar 2012 20:26:28 -0500
+
+ufw (0.31) RELEASED; urgency=low
+
+  * allow UPnP multicast for service discovery (LP: #764933)
+  * conf/ufw.defaults:
+    - remove IRC connection tracking, which is only required for DCC
+    - allow nf_conntrack_netbios_ns (Samba) (LP: #360975)
+  * enable IPv6 by default
+  * fix 'allow to any ipv6' when IPv6 is enabled
+  * update manpage references to ufw and ufw-framework to include the section
+  * update check-requirements to prompt to continue with tests that may
+    autoload modules. Add '-f' option to check-requirements and update test
+    suite accordingly (LP: #782816)
+  * don't fail when running 'show listening' under fakeroot (LP: #812516)
+  * add syntax-check to Makefile
+  * add man-check to Makefile
+  * src/util.py: use codes.open(..., 'UTF-8') to better support non-english
+    locales in third-party frontends. Analysis and patch suggestion thanks to
+    S. Nizio. (LP: #921758)
+  * conf/ufw.defaults and doc/ufw-framework.8: add info on tftp connection
+    tracking modules
+  * fix traceback when specifying '--dry-run' with no arguments (LP: #946332)
+  * tests/testlib.sh: add 'http-or-www' argument to do_cmd() to try to
+    account for /etc/services files with http/udp instead of www/udp. Adjust
+    bad/apps and root/normalization for this (LP: #947224)
+  * conf/before6.rules: use correct ports for DHCPv6 and limit source and
+    destination addresses to autoconfiguration addresses (fe80::/10). Thanks
+    to Mathieu Trudel-Lapierre (LP: #947416)
+  * import new and updated Launchpad translations:
+    - po/ar.po, po/ast.po (new), po/bg.po, po/bs.po (new), po/ca.po, po/cs.po,
+      po/da.po, po/de.po, po/el.po, po/en_AU.po, po/en_GB.po, po/es.po,
+      po/fi.po, po/fr.po, po/he.po, po/hu.po, po/id.po, po/it.po,
+      po/ja.po (new), po/nb.po, po/nl.po, po/pl.po, po/pt_BR.po, po/pt.po,
+      po/ru.po, po/sk.po, po/sl.po, po/sr.po, po/sv.po, po/tl.po,
+      po/ur.po (new), po/zh_CN.po
+    - thanks to all contributors: https://translations.launchpad.net/ufw
+  * allow multiple interface matching via '+'. Thanks to Oliver Hookins.
+    (LP: #611838)
+  * allow application profiles to start with a digit (LP: #663632)
+  * don't traceback in show listening when a rule references a non-existent
+    interface (LP: #840500)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 09 Mar 2012 14:24:24 -0600
+
+ufw (0.30.1) RELEASED; urgency=low
+
+  * allow for python 2.7 (verified to work with python 2.7.1)
+  * fix improper display of error messages. Patch thanks to Serguey Basalaev
+    (LP: #580032)
+  * profiles/ufw-mailserver: remove Postfix reference
+  * fix typo in warning (LP: #637876)
+  * fix manpage reference to /etc/default/ufw (Closes: 601111)
+  * mention quoting of application profile names with spaces (LP: #715676)
+  * fix man-page hyphenation in ufw.8
+  * run_tests.sh: adjust PATH if iptables can't be found
+  * adjust /etc/ufw/sysctl.conf to have commented out entries for ipv6 privacy
+    addressing
+  * profiles/ufw-fileserver: add svnserve profile (LP: #501140)
+  * use 'UFW AUDIT INVALID' for INVALID packets in medium and higher
+  * DROP packets with RH0 headers (LP: #740249)
+  * update README to discuss the default ruleset
+  * only allow mDNS multicast (LP: #740256)
+  * allow ping replies from multicast (LP: #720605)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Tue, 22 Mar 2011 12:06:10 -0500
+
+ufw (0.30) RELEASED; urgency=low
+
+  * add example Upstart script
+  * error out when filesystem is read-only (LP: #430053)
+  * catch exception if can't find parent pid when refreshing application
+    profiles (LP: #424528)
+  * update manpage to clarify 'show' command (LP: #453083)
+  * update setup.py to use sys.executable and cleanup required binaries
+  * update test suite
+    - better handle iptables < 1.4 (tested with 1.3.8)
+    - allow alternate interpreter
+  * write loglevel rules to user rules (LP: #459925)
+  * properly log INVALID packets for medium and higher (LP: #480789)
+  * Makefile: clean up POTFILES target
+  * generate binary translations in setup.py rather than shipping them in
+    source (LP: #490366)
+  * src/ufw-init-functions: don't run 'already started' check unless
+    ENABLED. This should improve boot speed such that iptables is not
+    needlessly called which results in an unneeded modprobe.
+  * manpage fixes thanks to Loic Minier
+  * set "default" sysctl values before "all" values. Thanks to Loic Minier
+  * clean up parser to make it easier to add new functionality
+  * don't log LIMIT rules if logging is off (LP: #512131)
+  * fix for noisy services getting logged. Added new 'skip-to-policy' chains
+    that are now used in after*.rules (LP: #488032)
+  * add rsyslog example configuration and update README
+  * add reset command (LP: #436608)
+  * add --force option to enable (LP: #496267)
+  * decode("utf-8") some strings in 'status' to correct formatting errors with
+    with multibyte characters
+  * add more reports
+  * add delete by rule number (LP: #367571)
+  * add support for IPv6 tunnels and 6to4 (LP: #502655)
+  * fix occasional ufw errors during boot with upstart (/tmp not available)
+    (LP: #521359)
+  * normalize IPv6 addresses to standard python shortened notation
+  * follow iptables and don't require that an interface ends with a number
+    (LP: #568877)
+  * really allow IPv6 neighbor discovery (LP: #611982)
+  * add support for IPSec via the esp and ah protocols (LP: #606997)
+  * fix traceback in 'show listening' report (LP: #624199)
+  * fix inaccuracies in 'show listening' report with IPv6 (LP: #625340)
+  * update check-requirements to not check ip6tables modules needed for the
+    'limit' command
+  * import updated Launchpad translations:
+    - po/ar.po, po/bg.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po,
+      po/en_AU.po, po/en_GB.po, po/es.po, po/fi.po, po/fr.po, po/he.po,
+      po/hu.po, po/id.po, po/it.po, po/nb.po, po/nl.po, po/pl.po, po/pt_BR.po,
+      po/pt.po, po/ru.po, po/sk.po, po/sl.po, po/sr.po, po/sv.po, po/tl.po,
+      po/zh_CN.po
+    - thanks to all contributors: https://translations.launchpad.net/ufw
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 27 Aug 2010 15:30:43 -0500
+
+ufw (0.29) RELEASE; urgency=low
+
+  * add egress filtering support:
+    - CLI command allows specifying direction in simple and extended syntax
+    - status reporting shows outgoing policy and outgoing rules
+    - allow changing default outgoing policy
+    - connection tracking rules for state NEW, when using a default policy
+      of ACCEPT for INPUT and OUTPUT, are now put in their own chains, rather
+      than configured in before*.rules
+    - add state RELATED,ESTABLISHED rule to ufw-before-output in before*.rules
+      like we do with ufw-before-input, to increase performance
+    - DEFAULT_OUTPUT_POLICY and DEFAULT_INPUT_POLICY can now also be set to
+      ACCEPT_NO_TRACK, which avoids adding connection tracking rules for
+      state NEW
+    - update documentation for the above
+  * add tests/check-requirements and integrate into test suite. This script
+    can be used to make sure that your system has all the required iptables
+    and netfilter functionality as described in README
+  * add doc/ufw-framework.8
+  * allow deletion of non-existent application rules introduced in 0.24.
+    (LP: #407810)
+  * import Launchpad translations:
+    - po/ar.po, po/bg.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po,
+      po/en_AU.po, po/en_GB.po, po/fi.po, po/fr.po, po/he.po, po/hu.po,
+      po/id.po, po/it.po, po/nb.po, po/nl.po, po/pl.po, po/pt_BR.po, po/pt.po,
+      po/ru.po, po/sk.po, po/sl.po, po/sr.po, po/sv.po, po/tl.po, po/zh_CN.po
+    - thanks to all contributors: https://translations.launchpad.net/ufw
+    - moved translations into locales/po and locales/mo. setup.py installs
+      files in locales/mo
+    - translations are now installed into ${prefix}/share/ufw/messages
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Tue, 25 Aug 2009 09:12:10 -0500
+
+ufw (0.28) RELEASE; urgency=low
+
+  * translation fixes
+  * add interface rules
+  * update Makefile to fail if byte-compiling failed
+  * install rules files 0640 (LP: #393187)
+  * adjust help command for proper translation and bash completion support
+  * add limit command to help (LP: #358964)
+  * add shell-completion/bash. Based on work by Didier Roche
+  * tests/*: updated with 'nostats' option so redundant tests are counted
+    in test results. Update many root tests to use 'nostats'
+  * look for location of iptables and set IPTABLES_DIR in common.py. Adjust
+    calls to ip[6]tables* to use IPTABLES_DIR
+  * fix harmless but annoying bug where multi-rule application rules ended
+    up with ::/0 in the tuple line in user.rules (IPV4) when not specifying a
+    destination or source address and IPV6 is enabled
+  * make insert rule logic more robust
+  * update setup.py to install user rules and init script helpers into
+    /lib, rather than /var/lib and /usr/share/ufw. Update tests,
+    backend_iptables.py, ufw-init and documentation accordingly. (LP: #400208)
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Wed, 15 Jul 2009 09:30:25 -0500
+
+ufw (0.27.1) RELEASE; urgency=low
+
+  * update README for instructions on integrating ufw into the boot process
+  * adjust strings to better conform with translation guidelines (LP: #353424)
+  * adjust translation location to work with rosetta
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 23 Mar 2009 12:06:27 -0500
+
+ufw (0.27) RELEASE; urgency=low
+
+  * don't do symlink check anymore (LP: #317700)
+  * don't do hidden file check anymore (LP: #319226). Hidden application
+    profiles are already skipped, so this check only bumps into revision
+    control systems
+  * add 'status numbered' command
+  * more comments in conf/sysctl.conf
+  * add insert rule support (LP: #260745)
+  * read in rules from /var/lib/ufw/*.rules. This helps keep status inline
+    with reality and fixes (LP: #262975)
+  * add loglevel support. This also changed the default rules files
+  * add per rule logging support
+  * get rid of redundant RETURN rules
+  * update LIMIT logging prefix
+  * update setup.py to use subprocess instead of Popen3
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Sat, 17 Jan 2009 07:15:25 -0600
+
+ufw (0.26) RELEASE; urgency=low
+
+  * fix formatting when using 'app update all' (LP: #300726)
+  * add runtime version check for iptables and warn if using IPv6 application
+    rules with iptables < 1.4
+  * Makefile: depend on translations when making tarball
+  * remove more useless newlines
+  * man page updates
+  * display interfaces and exact packet counters in 'status raw'
+  * support REJECT for rules, default policy and default application policy
+    (LP: #197322)
+  * only flush and delete ufw chains
+  * add a 'flush-all' command to ufw-init
+  * add MANAGE_BUILTINS option to /etc/default/ufw, and when set to 'yes'
+    flush the built-in chains too
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Fri, 16 Jan 2009 07:01:38 -0600
+
+ufw (0.25) RELEASE; urgency=low
+
+  * new ChangeLog files for upstream tarballs. See ChangeLog.pre-0.25 for
+    previous changes, including Ubuntu-specific changes
+  * setup.py: don't install initscript anymore
+  * add example (non-LSB) initscript to doc/initscript.example
+  * split out initscript into ufw-init-functions, ufw-init (for use by
+    ufw itself) and doc/initscript.example (for use by distributions). This
+    makes ufw more robust and portable
+  * don't stop the firewall via the initscripts if ufw is not enabled
+    (LP: #311066)
+  * rename skel-ui to skel-ui.example
+  * README:
+    - add Distributions section
+    - update for initscript changes
+    - update What's in a Name
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 22 Dec 2008 08:53:14 -0600

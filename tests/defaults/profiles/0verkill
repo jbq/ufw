@@ -1,0 +1,4 @@
+[0verkill]
+title=0verkill
+description=A ASCII-art 2D deathmatch game
+ports=6666/udp|6666/tcp

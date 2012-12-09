@@ -1,0 +1,226 @@
+TESTING GOOD DEFAULT POLICY
+Setting DEFAULT_INPUT_POLICY to ACCEPT
+0: --dry-run status
+
+
+Setting DEFAULT_INPUT_POLICY to ACCEPT_NO_TRACK
+1: --dry-run status
+
+
+Setting DEFAULT_INPUT_POLICY to DROP
+2: --dry-run status
+
+
+Setting DEFAULT_INPUT_POLICY to REJECT
+3: --dry-run status
+
+
+Setting DEFAULT_OUTPUT_POLICY to ACCEPT
+4: --dry-run status
+
+
+Setting DEFAULT_OUTPUT_POLICY to ACCEPT_NO_TRACK
+5: --dry-run status
+
+
+Setting DEFAULT_OUTPUT_POLICY to DROP
+6: --dry-run status
+
+
+Setting DEFAULT_OUTPUT_POLICY to REJECT
+7: --dry-run status
+
+
+Setting DEFAULT_FORWARD_POLICY to ACCEPT
+8: --dry-run status
+
+
+Setting DEFAULT_FORWARD_POLICY to DROP
+9: --dry-run status
+
+
+Setting DEFAULT_FORWARD_POLICY to REJECT
+10: --dry-run status
+
+
+TESTING ARGS (default)
+11: --dry-run default allow
+WARN: Checks disabled
+Default incoming policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+12: --dry-run default deny
+WARN: Checks disabled
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+13: --dry-run default reject
+WARN: Checks disabled
+Default incoming policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+
+14: --dry-run default ALLOW
+WARN: Checks disabled
+Default incoming policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+15: --dry-run default DENY
+WARN: Checks disabled
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+16: --dry-run default REJECT
+WARN: Checks disabled
+Default incoming policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+
+17: --dry-run default allow incoming
+WARN: Checks disabled
+Default incoming policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+18: --dry-run default deny incoming
+WARN: Checks disabled
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+19: --dry-run default reject incoming
+WARN: Checks disabled
+Default incoming policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+
+20: --dry-run default ALLOW incoming
+WARN: Checks disabled
+Default incoming policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+21: --dry-run default DENY incoming
+WARN: Checks disabled
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+22: --dry-run default REJECT incoming
+WARN: Checks disabled
+Default incoming policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+
+23: --dry-run default allow outgoing
+WARN: Checks disabled
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+24: --dry-run default deny outgoing
+WARN: Checks disabled
+Default outgoing policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+25: --dry-run default reject outgoing
+WARN: Checks disabled
+Default outgoing policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+
+26: --dry-run default ALLOW outgoing
+WARN: Checks disabled
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+27: --dry-run default DENY outgoing
+WARN: Checks disabled
+Default outgoing policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+28: --dry-run default REJECT outgoing
+WARN: Checks disabled
+Default outgoing policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+
+29: --dry-run default allow input
+WARN: Checks disabled
+Default incoming policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+30: --dry-run default deny input
+WARN: Checks disabled
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+31: --dry-run default reject input
+WARN: Checks disabled
+Default incoming policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+
+32: --dry-run default ALLOW input
+WARN: Checks disabled
+Default incoming policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+33: --dry-run default DENY input
+WARN: Checks disabled
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+34: --dry-run default REJECT input
+WARN: Checks disabled
+Default incoming policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+
+35: --dry-run default allow output
+WARN: Checks disabled
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+36: --dry-run default deny output
+WARN: Checks disabled
+Default outgoing policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+37: --dry-run default reject output
+WARN: Checks disabled
+Default outgoing policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+
+38: --dry-run default ALLOW output
+WARN: Checks disabled
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+
+
+39: --dry-run default DENY output
+WARN: Checks disabled
+Default outgoing policy changed to 'deny'
+(be sure to update your rules accordingly)
+
+
+40: --dry-run default REJECT output
+WARN: Checks disabled
+Default outgoing policy changed to 'reject'
+(be sure to update your rules accordingly)
+
+

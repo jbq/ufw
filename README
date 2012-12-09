@@ -1,0 +1,333 @@
+UFW
+---
+https://wiki.ubuntu.com/UbuntuFirewall
+
+
+What's in a name?
+-----------------
+What does it mean?  It has come to mean 'Uncomplicated Firewall', but you
+can change it to something more suitable if you want. If you like it, you might
+pick 'Universal Firewall', or 'Ultimate Firewall'. If you are not a fan,
+perhaps 'Unbearable Firewall'. Have fun!
+
+
+Requirements
+------------
+python 2.5-2.7 (known to work with 2.5+, 2.6.2+, and 2.7.0)
+iptables 1.4*
+gettext
+/proc filesystem support
+Linux kernel configured with the following modules (not exhaustive):
+  addrtype
+  comment
+  hl (IPv6)
+  limit
+  multiport
+  recent
+  state
+
+* Systems with iptables below 1.4 will not have IPv6 application rule support.
+  ufw will give a warning when users try to use this functionality, but ufw
+  will otherwise work fine. ufw is known to work with iptables 1.3.8 in this
+  degraded mode.
+
+ufw has been widely tested on Linux 2.6.24 and higher kernels. You may also
+use the check-requirements script in the tests/ directory to see if your
+system has all the required iptables/netfilter functionality.
+
+
+Install
+-------
+Users can install with:
+# python ./setup.py install
+$ python ./setup.py install --home=PREFIX
+
+The interpreter used for setup.py is the one used for ufw. So if your system
+python is 2.4, but you have python2.5 available, use something like:
+$ python2.5 ./setup.py install --home=PREFIX
+
+Distributions which install to a build directory for packaging can install
+with:
+$ python ./setup.py install --root=PREFIX
+
+Eg:
+$ python ./setup.py install --root=/tmp/ufw
+
+When installing ufw from source, you will also need to integrate it into your
+boot process for the firewall to start when you restart your system. Depending
+on your needs, this can be as simple as adding the following to a startup
+script (eg rc.local for systems that use it):
+
+# /lib/ufw/ufw-init start
+
+For systems that use SysV initscripts, an example script is provided in
+doc/initscript.example. See doc/upstart.example for an Upstart example. Consult
+your distribution's documentation for the proper way to modify your boot
+process.
+
+
+Basic Layout
+------------
+/usr/sbin/ufw 			is the UI for people (have different backends)
+/etc/defaults/ufw 		high level configuration
+/etc/ufw/before[6].rules 	rules evaluated before UI added rules
+/etc/ufw/after[6].rules 	rules evaluated after UI added rules
+/lib/ufw/user[6].rules		UI added rules (not to be modified)
+/etc/ufw/sysctl.conf 		kernel network tunables
+/lib/ufw/ufw-init		start script
+
+
+Usage
+-----
+ufw enable|disable 		turn firewall on and off (including at boot)
+ufw default allow|deny		updates default policy
+ufw logging on|off		updates backend logging (*.rules)
+ufw status			displays firewall status (user.rules only)
+ufw allow|deny|limit RULE	add RULE to firewall
+
+See 'man ufw' and also Ubuntu's tutorial at:
+http://doc.ubuntu.com/ubuntu/serverguide/C/firewall.html
+
+
+Chains
+------
+ufw uses several chains to allow ease of use and flexibility. Control flow
+through the various chains is (essentially) as follows:
+
+INPUT ->
+  ufw-before-logging-input ->
+  ufw-before-input ->
+    ufw-user-input ->
+      ufw-user-logging-input (rule specific) ->
+  ufw-after-input ->
+  ufw-after-logging-input ->
+  ufw-reject-input -> return to INPUT
+
+OUTPUT ->
+  ufw-before-logging-output ->
+  ufw-before-output ->
+    ufw-user-output ->
+      ufw-user-logging-output (rule specific) ->
+  ufw-after-output ->
+  ufw-after-logging-output ->
+  ufw-reject-output -> return to OUTPUT
+
+FORWARD ->
+  ufw-before-logging-forward ->
+  ufw-before-forward ->
+    ufw-user-forward ->
+      ufw-user-logging-forward (not used) ->
+  ufw-after-forward ->
+  ufw-after-logging-forward ->
+  ufw-reject-forward -> return to FORWARD
+
+The 'before' chains are setup in 'before.rules', the 'after' chains in
+'after.rules' and the 'user' chains are maintained by ufw. If an administrator
+wants to add rules manually, the rules should be added to 'before.rules' and
+'after.rules'. The 'reject' chains are used for when the default policy is
+set to REJECT (because iptables does not support REJECT as a target at this
+time). Keep in mind, when using REJECT as default policy, ufw may end up
+rejecting rules that are added outside of ufw and after ufw is started.
+
+There is some default configuration in both 'before.rules' and 'after.rules',
+and this configuration is not displayed with 'ufw status' (but can always
+be viewed with 'iptables -L -n' or 'iptables -L [chain] -n'. See the iptables
+man page for details. There are also 3 chains (for both IPv4 and IPv6) that
+can be used to immediately go to POLICY, which are mostly useful to avoid
+logging (these chains are used in the default ufw after*.rules configuration to
+avoid logging noisy services by default):
+  ufw-skip-to-policy-input
+  ufw-skip-to-policy-output
+  ufw-skip-to-policy-forward
+
+The primary chains are ufw-before-*, ufw-after-* and ufw-reject-*. The
+treatment of iptables' built-in chains can be controlled with the
+MANAGE_BUILTINS configuration option (in /etc/default/ufw). By default this is
+set to 'no', which means that other than adding the primary chains, the
+built-in chains will remain untouched. This also means that these primary
+chains will stay in the table, even after disabling ufw. This is to make sure
+that the primary chains don't move around other non-ufw rules and chains. To
+completely flush the built-in chains with this configuration, you can use:
+
+# /lib/ufw/ufw-init flush-all
+
+Alternately, ufw may also take full control of the firewall by setting
+MANAGE_BUILTINS=yes in /etc/defaults/ufw. This will flush all the built-in
+rules and delete the non-built-in rules on start, stop and reload.
+
+
+Advanced Configuration
+----------------------
+ufw can be thought of two parts, the ufw command-line program and the ufw
+framework. The ufw command is intentionally kept as simple as possible, so
+users can do common tasks more easily. The framework (ie the bootscripts, setup
+of the chains (see above), sysctl configuration, etc) is very flexible, and
+since ufw is simply a frontend for iptables, anything that can be done with
+iptables can be done within the ufw framework.
+
+As an example, to perform port redirection, users can add to the top of
+/etc/ufw/before.rules, before the '*filter' section:
+*nat
+:PREROUTING ACCEPT [0:0]
+# redirect all incoming requests to tcp port 80 to tcp port 22
+-A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 22
+COMMIT
+
+then run:
+# ufw disable
+# ufw enable
+# ufw allow 80/tcp	(required only if ufw blocks requests to this port)
+
+
+To add NAT masquerading to the above, change the nat table that was just added
+to something like:
+*nat
+:PREROUTING ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 22
+# Forward traffic from eth1 through eth0.
+-A POSTROUTING -s 192.168.0.0/24 -o eth0 -j MASQUERADE
+COMMIT
+
+then adjust /etc/default/ufw to have:
+DEFAULT_FORWARD_POLICY="ACCEPT"
+
+and /etc/ufw/sysctl.conf to have:
+net.ipv4.ip_forward=1
+
+then run:
+# ufw disable
+# ufw enable
+
+
+It's important to remember that ufw will only flush the chains and tables it
+manages, so if if you need to flush the nat table to restart anew, please do:
+# iptables -F -t nat
+
+Similarly, to see what rules are in the nat table's chains, use:
+# iptables -L -n -t nat
+
+See 'man iptables' for details.
+
+
+Default ruleset
+---------------
+Enabling ufw creates a ruleset that is intended to protect the host while
+allowing some common traffic such as DHCP, ping and mDNS. These defaults are
+setup in the before*.rules and after*.rules files (see 'man iptables' for
+terminology):
+- Default DROP on INPUT
+- Default DROP on FORWARD
+- Default ACCEPT on OUTPUT
+- ACCEPT all on lo
+- DROP packets with RH0 headers
+- ACCEPT all RELATED and ESTABLISHED on INPUT and OUTPUT
+- DROP INVALID packets (packets not associated with a known connection)
+- ACCEPT certain icmp packets:
+  - destination-unreachable, source-quench, time-exceeded, parameter-problem,
+    and echo-request for IPv4
+  - neighbor-solicitation, neighbor-advertisement, router-solicitation,
+    destination-unreachable, packet-too-big, time-exceeded, parameter-problem,
+    and echo-request
+- ACCEPT mDNS (zeroconf/bonjour/avahi 224.0.0.251 for IPv4 and ff02::fb for
+  IPv6) for service discovery
+- ACCEPT UPnP (239.255.255.250 for IPv4 and ff02::f for IPv6) for service
+  discovery
+- ACCEPT ping replies from IPv6 link-local (ffe8::/10) addresses
+- DROP non-local, broadcast and multicast traffic
+- ACCEPT DHCP client traffic
+- Silently DROP SMB/CIFS traffic
+- Silently DROP DHCP traffic not associated with host's use of DHCP client
+- Silently DROP BROADCAST (IPv4) traffic
+- Log all blocked packets not matching the default policy with rate limiting
+
+If you are using a packaged version of ufw supplied by your distribution, the
+default ruleset may be different.
+
+
+Remote Management
+-----------------
+On /lib/ufw/ufw-init start and 'ufw enable' the chains are flushed, so
+ssh may drop. This is needed so ufw is in a consistent state. Once the ufw is
+'enabled' it will insert rules into the existing chains, and therefore not
+flush the chains (but will when modifying a rule or changing the default
+policy).
+
+You can insert rules before enabling the firewall however, so it is often
+a good idea to to:
+# ufw allow proto tcp from any to any port 22
+# ufw enable
+
+In this case, the chains are still flushed, but the ssh port will be open
+after enabling the firewall.
+
+
+IPV6
+----
+ufw has full support for IPv6, and it is enabled by default. To disable, modify
+/etc/default/ufw (or wherever this is installed) to have:
+
+IPV6=no
+
+Then do:
+# ufw disable
+# ufw enable
+
+
+Application Integration
+-----------------------
+ufw has support for application integration. This allows for administrators
+and developers to put profiles in /etc/ufw/applications.d and have users use
+these profiles in their rules. Profiles use the .INI syntax, and examples
+can be found in the examples/ directory. See 'man ufw' for details.
+
+
+Upgrading
+---------
+If upgrading from 0.17 or below to 0.18, new chains to support the 'limit'
+command will be added automatically.
+
+
+Distributions
+-------------
+While it certainly ok to use /lib/ufw/ufw-init as the initscript for
+ufw, this script is meant to be used by ufw itself, and therefore not
+particularly user friendly. See doc/initscript.example for a simple
+implementation that can be adapted to your distribution.
+
+Simple rules for rsyslog support can be found in doc/rsyslog.example.
+
+
+Testing
+-------
+$ mkdir -p /tmp/ufw/usr /tmp/ufw/etc
+$ python ./setup.py install --home=/tmp/ufw
+
+The edit /tmp/ufw/lib/python/ufw/backend.py to have (since it's installed in
+/tmp):
+        self.do_checks = False
+
+Now do:
+$ /tmp/ufw/usr/sbin/ufw help
+
+Here is a command to do it all at once:
+$ rm -rf /tmp/ufw && mkdir -p /tmp/ufw/usr /tmp/ufw/etc && python ./setup.py install --home=/tmp/ufw && sed -i 's/self.do_checks = True/self.do_checks = False/' /tmp/ufw/lib/python/ufw/backend.py
+
+Then test with:
+$ PYTHONPATH=$PYTHONPATH:/tmp/ufw/lib/python /tmp/ufw/usr/sbin/ufw ...
+
+$ sudo sh -c "PYTHONPATH=$PYTHONPATH:/tmp/ufw/lib/python /tmp/ufw/usr/sbin/ufw ..."
+
+Can also just run from the source directory:
+$ ./run_tests.sh -s
+
+Or for the root tests (these are iptables version dependent, will modify your
+existing firewall and insert kernel modules, so they require root privileges
+and aren't run by default):
+# ./run_tests.sh -s root
+
+You may also specify an interpreter for the tests. Eg:
+$ ./run_tests.sh -s -i /usr/local/bin/python2.5
+
+
+Copyright 2008-2011 Canonical Ltd.

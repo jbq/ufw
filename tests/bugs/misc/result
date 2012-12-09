@@ -1,0 +1,166 @@
+Bug #319226
+0: app list
+WARN: Checks disabled
+Available applications:
+  0verkill
+  A aZ9 _-.+
+  AIM
+  Apache
+  Apache Full
+  Apache Secure
+  Bind9
+  Bonjour
+  CIFS
+  Custom Web App
+  Custom Web App2
+  DNS
+  Deluge
+  Dovecot IMAP
+  Dovecot POP3
+  Dovecot Secure IMAP
+  Dovecot Secure POP3
+  IMAP
+  IMAPS
+  IPP
+  KTorrent
+  Kerberos Admin
+  Kerberos Full
+  Kerberos KDC
+  Kerberos Password
+  LDAP
+  LPD
+  MSN
+  MSN SSL
+  Mail submission
+  Multi TCP
+  Multi UDP
+  NFS
+  No Protocol
+  OpenNTPD
+  POP3
+  POP3S
+  PeopleNearby
+  SMTP
+  SSH
+  Samba
+  Socks
+  Telnet
+  Transmission
+  Transparent Proxy
+  VNC
+  WWW
+  WWW Cache
+  WWW Full
+  WWW Secure
+  XMPP
+  Yahoo
+  a aZ9 _-.+
+  qBittorent
+  svnserve
+
+
+Bug #337705
+1: help
+ERROR: Could not find required libraries. Aborting.
+
+
+Bug #430053
+2: allow 12345
+
+
+3: allow 12345
+
+
+4: default deny
+
+
+5: logging medium
+
+
+Bug #480789
+6: --dry-run logging low
+
+
+7: allow 22
+
+
+checking for 'INVALID -j RETURN' in user.rules
+checking for 'INVALID -j RETURN' in user6.rules
+8: delete allow 22
+
+
+9: --dry-run logging on
+
+
+10: allow 22
+
+
+checking for 'INVALID -j RETURN' in user.rules
+checking for 'INVALID -j RETURN' in user6.rules
+11: delete allow 22
+
+
+12: --dry-run logging medium
+
+
+13: allow 22
+
+
+checking for 'INVALID -j RETURN' in user.rules
+checking for 'INVALID -j RETURN' in user6.rules
+14: delete allow 22
+
+
+15: --dry-run logging high
+
+
+16: allow 22
+
+
+checking for 'INVALID -j RETURN' in user.rules
+checking for 'INVALID -j RETURN' in user6.rules
+17: delete allow 22
+
+
+18: --dry-run logging full
+
+
+19: allow 22
+
+
+checking for 'INVALID -j RETURN' in user.rules
+checking for 'INVALID -j RETURN' in user6.rules
+20: delete allow 22
+
+
+Bug #512131
+21: logging off
+
+
+22: logging low
+
+
+23: logging on
+
+
+24: logging medium
+
+
+25: logging high
+
+
+26: logging full
+
+
+27: logging off
+
+
+Bug #568877
+28: --dry-run allow in on iaslab
+
+
+Bug #946332
+29: --dry-run
+ERROR: not enough args
+
+

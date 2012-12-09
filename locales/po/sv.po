@@ -1,0 +1,929 @@
+# Swedish translation for ufw
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the ufw package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ufw\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-03-22 10:34-0500\n"
+"PO-Revision-Date: 2010-08-28 01:18+0000\n"
+"Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-02-13 23:52+0000\n"
+"X-Generator: Launchpad (build 14781)\n"
+
+#: src/ufw:46
+msgid ": Need at least python 2.5)\n"
+msgstr ": Behöver minst python 2.5)\n"
+
+#: src/ufw:103 src/frontend.py:554 src/frontend.py:854
+msgid "Aborted"
+msgstr "Avbruten"
+
+#: src/applications.py:32
+msgid "Profiles directory does not exist"
+msgstr "Profilkatalogen finns inte"
+
+#: src/applications.py:64
+#, python-format
+msgid "Skipping '%s': couldn't stat"
+msgstr "Hoppar över \"%s\": kunde inte ta status"
+
+#: src/applications.py:69
+#, python-format
+msgid "Skipping '%s': too big"
+msgstr "Hoppar över \"%s\": för stor"
+
+#: src/applications.py:74
+#, python-format
+msgid "Skipping '%s': too many files read already"
+msgstr "Hoppar över \"%s\": för många filer inlästa redan"
+
+#: src/applications.py:84
+#, python-format
+msgid "Skipping '%s': couldn't process"
+msgstr "Hoppar över \"%s\": kunde inte behandla"
+
+#: src/applications.py:91
+#, python-format
+msgid "Skipping '%s': name too long"
+msgstr "Hoppar över \"%s\": namnet är för långt"
+
+#: src/applications.py:96
+#, python-format
+msgid "Skipping '%s': invalid name"
+msgstr "Hoppar över \"%s\": ogiltigt namn"
+
+#: src/applications.py:102
+#, python-format
+msgid "Skipping '%s': also in /etc/services"
+msgstr "Hoppar över \"%s\": finns även i /etc/services"
+
+#: src/applications.py:111
+#, python-format
+msgid "Skipping '%s': field too long"
+msgstr "Hoppar över \"%s\": fältet för långt"
+
+#: src/applications.py:116
+#, python-format
+msgid "Skipping '%(value)s': value too long for '%(field)s'"
+msgstr "Hoppar över \"%(value)s\": värdet är för långt för \"%(field)s\""
+
+#: src/applications.py:126
+#, python-format
+msgid "Duplicate profile '%s', using last found"
+msgstr "Dublett av profilen \"%s\", använder senast hittad"
+
+#: src/applications.py:156
+#, python-format
+msgid "Profile '%(fn)s' missing required field '%(f)s'"
+msgstr "Profilen \"%(fn)s\" saknar nödvändiga fältet \"%(f)s\""
+
+#: src/applications.py:161
+#, python-format
+msgid "Profile '%(fn)s' has empty required field '%(f)s'"
+msgstr "Profilen \"%(fn)s\" har nödvändiga fältet \"%(f)s\" tomt"
+
+#: src/applications.py:167
+#, python-format
+msgid "No ports found in profile '%s'"
+msgstr "Inga portar hittades i profilen \"%s\""
+
+#: src/applications.py:180
+#, python-format
+msgid "Invalid ports in profile '%s'"
+msgstr "Ogiltiga portar i profilen \"%s\""
+
+#: src/backend_iptables.py:87
+msgid "New profiles:"
+msgstr "Nya profiler:"
+
+#: src/backend_iptables.py:103 src/backend.py:275
+#, python-format
+msgid "Unsupported policy '%s'"
+msgstr "Policyn \"%s\" stöds inte"
+
+#: src/backend_iptables.py:107
+#, python-format
+msgid "Unsupported policy for direction '%s'"
+msgstr "Policyn för riktningen \"%s\" stöds inte"
+
+#: src/backend_iptables.py:165
+#, python-format
+msgid "Default %(direction)s policy changed to '%(policy)s'\n"
+msgstr "Standardpolicy för %(direction)s har ändrats till \"%(policy)s\"\n"
+
+#: src/backend_iptables.py:167
+msgid "(be sure to update your rules accordingly)"
+msgstr "(glöm inte att uppdatera dina regler enligt detta)"
+
+#: src/backend_iptables.py:174
+msgid "Checking raw iptables\n"
+msgstr "Kontrollerar rå iptables\n"
+
+#: src/backend_iptables.py:175
+msgid "Checking raw ip6tables\n"
+msgstr "Kontrollerar rå ip6tables\n"
+
+#: src/backend_iptables.py:178 src/backend_iptables.py:269
+#: src/backend_iptables.py:448 src/backend_iptables.py:459
+#: src/backend_iptables.py:507
+msgid "problem running"
+msgstr "kunde inte köra"
+
+#: src/backend_iptables.py:264
+msgid "Checking iptables\n"
+msgstr "Kontrollerar iptables\n"
+
+#: src/backend_iptables.py:266
+msgid "Checking ip6tables\n"
+msgstr "Kontrollerar ip6tables\n"
+
+#: src/backend_iptables.py:275
+msgid "Status: inactive"
+msgstr "Status: inaktiv"
+
+#: src/backend_iptables.py:411
+msgid "To"
+msgstr "Till"
+
+#: src/backend_iptables.py:412
+msgid "From"
+msgstr "Från"
+
+#: src/backend_iptables.py:413
+msgid "Action"
+msgstr "Åtgärd"
+
+#: src/backend_iptables.py:428
+msgid "\n"
+msgstr "\n"
+
+#: src/backend_iptables.py:436
+#, python-format
+msgid "Default: %(in)s (incoming), %(out)s (outgoing)"
+msgstr "Standard: %(in)s (inkommande), %(out)s (utgående)"
+
+#: src/backend_iptables.py:440
+#, python-format
+msgid ""
+"Status: active\n"
+"%(log)s\n"
+"%(pol)s\n"
+"%(app)s%(status)s"
+msgstr ""
+"Status: aktiv\n"
+"%(log)s\n"
+"%(pol)s\n"
+"%(app)s%(status)s"
+
+#: src/backend_iptables.py:444
+#, python-format
+msgid "Status: active%s"
+msgstr "Status: aktiv%s"
+
+#: src/backend_iptables.py:450 src/backend_iptables.py:461
+msgid "running ufw-init"
+msgstr "kör ufw-init"
+
+#: src/backend_iptables.py:474
+msgid "Could not set LOGLEVEL"
+msgstr "Kunde inte ställa in LOGLEVEL"
+
+#: src/backend_iptables.py:480
+msgid "Could not load logging rules"
+msgstr "Kunde inte läsa in loggningsregler"
+
+#: src/backend_iptables.py:629 src/backend.py:181
+#, python-format
+msgid "Couldn't open '%s' for reading"
+msgstr "Kunde inte öppna \"%s\" för läsning"
+
+#: src/backend_iptables.py:638
+#, python-format
+msgid "Skipping malformed tuple (bad length): %s"
+msgstr "Hoppar över felformulerad tupel (felaktig längd): %s"
+
+#: src/backend_iptables.py:668
+#, python-format
+msgid "Skipping malformed tuple: %s"
+msgstr "Hoppar över felformulerad tupel: %s"
+
+#: src/backend_iptables.py:690 src/backend.py:213
+#, python-format
+msgid "'%s' is not writable"
+msgstr ""
+
+#: src/backend_iptables.py:830
+msgid "Adding IPv6 rule failed: IPv6 not enabled"
+msgstr "Misslyckades med att lägga till IPv6-regel: IPv6 inte aktiverat"
+
+#: src/backend_iptables.py:834
+#, python-format
+msgid "Skipping unsupported IPv6 '%s' rule"
+msgstr "Hoppar över IPv6 \"%s\"-regel som inte stöds"
+
+#: src/backend_iptables.py:837
+msgid "Must specify 'tcp' or 'udp' with multiple ports"
+msgstr "Måste ange \"tcp\" eller \"udp\" med flera portar"
+
+#: src/backend_iptables.py:849
+msgid "Skipping IPv6 application rule. Need at least iptables 1.4"
+msgstr "Hoppar över IPv6-programregel. Behöver minst iptables 1.4"
+
+#: src/backend_iptables.py:854
+#, python-format
+msgid "Invalid position '%d'"
+msgstr "Ogiltig position \"%d\""
+
+#: src/backend_iptables.py:858
+msgid "Cannot specify insert and delete"
+msgstr "Kan inte ange insert och delete"
+
+#: src/backend_iptables.py:861
+#, python-format
+msgid "Cannot insert rule at position '%d'"
+msgstr "Kan inte infoga regel på position \"%d\""
+
+#: src/backend_iptables.py:919
+msgid "Skipping inserting existing rule"
+msgstr "Hoppar över inmatning av befintlig regel"
+
+#: src/backend_iptables.py:930 src/frontend.py:365
+msgid "Could not delete non-existent rule"
+msgstr "Kunde inte ta bort icke-existerande regel"
+
+#: src/backend_iptables.py:935
+msgid "Skipping adding existing rule"
+msgstr "Hoppar över addering av befintlig regel"
+
+#: src/backend_iptables.py:951
+msgid "Couldn't update rules file"
+msgstr "Kunde inte uppdatera regelfilen"
+
+#: src/backend_iptables.py:956
+msgid "Rules updated"
+msgstr "Regler uppdaterade"
+
+#: src/backend_iptables.py:958
+msgid "Rules updated (v6)"
+msgstr "Regler uppdaterade (v6)"
+
+#: src/backend_iptables.py:966
+msgid "Rule inserted"
+msgstr "Regel infogad"
+
+#: src/backend_iptables.py:968
+msgid "Rule updated"
+msgstr "Regel uppdaterad"
+
+#: src/backend_iptables.py:978
+msgid " (skipped reloading firewall)"
+msgstr " (hoppade över omläsning av brandvägg)"
+
+#: src/backend_iptables.py:981
+msgid "Rule deleted"
+msgstr "Regel borttagen"
+
+#: src/backend_iptables.py:984
+msgid "Rule added"
+msgstr "Regel lades till"
+
+#: src/backend_iptables.py:999 src/backend_iptables.py:1087
+msgid "Could not update running firewall"
+msgstr "Kunde inte uppdatera körande brandvägg"
+
+#: src/backend_iptables.py:1054
+#, python-format
+msgid "Could not perform '%s'"
+msgstr "Kunde inte genomföra \"%s\""
+
+#: src/backend_iptables.py:1078
+msgid "Couldn't update rules file for logging"
+msgstr ""
+
+#: src/backend_iptables.py:1132 src/backend.py:530
+#, python-format
+msgid "Invalid log level '%s'"
+msgstr "Ogiltig loggnivå \"%s\""
+
+#: src/backend_iptables.py:1228
+#, python-format
+msgid "Could not find '%s'. Aborting"
+msgstr ""
+
+#: src/backend_iptables.py:1240
+#, python-format
+msgid "'%s' already exists. Aborting"
+msgstr ""
+
+#: src/backend_iptables.py:1246
+#, python-format
+msgid "Backing up '%(old)s' to '%(new)s'\n"
+msgstr ""
+
+#: src/backend_iptables.py:1262 src/backend.py:140
+#, python-format
+msgid "Couldn't stat '%s'"
+msgstr "Kunde inte ta status på \"%s\""
+
+#: src/backend_iptables.py:1267
+#, python-format
+msgid "WARN: '%s' is world writable"
+msgstr ""
+
+#: src/backend_iptables.py:1269
+#, python-format
+msgid "WARN: '%s' is world readable"
+msgstr ""
+
+#: src/backend.py:96
+msgid "Checks disabled"
+msgstr "Kontroller inaktiverade"
+
+#: src/backend.py:102
+msgid "ERROR: this script should not be SUID"
+msgstr "FEL: detta skript ska inte vara SUID"
+
+#: src/backend.py:105
+msgid "ERROR: this script should not be SGID"
+msgstr "FEL: detta skript ska inte vara SGID"
+
+#: src/backend.py:110
+msgid "You need to be root to run this script"
+msgstr "Du måste vara root för att köra detta skript"
+
+#: src/backend.py:120
+#, python-format
+msgid "'%s' does not exist"
+msgstr "\"%s\" finns inte"
+
+#: src/backend.py:146
+#, python-format
+msgid "uid is %(uid)s but '%(path)s' is owned by %(st_uid)s"
+msgstr "uid är %(uid)s men \"%(path)s\" ägs av %(st_uid)s"
+
+#: src/backend.py:153
+#, python-format
+msgid "%s is world writable!"
+msgstr "%s är skrivbar för alla!"
+
+#: src/backend.py:157
+#, python-format
+msgid "%s is group writable!"
+msgstr "%s är skrivbar för gruppen!"
+
+#: src/backend.py:170
+#, python-format
+msgid "'%(f)s' file '%(name)s' does not exist"
+msgstr "\"%(f)s\"-filen \"%(name)s\" finns inte"
+
+#: src/backend.py:195
+#, python-format
+msgid "Missing policy for '%s'"
+msgstr "Saknar policy för \"%s\""
+
+#: src/backend.py:200
+#, python-format
+msgid "Invalid policy '%(policy)s' for '%(chain)s'"
+msgstr "Ogiltig policy \"%(policy)s\" för \"%(chain)s\""
+
+#: src/backend.py:207
+msgid "Invalid option"
+msgstr "Ogiltig flagga"
+
+#: src/backend.py:278
+#, python-format
+msgid "Default application policy changed to '%s'"
+msgstr "Standardprogrampolicy ändrad till \"%s\""
+
+#: src/backend.py:360
+msgid "No rules found for application profile"
+msgstr "Inga regler hittades för programprofilen"
+
+#: src/backend.py:419
+#, python-format
+msgid "Rules updated for profile '%s'"
+msgstr "Regler uppdaterade för profilen \"%s\""
+
+#: src/backend.py:425
+msgid "Couldn't update application rules"
+msgstr "Kunde inte uppdatera programregler"
+
+#: src/backend.py:447
+#, python-format
+msgid "Found multiple matches for '%s'. Please use exact profile name"
+msgstr "Hittade flera träffar för \"%s\". Använd det exakta profilnamnet"
+
+#: src/backend.py:448
+#, python-format
+msgid "Could not find a profile matching '%s'"
+msgstr "Kunde inte hitta en profil som matchar \"%s\""
+
+#: src/backend.py:514
+msgid "Logging: "
+msgstr "Loggning: "
+
+#: src/backend.py:518
+msgid "unknown"
+msgstr "okänd"
+
+#: src/backend.py:548
+msgid "Logging disabled"
+msgstr "Loggning inaktiverad"
+
+#: src/backend.py:550
+msgid "Logging enabled"
+msgstr "Loggning aktiverad"
+
+#: src/common.py:186
+#, python-format
+msgid "Bad port '%s'"
+msgstr "Felaktig port \"%s\""
+
+#: src/common.py:251
+#, python-format
+msgid "Unsupported protocol '%s'"
+msgstr "Protokollet \"%s\" stöds inte"
+
+#: src/common.py:279
+msgid "Bad source address"
+msgstr "Felaktig källadress"
+
+#: src/common.py:289
+msgid "Bad destination address"
+msgstr "Felaktig måladress"
+
+#: src/common.py:297
+msgid "Bad interface type"
+msgstr "Felaktig gränssnittstyp"
+
+#: src/common.py:301
+msgid "Bad interface name"
+msgstr "Felaktigt gränssnittsnamn"
+
+#: src/common.py:305
+msgid "Bad interface name: can't use interface aliases"
+msgstr "Felaktigt gränssnittsnamn: kan inte använd alias för gränssnitt"
+
+#: src/common.py:316
+#, python-format
+msgid "Insert position '%s' is not a valid position"
+msgstr "Inmatningsposition \"%s\" är inte en giltig position"
+
+#: src/common.py:326
+#, python-format
+msgid "Invalid log type '%s'"
+msgstr "Ogiltig loggtyp \"%s\""
+
+#: src/common.py:334
+#, python-format
+msgid "Unsupported direction '%s'"
+msgstr "Riktningen stöds inte \"%s\""
+
+#: src/common.py:346
+msgid "Could not normalize source address"
+msgstr "Kunde inte normalisera källadressen"
+
+#: src/common.py:356
+msgid "Could not normalize destination address"
+msgstr "Kunde inte normalisera måladressen"
+
+#: src/common.py:417
+msgid "Found exact match"
+msgstr "Hittade exakt träff"
+
+#: src/common.py:421
+#, python-format
+msgid "Found non-action/non-logtype match (%(xa)s/%(ya)s %(xl)s/%(yl)s)"
+msgstr ""
+"Hittade non-action/non-logtype-matchning (%(xa)s/%(ya)s %(xl)s/%(yl)s)"
+
+#: src/frontend.py:93
+#, python-format
+msgid ""
+"\n"
+"Usage: %(progname)s %(command)s\n"
+"\n"
+"%(commands)s:\n"
+" %(enable)-31s enables the firewall\n"
+" %(disable)-31s disables the firewall\n"
+" %(default)-31s set default policy\n"
+" %(logging)-31s set logging to %(level)s\n"
+" %(allow)-31s add allow %(rule)s\n"
+" %(deny)-31s add deny %(rule)s\n"
+" %(reject)-31s add reject %(rule)s\n"
+" %(limit)-31s add limit %(rule)s\n"
+" %(delete)-31s delete %(urule)s\n"
+" %(insert)-31s insert %(urule)s at %(number)s\n"
+" %(reset)-31s reset firewall\n"
+" %(status)-31s show firewall status\n"
+" %(statusnum)-31s show firewall status as numbered list of %(rules)s\n"
+" %(statusverbose)-31s show verbose firewall status\n"
+" %(show)-31s show firewall report\n"
+" %(version)-31s display version information\n"
+"\n"
+"%(appcommands)s:\n"
+" %(applist)-31s list application profiles\n"
+" %(appinfo)-31s show information on %(profile)s\n"
+" %(appupdate)-31s update %(profile)s\n"
+" %(appdefault)-31s set default application policy\n"
+msgstr ""
+
+#: src/frontend.py:168
+msgid "n"
+msgstr "n"
+
+#: src/frontend.py:169
+msgid "y"
+msgstr "j"
+
+#: src/frontend.py:170
+msgid "yes"
+msgstr "ja"
+
+#: src/frontend.py:215
+msgid "Firewall is active and enabled on system startup"
+msgstr "Brandväggen är aktiv och aktiverad vid systemuppstart"
+
+#: src/frontend.py:222
+msgid "Firewall stopped and disabled on system startup"
+msgstr "Brandvägg stoppad och inaktiverad vid systemets uppstart"
+
+#: src/frontend.py:273
+msgid "Could not get listening status"
+msgstr ""
+
+#: src/frontend.py:360 src/frontend.py:458 src/frontend.py:468
+#, python-format
+msgid "Invalid IP version '%s'"
+msgstr "Ogiltig IP-version \"%s\""
+
+#: src/frontend.py:391
+msgid "Invalid position '"
+msgstr "Ogiltig position \""
+
+#: src/frontend.py:465
+msgid "IPv6 support not enabled"
+msgstr "IPv6-stöd inte aktiverat"
+
+#: src/frontend.py:476
+msgid "Rule changed after normalization"
+msgstr "Regel ändrad efter normalisering"
+
+#: src/frontend.py:500
+#, python-format
+msgid "Could not back out rule '%s'"
+msgstr "Kunde inte backa ut regeln \"%s\""
+
+#: src/frontend.py:504
+msgid ""
+"\n"
+"Error applying application rules."
+msgstr ""
+"\n"
+"Fel vid tillämpning av programregler."
+
+#: src/frontend.py:506
+msgid " Some rules could not be unapplied."
+msgstr " Några regler kunde inte inaktiveras."
+
+#: src/frontend.py:508
+msgid " Attempted rules successfully unapplied."
+msgstr " Inaktivering av regler lyckades."
+
+#: src/frontend.py:519
+#, python-format
+msgid "Could not find rule '%s'"
+msgstr ""
+
+#: src/frontend.py:524 src/frontend.py:529
+#, python-format
+msgid "Could not find rule '%d'"
+msgstr ""
+
+#: src/frontend.py:541
+#, python-format
+msgid ""
+"Deleting:\n"
+" %(rule)s\n"
+"Proceed with operation (%(yes)s|%(no)s)? "
+msgstr ""
+
+#: src/frontend.py:572
+msgid "Unsupported default policy"
+msgstr "Standardpolicyn stöds inte"
+
+#: src/frontend.py:599 src/frontend.py:744
+msgid "Firewall reloaded"
+msgstr "Brandväggen omläst"
+
+#: src/frontend.py:601
+msgid "Firewall not enabled (skipping reload)"
+msgstr "Brandvägg inte aktiverad (hoppar över omläsning)"
+
+#: src/frontend.py:618 src/frontend.py:632 src/frontend.py:669
+msgid "Invalid profile name"
+msgstr "Ogiltigt profilnamn"
+
+#: src/frontend.py:637 src/frontend.py:819
+#, python-format
+msgid "Unsupported action '%s'"
+msgstr "Åtgärden \"%s\" stöds inte"
+
+#: src/frontend.py:656
+msgid "Available applications:"
+msgstr "Tillgängliga program:"
+
+#: src/frontend.py:677
+#, python-format
+msgid "Could not find profile '%s'"
+msgstr "Kunde inte hitta profilen \"%s\""
+
+#: src/frontend.py:682
+msgid "Invalid profile"
+msgstr "Ogiltig profil"
+
+#: src/frontend.py:685
+#, python-format
+msgid "Profile: %s\n"
+msgstr "Profil: %s\n"
+
+#: src/frontend.py:686
+#, python-format
+msgid "Title: %s\n"
+msgstr "Titel: %s\n"
+
+#: src/frontend.py:689
+#, python-format
+msgid ""
+"Description: %s\n"
+"\n"
+msgstr ""
+"Beskrivning: %s\n"
+"\n"
+
+#: src/frontend.py:695
+msgid "Ports:"
+msgstr "Portar:"
+
+#: src/frontend.py:697
+msgid "Port:"
+msgstr "Port:"
+
+#: src/frontend.py:746
+msgid "Skipped reloading firewall"
+msgstr "Hoppade över omläsning av brandvägg"
+
+#: src/frontend.py:756
+msgid "Cannot specify 'all' with '--add-new'"
+msgstr "Kan inte ange \"all\" med \"--add-new\""
+
+#: src/frontend.py:771
+#, python-format
+msgid "Unknown policy '%s'"
+msgstr "Okänd policy \"%s\""
+
+#: src/frontend.py:828
+#, python-format
+msgid ""
+"Command may disrupt existing ssh connections. Proceed with operation "
+"(%(yes)s|%(no)s)? "
+msgstr ""
+
+#: src/frontend.py:841
+#, python-format
+msgid ""
+"Resetting all rules to installed defaults. Proceed with operation "
+"(%(yes)s|%(no)s)? "
+msgstr ""
+
+#: src/frontend.py:845
+#, python-format
+msgid ""
+"Resetting all rules to installed defaults. This may disrupt existing ssh "
+"connections. Proceed with operation (%(yes)s|%(no)s)? "
+msgstr ""
+
+#: src/parser.py:109
+#, python-format
+msgid "Cannot insert rule at position '%s'"
+msgstr "Kan inte infoga regel på position \"%s\""
+
+#: src/parser.py:147
+msgid "Invalid interface clause"
+msgstr "Ogiltigt gränssnittsklausul"
+
+#: src/parser.py:173
+msgid "Option 'log' not allowed here"
+msgstr "Flaggan \"log\" tillåts inte här"
+
+#: src/parser.py:177
+msgid "Option 'log-all' not allowed here"
+msgstr "Flaggan \"log-all\" tillåts inte här"
+
+#: src/parser.py:210 src/parser.py:224
+msgid "Bad port"
+msgstr "Felaktig port"
+
+#: src/parser.py:215 src/parser.py:335
+msgid "Port ranges must be numeric"
+msgstr "Portintervall måste vara numeriska"
+
+#: src/parser.py:229 src/parser.py:426
+#, python-format
+msgid "Invalid port with protocol '%s'"
+msgstr ""
+
+#: src/parser.py:233
+msgid "Wrong number of arguments"
+msgstr "Fel antal argument"
+
+#: src/parser.py:237
+msgid "Need 'to' or 'from' clause"
+msgstr "Behöver \"to\" eller \"from\""
+
+#: src/parser.py:252
+msgid "Improper rule syntax"
+msgstr "Felaktig regelsyntax"
+
+#: src/parser.py:259
+#, python-format
+msgid "Invalid token '%s'"
+msgstr "Ogiltigt token \"%s\""
+
+#: src/parser.py:268
+msgid "Invalid 'proto' clause"
+msgstr "Ogiltig \"proto\""
+
+#: src/parser.py:280
+#, python-format
+msgid "Invalid '%s' clause"
+msgstr "Ogiltig \"%s\"-klausul"
+
+#: src/parser.py:299
+msgid "Invalid 'from' clause"
+msgstr "Ogiltig \"from\""
+
+#: src/parser.py:318
+msgid "Invalid 'to' clause"
+msgstr "Ogiltig \"to\""
+
+#: src/parser.py:323
+#, python-format
+msgid "Need 'from' or 'to' with '%s'"
+msgstr "Behöver \"from\" eller \"to\" med \"%s\""
+
+#: src/parser.py:347
+msgid "Invalid 'port' clause"
+msgstr "Ogiltig \"port\""
+
+#: src/parser.py:356
+msgid "Mixed IP versions for 'from' and 'to'"
+msgstr "Blandade IP-versioner för \"from\" och \"to\""
+
+#: src/parser.py:370 src/parser.py:377 src/parser.py:383
+msgid "Could not find protocol"
+msgstr "Kunde inte hitta protokollet"
+
+#: src/parser.py:390
+msgid "Protocol mismatch (from/to)"
+msgstr "Protokollen stämmer inte överens (from/to)"
+
+#: src/parser.py:397
+#, python-format
+msgid "Protocol mismatch with specified protocol %s"
+msgstr "Protokollen stämmer inte överens med angivet protokoll %s"
+
+#: src/parser.py:409
+#, python-format
+msgid "Improper rule syntax ('%s' specified with app rule)"
+msgstr "Felaktig regelsyntax (\"%s\" angiven med programregel)"
+
+#: src/parser.py:416
+#, python-format
+msgid "Invalid IPv6 address with protocol '%s'"
+msgstr ""
+
+#: src/parser.py:745
+#, python-format
+msgid "Invalid command '%s'"
+msgstr ""
+
+#: src/parser.py:767
+#, python-format
+msgid "Command '%s' already exists"
+msgstr ""
+
+#: src/util.py:386
+msgid "Couldn't find pid (is /proc mounted?)"
+msgstr "Kunde inte hitta pid (är /proc monterad?)"
+
+#: src/util.py:390
+#, python-format
+msgid "Couldn't find parent pid for '%s'"
+msgstr "Kunde inte hitta föräldra-pid för \"%s\""
+
+#: src/util.py:400
+#, python-format
+msgid "Couldn't find '%s'"
+msgstr "Kunde inte hitta \"%s\""
+
+#: src/util.py:406
+#, python-format
+msgid "Could not find executable for '%s'"
+msgstr "Kunde inte hitta körbar fil för \"%s\""
+
+#: src/util.py:871
+#, python-format
+msgid "Could not get statistics for '%s'"
+msgstr ""
+
+#~ msgid "------"
+#~ msgstr "------"
+
+#~ msgid "uid is %s but '%s' is owned by %s"
+#~ msgstr "uid är %s men \"%s\" ägs av %s"
+
+#~ msgid "'%s' file '%s' does not exist"
+#~ msgstr "\"%s\"-filen \"%s\" finns inte"
+
+#, python-format
+#~ msgid "Default policy changed to '%s'\n"
+#~ msgstr "Standardpolicy ändrad till \"%s\"\n"
+
+#~ msgid "----"
+#~ msgstr "----"
+
+#~ msgid "--"
+#~ msgstr "----"
+
+#~ msgid "No match"
+#~ msgstr "Ingen träff"
+
+#~ msgid ""
+#~ "\n"
+#~ "Usage: "
+#~ msgstr ""
+#~ "\n"
+#~ "Användning: "
+
+#, python-format
+#~ msgid "Default: %s"
+#~ msgstr "Standard: %s"
+
+#~ msgid "Status: active"
+#~ msgstr "Status: aktiv"
+
+#~ msgid ""
+#~ " COMMAND\n"
+#~ "\n"
+#~ "Commands:\n"
+#~ " enable\t\t\t\tenables the firewall\n"
+#~ " disable\t\t\tdisables the firewall\n"
+#~ " default ARG\t\t\tset default policy to ALLOW, DENY or REJECT\n"
+#~ " logging ARG\t\t\tset logging to OFF, ON or LEVEL\n"
+#~ " allow|deny|reject ARG\t\tadd allow, deny or reject RULE\n"
+#~ " delete RULE\t\t \tdelete the RULE\n"
+#~ " insert NUM RULE\t \tinsert RULE at NUM\n"
+#~ " status \t\t\tshow firewall status\n"
+#~ " status numbered\t\tshow firewall status as numbered list of RULES\n"
+#~ " show ARG\t\t\tshow firewall report\n"
+#~ " version\t\t\tdisplay version information\n"
+#~ "\n"
+#~ "Application profile commands:\n"
+#~ " app list\t\t\tlist application profiles\n"
+#~ " app info PROFILE\t\tshow information on PROFILE\n"
+#~ " app update PROFILE\t\tupdate PROFILE\n"
+#~ " app default ARG\t\tset profile policy to ALLOW, DENY, REJECT or\n"
+#~ "\t\t\t\tSKIP\n"
+#~ msgstr ""
+#~ " KOMMANDO\n"
+#~ "\n"
+#~ "Kommandon:\n"
+#~ " enable\t\t\t\taktiverar brandväggen\n"
+#~ " disable\t\t\tinaktiverar brandväggen\n"
+#~ " default ARG\t\t\tställ in standardpolicy till ALLOW, DENY eller REJECT\n"
+#~ " logging ARG\t\t\tställ in loggning till OFF, ON eller LEVEL\n"
+#~ " allow|deny|reject ARG\t\tlägg till REGEL för allow, deny eller reject\n"
+#~ " delete REGEL\t\t \tta bort REGEL\n"
+#~ " insert NUM REGEL\t \tinfoga REGEL vid NUM\n"
+#~ " status \t\t\tvisa brandväggsstatus\n"
+#~ " status numbered\t\tvisa brandväggsstatus som numrerad lista av REGLER\n"
+#~ " show ARG\t\t\tvisa brandväggsrapport\n"
+#~ " version\t\t\tvisa versionsinformation\n"
+#~ "\n"
+#~ "Kommandon för programprofiler:\n"
+#~ " app list\t\t\tlista programprofiler\n"
+#~ " app info PROFIL\t\tvisa information om PROFIL\n"
+#~ " app update PROFIL\t\tuppdatera PROFIL\n"
+#~ " app default ARG\t\tställ in profilpolicy till ALLOW, DENY, REJECT\n"
+#~ "\t\t\t\teller SKIP\n"
+
+#~ msgid "Command may disrupt existing ssh connections."
+#~ msgstr "Kommandot kan påverka befintliga ssh-anslutningar."

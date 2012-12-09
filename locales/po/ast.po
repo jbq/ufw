@@ -1,0 +1,871 @@
+# Asturian translation for ufw
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the ufw package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ufw\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-03-22 10:34-0500\n"
+"PO-Revision-Date: 2010-04-08 14:07+0000\n"
+"Last-Translator: Costales <costales.marcos@gmail.com>\n"
+"Language-Team: Asturian <ast@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-02-13 23:52+0000\n"
+"X-Generator: Launchpad (build 14781)\n"
+
+#: src/ufw:46
+msgid ": Need at least python 2.5)\n"
+msgstr ": Necesitase como mínimo Python 2.5)\n"
+
+#: src/ufw:103 src/frontend.py:554 src/frontend.py:854
+msgid "Aborted"
+msgstr "Albortáu"
+
+#: src/applications.py:32
+msgid "Profiles directory does not exist"
+msgstr "Nun esiste'l direutoriu de perfiles"
+
+#: src/applications.py:64
+#, python-format
+msgid "Skipping '%s': couldn't stat"
+msgstr "Saltando «%s»: nun puede llese"
+
+#: src/applications.py:69
+#, python-format
+msgid "Skipping '%s': too big"
+msgstr "Saltando «%s»: enforma grande"
+
+#: src/applications.py:74
+#, python-format
+msgid "Skipping '%s': too many files read already"
+msgstr "Saltando «%s»: yá se lleeron abondos ficheros"
+
+#: src/applications.py:84
+#, python-format
+msgid "Skipping '%s': couldn't process"
+msgstr "Saltando «%s»: nun puede procesase"
+
+#: src/applications.py:91
+#, python-format
+msgid "Skipping '%s': name too long"
+msgstr "Saltando «%s»: nome enforma llargu"
+
+#: src/applications.py:96
+#, python-format
+msgid "Skipping '%s': invalid name"
+msgstr "Saltando «%s»: nome incorreutu"
+
+#: src/applications.py:102
+#, python-format
+msgid "Skipping '%s': also in /etc/services"
+msgstr "Saltando «%s»: ta tamién en /etc/services"
+
+#: src/applications.py:111
+#, python-format
+msgid "Skipping '%s': field too long"
+msgstr "Saltando «%s»: campu enforma llargu"
+
+#: src/applications.py:116
+#, python-format
+msgid "Skipping '%(value)s': value too long for '%(field)s'"
+msgstr "Saltando '%(value)s': valor enforma llargu pa '%(field)s'"
+
+#: src/applications.py:126
+#, python-format
+msgid "Duplicate profile '%s', using last found"
+msgstr "Perfil «%s» duplicáu; usaráse l'últimu alcontráu"
+
+#: src/applications.py:156
+#, python-format
+msgid "Profile '%(fn)s' missing required field '%(f)s'"
+msgstr "Nel perfil «%(fn)s» falta'l campu obligatoriu '%(f)s'"
+
+#: src/applications.py:161
+#, python-format
+msgid "Profile '%(fn)s' has empty required field '%(f)s'"
+msgstr "El perfil «%(fn)s» tienn ermu'l campu obligatoriu «%(f)s»"
+
+#: src/applications.py:167
+#, python-format
+msgid "No ports found in profile '%s'"
+msgstr "Nun s'alcontraron puertos nel perfil «%s»"
+
+#: src/applications.py:180
+#, python-format
+msgid "Invalid ports in profile '%s'"
+msgstr "Hai puertos incorreutos nel perfil «%s»"
+
+#: src/backend_iptables.py:87
+msgid "New profiles:"
+msgstr "Perfiles nuevos:"
+
+#: src/backend_iptables.py:103 src/backend.py:275
+#, python-format
+msgid "Unsupported policy '%s'"
+msgstr "Política «%s» non sofitada"
+
+#: src/backend_iptables.py:107
+#, python-format
+msgid "Unsupported policy for direction '%s'"
+msgstr "Politica pa direición '%s'  non sofitada"
+
+#: src/backend_iptables.py:165
+#, python-format
+msgid "Default %(direction)s policy changed to '%(policy)s'\n"
+msgstr "La política %(direction)s predeterminada camudó a '%(policy)s'\n"
+
+#: src/backend_iptables.py:167
+msgid "(be sure to update your rules accordingly)"
+msgstr "(asegúrate d'anovar les regles consecuentemente)"
+
+#: src/backend_iptables.py:174
+msgid "Checking raw iptables\n"
+msgstr "Comprobando iptables en bruto\n"
+
+#: src/backend_iptables.py:175
+msgid "Checking raw ip6tables\n"
+msgstr "Comprobando ip6tables en bruto\n"
+
+#: src/backend_iptables.py:178 src/backend_iptables.py:269
+#: src/backend_iptables.py:448 src/backend_iptables.py:459
+#: src/backend_iptables.py:507
+msgid "problem running"
+msgstr "problema executando"
+
+#: src/backend_iptables.py:264
+msgid "Checking iptables\n"
+msgstr "Verificando les regles d'iptables\n"
+
+#: src/backend_iptables.py:266
+msgid "Checking ip6tables\n"
+msgstr "Verificando les regles d'ip6tables\n"
+
+#: src/backend_iptables.py:275
+msgid "Status: inactive"
+msgstr "Estáu: inactivu"
+
+#: src/backend_iptables.py:411
+msgid "To"
+msgstr "A"
+
+#: src/backend_iptables.py:412
+msgid "From"
+msgstr "Dende"
+
+#: src/backend_iptables.py:413
+msgid "Action"
+msgstr "Aición"
+
+#: src/backend_iptables.py:428
+msgid "\n"
+msgstr "\n"
+
+#: src/backend_iptables.py:436
+#, python-format
+msgid "Default: %(in)s (incoming), %(out)s (outgoing)"
+msgstr "Por defeuto: %(in)s (Entrada), %(out)s (Salida)"
+
+#: src/backend_iptables.py:440
+#, python-format
+msgid ""
+"Status: active\n"
+"%(log)s\n"
+"%(pol)s\n"
+"%(app)s%(status)s"
+msgstr ""
+"Estáu: activu\n"
+"%(log)s\n"
+"%(pol)s\n"
+"%(app)s%(status)s"
+
+#: src/backend_iptables.py:444
+#, python-format
+msgid "Status: active%s"
+msgstr "Estáu: activu%s"
+
+#: src/backend_iptables.py:450 src/backend_iptables.py:461
+msgid "running ufw-init"
+msgstr "executando ufw-init"
+
+#: src/backend_iptables.py:474
+msgid "Could not set LOGLEVEL"
+msgstr "Nun pudo afitase LOGLEVEL"
+
+#: src/backend_iptables.py:480
+msgid "Could not load logging rules"
+msgstr "Nun pudieron cargase les regles de rexistru"
+
+#: src/backend_iptables.py:629 src/backend.py:181
+#, python-format
+msgid "Couldn't open '%s' for reading"
+msgstr "Nun puede abrise «%s» pa llectura"
+
+#: src/backend_iptables.py:638
+#, python-format
+msgid "Skipping malformed tuple (bad length): %s"
+msgstr ""
+"Saltando regla errónea (llonxitú errónea): %s. Verifica'l to tornafueos"
+
+#: src/backend_iptables.py:668
+#, python-format
+msgid "Skipping malformed tuple: %s"
+msgstr "Saltando llínia erróna: %s. Verifica'l to tornafueos"
+
+#: src/backend_iptables.py:690 src/backend.py:213
+#, python-format
+msgid "'%s' is not writable"
+msgstr ""
+
+#: src/backend_iptables.py:830
+msgid "Adding IPv6 rule failed: IPv6 not enabled"
+msgstr "Fallu al amestar la regla IPv6: IPv6 nun activao"
+
+#: src/backend_iptables.py:834
+#, python-format
+msgid "Skipping unsupported IPv6 '%s' rule"
+msgstr "Saltando regla IPv6 «%s» non sofitada"
+
+#: src/backend_iptables.py:837
+msgid "Must specify 'tcp' or 'udp' with multiple ports"
+msgstr "Tien d'especificase «tcp» o «udp» con varios puertos"
+
+#: src/backend_iptables.py:849
+msgid "Skipping IPv6 application rule. Need at least iptables 1.4"
+msgstr ""
+"Saltando les regles d'aplicación IPv6. Necesitase iptables 1.4 como mínimo"
+
+#: src/backend_iptables.py:854
+#, python-format
+msgid "Invalid position '%d'"
+msgstr "Posición «%d» incorreuta"
+
+#: src/backend_iptables.py:858
+msgid "Cannot specify insert and delete"
+msgstr "Nun puede especificase inxertar y desaniciar"
+
+#: src/backend_iptables.py:861
+#, python-format
+msgid "Cannot insert rule at position '%d'"
+msgstr "Nun pudo inxertase la regla na posición «%d»"
+
+#: src/backend_iptables.py:919
+msgid "Skipping inserting existing rule"
+msgstr "Saltando l'inxertáu de regla ya existente"
+
+#: src/backend_iptables.py:930 src/frontend.py:365
+msgid "Could not delete non-existent rule"
+msgstr "Nun puede desaniciase una regla inesistente"
+
+#: src/backend_iptables.py:935
+msgid "Skipping adding existing rule"
+msgstr "Saltando l'añader d'una regla ya existente"
+
+#: src/backend_iptables.py:951
+msgid "Couldn't update rules file"
+msgstr "Nun pudo anovase'l ficheru de regles"
+
+#: src/backend_iptables.py:956
+msgid "Rules updated"
+msgstr "Regles anovaes"
+
+#: src/backend_iptables.py:958
+msgid "Rules updated (v6)"
+msgstr "Regles anovaes (v6)"
+
+#: src/backend_iptables.py:966
+msgid "Rule inserted"
+msgstr "Regla inxertada"
+
+#: src/backend_iptables.py:968
+msgid "Rule updated"
+msgstr "Regla anovada"
+
+#: src/backend_iptables.py:978
+msgid " (skipped reloading firewall)"
+msgstr " (saltando la recarga del tornafueos)"
+
+#: src/backend_iptables.py:981
+msgid "Rule deleted"
+msgstr "Regla desaniciada"
+
+#: src/backend_iptables.py:984
+msgid "Rule added"
+msgstr "Regla amestada"
+
+#: src/backend_iptables.py:999 src/backend_iptables.py:1087
+msgid "Could not update running firewall"
+msgstr "El tortafueos NON foi anováu"
+
+#: src/backend_iptables.py:1054
+#, python-format
+msgid "Could not perform '%s'"
+msgstr "Nun puedes facer «%s»"
+
+#: src/backend_iptables.py:1078
+msgid "Couldn't update rules file for logging"
+msgstr ""
+
+#: src/backend_iptables.py:1132 src/backend.py:530
+#, python-format
+msgid "Invalid log level '%s'"
+msgstr "Nivel de rexistru «%s» incorreutu"
+
+#: src/backend_iptables.py:1228
+#, python-format
+msgid "Could not find '%s'. Aborting"
+msgstr ""
+
+#: src/backend_iptables.py:1240
+#, python-format
+msgid "'%s' already exists. Aborting"
+msgstr ""
+
+#: src/backend_iptables.py:1246
+#, python-format
+msgid "Backing up '%(old)s' to '%(new)s'\n"
+msgstr ""
+
+#: src/backend_iptables.py:1262 src/backend.py:140
+#, python-format
+msgid "Couldn't stat '%s'"
+msgstr "Nun se pudo facer stat «%s»"
+
+#: src/backend_iptables.py:1267
+#, python-format
+msgid "WARN: '%s' is world writable"
+msgstr ""
+
+#: src/backend_iptables.py:1269
+#, python-format
+msgid "WARN: '%s' is world readable"
+msgstr ""
+
+#: src/backend.py:96
+msgid "Checks disabled"
+msgstr "Verificación desactivada"
+
+#: src/backend.py:102
+msgid "ERROR: this script should not be SUID"
+msgstr "ERROR: esti guión nun tendría de ser SUID"
+
+#: src/backend.py:105
+msgid "ERROR: this script should not be SGID"
+msgstr "ERROR: esti guión nun tendría de ser SGID"
+
+#: src/backend.py:110
+msgid "You need to be root to run this script"
+msgstr "Necesita permisos d'alministrador pa executar esti guión"
+
+#: src/backend.py:120
+#, python-format
+msgid "'%s' does not exist"
+msgstr "«%s» nun esiste"
+
+#: src/backend.py:146
+#, python-format
+msgid "uid is %(uid)s but '%(path)s' is owned by %(st_uid)s"
+msgstr "l'uid ye %(uid)s pero «%(path)s» pertenez a %(st_uid)s"
+
+#: src/backend.py:153
+#, python-format
+msgid "%s is world writable!"
+msgstr "¡%s tien concedíos permisos d'escritura pa tol mundu!"
+
+#: src/backend.py:157
+#, python-format
+msgid "%s is group writable!"
+msgstr "¡El grupu tien drechu d'escritura en %s!"
+
+#: src/backend.py:170
+#, python-format
+msgid "'%(f)s' file '%(name)s' does not exist"
+msgstr "'%(f)s' el ficheru '%(name)s' nun esiste"
+
+#: src/backend.py:195
+#, python-format
+msgid "Missing policy for '%s'"
+msgstr "Falta política pa '%s'"
+
+#: src/backend.py:200
+#, python-format
+msgid "Invalid policy '%(policy)s' for '%(chain)s'"
+msgstr "Política «%(policy)s» incorreuta pa «%(chain)s»"
+
+#: src/backend.py:207
+msgid "Invalid option"
+msgstr "Opción inválida"
+
+#: src/backend.py:278
+#, python-format
+msgid "Default application policy changed to '%s'"
+msgstr "Directives d'aplicación predeterminaes camudaes a «%s»"
+
+#: src/backend.py:360
+msgid "No rules found for application profile"
+msgstr "Nun s'alcontraron regles pal perfil de l'aplicación"
+
+#: src/backend.py:419
+#, python-format
+msgid "Rules updated for profile '%s'"
+msgstr "Anovaronse les regles pal perfil «%s»"
+
+#: src/backend.py:425
+msgid "Couldn't update application rules"
+msgstr "Nun pudieron anovase les regles de la aplicación"
+
+#: src/backend.py:447
+#, python-format
+msgid "Found multiple matches for '%s'. Please use exact profile name"
+msgstr ""
+"Alcontraronse varies coincidencise pa «%s». Usa un nome de perfil esautu"
+
+#: src/backend.py:448
+#, python-format
+msgid "Could not find a profile matching '%s'"
+msgstr "Nun pudo alcontrase un perfil que concase con «%s»"
+
+#: src/backend.py:514
+msgid "Logging: "
+msgstr "Accesu: "
+
+#: src/backend.py:518
+msgid "unknown"
+msgstr "desconocíu"
+
+#: src/backend.py:548
+msgid "Logging disabled"
+msgstr "Rexistru desactiváu"
+
+#: src/backend.py:550
+msgid "Logging enabled"
+msgstr "Registru activáu"
+
+#: src/common.py:186
+#, python-format
+msgid "Bad port '%s'"
+msgstr "Puertu incorreutu «%s»"
+
+#: src/common.py:251
+#, python-format
+msgid "Unsupported protocol '%s'"
+msgstr "Protocolu «%s» nun sofitáu"
+
+#: src/common.py:279
+msgid "Bad source address"
+msgstr "Direición de oríxe errónea"
+
+#: src/common.py:289
+msgid "Bad destination address"
+msgstr "Direición de destín errónea"
+
+#: src/common.py:297
+msgid "Bad interface type"
+msgstr "Triba d'interface incorreuta"
+
+#: src/common.py:301
+msgid "Bad interface name"
+msgstr "Nome d'interface incorreutu"
+
+#: src/common.py:305
+msgid "Bad interface name: can't use interface aliases"
+msgstr "Nome d'interface erróneu: nun puede usase un nomatu d'interface"
+
+#: src/common.py:316
+#, python-format
+msgid "Insert position '%s' is not a valid position"
+msgstr "La posición «%s» inxertada nun ye una posición válida"
+
+#: src/common.py:326
+#, python-format
+msgid "Invalid log type '%s'"
+msgstr "Triba de rexistru «%s» incorreuta"
+
+#: src/common.py:334
+#, python-format
+msgid "Unsupported direction '%s'"
+msgstr "Direición '%s' non sofitada"
+
+#: src/common.py:346
+msgid "Could not normalize source address"
+msgstr "Nun pudo normalizase la direición d'orixe"
+
+#: src/common.py:356
+msgid "Could not normalize destination address"
+msgstr "Nun pudo normalizase la direición de destín"
+
+#: src/common.py:417
+msgid "Found exact match"
+msgstr "Alcontrada una coincidencia esauta"
+
+#: src/common.py:421
+#, python-format
+msgid "Found non-action/non-logtype match (%(xa)s/%(ya)s %(xl)s/%(yl)s)"
+msgstr ""
+"Coincidencia alcontrada non-action/non-logtype (%(xa)s/%(ya)s %(xl)s/%(yl)s)"
+
+#: src/frontend.py:93
+#, python-format
+msgid ""
+"\n"
+"Usage: %(progname)s %(command)s\n"
+"\n"
+"%(commands)s:\n"
+" %(enable)-31s enables the firewall\n"
+" %(disable)-31s disables the firewall\n"
+" %(default)-31s set default policy\n"
+" %(logging)-31s set logging to %(level)s\n"
+" %(allow)-31s add allow %(rule)s\n"
+" %(deny)-31s add deny %(rule)s\n"
+" %(reject)-31s add reject %(rule)s\n"
+" %(limit)-31s add limit %(rule)s\n"
+" %(delete)-31s delete %(urule)s\n"
+" %(insert)-31s insert %(urule)s at %(number)s\n"
+" %(reset)-31s reset firewall\n"
+" %(status)-31s show firewall status\n"
+" %(statusnum)-31s show firewall status as numbered list of %(rules)s\n"
+" %(statusverbose)-31s show verbose firewall status\n"
+" %(show)-31s show firewall report\n"
+" %(version)-31s display version information\n"
+"\n"
+"%(appcommands)s:\n"
+" %(applist)-31s list application profiles\n"
+" %(appinfo)-31s show information on %(profile)s\n"
+" %(appupdate)-31s update %(profile)s\n"
+" %(appdefault)-31s set default application policy\n"
+msgstr ""
+
+#: src/frontend.py:168
+msgid "n"
+msgstr "n"
+
+#: src/frontend.py:169
+msgid "y"
+msgstr "y"
+
+#: src/frontend.py:170
+msgid "yes"
+msgstr "sí"
+
+#: src/frontend.py:215
+msgid "Firewall is active and enabled on system startup"
+msgstr "El tornafueos ta activo y activáu nel arranque del sistema"
+
+#: src/frontend.py:222
+msgid "Firewall stopped and disabled on system startup"
+msgstr "El tornafueos ta paráu y desactiváu nel arranque del sistema"
+
+#: src/frontend.py:273
+msgid "Could not get listening status"
+msgstr ""
+
+#: src/frontend.py:360 src/frontend.py:458 src/frontend.py:468
+#, python-format
+msgid "Invalid IP version '%s'"
+msgstr "La versión d'IP «%s» nun ye válida"
+
+#: src/frontend.py:391
+msgid "Invalid position '"
+msgstr "Posición ' incorreuta"
+
+#: src/frontend.py:465
+msgid "IPv6 support not enabled"
+msgstr "El sofitu pa IPv6 nun ta activao"
+
+#: src/frontend.py:476
+msgid "Rule changed after normalization"
+msgstr "Camudóse una regla tres la normalización"
+
+#: src/frontend.py:500
+#, python-format
+msgid "Could not back out rule '%s'"
+msgstr "Nun pudo revertise la regla «%s»"
+
+#: src/frontend.py:504
+msgid ""
+"\n"
+"Error applying application rules."
+msgstr ""
+"\n"
+"Hebo un fallu al aplicar les regles de l'aplicación."
+
+#: src/frontend.py:506
+msgid " Some rules could not be unapplied."
+msgstr " Ye posible que dalgunes regles nun s'heban revertío."
+
+#: src/frontend.py:508
+msgid " Attempted rules successfully unapplied."
+msgstr " Les regles pudieron revertise."
+
+#: src/frontend.py:519
+#, python-format
+msgid "Could not find rule '%s'"
+msgstr ""
+
+#: src/frontend.py:524 src/frontend.py:529
+#, python-format
+msgid "Could not find rule '%d'"
+msgstr ""
+
+#: src/frontend.py:541
+#, python-format
+msgid ""
+"Deleting:\n"
+" %(rule)s\n"
+"Proceed with operation (%(yes)s|%(no)s)? "
+msgstr ""
+
+#: src/frontend.py:572
+msgid "Unsupported default policy"
+msgstr "Política predeterminada non sofitada"
+
+#: src/frontend.py:599 src/frontend.py:744
+msgid "Firewall reloaded"
+msgstr "El tornafueos reaniciose"
+
+#: src/frontend.py:601
+msgid "Firewall not enabled (skipping reload)"
+msgstr "El tornafueos nun ta activáu (nun puede recargase)"
+
+#: src/frontend.py:618 src/frontend.py:632 src/frontend.py:669
+msgid "Invalid profile name"
+msgstr "El nome del perfil ye incorreutu"
+
+#: src/frontend.py:637 src/frontend.py:819
+#, python-format
+msgid "Unsupported action '%s'"
+msgstr "Aición «%s» non sofitada"
+
+#: src/frontend.py:656
+msgid "Available applications:"
+msgstr "Aplicaciones disponibles:"
+
+#: src/frontend.py:677
+#, python-format
+msgid "Could not find profile '%s'"
+msgstr "Nun pudo alcontrase'l perfil «%s»"
+
+#: src/frontend.py:682
+msgid "Invalid profile"
+msgstr "Perfil incorreutu"
+
+#: src/frontend.py:685
+#, python-format
+msgid "Profile: %s\n"
+msgstr "Perfil: %s\n"
+
+#: src/frontend.py:686
+#, python-format
+msgid "Title: %s\n"
+msgstr "Títulu: %s\n"
+
+#: src/frontend.py:689
+#, python-format
+msgid ""
+"Description: %s\n"
+"\n"
+msgstr ""
+"Descripción: %s\n"
+"\n"
+
+#: src/frontend.py:695
+msgid "Ports:"
+msgstr "Puertos:"
+
+#: src/frontend.py:697
+msgid "Port:"
+msgstr "Puertu:"
+
+#: src/frontend.py:746
+msgid "Skipped reloading firewall"
+msgstr "Saltase la recarga del tornafueos"
+
+#: src/frontend.py:756
+msgid "Cannot specify 'all' with '--add-new'"
+msgstr "Nun puede especificase «all» con «--add-new»"
+
+#: src/frontend.py:771
+#, python-format
+msgid "Unknown policy '%s'"
+msgstr "La política «%s» ye desconocida"
+
+#: src/frontend.py:828
+#, python-format
+msgid ""
+"Command may disrupt existing ssh connections. Proceed with operation "
+"(%(yes)s|%(no)s)? "
+msgstr ""
+
+#: src/frontend.py:841
+#, python-format
+msgid ""
+"Resetting all rules to installed defaults. Proceed with operation "
+"(%(yes)s|%(no)s)? "
+msgstr ""
+
+#: src/frontend.py:845
+#, python-format
+msgid ""
+"Resetting all rules to installed defaults. This may disrupt existing ssh "
+"connections. Proceed with operation (%(yes)s|%(no)s)? "
+msgstr ""
+
+#: src/parser.py:109
+#, python-format
+msgid "Cannot insert rule at position '%s'"
+msgstr "Nun pudo inxertase la regla na posición «%s»"
+
+#: src/parser.py:147
+msgid "Invalid interface clause"
+msgstr "Cláusula d'interface incorreuta"
+
+#: src/parser.py:173
+msgid "Option 'log' not allowed here"
+msgstr "Opción «log» non permitida equí"
+
+#: src/parser.py:177
+msgid "Option 'log-all' not allowed here"
+msgstr "Opción 'log-all' non permitida equí"
+
+#: src/parser.py:210 src/parser.py:224
+msgid "Bad port"
+msgstr "Puertu erróneu"
+
+#: src/parser.py:215 src/parser.py:335
+msgid "Port ranges must be numeric"
+msgstr "Los rangos de puertos deben ser numbéricos"
+
+#: src/parser.py:229 src/parser.py:426
+#, python-format
+msgid "Invalid port with protocol '%s'"
+msgstr ""
+
+#: src/parser.py:233
+msgid "Wrong number of arguments"
+msgstr "Númberu incorreutu d'argumentos"
+
+#: src/parser.py:237
+msgid "Need 'to' or 'from' clause"
+msgstr "Necesitase la cláusula «to» o «from»"
+
+#: src/parser.py:252
+msgid "Improper rule syntax"
+msgstr "Fallu de sintáxis na regla"
+
+#: src/parser.py:259
+#, python-format
+msgid "Invalid token '%s'"
+msgstr "El token «%s» ye incorreutu"
+
+#: src/parser.py:268
+msgid "Invalid 'proto' clause"
+msgstr "La cláusula «proto» ye incorreuta"
+
+#: src/parser.py:280
+#, python-format
+msgid "Invalid '%s' clause"
+msgstr "Cláusula '%s' non válida"
+
+#: src/parser.py:299
+msgid "Invalid 'from' clause"
+msgstr "La cláusula «from» ye incorreuta"
+
+#: src/parser.py:318
+msgid "Invalid 'to' clause"
+msgstr "La cláusula «to» ye incorreuta"
+
+#: src/parser.py:323
+#, python-format
+msgid "Need 'from' or 'to' with '%s'"
+msgstr "Necesitase usar «from» o «to» con «%s»"
+
+#: src/parser.py:347
+msgid "Invalid 'port' clause"
+msgstr "La cláusula «port» ye incorreuta"
+
+#: src/parser.py:356
+msgid "Mixed IP versions for 'from' and 'to'"
+msgstr "Les versiones IP de «from» y «to» tan amestaes"
+
+#: src/parser.py:370 src/parser.py:377 src/parser.py:383
+msgid "Could not find protocol"
+msgstr "Nun pudo alcontrase'l protocolu"
+
+#: src/parser.py:390
+msgid "Protocol mismatch (from/to)"
+msgstr "Nun concasa l'usu del protocolu (from/to)"
+
+#: src/parser.py:397
+#, python-format
+msgid "Protocol mismatch with specified protocol %s"
+msgstr "El protocolu nun concasa col especificáu («%s»)"
+
+#: src/parser.py:409
+#, python-format
+msgid "Improper rule syntax ('%s' specified with app rule)"
+msgstr ""
+"Sintaxis inapropiada pa la regla (especificóse «%s» con una regla "
+"d'aplicación)"
+
+#: src/parser.py:416
+#, python-format
+msgid "Invalid IPv6 address with protocol '%s'"
+msgstr ""
+
+#: src/parser.py:745
+#, python-format
+msgid "Invalid command '%s'"
+msgstr ""
+
+#: src/parser.py:767
+#, python-format
+msgid "Command '%s' already exists"
+msgstr ""
+
+#: src/util.py:386
+msgid "Couldn't find pid (is /proc mounted?)"
+msgstr "Nun alcontráu'l PID (¿ta montáu /proc?)"
+
+#: src/util.py:390
+#, python-format
+msgid "Couldn't find parent pid for '%s'"
+msgstr "Nun alcontráu'l PID del padre de «%s»"
+
+#: src/util.py:400
+#, python-format
+msgid "Couldn't find '%s'"
+msgstr "Nun alcontráu «%s»"
+
+#: src/util.py:406
+#, python-format
+msgid "Could not find executable for '%s'"
+msgstr "Nun alcontráu l'executable pa «%s»"
+
+#: src/util.py:871
+#, python-format
+msgid "Could not get statistics for '%s'"
+msgstr ""
+
+#~ msgid "Skipping '%s': value too long for '%s'"
+#~ msgstr "Saltando «%s»: valor enforma llargu pa «%s»"
+
+#~ msgid "Profile '%s' missing required field '%s'"
+#~ msgstr "Al perfil «%s» fálta-y el campu necesariu «%s»"
+
+#~ msgid "'%s' file '%s' does not exist"
+#~ msgstr "'%s' ficheru '%s' nun esiste"
+
+#~ msgid "uid is %s but '%s' is owned by %s"
+#~ msgstr "El UID ye %s pero «%s» pertenez a %s"
+
+#~ msgid "No match"
+#~ msgstr "Nun concasa"
+
+#~ msgid "Command may disrupt existing ssh connections."
+#~ msgstr "Esa orden puede afectar a les conexones SSH en cursu."
+
+#~ msgid "Profile '%s' has empty required field '%s'"
+#~ msgstr "El perfil «%s» tien baleru el campu necesariu «%s»"

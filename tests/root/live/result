@@ -1,0 +1,3030 @@
+Setting IPV6 to yes
+0: disable
+
+
+1: enable
+
+
+TESTING ARGS (logging)
+2: logging on
+WARN: Checks disabled
+Logging enabled
+
+
+3: logging off
+WARN: Checks disabled
+Logging disabled
+
+
+TESTING ARGS (allow/deny to/from)
+4: allow 53
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+5: allow 23/tcp
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+6: allow smtp
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+7: deny proto tcp to any port 80
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+8: deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 25
+WARN: Checks disabled
+Rule added
+
+
+9: allow from 10.0.0.0/8
+WARN: Checks disabled
+Rule added
+
+
+10: allow from 172.16.0.0/12
+WARN: Checks disabled
+Rule added
+
+
+11: allow from 192.168.0.0/16
+WARN: Checks disabled
+Rule added
+
+
+12: deny proto udp from 1.2.3.4 to any port 514
+WARN: Checks disabled
+Rule added
+
+
+13: allow proto udp from 1.2.3.5 port 5469 to 1.2.3.4 port 5469
+WARN: Checks disabled
+Rule added
+
+
+14: limit 22/tcp
+WARN: Checks disabled
+Rule added
+Skipping unsupported IPv6 'limit' rule
+
+
+15: deny proto tcp from 2001:db8::/32 to any port 25
+WARN: Checks disabled
+Rule added (v6)
+
+
+16: deny from 2001:db8::/32 port 26 to 2001:db8:3:4:5:6:7:8
+WARN: Checks disabled
+Rule added (v6)
+
+
+17: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+53                         ALLOW       Anywhere
+23/tcp                     ALLOW       Anywhere
+25/tcp                     ALLOW       Anywhere
+80/tcp                     DENY        Anywhere
+192.168.0.1 25/tcp         DENY        10.0.0.0/8
+Anywhere                   ALLOW       10.0.0.0/8
+Anywhere                   ALLOW       172.16.0.0/12
+Anywhere                   ALLOW       192.168.0.0/16
+514/udp                    DENY        1.2.3.4
+1.2.3.4 5469/udp           ALLOW       1.2.3.5 5469/udp
+22/tcp                     LIMIT       Anywhere
+53                         ALLOW       Anywhere (v6)
+23/tcp                     ALLOW       Anywhere (v6)
+25/tcp                     ALLOW       Anywhere (v6)
+80/tcp                     DENY        Anywhere (v6)
+25/tcp                     DENY        2001:db8::/32
+2001:db8:3:4:5:6:7:8       DENY        2001:db8::/32 26
+
+
+
+### tuple ### allow any 53 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 53 -j ACCEPT
+-A ufw-user-input -p udp --dport 53 -j ACCEPT
+--
+### tuple ### allow tcp 23 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 23 -j ACCEPT
+
+### tuple ### allow tcp 25 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 25 -j ACCEPT
+
+### tuple ### deny tcp 80 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 80 -j DROP
+
+### tuple ### deny tcp 25 192.168.0.1 any 10.0.0.0/8 in
+-A ufw-user-input -p tcp -d 192.168.0.1 --dport 25 -s 10.0.0.0/8 -j DROP
+
+### tuple ### allow any any 0.0.0.0/0 any 10.0.0.0/8 in
+-A ufw-user-input -s 10.0.0.0/8 -j ACCEPT
+
+### tuple ### allow any any 0.0.0.0/0 any 172.16.0.0/12 in
+-A ufw-user-input -s 172.16.0.0/12 -j ACCEPT
+
+### tuple ### allow any any 0.0.0.0/0 any 192.168.0.0/16 in
+-A ufw-user-input -s 192.168.0.0/16 -j ACCEPT
+
+### tuple ### deny udp 514 0.0.0.0/0 any 1.2.3.4 in
+-A ufw-user-input -p udp --dport 514 -s 1.2.3.4 -j DROP
+
+### tuple ### allow udp 5469 1.2.3.4 5469 1.2.3.5 in
+-A ufw-user-input -p udp -d 1.2.3.4 --dport 5469 -s 1.2.3.5 --sport 5469 -j ACCEPT
+
+### tuple ### limit tcp 22 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 22 -m state --state NEW -m recent --set
+-A ufw-user-input -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+### tuple ### allow any 53 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 53 -j ACCEPT
+-A ufw6-user-input -p udp --dport 53 -j ACCEPT
+--
+### tuple ### allow tcp 23 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 23 -j ACCEPT
+
+### tuple ### allow tcp 25 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 25 -j ACCEPT
+
+### tuple ### deny tcp 80 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 80 -j DROP
+
+### tuple ### deny tcp 25 ::/0 any 2001:db8::/32 in
+-A ufw6-user-input -p tcp --dport 25 -s 2001:db8::/32 -j DROP
+
+### tuple ### deny any any 2001:db8:3:4:5:6:7:8 26 2001:db8::/32 in
+-A ufw6-user-input -p tcp -d 2001:db8:3:4:5:6:7:8 -s 2001:db8::/32 --sport 26 -j DROP
+-A ufw6-user-input -p udp -d 2001:db8:3:4:5:6:7:8 -s 2001:db8::/32 --sport 26 -j DROP
+TESTING ARGS (delete allow/deny to/from)
+18: delete allow 53
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+19: delete allow 23/tcp
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+20: delete allow smtp
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+21: delete deny proto tcp to any port 80
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+22: delete deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 25
+WARN: Checks disabled
+Rule deleted
+
+
+23: delete allow from 10.0.0.0/8
+WARN: Checks disabled
+Rule deleted
+
+
+24: delete allow from 172.16.0.0/12
+WARN: Checks disabled
+Rule deleted
+
+
+25: delete allow from 192.168.0.0/16
+WARN: Checks disabled
+Rule deleted
+
+
+26: delete deny proto udp from 1.2.3.4 to any port 514
+WARN: Checks disabled
+Rule deleted
+
+
+27: delete allow proto udp from 1.2.3.5 port 5469 to 1.2.3.4 port 5469
+WARN: Checks disabled
+Rule deleted
+
+
+28: delete limit 22/tcp
+WARN: Checks disabled
+Rule deleted
+Skipping unsupported IPv6 'limit' rule
+
+
+29: delete deny proto tcp from 2001:db8::/32 to any port 25
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+30: delete deny from 2001:db8::/32 port 26 to 2001:db8:3:4:5:6:7:8
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+31: status
+WARN: Checks disabled
+Status: active
+
+
+Setting IPV6 to no
+32: disable
+
+
+33: enable
+
+
+TESTING ARGS (logging)
+34: logging on
+WARN: Checks disabled
+Logging enabled
+
+
+35: logging off
+WARN: Checks disabled
+Logging disabled
+
+
+TESTING ARGS (allow/deny to/from)
+36: allow 53
+WARN: Checks disabled
+Rule added
+
+
+37: allow 23/tcp
+WARN: Checks disabled
+Rule added
+
+
+38: allow smtp
+WARN: Checks disabled
+Rule added
+
+
+39: deny proto tcp to any port 80
+WARN: Checks disabled
+Rule added
+
+
+40: deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 25
+WARN: Checks disabled
+Rule added
+
+
+41: allow from 10.0.0.0/8
+WARN: Checks disabled
+Rule added
+
+
+42: allow from 172.16.0.0/12
+WARN: Checks disabled
+Rule added
+
+
+43: allow from 192.168.0.0/16
+WARN: Checks disabled
+Rule added
+
+
+44: deny proto udp from 1.2.3.4 to any port 514
+WARN: Checks disabled
+Rule added
+
+
+45: allow proto udp from 1.2.3.5 port 5469 to 1.2.3.4 port 5469
+WARN: Checks disabled
+Rule added
+
+
+46: limit 22/tcp
+WARN: Checks disabled
+Rule added
+
+
+47: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+53                         ALLOW       Anywhere
+23/tcp                     ALLOW       Anywhere
+25/tcp                     ALLOW       Anywhere
+80/tcp                     DENY        Anywhere
+192.168.0.1 25/tcp         DENY        10.0.0.0/8
+Anywhere                   ALLOW       10.0.0.0/8
+Anywhere                   ALLOW       172.16.0.0/12
+Anywhere                   ALLOW       192.168.0.0/16
+514/udp                    DENY        1.2.3.4
+1.2.3.4 5469/udp           ALLOW       1.2.3.5 5469/udp
+22/tcp                     LIMIT       Anywhere
+
+
+
+### tuple ### allow any 53 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 53 -j ACCEPT
+-A ufw-user-input -p udp --dport 53 -j ACCEPT
+--
+### tuple ### allow tcp 23 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 23 -j ACCEPT
+
+### tuple ### allow tcp 25 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 25 -j ACCEPT
+
+### tuple ### deny tcp 80 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 80 -j DROP
+
+### tuple ### deny tcp 25 192.168.0.1 any 10.0.0.0/8 in
+-A ufw-user-input -p tcp -d 192.168.0.1 --dport 25 -s 10.0.0.0/8 -j DROP
+
+### tuple ### allow any any 0.0.0.0/0 any 10.0.0.0/8 in
+-A ufw-user-input -s 10.0.0.0/8 -j ACCEPT
+
+### tuple ### allow any any 0.0.0.0/0 any 172.16.0.0/12 in
+-A ufw-user-input -s 172.16.0.0/12 -j ACCEPT
+
+### tuple ### allow any any 0.0.0.0/0 any 192.168.0.0/16 in
+-A ufw-user-input -s 192.168.0.0/16 -j ACCEPT
+
+### tuple ### deny udp 514 0.0.0.0/0 any 1.2.3.4 in
+-A ufw-user-input -p udp --dport 514 -s 1.2.3.4 -j DROP
+
+### tuple ### allow udp 5469 1.2.3.4 5469 1.2.3.5 in
+-A ufw-user-input -p udp -d 1.2.3.4 --dport 5469 -s 1.2.3.5 --sport 5469 -j ACCEPT
+
+### tuple ### limit tcp 22 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 22 -m state --state NEW -m recent --set
+-A ufw-user-input -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+TESTING ARGS (delete allow/deny to/from)
+48: delete allow 53
+WARN: Checks disabled
+Rule deleted
+
+
+49: delete allow 23/tcp
+WARN: Checks disabled
+Rule deleted
+
+
+50: delete allow smtp
+WARN: Checks disabled
+Rule deleted
+
+
+51: delete deny proto tcp to any port 80
+WARN: Checks disabled
+Rule deleted
+
+
+52: delete deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 25
+WARN: Checks disabled
+Rule deleted
+
+
+53: delete allow from 10.0.0.0/8
+WARN: Checks disabled
+Rule deleted
+
+
+54: delete allow from 172.16.0.0/12
+WARN: Checks disabled
+Rule deleted
+
+
+55: delete allow from 192.168.0.0/16
+WARN: Checks disabled
+Rule deleted
+
+
+56: delete deny proto udp from 1.2.3.4 to any port 514
+WARN: Checks disabled
+Rule deleted
+
+
+57: delete allow proto udp from 1.2.3.5 port 5469 to 1.2.3.4 port 5469
+WARN: Checks disabled
+Rule deleted
+
+
+58: delete limit 22/tcp
+WARN: Checks disabled
+Rule deleted
+
+
+59: status
+WARN: Checks disabled
+Status: active
+
+
+Checking status
+60: status
+
+
+61: status verbose
+
+
+62: status numbered
+
+
+Checking reject
+Setting IPV6 to yes
+63: disable
+
+
+64: enable
+
+
+65: reject 113
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+66: reject 114/tcp
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+67: reject 115/udp
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+68: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+113                        REJECT      Anywhere
+114/tcp                    REJECT      Anywhere
+115/udp                    REJECT      Anywhere
+113                        REJECT      Anywhere (v6)
+114/tcp                    REJECT      Anywhere (v6)
+115/udp                    REJECT      Anywhere (v6)
+
+
+
+### tuple ### reject any 113 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 113 -j REJECT --reject-with tcp-reset
+-A ufw-user-input -p udp --dport 113 -j REJECT
+--
+### tuple ### reject tcp 114 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 114 -j REJECT --reject-with tcp-reset
+
+### tuple ### reject udp 115 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p udp --dport 115 -j REJECT
+
+### tuple ### reject any 113 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 113 -j REJECT --reject-with tcp-reset
+-A ufw6-user-input -p udp --dport 113 -j REJECT
+--
+### tuple ### reject tcp 114 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 114 -j REJECT --reject-with tcp-reset
+
+### tuple ### reject udp 115 ::/0 any ::/0 in
+-A ufw6-user-input -p udp --dport 115 -j REJECT
+
+69: delete reject 113
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+70: delete reject 114/tcp
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+71: delete reject 115/udp
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+72: status
+WARN: Checks disabled
+Status: active
+
+
+Setting IPV6 to no
+73: disable
+
+
+74: enable
+
+
+75: reject 113
+WARN: Checks disabled
+Rule added
+
+
+76: reject 114/tcp
+WARN: Checks disabled
+Rule added
+
+
+77: reject 115/udp
+WARN: Checks disabled
+Rule added
+
+
+78: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+113                        REJECT      Anywhere
+114/tcp                    REJECT      Anywhere
+115/udp                    REJECT      Anywhere
+
+
+
+### tuple ### reject any 113 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 113 -j REJECT --reject-with tcp-reset
+-A ufw-user-input -p udp --dport 113 -j REJECT
+--
+### tuple ### reject tcp 114 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 114 -j REJECT --reject-with tcp-reset
+
+### tuple ### reject udp 115 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p udp --dport 115 -j REJECT
+
+79: delete reject 113
+WARN: Checks disabled
+Rule deleted
+
+
+80: delete reject 114/tcp
+WARN: Checks disabled
+Rule deleted
+
+
+81: delete reject 115/udp
+WARN: Checks disabled
+Rule deleted
+
+
+82: status
+WARN: Checks disabled
+Status: active
+
+
+Checking flush builtins
+83: disable
+
+
+iptables -I INPUT -j ACCEPT -m comment --comment ufw_test_builtins
+84: enable
+
+
+85: disable
+
+
+iptables -I INPUT -j ACCEPT -m comment --comment ufw_test_builtins
+86: enable
+
+
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            /* ufw_test_builtins */
+Testing status numbered
+Setting IPV6 to yes
+87: disable
+
+
+88: enable
+
+
+89: allow 53
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+90: allow 23/tcp
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+91: allow smtp
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+92: deny proto tcp to any port 80
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+93: deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 25
+WARN: Checks disabled
+Rule added
+
+
+94: allow from 10.0.0.0/8
+WARN: Checks disabled
+Rule added
+
+
+95: allow from 172.16.0.0/12
+WARN: Checks disabled
+Rule added
+
+
+96: allow from 192.168.0.0/16
+WARN: Checks disabled
+Rule added
+
+
+97: deny proto udp from 1.2.3.4 to any port 514
+WARN: Checks disabled
+Rule added
+
+
+98: allow proto udp from 1.2.3.5 port 5469 to 1.2.3.4 port 5469
+WARN: Checks disabled
+Rule added
+
+
+99: limit 22/tcp
+WARN: Checks disabled
+Rule added
+Skipping unsupported IPv6 'limit' rule
+
+
+100: deny proto tcp from 2001:db8::/32 to any port 25
+WARN: Checks disabled
+Rule added (v6)
+
+
+101: deny from 2001:db8::/32 port 26 to 2001:db8:3:4:5:6:7:8
+WARN: Checks disabled
+Rule added (v6)
+
+
+102: status numbered
+WARN: Checks disabled
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 53                         ALLOW IN    Anywhere
+[ 2] 23/tcp                     ALLOW IN    Anywhere
+[ 3] 25/tcp                     ALLOW IN    Anywhere
+[ 4] 80/tcp                     DENY IN     Anywhere
+[ 5] 192.168.0.1 25/tcp         DENY IN     10.0.0.0/8
+[ 6] Anywhere                   ALLOW IN    10.0.0.0/8
+[ 7] Anywhere                   ALLOW IN    172.16.0.0/12
+[ 8] Anywhere                   ALLOW IN    192.168.0.0/16
+[ 9] 514/udp                    DENY IN     1.2.3.4
+[10] 1.2.3.4 5469/udp           ALLOW IN    1.2.3.5 5469/udp
+[11] 22/tcp                     LIMIT IN    Anywhere
+[12] 53                         ALLOW IN    Anywhere (v6)
+[13] 23/tcp                     ALLOW IN    Anywhere (v6)
+[14] 25/tcp                     ALLOW IN    Anywhere (v6)
+[15] 80/tcp                     DENY IN     Anywhere (v6)
+[16] 25/tcp                     DENY IN     2001:db8::/32
+[17] 2001:db8:3:4:5:6:7:8       DENY IN     2001:db8::/32 26
+
+
+
+103: delete allow 53
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+104: delete allow 23/tcp
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+105: delete allow smtp
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+106: delete deny proto tcp to any port 80
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+107: delete deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 25
+WARN: Checks disabled
+Rule deleted
+
+
+108: delete allow from 10.0.0.0/8
+WARN: Checks disabled
+Rule deleted
+
+
+109: delete allow from 172.16.0.0/12
+WARN: Checks disabled
+Rule deleted
+
+
+110: delete allow from 192.168.0.0/16
+WARN: Checks disabled
+Rule deleted
+
+
+111: delete deny proto udp from 1.2.3.4 to any port 514
+WARN: Checks disabled
+Rule deleted
+
+
+112: delete allow proto udp from 1.2.3.5 port 5469 to 1.2.3.4 port 5469
+WARN: Checks disabled
+Rule deleted
+
+
+113: delete limit 22/tcp
+WARN: Checks disabled
+Rule deleted
+Skipping unsupported IPv6 'limit' rule
+
+
+114: delete deny proto tcp from 2001:db8::/32 to any port 25
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+115: delete deny from 2001:db8::/32 port 26 to 2001:db8:3:4:5:6:7:8
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+116: status numbered
+WARN: Checks disabled
+Status: active
+
+
+Setting IPV6 to no
+117: disable
+
+
+118: enable
+
+
+119: allow 53
+WARN: Checks disabled
+Rule added
+
+
+120: allow 23/tcp
+WARN: Checks disabled
+Rule added
+
+
+121: allow smtp
+WARN: Checks disabled
+Rule added
+
+
+122: deny proto tcp to any port 80
+WARN: Checks disabled
+Rule added
+
+
+123: deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 25
+WARN: Checks disabled
+Rule added
+
+
+124: allow from 10.0.0.0/8
+WARN: Checks disabled
+Rule added
+
+
+125: allow from 172.16.0.0/12
+WARN: Checks disabled
+Rule added
+
+
+126: allow from 192.168.0.0/16
+WARN: Checks disabled
+Rule added
+
+
+127: deny proto udp from 1.2.3.4 to any port 514
+WARN: Checks disabled
+Rule added
+
+
+128: allow proto udp from 1.2.3.5 port 5469 to 1.2.3.4 port 5469
+WARN: Checks disabled
+Rule added
+
+
+129: limit 22/tcp
+WARN: Checks disabled
+Rule added
+
+
+130: status numbered
+WARN: Checks disabled
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 53                         ALLOW IN    Anywhere
+[ 2] 23/tcp                     ALLOW IN    Anywhere
+[ 3] 25/tcp                     ALLOW IN    Anywhere
+[ 4] 80/tcp                     DENY IN     Anywhere
+[ 5] 192.168.0.1 25/tcp         DENY IN     10.0.0.0/8
+[ 6] Anywhere                   ALLOW IN    10.0.0.0/8
+[ 7] Anywhere                   ALLOW IN    172.16.0.0/12
+[ 8] Anywhere                   ALLOW IN    192.168.0.0/16
+[ 9] 514/udp                    DENY IN     1.2.3.4
+[10] 1.2.3.4 5469/udp           ALLOW IN    1.2.3.5 5469/udp
+[11] 22/tcp                     LIMIT IN    Anywhere
+
+
+
+131: delete allow 53
+WARN: Checks disabled
+Rule deleted
+
+
+132: delete allow 23/tcp
+WARN: Checks disabled
+Rule deleted
+
+
+133: delete allow smtp
+WARN: Checks disabled
+Rule deleted
+
+
+134: delete deny proto tcp to any port 80
+WARN: Checks disabled
+Rule deleted
+
+
+135: delete deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 25
+WARN: Checks disabled
+Rule deleted
+
+
+136: delete allow from 10.0.0.0/8
+WARN: Checks disabled
+Rule deleted
+
+
+137: delete allow from 172.16.0.0/12
+WARN: Checks disabled
+Rule deleted
+
+
+138: delete allow from 192.168.0.0/16
+WARN: Checks disabled
+Rule deleted
+
+
+139: delete deny proto udp from 1.2.3.4 to any port 514
+WARN: Checks disabled
+Rule deleted
+
+
+140: delete allow proto udp from 1.2.3.5 port 5469 to 1.2.3.4 port 5469
+WARN: Checks disabled
+Rule deleted
+
+
+141: delete limit 22/tcp
+WARN: Checks disabled
+Rule deleted
+
+
+142: status numbered
+WARN: Checks disabled
+Status: active
+
+
+Testing interfaces
+Setting IPV6 to yes
+143: disable
+
+
+144: enable
+
+
+145: allow in on eth1
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+146: deny in on eth1:1
+
+
+147: reject in on eth1 to 192.168.0.1 port 22
+WARN: Checks disabled
+Rule added
+
+
+148: limit in on eth1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+149: allow in on eth1 to 192.168.0.1 from 10.0.0.1
+WARN: Checks disabled
+Rule added
+
+
+150: deny in on eth1 to 192.168.0.1 port 22 from 10.0.0.1
+WARN: Checks disabled
+Rule added
+
+
+151: reject in on eth1 to 192.168.0.1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+152: limit in on eth1 to 192.168.0.1 port 22 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+153: allow in on eth0 log
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+154: allow in on eth0 log from 192.168.0.1 to 10.0.0.1 port 24 proto tcp
+WARN: Checks disabled
+Rule added
+
+
+155: deny in on eth0 log-all from 192.168.0.1 to 10.0.0.1 port 25 proto tcp
+WARN: Checks disabled
+Rule added
+
+
+156: allow in on eth0 to any app Samba
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+157: status numbered
+WARN: Checks disabled
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] Anywhere on eth1           ALLOW IN    Anywhere
+[ 2] 192.168.0.1 22 on eth1     REJECT IN   Anywhere
+[ 3] Anywhere on eth1           LIMIT IN    10.0.0.1 80
+[ 4] 192.168.0.1 on eth1        ALLOW IN    10.0.0.1
+[ 5] 192.168.0.1 22 on eth1     DENY IN     10.0.0.1
+[ 6] 192.168.0.1 on eth1        REJECT IN   10.0.0.1 80
+[ 7] 192.168.0.1 22 on eth1     LIMIT IN    10.0.0.1 80
+[ 8] Anywhere on eth0           ALLOW IN    Anywhere (log)
+[ 9] 10.0.0.1 24/tcp on eth0    ALLOW IN    192.168.0.1 (log)
+[10] 10.0.0.1 25/tcp on eth0    DENY IN     192.168.0.1 (log-all)
+[11] Samba on eth0              ALLOW IN    Anywhere
+[12] Anywhere (v6) on eth1      ALLOW IN    Anywhere (v6)
+[13] Anywhere (v6) on eth0      ALLOW IN    Anywhere (v6) (log)
+[14] Samba (v6) on eth0         ALLOW IN    Anywhere (v6)
+
+
+
+158: insert 8 allow in on eth2 to any app Samba
+WARN: Checks disabled
+Rule inserted
+Rule inserted (v6)
+
+
+159: status numbered
+WARN: Checks disabled
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] Anywhere on eth1           ALLOW IN    Anywhere
+[ 2] 192.168.0.1 22 on eth1     REJECT IN   Anywhere
+[ 3] Anywhere on eth1           LIMIT IN    10.0.0.1 80
+[ 4] 192.168.0.1 on eth1        ALLOW IN    10.0.0.1
+[ 5] 192.168.0.1 22 on eth1     DENY IN     10.0.0.1
+[ 6] 192.168.0.1 on eth1        REJECT IN   10.0.0.1 80
+[ 7] 192.168.0.1 22 on eth1     LIMIT IN    10.0.0.1 80
+[ 8] Samba on eth2              ALLOW IN    Anywhere
+[ 9] Anywhere on eth0           ALLOW IN    Anywhere (log)
+[10] 10.0.0.1 24/tcp on eth0    ALLOW IN    192.168.0.1 (log)
+[11] 10.0.0.1 25/tcp on eth0    DENY IN     192.168.0.1 (log-all)
+[12] Samba on eth0              ALLOW IN    Anywhere
+[13] Anywhere (v6) on eth1      ALLOW IN    Anywhere (v6)
+[14] Samba (v6) on eth2         ALLOW IN    Anywhere (v6)
+[15] Anywhere (v6) on eth0      ALLOW IN    Anywhere (v6) (log)
+[16] Samba (v6) on eth0         ALLOW IN    Anywhere (v6)
+
+
+
+### tuple ### allow any any 0.0.0.0/0 any 0.0.0.0/0 in_eth1
+-A ufw-user-input -i eth1 -j ACCEPT
+
+### tuple ### reject any 22 192.168.0.1 any 0.0.0.0/0 in_eth1
+-A ufw-user-input -i eth1 -p tcp -d 192.168.0.1 --dport 22 -j REJECT --reject-with tcp-reset
+-A ufw-user-input -i eth1 -p udp -d 192.168.0.1 --dport 22 -j REJECT
+--
+### tuple ### limit any any 0.0.0.0/0 80 10.0.0.1 in_eth1
+-A ufw-user-input -i eth1 -p tcp -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --set
+-A ufw-user-input -i eth1 -p tcp -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+--
+### tuple ### allow any any 192.168.0.1 any 10.0.0.1 in_eth1
+-A ufw-user-input -i eth1 -d 192.168.0.1 -s 10.0.0.1 -j ACCEPT
+
+### tuple ### deny any 22 192.168.0.1 any 10.0.0.1 in_eth1
+-A ufw-user-input -i eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 -j DROP
+-A ufw-user-input -i eth1 -p udp -d 192.168.0.1 --dport 22 -s 10.0.0.1 -j DROP
+--
+### tuple ### reject any any 192.168.0.1 80 10.0.0.1 in_eth1
+-A ufw-user-input -i eth1 -p tcp -d 192.168.0.1 -s 10.0.0.1 --sport 80 -j REJECT --reject-with tcp-reset
+-A ufw-user-input -i eth1 -p udp -d 192.168.0.1 -s 10.0.0.1 --sport 80 -j REJECT
+--
+### tuple ### limit any 22 192.168.0.1 80 10.0.0.1 in_eth1
+-A ufw-user-input -i eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --set
+-A ufw-user-input -i eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+--
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth2
+-A ufw-user-input -i eth2 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth2
+-A ufw-user-input -i eth2 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow_log any any 0.0.0.0/0 any 0.0.0.0/0 in_eth0
+-A ufw-user-logging-input -i eth0 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -i eth0 -j RETURN
+--
+### tuple ### allow_log tcp 24 10.0.0.1 any 192.168.0.1 in_eth0
+-A ufw-user-logging-input -i eth0 -p tcp -d 10.0.0.1 --dport 24 -s 192.168.0.1 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -i eth0 -p tcp -d 10.0.0.1 --dport 24 -s 192.168.0.1 -j RETURN
+--
+### tuple ### deny_log-all tcp 25 10.0.0.1 any 192.168.0.1 in_eth0
+-A ufw-user-logging-input -i eth0 -p tcp -d 10.0.0.1 --dport 25 -s 192.168.0.1 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -i eth0 -p tcp -d 10.0.0.1 --dport 25 -s 192.168.0.1 -j RETURN
+--
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow any any ::/0 any ::/0 in_eth1
+-A ufw6-user-input -i eth1 -j ACCEPT
+
+### tuple ### allow udp 137,138 ::/0 any ::/0 Samba - in_eth2
+-A ufw6-user-input -i eth2 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 ::/0 any ::/0 Samba - in_eth2
+-A ufw6-user-input -i eth2 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow_log any any ::/0 any ::/0 in_eth0
+-A ufw6-user-logging-input -i eth0 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-input -i eth0 -j RETURN
+--
+### tuple ### allow udp 137,138 ::/0 any ::/0 Samba - in_eth0
+-A ufw6-user-input -i eth0 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 ::/0 any ::/0 Samba - in_eth0
+-A ufw6-user-input -i eth0 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+160: delete allow in on eth1
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+161: delete reject in on eth1 to 192.168.0.1 port 22
+WARN: Checks disabled
+Rule deleted
+
+
+162: delete limit in on eth1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+163: delete allow in on eth1 to 192.168.0.1 from 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+164: delete deny in on eth1 to 192.168.0.1 port 22 from 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+165: delete reject in on eth1 to 192.168.0.1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+166: delete limit in on eth1 to 192.168.0.1 port 22 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+167: delete allow in on eth0 log
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+168: delete allow in on eth0 log from 192.168.0.1 to 10.0.0.1 port 24 proto tcp
+WARN: Checks disabled
+Rule deleted
+
+
+169: delete deny in on eth0 log-all from 192.168.0.1 to 10.0.0.1 port 25 proto tcp
+WARN: Checks disabled
+Rule deleted
+
+
+170: delete allow in on eth0 to any app Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+171: delete allow in on eth2 to any app Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+Setting IPV6 to yes
+172: disable
+
+
+173: enable
+
+
+174: allow out on eth1
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+175: deny out on eth1:1
+
+
+176: reject out on eth1 to 192.168.0.1 port 22
+WARN: Checks disabled
+Rule added
+
+
+177: limit out on eth1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+178: allow out on eth1 to 192.168.0.1 from 10.0.0.1
+WARN: Checks disabled
+Rule added
+
+
+179: deny out on eth1 to 192.168.0.1 port 22 from 10.0.0.1
+WARN: Checks disabled
+Rule added
+
+
+180: reject out on eth1 to 192.168.0.1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+181: limit out on eth1 to 192.168.0.1 port 22 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+182: allow out on eth0 log
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+183: allow out on eth0 log from 192.168.0.1 to 10.0.0.1 port 24 proto tcp
+WARN: Checks disabled
+Rule added
+
+
+184: deny out on eth0 log-all from 192.168.0.1 to 10.0.0.1 port 25 proto tcp
+WARN: Checks disabled
+Rule added
+
+
+185: allow out on eth0 to any app Samba
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+186: status numbered
+WARN: Checks disabled
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] Anywhere                   ALLOW OUT   Anywhere on eth1 (out)
+[ 2] 192.168.0.1 22             REJECT OUT  Anywhere on eth1 (out)
+[ 3] Anywhere                   LIMIT OUT   10.0.0.1 80 on eth1 (out)
+[ 4] 192.168.0.1                ALLOW OUT   10.0.0.1 on eth1 (out)
+[ 5] 192.168.0.1 22             DENY OUT    10.0.0.1 on eth1 (out)
+[ 6] 192.168.0.1                REJECT OUT  10.0.0.1 80 on eth1 (out)
+[ 7] 192.168.0.1 22             LIMIT OUT   10.0.0.1 80 on eth1 (out)
+[ 8] Anywhere                   ALLOW OUT   Anywhere on eth0 (log, out)
+[ 9] 10.0.0.1 24/tcp            ALLOW OUT   192.168.0.1 on eth0 (log, out)
+[10] 10.0.0.1 25/tcp            DENY OUT    192.168.0.1 on eth0 (log-all, out)
+[11] Samba                      ALLOW OUT   Anywhere on eth0 (out)
+[12] Anywhere (v6)              ALLOW OUT   Anywhere (v6) on eth1 (out)
+[13] Anywhere (v6)              ALLOW OUT   Anywhere (v6) on eth0 (log, out)
+[14] Samba (v6)                 ALLOW OUT   Anywhere (v6) on eth0 (out)
+
+
+
+187: insert 8 allow out on eth2 to any app Samba
+WARN: Checks disabled
+Rule inserted
+Rule inserted (v6)
+
+
+188: status numbered
+WARN: Checks disabled
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] Anywhere                   ALLOW OUT   Anywhere on eth1 (out)
+[ 2] 192.168.0.1 22             REJECT OUT  Anywhere on eth1 (out)
+[ 3] Anywhere                   LIMIT OUT   10.0.0.1 80 on eth1 (out)
+[ 4] 192.168.0.1                ALLOW OUT   10.0.0.1 on eth1 (out)
+[ 5] 192.168.0.1 22             DENY OUT    10.0.0.1 on eth1 (out)
+[ 6] 192.168.0.1                REJECT OUT  10.0.0.1 80 on eth1 (out)
+[ 7] 192.168.0.1 22             LIMIT OUT   10.0.0.1 80 on eth1 (out)
+[ 8] Samba                      ALLOW OUT   Anywhere on eth2 (out)
+[ 9] Anywhere                   ALLOW OUT   Anywhere on eth0 (log, out)
+[10] 10.0.0.1 24/tcp            ALLOW OUT   192.168.0.1 on eth0 (log, out)
+[11] 10.0.0.1 25/tcp            DENY OUT    192.168.0.1 on eth0 (log-all, out)
+[12] Samba                      ALLOW OUT   Anywhere on eth0 (out)
+[13] Anywhere (v6)              ALLOW OUT   Anywhere (v6) on eth1 (out)
+[14] Samba (v6)                 ALLOW OUT   Anywhere (v6) on eth2 (out)
+[15] Anywhere (v6)              ALLOW OUT   Anywhere (v6) on eth0 (log, out)
+[16] Samba (v6)                 ALLOW OUT   Anywhere (v6) on eth0 (out)
+
+
+
+### tuple ### allow any any 0.0.0.0/0 any 0.0.0.0/0 out_eth1
+-A ufw-user-output -o eth1 -j ACCEPT
+
+### tuple ### reject any 22 192.168.0.1 any 0.0.0.0/0 out_eth1
+-A ufw-user-output -o eth1 -p tcp -d 192.168.0.1 --dport 22 -j REJECT --reject-with tcp-reset
+-A ufw-user-output -o eth1 -p udp -d 192.168.0.1 --dport 22 -j REJECT
+--
+### tuple ### limit any any 0.0.0.0/0 80 10.0.0.1 out_eth1
+-A ufw-user-output -o eth1 -p tcp -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --set
+-A ufw-user-output -o eth1 -p tcp -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+--
+### tuple ### allow any any 192.168.0.1 any 10.0.0.1 out_eth1
+-A ufw-user-output -o eth1 -d 192.168.0.1 -s 10.0.0.1 -j ACCEPT
+
+### tuple ### deny any 22 192.168.0.1 any 10.0.0.1 out_eth1
+-A ufw-user-output -o eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 -j DROP
+-A ufw-user-output -o eth1 -p udp -d 192.168.0.1 --dport 22 -s 10.0.0.1 -j DROP
+--
+### tuple ### reject any any 192.168.0.1 80 10.0.0.1 out_eth1
+-A ufw-user-output -o eth1 -p tcp -d 192.168.0.1 -s 10.0.0.1 --sport 80 -j REJECT --reject-with tcp-reset
+-A ufw-user-output -o eth1 -p udp -d 192.168.0.1 -s 10.0.0.1 --sport 80 -j REJECT
+--
+### tuple ### limit any 22 192.168.0.1 80 10.0.0.1 out_eth1
+-A ufw-user-output -o eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --set
+-A ufw-user-output -o eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+--
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - out_eth2
+-A ufw-user-output -o eth2 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - out_eth2
+-A ufw-user-output -o eth2 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow_log any any 0.0.0.0/0 any 0.0.0.0/0 out_eth0
+-A ufw-user-logging-output -o eth0 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-output -o eth0 -j RETURN
+--
+### tuple ### allow_log tcp 24 10.0.0.1 any 192.168.0.1 out_eth0
+-A ufw-user-logging-output -o eth0 -p tcp -d 10.0.0.1 --dport 24 -s 192.168.0.1 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-output -o eth0 -p tcp -d 10.0.0.1 --dport 24 -s 192.168.0.1 -j RETURN
+--
+### tuple ### deny_log-all tcp 25 10.0.0.1 any 192.168.0.1 out_eth0
+-A ufw-user-logging-output -o eth0 -p tcp -d 10.0.0.1 --dport 25 -s 192.168.0.1 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-output -o eth0 -p tcp -d 10.0.0.1 --dport 25 -s 192.168.0.1 -j RETURN
+--
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow any any ::/0 any ::/0 out_eth1
+-A ufw6-user-output -o eth1 -j ACCEPT
+
+### tuple ### allow udp 137,138 ::/0 any ::/0 Samba - out_eth2
+-A ufw6-user-output -o eth2 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 ::/0 any ::/0 Samba - out_eth2
+-A ufw6-user-output -o eth2 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow_log any any ::/0 any ::/0 out_eth0
+-A ufw6-user-logging-output -o eth0 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw6-user-logging-output -o eth0 -j RETURN
+--
+### tuple ### allow udp 137,138 ::/0 any ::/0 Samba - out_eth0
+-A ufw6-user-output -o eth0 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 ::/0 any ::/0 Samba - out_eth0
+-A ufw6-user-output -o eth0 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+189: delete allow out on eth1
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+190: delete reject out on eth1 to 192.168.0.1 port 22
+WARN: Checks disabled
+Rule deleted
+
+
+191: delete limit out on eth1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+192: delete allow out on eth1 to 192.168.0.1 from 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+193: delete deny out on eth1 to 192.168.0.1 port 22 from 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+194: delete reject out on eth1 to 192.168.0.1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+195: delete limit out on eth1 to 192.168.0.1 port 22 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+196: delete allow out on eth0 log
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+197: delete allow out on eth0 log from 192.168.0.1 to 10.0.0.1 port 24 proto tcp
+WARN: Checks disabled
+Rule deleted
+
+
+198: delete deny out on eth0 log-all from 192.168.0.1 to 10.0.0.1 port 25 proto tcp
+WARN: Checks disabled
+Rule deleted
+
+
+199: delete allow out on eth0 to any app Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+200: delete allow out on eth2 to any app Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+Setting IPV6 to no
+201: disable
+
+
+202: enable
+
+
+203: allow in on eth1
+WARN: Checks disabled
+Rule added
+
+
+204: deny in on eth1:1
+
+
+205: reject in on eth1 to 192.168.0.1 port 22
+WARN: Checks disabled
+Rule added
+
+
+206: limit in on eth1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+207: allow in on eth1 to 192.168.0.1 from 10.0.0.1
+WARN: Checks disabled
+Rule added
+
+
+208: deny in on eth1 to 192.168.0.1 port 22 from 10.0.0.1
+WARN: Checks disabled
+Rule added
+
+
+209: reject in on eth1 to 192.168.0.1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+210: limit in on eth1 to 192.168.0.1 port 22 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+211: allow in on eth0 log
+WARN: Checks disabled
+Rule added
+
+
+212: allow in on eth0 log from 192.168.0.1 to 10.0.0.1 port 24 proto tcp
+WARN: Checks disabled
+Rule added
+
+
+213: deny in on eth0 log-all from 192.168.0.1 to 10.0.0.1 port 25 proto tcp
+WARN: Checks disabled
+Rule added
+
+
+214: allow in on eth0 to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+215: status numbered
+WARN: Checks disabled
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] Anywhere on eth1           ALLOW IN    Anywhere
+[ 2] 192.168.0.1 22 on eth1     REJECT IN   Anywhere
+[ 3] Anywhere on eth1           LIMIT IN    10.0.0.1 80
+[ 4] 192.168.0.1 on eth1        ALLOW IN    10.0.0.1
+[ 5] 192.168.0.1 22 on eth1     DENY IN     10.0.0.1
+[ 6] 192.168.0.1 on eth1        REJECT IN   10.0.0.1 80
+[ 7] 192.168.0.1 22 on eth1     LIMIT IN    10.0.0.1 80
+[ 8] Anywhere on eth0           ALLOW IN    Anywhere (log)
+[ 9] 10.0.0.1 24/tcp on eth0    ALLOW IN    192.168.0.1 (log)
+[10] 10.0.0.1 25/tcp on eth0    DENY IN     192.168.0.1 (log-all)
+[11] Samba on eth0              ALLOW IN    Anywhere
+
+
+
+216: insert 8 allow in on eth2 to any app Samba
+WARN: Checks disabled
+Rule inserted
+
+
+217: status numbered
+WARN: Checks disabled
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] Anywhere on eth1           ALLOW IN    Anywhere
+[ 2] 192.168.0.1 22 on eth1     REJECT IN   Anywhere
+[ 3] Anywhere on eth1           LIMIT IN    10.0.0.1 80
+[ 4] 192.168.0.1 on eth1        ALLOW IN    10.0.0.1
+[ 5] 192.168.0.1 22 on eth1     DENY IN     10.0.0.1
+[ 6] 192.168.0.1 on eth1        REJECT IN   10.0.0.1 80
+[ 7] 192.168.0.1 22 on eth1     LIMIT IN    10.0.0.1 80
+[ 8] Samba on eth2              ALLOW IN    Anywhere
+[ 9] Anywhere on eth0           ALLOW IN    Anywhere (log)
+[10] 10.0.0.1 24/tcp on eth0    ALLOW IN    192.168.0.1 (log)
+[11] 10.0.0.1 25/tcp on eth0    DENY IN     192.168.0.1 (log-all)
+[12] Samba on eth0              ALLOW IN    Anywhere
+
+
+
+### tuple ### allow any any 0.0.0.0/0 any 0.0.0.0/0 in_eth1
+-A ufw-user-input -i eth1 -j ACCEPT
+
+### tuple ### reject any 22 192.168.0.1 any 0.0.0.0/0 in_eth1
+-A ufw-user-input -i eth1 -p tcp -d 192.168.0.1 --dport 22 -j REJECT --reject-with tcp-reset
+-A ufw-user-input -i eth1 -p udp -d 192.168.0.1 --dport 22 -j REJECT
+--
+### tuple ### limit any any 0.0.0.0/0 80 10.0.0.1 in_eth1
+-A ufw-user-input -i eth1 -p tcp -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --set
+-A ufw-user-input -i eth1 -p tcp -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+--
+### tuple ### allow any any 192.168.0.1 any 10.0.0.1 in_eth1
+-A ufw-user-input -i eth1 -d 192.168.0.1 -s 10.0.0.1 -j ACCEPT
+
+### tuple ### deny any 22 192.168.0.1 any 10.0.0.1 in_eth1
+-A ufw-user-input -i eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 -j DROP
+-A ufw-user-input -i eth1 -p udp -d 192.168.0.1 --dport 22 -s 10.0.0.1 -j DROP
+--
+### tuple ### reject any any 192.168.0.1 80 10.0.0.1 in_eth1
+-A ufw-user-input -i eth1 -p tcp -d 192.168.0.1 -s 10.0.0.1 --sport 80 -j REJECT --reject-with tcp-reset
+-A ufw-user-input -i eth1 -p udp -d 192.168.0.1 -s 10.0.0.1 --sport 80 -j REJECT
+--
+### tuple ### limit any 22 192.168.0.1 80 10.0.0.1 in_eth1
+-A ufw-user-input -i eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --set
+-A ufw-user-input -i eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+--
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth2
+-A ufw-user-input -i eth2 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth2
+-A ufw-user-input -i eth2 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow_log any any 0.0.0.0/0 any 0.0.0.0/0 in_eth0
+-A ufw-user-logging-input -i eth0 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -i eth0 -j RETURN
+--
+### tuple ### allow_log tcp 24 10.0.0.1 any 192.168.0.1 in_eth0
+-A ufw-user-logging-input -i eth0 -p tcp -d 10.0.0.1 --dport 24 -s 192.168.0.1 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-input -i eth0 -p tcp -d 10.0.0.1 --dport 24 -s 192.168.0.1 -j RETURN
+--
+### tuple ### deny_log-all tcp 25 10.0.0.1 any 192.168.0.1 in_eth0
+-A ufw-user-logging-input -i eth0 -p tcp -d 10.0.0.1 --dport 25 -s 192.168.0.1 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-input -i eth0 -p tcp -d 10.0.0.1 --dport 25 -s 192.168.0.1 -j RETURN
+--
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+218: delete allow in on eth1
+WARN: Checks disabled
+Rule deleted
+
+
+219: delete reject in on eth1 to 192.168.0.1 port 22
+WARN: Checks disabled
+Rule deleted
+
+
+220: delete limit in on eth1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+221: delete allow in on eth1 to 192.168.0.1 from 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+222: delete deny in on eth1 to 192.168.0.1 port 22 from 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+223: delete reject in on eth1 to 192.168.0.1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+224: delete limit in on eth1 to 192.168.0.1 port 22 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+225: delete allow in on eth0 log
+WARN: Checks disabled
+Rule deleted
+
+
+226: delete allow in on eth0 log from 192.168.0.1 to 10.0.0.1 port 24 proto tcp
+WARN: Checks disabled
+Rule deleted
+
+
+227: delete deny in on eth0 log-all from 192.168.0.1 to 10.0.0.1 port 25 proto tcp
+WARN: Checks disabled
+Rule deleted
+
+
+228: delete allow in on eth0 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+229: delete allow in on eth2 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+Setting IPV6 to no
+230: disable
+
+
+231: enable
+
+
+232: allow out on eth1
+WARN: Checks disabled
+Rule added
+
+
+233: deny out on eth1:1
+
+
+234: reject out on eth1 to 192.168.0.1 port 22
+WARN: Checks disabled
+Rule added
+
+
+235: limit out on eth1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+236: allow out on eth1 to 192.168.0.1 from 10.0.0.1
+WARN: Checks disabled
+Rule added
+
+
+237: deny out on eth1 to 192.168.0.1 port 22 from 10.0.0.1
+WARN: Checks disabled
+Rule added
+
+
+238: reject out on eth1 to 192.168.0.1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+239: limit out on eth1 to 192.168.0.1 port 22 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule added
+
+
+240: allow out on eth0 log
+WARN: Checks disabled
+Rule added
+
+
+241: allow out on eth0 log from 192.168.0.1 to 10.0.0.1 port 24 proto tcp
+WARN: Checks disabled
+Rule added
+
+
+242: deny out on eth0 log-all from 192.168.0.1 to 10.0.0.1 port 25 proto tcp
+WARN: Checks disabled
+Rule added
+
+
+243: allow out on eth0 to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+244: status numbered
+WARN: Checks disabled
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] Anywhere                   ALLOW OUT   Anywhere on eth1 (out)
+[ 2] 192.168.0.1 22             REJECT OUT  Anywhere on eth1 (out)
+[ 3] Anywhere                   LIMIT OUT   10.0.0.1 80 on eth1 (out)
+[ 4] 192.168.0.1                ALLOW OUT   10.0.0.1 on eth1 (out)
+[ 5] 192.168.0.1 22             DENY OUT    10.0.0.1 on eth1 (out)
+[ 6] 192.168.0.1                REJECT OUT  10.0.0.1 80 on eth1 (out)
+[ 7] 192.168.0.1 22             LIMIT OUT   10.0.0.1 80 on eth1 (out)
+[ 8] Anywhere                   ALLOW OUT   Anywhere on eth0 (log, out)
+[ 9] 10.0.0.1 24/tcp            ALLOW OUT   192.168.0.1 on eth0 (log, out)
+[10] 10.0.0.1 25/tcp            DENY OUT    192.168.0.1 on eth0 (log-all, out)
+[11] Samba                      ALLOW OUT   Anywhere on eth0 (out)
+
+
+
+245: insert 8 allow out on eth2 to any app Samba
+WARN: Checks disabled
+Rule inserted
+
+
+246: status numbered
+WARN: Checks disabled
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] Anywhere                   ALLOW OUT   Anywhere on eth1 (out)
+[ 2] 192.168.0.1 22             REJECT OUT  Anywhere on eth1 (out)
+[ 3] Anywhere                   LIMIT OUT   10.0.0.1 80 on eth1 (out)
+[ 4] 192.168.0.1                ALLOW OUT   10.0.0.1 on eth1 (out)
+[ 5] 192.168.0.1 22             DENY OUT    10.0.0.1 on eth1 (out)
+[ 6] 192.168.0.1                REJECT OUT  10.0.0.1 80 on eth1 (out)
+[ 7] 192.168.0.1 22             LIMIT OUT   10.0.0.1 80 on eth1 (out)
+[ 8] Samba                      ALLOW OUT   Anywhere on eth2 (out)
+[ 9] Anywhere                   ALLOW OUT   Anywhere on eth0 (log, out)
+[10] 10.0.0.1 24/tcp            ALLOW OUT   192.168.0.1 on eth0 (log, out)
+[11] 10.0.0.1 25/tcp            DENY OUT    192.168.0.1 on eth0 (log-all, out)
+[12] Samba                      ALLOW OUT   Anywhere on eth0 (out)
+
+
+
+### tuple ### allow any any 0.0.0.0/0 any 0.0.0.0/0 out_eth1
+-A ufw-user-output -o eth1 -j ACCEPT
+
+### tuple ### reject any 22 192.168.0.1 any 0.0.0.0/0 out_eth1
+-A ufw-user-output -o eth1 -p tcp -d 192.168.0.1 --dport 22 -j REJECT --reject-with tcp-reset
+-A ufw-user-output -o eth1 -p udp -d 192.168.0.1 --dport 22 -j REJECT
+--
+### tuple ### limit any any 0.0.0.0/0 80 10.0.0.1 out_eth1
+-A ufw-user-output -o eth1 -p tcp -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --set
+-A ufw-user-output -o eth1 -p tcp -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+--
+### tuple ### allow any any 192.168.0.1 any 10.0.0.1 out_eth1
+-A ufw-user-output -o eth1 -d 192.168.0.1 -s 10.0.0.1 -j ACCEPT
+
+### tuple ### deny any 22 192.168.0.1 any 10.0.0.1 out_eth1
+-A ufw-user-output -o eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 -j DROP
+-A ufw-user-output -o eth1 -p udp -d 192.168.0.1 --dport 22 -s 10.0.0.1 -j DROP
+--
+### tuple ### reject any any 192.168.0.1 80 10.0.0.1 out_eth1
+-A ufw-user-output -o eth1 -p tcp -d 192.168.0.1 -s 10.0.0.1 --sport 80 -j REJECT --reject-with tcp-reset
+-A ufw-user-output -o eth1 -p udp -d 192.168.0.1 -s 10.0.0.1 --sport 80 -j REJECT
+--
+### tuple ### limit any 22 192.168.0.1 80 10.0.0.1 out_eth1
+-A ufw-user-output -o eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --set
+-A ufw-user-output -o eth1 -p tcp -d 192.168.0.1 --dport 22 -s 10.0.0.1 --sport 80 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+--
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - out_eth2
+-A ufw-user-output -o eth2 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - out_eth2
+-A ufw-user-output -o eth2 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow_log any any 0.0.0.0/0 any 0.0.0.0/0 out_eth0
+-A ufw-user-logging-output -o eth0 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-output -o eth0 -j RETURN
+--
+### tuple ### allow_log tcp 24 10.0.0.1 any 192.168.0.1 out_eth0
+-A ufw-user-logging-output -o eth0 -p tcp -d 10.0.0.1 --dport 24 -s 192.168.0.1 -m state --state NEW -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW ALLOW] "
+-A ufw-user-logging-output -o eth0 -p tcp -d 10.0.0.1 --dport 24 -s 192.168.0.1 -j RETURN
+--
+### tuple ### deny_log-all tcp 25 10.0.0.1 any 192.168.0.1 out_eth0
+-A ufw-user-logging-output -o eth0 -p tcp -d 10.0.0.1 --dport 25 -s 192.168.0.1 -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW BLOCK] "
+-A ufw-user-logging-output -o eth0 -p tcp -d 10.0.0.1 --dport 25 -s 192.168.0.1 -j RETURN
+--
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+247: delete allow out on eth1
+WARN: Checks disabled
+Rule deleted
+
+
+248: delete reject out on eth1 to 192.168.0.1 port 22
+WARN: Checks disabled
+Rule deleted
+
+
+249: delete limit out on eth1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+250: delete allow out on eth1 to 192.168.0.1 from 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+251: delete deny out on eth1 to 192.168.0.1 port 22 from 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+252: delete reject out on eth1 to 192.168.0.1 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+253: delete limit out on eth1 to 192.168.0.1 port 22 from 10.0.0.1 port 80
+WARN: Checks disabled
+Rule deleted
+
+
+254: delete allow out on eth0 log
+WARN: Checks disabled
+Rule deleted
+
+
+255: delete allow out on eth0 log from 192.168.0.1 to 10.0.0.1 port 24 proto tcp
+WARN: Checks disabled
+Rule deleted
+
+
+256: delete deny out on eth0 log-all from 192.168.0.1 to 10.0.0.1 port 25 proto tcp
+WARN: Checks disabled
+Rule deleted
+
+
+257: delete allow out on eth0 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+258: delete allow out on eth2 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+Compare enable and ufw-init
+259: disable
+
+
+260: allow 23/tcp
+
+
+261: logging medium
+
+
+262: enable
+
+
+263: disable
+
+
+264: tests/testarea/lib/ufw/ufw-init start
+
+
+265: tests/testarea/lib/ufw/ufw-init stop
+
+
+266: enable
+
+
+267: delete allow 23/tcp
+
+
+268: logging low
+
+
+269: disable
+
+
+Verify toplevel chains
+270: logging off
+
+
+271: disable
+
+
+272: enable
+
+
+273: iptables -L INPUT -n | egrep -q 'ufw-before-logging-input'
+
+
+274: iptables -L INPUT -n | egrep -q 'ufw-before-input'
+
+
+275: iptables -L INPUT -n | egrep -q 'ufw-after-input'
+
+
+276: iptables -L INPUT -n | egrep -q 'ufw-after-logging-input'
+
+
+277: iptables -L INPUT -n | egrep -q 'ufw-reject-input'
+
+
+278: iptables -L INPUT -n | egrep -q 'ufw-track-input'
+
+
+279: iptables -L OUTPUT -n | egrep -q 'ufw-before-logging-output'
+
+
+280: iptables -L OUTPUT -n | egrep -q 'ufw-before-output'
+
+
+281: iptables -L OUTPUT -n | egrep -q 'ufw-after-output'
+
+
+282: iptables -L OUTPUT -n | egrep -q 'ufw-after-logging-output'
+
+
+283: iptables -L OUTPUT -n | egrep -q 'ufw-reject-output'
+
+
+284: iptables -L OUTPUT -n | egrep -q 'ufw-track-output'
+
+
+285: iptables -L FORWARD -n | egrep -q 'ufw-before-logging-forward'
+
+
+286: iptables -L FORWARD -n | egrep -q 'ufw-before-forward'
+
+
+287: iptables -L FORWARD -n | egrep -q 'ufw-after-forward'
+
+
+288: iptables -L FORWARD -n | egrep -q 'ufw-after-logging-forward'
+
+
+289: iptables -L FORWARD -n | egrep -q 'ufw-reject-forward'
+
+
+290: logging on
+
+
+291: disable
+
+
+292: enable
+
+
+293: iptables -L INPUT -n | egrep -q 'ufw-before-logging-input'
+
+
+294: iptables -L INPUT -n | egrep -q 'ufw-before-input'
+
+
+295: iptables -L INPUT -n | egrep -q 'ufw-after-input'
+
+
+296: iptables -L INPUT -n | egrep -q 'ufw-after-logging-input'
+
+
+297: iptables -L INPUT -n | egrep -q 'ufw-reject-input'
+
+
+298: iptables -L INPUT -n | egrep -q 'ufw-track-input'
+
+
+299: iptables -L OUTPUT -n | egrep -q 'ufw-before-logging-output'
+
+
+300: iptables -L OUTPUT -n | egrep -q 'ufw-before-output'
+
+
+301: iptables -L OUTPUT -n | egrep -q 'ufw-after-output'
+
+
+302: iptables -L OUTPUT -n | egrep -q 'ufw-after-logging-output'
+
+
+303: iptables -L OUTPUT -n | egrep -q 'ufw-reject-output'
+
+
+304: iptables -L OUTPUT -n | egrep -q 'ufw-track-output'
+
+
+305: iptables -L FORWARD -n | egrep -q 'ufw-before-logging-forward'
+
+
+306: iptables -L FORWARD -n | egrep -q 'ufw-before-forward'
+
+
+307: iptables -L FORWARD -n | egrep -q 'ufw-after-forward'
+
+
+308: iptables -L FORWARD -n | egrep -q 'ufw-after-logging-forward'
+
+
+309: iptables -L FORWARD -n | egrep -q 'ufw-reject-forward'
+
+
+310: logging low
+
+
+311: disable
+
+
+312: enable
+
+
+313: iptables -L INPUT -n | egrep -q 'ufw-before-logging-input'
+
+
+314: iptables -L INPUT -n | egrep -q 'ufw-before-input'
+
+
+315: iptables -L INPUT -n | egrep -q 'ufw-after-input'
+
+
+316: iptables -L INPUT -n | egrep -q 'ufw-after-logging-input'
+
+
+317: iptables -L INPUT -n | egrep -q 'ufw-reject-input'
+
+
+318: iptables -L INPUT -n | egrep -q 'ufw-track-input'
+
+
+319: iptables -L OUTPUT -n | egrep -q 'ufw-before-logging-output'
+
+
+320: iptables -L OUTPUT -n | egrep -q 'ufw-before-output'
+
+
+321: iptables -L OUTPUT -n | egrep -q 'ufw-after-output'
+
+
+322: iptables -L OUTPUT -n | egrep -q 'ufw-after-logging-output'
+
+
+323: iptables -L OUTPUT -n | egrep -q 'ufw-reject-output'
+
+
+324: iptables -L OUTPUT -n | egrep -q 'ufw-track-output'
+
+
+325: iptables -L FORWARD -n | egrep -q 'ufw-before-logging-forward'
+
+
+326: iptables -L FORWARD -n | egrep -q 'ufw-before-forward'
+
+
+327: iptables -L FORWARD -n | egrep -q 'ufw-after-forward'
+
+
+328: iptables -L FORWARD -n | egrep -q 'ufw-after-logging-forward'
+
+
+329: iptables -L FORWARD -n | egrep -q 'ufw-reject-forward'
+
+
+330: logging medium
+
+
+331: disable
+
+
+332: enable
+
+
+333: iptables -L INPUT -n | egrep -q 'ufw-before-logging-input'
+
+
+334: iptables -L INPUT -n | egrep -q 'ufw-before-input'
+
+
+335: iptables -L INPUT -n | egrep -q 'ufw-after-input'
+
+
+336: iptables -L INPUT -n | egrep -q 'ufw-after-logging-input'
+
+
+337: iptables -L INPUT -n | egrep -q 'ufw-reject-input'
+
+
+338: iptables -L INPUT -n | egrep -q 'ufw-track-input'
+
+
+339: iptables -L OUTPUT -n | egrep -q 'ufw-before-logging-output'
+
+
+340: iptables -L OUTPUT -n | egrep -q 'ufw-before-output'
+
+
+341: iptables -L OUTPUT -n | egrep -q 'ufw-after-output'
+
+
+342: iptables -L OUTPUT -n | egrep -q 'ufw-after-logging-output'
+
+
+343: iptables -L OUTPUT -n | egrep -q 'ufw-reject-output'
+
+
+344: iptables -L OUTPUT -n | egrep -q 'ufw-track-output'
+
+
+345: iptables -L FORWARD -n | egrep -q 'ufw-before-logging-forward'
+
+
+346: iptables -L FORWARD -n | egrep -q 'ufw-before-forward'
+
+
+347: iptables -L FORWARD -n | egrep -q 'ufw-after-forward'
+
+
+348: iptables -L FORWARD -n | egrep -q 'ufw-after-logging-forward'
+
+
+349: iptables -L FORWARD -n | egrep -q 'ufw-reject-forward'
+
+
+350: logging high
+
+
+351: disable
+
+
+352: enable
+
+
+353: iptables -L INPUT -n | egrep -q 'ufw-before-logging-input'
+
+
+354: iptables -L INPUT -n | egrep -q 'ufw-before-input'
+
+
+355: iptables -L INPUT -n | egrep -q 'ufw-after-input'
+
+
+356: iptables -L INPUT -n | egrep -q 'ufw-after-logging-input'
+
+
+357: iptables -L INPUT -n | egrep -q 'ufw-reject-input'
+
+
+358: iptables -L INPUT -n | egrep -q 'ufw-track-input'
+
+
+359: iptables -L OUTPUT -n | egrep -q 'ufw-before-logging-output'
+
+
+360: iptables -L OUTPUT -n | egrep -q 'ufw-before-output'
+
+
+361: iptables -L OUTPUT -n | egrep -q 'ufw-after-output'
+
+
+362: iptables -L OUTPUT -n | egrep -q 'ufw-after-logging-output'
+
+
+363: iptables -L OUTPUT -n | egrep -q 'ufw-reject-output'
+
+
+364: iptables -L OUTPUT -n | egrep -q 'ufw-track-output'
+
+
+365: iptables -L FORWARD -n | egrep -q 'ufw-before-logging-forward'
+
+
+366: iptables -L FORWARD -n | egrep -q 'ufw-before-forward'
+
+
+367: iptables -L FORWARD -n | egrep -q 'ufw-after-forward'
+
+
+368: iptables -L FORWARD -n | egrep -q 'ufw-after-logging-forward'
+
+
+369: iptables -L FORWARD -n | egrep -q 'ufw-reject-forward'
+
+
+370: logging full
+
+
+371: disable
+
+
+372: enable
+
+
+373: iptables -L INPUT -n | egrep -q 'ufw-before-logging-input'
+
+
+374: iptables -L INPUT -n | egrep -q 'ufw-before-input'
+
+
+375: iptables -L INPUT -n | egrep -q 'ufw-after-input'
+
+
+376: iptables -L INPUT -n | egrep -q 'ufw-after-logging-input'
+
+
+377: iptables -L INPUT -n | egrep -q 'ufw-reject-input'
+
+
+378: iptables -L INPUT -n | egrep -q 'ufw-track-input'
+
+
+379: iptables -L OUTPUT -n | egrep -q 'ufw-before-logging-output'
+
+
+380: iptables -L OUTPUT -n | egrep -q 'ufw-before-output'
+
+
+381: iptables -L OUTPUT -n | egrep -q 'ufw-after-output'
+
+
+382: iptables -L OUTPUT -n | egrep -q 'ufw-after-logging-output'
+
+
+383: iptables -L OUTPUT -n | egrep -q 'ufw-reject-output'
+
+
+384: iptables -L OUTPUT -n | egrep -q 'ufw-track-output'
+
+
+385: iptables -L FORWARD -n | egrep -q 'ufw-before-logging-forward'
+
+
+386: iptables -L FORWARD -n | egrep -q 'ufw-before-forward'
+
+
+387: iptables -L FORWARD -n | egrep -q 'ufw-after-forward'
+
+
+388: iptables -L FORWARD -n | egrep -q 'ufw-after-logging-forward'
+
+
+389: iptables -L FORWARD -n | egrep -q 'ufw-reject-forward'
+
+
+Verify secondary chains
+390: logging off
+
+
+391: disable
+
+
+392: enable
+
+
+393: ! iptables -L ufw-logging-deny -n | egrep -q '0 references'
+
+
+394: ! iptables -L ufw-not-local -n | egrep -q '0 references'
+
+
+395: ! iptables -L ufw-user-forward -n | egrep -q '0 references'
+
+
+396: ! iptables -L ufw-user-input -n | egrep -q '0 references'
+
+
+397: ! iptables -L ufw-user-output -n | egrep -q '0 references'
+
+
+398: ! iptables -L ufw-skip-to-policy-input -n | egrep -q '0 references'
+
+
+399: iptables -L ufw-logging-allow -n | egrep -q '0 references'
+
+
+400: iptables -L ufw-user-limit -n | egrep -q '0 references'
+
+
+401: iptables -L ufw-user-limit-accept -n | egrep -q '0 references'
+
+
+402: iptables -L ufw-user-logging-forward -n | egrep -q '0 references'
+
+
+403: iptables -L ufw-user-logging-input -n | egrep -q '0 references'
+
+
+404: iptables -L ufw-user-logging-output -n | egrep -q '0 references'
+
+
+405: iptables -L ufw-skip-to-policy-output -n | egrep -q '0 references'
+
+
+406: iptables -L ufw-skip-to-policy-forward -n | egrep -q '0 references'
+
+
+407: logging on
+
+
+408: disable
+
+
+409: enable
+
+
+410: ! iptables -L ufw-logging-deny -n | egrep -q '0 references'
+
+
+411: ! iptables -L ufw-not-local -n | egrep -q '0 references'
+
+
+412: ! iptables -L ufw-user-forward -n | egrep -q '0 references'
+
+
+413: ! iptables -L ufw-user-input -n | egrep -q '0 references'
+
+
+414: ! iptables -L ufw-user-output -n | egrep -q '0 references'
+
+
+415: ! iptables -L ufw-skip-to-policy-input -n | egrep -q '0 references'
+
+
+416: iptables -L ufw-logging-allow -n | egrep -q '0 references'
+
+
+417: iptables -L ufw-user-limit -n | egrep -q '0 references'
+
+
+418: iptables -L ufw-user-limit-accept -n | egrep -q '0 references'
+
+
+419: iptables -L ufw-user-logging-forward -n | egrep -q '0 references'
+
+
+420: iptables -L ufw-user-logging-input -n | egrep -q '0 references'
+
+
+421: iptables -L ufw-user-logging-output -n | egrep -q '0 references'
+
+
+422: iptables -L ufw-skip-to-policy-output -n | egrep -q '0 references'
+
+
+423: iptables -L ufw-skip-to-policy-forward -n | egrep -q '0 references'
+
+
+424: logging low
+
+
+425: disable
+
+
+426: enable
+
+
+427: ! iptables -L ufw-logging-deny -n | egrep -q '0 references'
+
+
+428: ! iptables -L ufw-not-local -n | egrep -q '0 references'
+
+
+429: ! iptables -L ufw-user-forward -n | egrep -q '0 references'
+
+
+430: ! iptables -L ufw-user-input -n | egrep -q '0 references'
+
+
+431: ! iptables -L ufw-user-output -n | egrep -q '0 references'
+
+
+432: ! iptables -L ufw-skip-to-policy-input -n | egrep -q '0 references'
+
+
+433: iptables -L ufw-logging-allow -n | egrep -q '0 references'
+
+
+434: iptables -L ufw-user-limit -n | egrep -q '0 references'
+
+
+435: iptables -L ufw-user-limit-accept -n | egrep -q '0 references'
+
+
+436: iptables -L ufw-user-logging-forward -n | egrep -q '0 references'
+
+
+437: iptables -L ufw-user-logging-input -n | egrep -q '0 references'
+
+
+438: iptables -L ufw-user-logging-output -n | egrep -q '0 references'
+
+
+439: iptables -L ufw-skip-to-policy-output -n | egrep -q '0 references'
+
+
+440: iptables -L ufw-skip-to-policy-forward -n | egrep -q '0 references'
+
+
+441: logging medium
+
+
+442: disable
+
+
+443: enable
+
+
+444: ! iptables -L ufw-logging-deny -n | egrep -q '0 references'
+
+
+445: ! iptables -L ufw-not-local -n | egrep -q '0 references'
+
+
+446: ! iptables -L ufw-user-forward -n | egrep -q '0 references'
+
+
+447: ! iptables -L ufw-user-input -n | egrep -q '0 references'
+
+
+448: ! iptables -L ufw-user-output -n | egrep -q '0 references'
+
+
+449: ! iptables -L ufw-skip-to-policy-input -n | egrep -q '0 references'
+
+
+450: iptables -L ufw-logging-allow -n | egrep -q '0 references'
+
+
+451: iptables -L ufw-user-limit -n | egrep -q '0 references'
+
+
+452: iptables -L ufw-user-limit-accept -n | egrep -q '0 references'
+
+
+453: iptables -L ufw-user-logging-forward -n | egrep -q '0 references'
+
+
+454: iptables -L ufw-user-logging-input -n | egrep -q '0 references'
+
+
+455: iptables -L ufw-user-logging-output -n | egrep -q '0 references'
+
+
+456: iptables -L ufw-skip-to-policy-output -n | egrep -q '0 references'
+
+
+457: iptables -L ufw-skip-to-policy-forward -n | egrep -q '0 references'
+
+
+458: logging high
+
+
+459: disable
+
+
+460: enable
+
+
+461: ! iptables -L ufw-logging-deny -n | egrep -q '0 references'
+
+
+462: ! iptables -L ufw-not-local -n | egrep -q '0 references'
+
+
+463: ! iptables -L ufw-user-forward -n | egrep -q '0 references'
+
+
+464: ! iptables -L ufw-user-input -n | egrep -q '0 references'
+
+
+465: ! iptables -L ufw-user-output -n | egrep -q '0 references'
+
+
+466: ! iptables -L ufw-skip-to-policy-input -n | egrep -q '0 references'
+
+
+467: iptables -L ufw-logging-allow -n | egrep -q '0 references'
+
+
+468: iptables -L ufw-user-limit -n | egrep -q '0 references'
+
+
+469: iptables -L ufw-user-limit-accept -n | egrep -q '0 references'
+
+
+470: iptables -L ufw-user-logging-forward -n | egrep -q '0 references'
+
+
+471: iptables -L ufw-user-logging-input -n | egrep -q '0 references'
+
+
+472: iptables -L ufw-user-logging-output -n | egrep -q '0 references'
+
+
+473: iptables -L ufw-skip-to-policy-output -n | egrep -q '0 references'
+
+
+474: iptables -L ufw-skip-to-policy-forward -n | egrep -q '0 references'
+
+
+475: logging full
+
+
+476: disable
+
+
+477: enable
+
+
+478: ! iptables -L ufw-logging-deny -n | egrep -q '0 references'
+
+
+479: ! iptables -L ufw-not-local -n | egrep -q '0 references'
+
+
+480: ! iptables -L ufw-user-forward -n | egrep -q '0 references'
+
+
+481: ! iptables -L ufw-user-input -n | egrep -q '0 references'
+
+
+482: ! iptables -L ufw-user-output -n | egrep -q '0 references'
+
+
+483: ! iptables -L ufw-skip-to-policy-input -n | egrep -q '0 references'
+
+
+484: iptables -L ufw-logging-allow -n | egrep -q '0 references'
+
+
+485: iptables -L ufw-user-limit -n | egrep -q '0 references'
+
+
+486: iptables -L ufw-user-limit-accept -n | egrep -q '0 references'
+
+
+487: iptables -L ufw-user-logging-forward -n | egrep -q '0 references'
+
+
+488: iptables -L ufw-user-logging-input -n | egrep -q '0 references'
+
+
+489: iptables -L ufw-user-logging-output -n | egrep -q '0 references'
+
+
+490: iptables -L ufw-skip-to-policy-output -n | egrep -q '0 references'
+
+
+491: iptables -L ufw-skip-to-policy-forward -n | egrep -q '0 references'
+
+
+492: logging on
+
+
+493: disable
+
+
+'Resource temporarily unavailable' test
+494: disable
+
+
+495: allow 22/tcp
+
+
+496: enable
+
+
+497: ufw-init start/flush-all
+
+
+498: ufw-init start/flush-all
+
+
+499: ufw-init start/flush-all
+
+
+500: ufw-init start/flush-all
+
+
+501: ufw-init start/flush-all
+
+
+502: ufw-init start/flush-all
+
+
+503: ufw-init start/flush-all
+
+
+504: ufw-init start/flush-all
+
+
+505: ufw-init start/flush-all
+
+
+506: ufw-init start/flush-all
+
+
+507: ufw-init start/flush-all
+
+
+508: ufw-init start/flush-all
+
+
+509: ufw-init start/flush-all
+
+
+510: ufw-init start/flush-all
+
+
+511: ufw-init start/flush-all
+
+
+512: ufw-init start/flush-all
+
+
+513: ufw-init start/flush-all
+
+
+514: ufw-init start/flush-all
+
+
+515: ufw-init start/flush-all
+
+
+516: ufw-init start/flush-all
+
+
+517: ufw-init start/flush-all
+
+
+518: ufw-init start/flush-all
+
+
+519: ufw-init start/flush-all
+
+
+520: ufw-init start/flush-all
+
+
+521: ufw-init start/flush-all
+
+
+522: enable
+
+
+523: delete allow 22/tcp
+
+
+Reset test
+524: enable
+
+
+525: allow 12345
+
+
+526: reset
+
+
+Show
+Setting IPV6 to yes
+527: disable
+
+
+528: enable
+
+
+529: show raw
+
+
+530: show builtins
+
+
+531: show before-rules
+
+
+532: show user-rules
+
+
+533: show after-rules
+
+
+534: show logging-rules
+
+
+535: show listening
+
+
+Setting IPV6 to no
+536: disable
+
+
+537: enable
+
+
+538: show raw
+
+
+539: show builtins
+
+
+540: show before-rules
+
+
+541: show user-rules
+
+
+542: show after-rules
+
+
+543: show logging-rules
+
+
+544: show listening
+
+
+545: disable
+
+
+Delete by number
+Setting IPV6 to yes
+546: disable
+
+
+547: enable
+
+
+548: allow 1
+
+
+549: allow 2
+
+
+550: allow 3
+
+
+551: allow 4
+
+
+### tuple ### allow any 1 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw-user-input -p udp --dport 1 -j ACCEPT
+--
+### tuple ### allow any 2 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 2 -j ACCEPT
+-A ufw-user-input -p udp --dport 2 -j ACCEPT
+--
+### tuple ### allow any 3 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 3 -j ACCEPT
+-A ufw-user-input -p udp --dport 3 -j ACCEPT
+--
+### tuple ### allow any 4 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 4 -j ACCEPT
+-A ufw-user-input -p udp --dport 4 -j ACCEPT
+### tuple ### allow any 1 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw6-user-input -p udp --dport 1 -j ACCEPT
+--
+### tuple ### allow any 2 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 2 -j ACCEPT
+-A ufw6-user-input -p udp --dport 2 -j ACCEPT
+--
+### tuple ### allow any 3 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 3 -j ACCEPT
+-A ufw6-user-input -p udp --dport 3 -j ACCEPT
+--
+### tuple ### allow any 4 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 4 -j ACCEPT
+-A ufw6-user-input -p udp --dport 4 -j ACCEPT
+552: --force delete 8
+
+
+### tuple ### allow any 1 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw6-user-input -p udp --dport 1 -j ACCEPT
+--
+### tuple ### allow any 2 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 2 -j ACCEPT
+-A ufw6-user-input -p udp --dport 2 -j ACCEPT
+--
+### tuple ### allow any 3 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 3 -j ACCEPT
+-A ufw6-user-input -p udp --dport 3 -j ACCEPT
+553: --force delete 4
+
+
+### tuple ### allow any 1 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw-user-input -p udp --dport 1 -j ACCEPT
+--
+### tuple ### allow any 2 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 2 -j ACCEPT
+-A ufw-user-input -p udp --dport 2 -j ACCEPT
+--
+### tuple ### allow any 3 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 3 -j ACCEPT
+-A ufw-user-input -p udp --dport 3 -j ACCEPT
+554: --force delete 6
+
+
+### tuple ### allow any 1 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw6-user-input -p udp --dport 1 -j ACCEPT
+--
+### tuple ### allow any 2 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 2 -j ACCEPT
+-A ufw6-user-input -p udp --dport 2 -j ACCEPT
+555: --force delete 3
+
+
+### tuple ### allow any 1 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw-user-input -p udp --dport 1 -j ACCEPT
+--
+### tuple ### allow any 2 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 2 -j ACCEPT
+-A ufw-user-input -p udp --dport 2 -j ACCEPT
+556: --force delete 4
+
+
+### tuple ### allow any 1 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw6-user-input -p udp --dport 1 -j ACCEPT
+557: --force delete 2
+
+
+### tuple ### allow any 1 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw-user-input -p udp --dport 1 -j ACCEPT
+558: --force delete 2
+
+
+559: --force delete 1
+
+
+Setting IPV6 to no
+560: disable
+
+
+561: enable
+
+
+562: allow 1
+
+
+563: allow 2
+
+
+564: allow 3
+
+
+565: allow 4
+
+
+### tuple ### allow any 1 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw-user-input -p udp --dport 1 -j ACCEPT
+--
+### tuple ### allow any 2 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 2 -j ACCEPT
+-A ufw-user-input -p udp --dport 2 -j ACCEPT
+--
+### tuple ### allow any 3 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 3 -j ACCEPT
+-A ufw-user-input -p udp --dport 3 -j ACCEPT
+--
+### tuple ### allow any 4 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 4 -j ACCEPT
+-A ufw-user-input -p udp --dport 4 -j ACCEPT
+566: --force delete 4
+
+
+### tuple ### allow any 1 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw-user-input -p udp --dport 1 -j ACCEPT
+--
+### tuple ### allow any 2 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 2 -j ACCEPT
+-A ufw-user-input -p udp --dport 2 -j ACCEPT
+--
+### tuple ### allow any 3 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 3 -j ACCEPT
+-A ufw-user-input -p udp --dport 3 -j ACCEPT
+567: --force delete 3
+
+
+### tuple ### allow any 1 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw-user-input -p udp --dport 1 -j ACCEPT
+--
+### tuple ### allow any 2 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 2 -j ACCEPT
+-A ufw-user-input -p udp --dport 2 -j ACCEPT
+568: --force delete 2
+
+
+### tuple ### allow any 1 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 1 -j ACCEPT
+-A ufw-user-input -p udp --dport 1 -j ACCEPT
+569: --force delete 1
+
+
+Testing interface with '+'
+Setting IPV6 to yes
+570: disable
+
+
+571: enable
+
+
+572: allow in on lo+
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+### tuple ### allow any any 0.0.0.0/0 any 0.0.0.0/0 in_lo+
+-A ufw-user-input -i lo+ -j ACCEPT
+
+### tuple ### allow any any ::/0 any ::/0 in_lo+
+-A ufw6-user-input -i lo+ -j ACCEPT
+
+573: delete allow in on lo+
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+Setting IPV6 to yes
+574: disable
+
+
+575: enable
+
+
+576: allow out on lo+
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+### tuple ### allow any any 0.0.0.0/0 any 0.0.0.0/0 out_lo+
+-A ufw-user-output -o lo+ -j ACCEPT
+
+### tuple ### allow any any ::/0 any ::/0 out_lo+
+-A ufw6-user-output -o lo+ -j ACCEPT
+
+577: delete allow out on lo+
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+Setting IPV6 to no
+578: disable
+
+
+579: enable
+
+
+580: allow in on lo+
+WARN: Checks disabled
+Rule added
+
+
+### tuple ### allow any any 0.0.0.0/0 any 0.0.0.0/0 in_lo+
+-A ufw-user-input -i lo+ -j ACCEPT
+
+581: delete allow in on lo+
+WARN: Checks disabled
+Rule deleted
+
+
+Setting IPV6 to no
+582: disable
+
+
+583: enable
+
+
+584: allow out on lo+
+WARN: Checks disabled
+Rule added
+
+
+### tuple ### allow any any 0.0.0.0/0 any 0.0.0.0/0 out_lo+
+-A ufw-user-output -o lo+ -j ACCEPT
+
+585: delete allow out on lo+
+WARN: Checks disabled
+Rule deleted
+
+
+586: disable
+
+
+587: disable
+
+

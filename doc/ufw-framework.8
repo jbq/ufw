@@ -1,0 +1,246 @@
+.TH "UFW FRAMEWORK" "8" "" "October 2011" "October 2011"
+
+.SH NAME
+ufw\-framework \- using the ufw framework
+.PP
+.SH DESCRIPTION
+\fBufw\fR provides both a command line interface and a framework for managing a
+netfilter firewall. While the \fBufw\fR command provides an easy to use
+interface for managing a firewall, the \fBufw\fR framework provides the
+administrator methods to customize default behavior and add rules not
+supported by the command line tool. In this way, \fBufw\fR can take full
+advantage of Linux netfilter's power and flexibility.
+
+.SH OVERVIEW
+.PP
+The framework provides boot time initialization, rules files for adding custom
+rules, a method for loading netfilter modules, configuration of kernel
+parameters and configuration of IPv6. The framework consists of the following
+files:
+.TP
+#STATE_PREFIX#/ufw\-init
+initialization script
+.TP
+#CONFIG_PREFIX#/ufw/before[6].rules
+rules file containing rules evaluated before UI added rules
+.TP
+#STATE_PREFIX#/user[6].rules
+rules file containing UI added rules (managed with the \fBufw\fR command)
+.TP
+#CONFIG_PREFIX#/ufw/after[6].rules
+rules file containing rules evaluated after UI added rules
+.TP
+#CONFIG_PREFIX#/default/ufw
+high level configuration
+.TP
+#CONFIG_PREFIX#/ufw/sysctl.conf
+kernel network tunables
+.TP
+#CONFIG_PREFIX#/ufw/ufw.conf
+additional high level configuration
+
+.SH "BOOT INITIALIZATION"
+.PP
+\fBufw\fR is started on boot with #STATE_PREFIX#/ufw\-init. This script is a
+standard SysV style initscript used by the \fBufw\fR command and should not be
+modified. It supports the following arguments:
+.TP
+start:
+loads the firewall
+.TP
+stop:
+unloads the firewall
+.TP
+restart:
+reloads the firewall
+.TP
+force\-reload:
+same as restart
+.TP
+status:
+basic status of the firewall
+.TP
+force\-stop:
+same as stop, except does not check if the firewall is already loaded
+.TP
+flush\-all:
+flushes the built\-in chains, deletes all non\-built\-in chains and resets the
+policy to ACCEPT
+.PP
+\fBufw\fR uses many user\-defined chains in addition to the built\-in iptables
+chains. If MANAGE_BUILTINS in #CONFIG_PREFIX#/default/ufw is set to 'yes', on
+stop and reload the built\-in chains are flushed. If it is set to 'no', on stop
+and reload the \fBufw\fR secondary chains are removed and the \fBufw\fR primary
+chains are flushed. In addition to flushing the \fBufw\fR specific chains, it
+keeps the primary chains in the same order with respect to any other
+user\-defined chains that may have been added. This allows for \fBufw\fR to
+interoperate with other software that may manage their own firewall rules.
+.PP
+To ensure your firewall is loading on boot, you must integrate this script
+into the boot process. Consult your distribution's documentation for the proper
+way to modify your boot process if \fBufw\fR is not already integrated.
+
+.SH "RULES FILES"
+.PP
+\fBufw\fR is in part a front\-end for \fBiptables\-restore\fR, with its rules
+saved in #CONFIG_PREFIX#/ufw/before.rules, #CONFIG_PREFIX#/ufw/after.rules and
+#STATE_PREFIX#/user.rules. Administrators can customize \fBbefore.rules\fR and
+\fBafter.rules\fR as desired using the standard \fBiptables\-restore\fR syntax.
+Rules are evaluated as follows: \fBbefore.rules\fR first, \fBuser.rules\fR
+next, and \fBafter.rules\fR last. IPv6 rules are evaluated in the same way,
+with the rules files named \fBbefore6.rules\fR, \fBuser6.rules\fR and
+\fBafter6.rules\fR. Please note that \fBufw status\fR only shows rules added
+with \fBufw\fR and not the rules found in the #CONFIG_PREFIX#/ufw rules files.
+.PP
+\fBImportant\fR: \fBufw\fR only uses the *filter table by default. You
+may add any other tables such as *nat, *raw and *mangle as desired. For each
+table a corresponding COMMIT statement is required.
+.PP
+After modifying any of these files, you must reload \fBufw\fR for the rules to
+take effect.  See the EXAMPLES section for common uses of these rules files.
+
+.SH MODULES
+.PP
+Netfilter has many different connection tracking modules. These modules are
+aware of the underlying protocol and allow the administrator to simplify his or
+her rule sets. You can adjust which netfilter modules to load by adjusting
+IPT_MODULES in #CONFIG_PREFIX#/default/ufw. Some popular modules to load are:
+
+  nf_conntrack_ftp
+  nf_nat_ftp
+  nf_conntrack_irc
+  nf_nat_irc
+  nf_conntrack_netbios_ns
+  nf_conntrack_pptp
+  nf_conntrack_tftp
+  nf_nat_tftp
+
+.SH "KERNEL PARAMETERS"
+.PP
+\fBufw\fR will read in #CONFIG_PREFIX#/ufw/sysctl.conf on boot when enabled.
+Please note that #CONFIG_PREFIX#/ufw/sysctl.conf overrides values in the
+system systcl.conf (usually #CONFIG_PREFIX#/sysctl.conf). Administrators can
+change the file used by modifying #CONFIG_PREFIX#/default/ufw.
+
+.SH IPV6
+.PP
+IPv6 is enabled by default. When disabled, all incoming, outgoing and forwarded
+packets are dropped, with the exception of traffic on the loopback interface.
+To adjust this behavior, set IPV6 to 'yes' in #CONFIG_PREFIX#/default/ufw. See
+the \fBufw\fR manual page for details.
+
+.SH EXAMPLES
+.PP
+As mentioned, \fBufw\fR loads its rules files into the kernel by using the
+\fBiptables\-restore\fR and \fBip6tables\-restore\fR commands. Users wanting
+to add rules to the \fBufw\fR rules files manually must be familiar with
+these as well as the \fBiptables\fR and \fBip6tables\fR commands. Below are
+some common examples of using the \fBufw\fR rules files.  All examples assume
+IPv4 only and that DEFAULT_FORWARD_POLICY in #CONFIG_PREFIX#/default/ufw is
+set to DROP.
+.SS
+IP Masquerading
+.PP
+To allow IP masquerading for computers from the 10.0.0.0/8 network to
+share the single IP address on eth0:
+.TP
+Edit #CONFIG_PREFIX#/ufw/sysctl.conf to have:
+ net.ipv4.ip_forward=1
+.TP
+Add to the end of #CONFIG_PREFIX#/ufw/before.rules, after the *filter section:
+ *nat
+ :POSTROUTING ACCEPT [0:0]
+ \-A POSTROUTING \-s 10.0.0.0/8 \-o eth0 \-j MASQUERADE
+ COMMIT
+.TP
+If your firewall is using IPv6 tunnels or 6to4 and is also doing NAT, then you should not usually masquerade protocol '41' (ipv6) packets. For example, instead of the above, #CONFIG_PREFIX#/ufw/before.rules can be adjusted to have:
+ *nat
+ :POSTROUTING ACCEPT [0:0]
+ \-A POSTROUTING \-s 10.0.0.0/8 \-\-protocol ! 41 \-o eth0 \-j MASQUERADE
+ COMMIT
+.SS
+Port Redirections
+.PP
+To forward tcp port 80 on eth0 to go to the webserver at 10.0.0.2:
+.TP
+Edit #CONFIG_PREFIX#/ufw/sysctl.conf to have:
+ net.ipv4.ip_forward=1
+.TP
+Add to the *filter section of #CONFIG_PREFIX#/ufw/before.rules:
+ \-A ufw\-before\-forward \-m state \-\-state RELATED,ESTABLISHED \\
+   \-j ACCEPT
+ \-A ufw\-before\-forward \-m state \-\-state NEW \-i eth0 \\
+   \-d 10.0.0.2 \-p tcp \-\-dport 80 \-j ACCEPT
+.TP
+Add to the end of #CONFIG_PREFIX#/ufw/before.rules, after the *filter section:
+ *nat
+ :PREROUTING ACCEPT [0:0]
+ \-A PREROUTING \-p tcp \-i eth0 \-\-dport 80 \-j DNAT \\
+   \-\-to\-destination 10.0.0.2:80
+ COMMIT
+
+.SS
+Egress filtering
+.PP
+To block RFC1918 addresses going out of eth0:
+.TP
+Add in the *filter section of #CONFIG_PREFIX#/ufw/before.rules:
+ \-A ufw\-before\-forward \-o eth0 \-d 10.0.0.0/8 \-j REJECT
+ \-A ufw\-before\-forward \-o eth0 \-d 172.16.0.0/12 \-j REJECT
+ \-A ufw\-before\-forward \-o eth0 \-d 192.168.0.0/16 \-j REJECT
+
+.SS
+Full example
+.PP
+This example combines the other examples and demonstrates a simple routing
+firewall. \fBWarning\fR: this setup is only an example to demonstrate
+the functionality of the \fBufw\fR framework in a concise and simple manner
+and should not be used in production without understanding what each part
+does and does not do. Your firewall will undoubtedly want to be less open.
+.PP
+This router/firewall has two interfaces: eth0 (Internet facing) and eth1
+(internal LAN). Internal clients have addresses on the 10.0.0.0/8 network
+and should be able to connect to anywhere on the Internet. Connections
+to port 80 from the Internet should be forwarded to 10.0.0.2. Access to
+ssh port 22 from the administrative workstation (10.0.0.100) to this machine
+should be allowed. Also make sure no internal traffic goes to the Internet.
+.TP
+Edit #CONFIG_PREFIX#/ufw/sysctl.conf to have:
+  net.ipv4.ip_forward=1
+.TP
+Add to the *filter section of #CONFIG_PREFIX#/ufw/before.rules:
+ \-A ufw\-before\-forward \-m state \-\-state RELATED,ESTABLISHED \\
+   \-j ACCEPT
+
+ \-A ufw\-before\-forward \-i eth1 \-s 10.0.0.0/8 \-o eth0 \-m state \\
+   \-\-state NEW \-j ACCEPT
+
+ \-A ufw\-before\-forward \-m state \-\-state NEW \-i eth0 \\
+   \-d 10.0.0.2 \-p tcp \-\-dport 80 \-j ACCEPT
+
+ \-A ufw\-before\-forward \-o eth0 \-d 10.0.0.0/8 \-j REJECT
+ \-A ufw\-before\-forward \-o eth0 \-d 172.16.0.0/12 \-j REJECT
+ \-A ufw\-before\-forward \-o eth0 \-d 192.168.0.0/16 \-j REJECT
+.TP
+Add to the end of #CONFIG_PREFIX#/ufw/before.rules, after the *filter section:
+ *nat
+ :PREROUTING ACCEPT [0:0]
+ :POSTROUTING ACCEPT [0:0]
+ \-A PREROUTING \-p tcp \-i eth0 \-\-dport 80 \-j DNAT \\
+   \-\-to\-destination 10.0.0.2:80
+ \-A POSTROUTING \-s 10.0.0.0/8 \-o eth0 \-j MASQUERADE
+ COMMIT
+.TP
+For allowing ssh on eth1 from 10.0.0.100, use the \fBufw\fR command:
+ # ufw allow in on eth1 from 10.0.0.100 to any port 22 proto tcp
+
+.SH SEE ALSO
+.PP
+\fBufw\fR(8), \fBiptables\fR(8), \fBip6tables\fR(8), \fBiptables\-restore\fR(8), \fBip6tables\-restore\fR(8), \fBsysctl\fR(8), \fBsysctl.conf\fR(5)
+
+.SH AUTHOR
+.PP
+ufw is Copyright 2008-2011, Canonical Ltd.
+
+.PP
+ufw and this manual page was originally written by Jamie Strandboge <jamie@canonical\&.com>

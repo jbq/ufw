@@ -1,0 +1,18 @@
+#
+# Example Upstart script
+#
+
+# ufw - Uncomplicated Firewall
+#
+# The Uncomplicated Firewall is a front-end for iptables, to make managing a
+# Netfilter firewall easier.
+
+description	"Uncomplicated firewall"
+
+start on net-device-added INTERFACE=lo
+stop on runlevel [!023456]
+
+console output
+
+pre-start exec /lib/ufw/ufw-init start
+post-stop exec /lib/ufw/ufw-init stop

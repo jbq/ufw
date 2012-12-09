@@ -1,0 +1,14 @@
+[CIFS]
+title=SMB/CIFS server
+description=SMB/CIFS server
+ports=137,138/udp|139,445/tcp
+
+[NFS]
+title=NFS server
+description=NFS and portmap server. Will also need access to mountd, statd and possibly others
+ports=2049,111/tcp|2049,111/udp
+
+[svnserve]
+title=Subversion server
+description=Subversion server for access to Subversion repositories.
+ports=3690/tcp

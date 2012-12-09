@@ -1,0 +1,2759 @@
+TESTING APPLICATION RULES
+Adding and deleting app rules
+Setting IPV6 to yes
+0: disable
+
+
+1: enable
+
+
+2: allow Apache
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+3: allow to any app Samba
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+4: allow from any app Samba
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+5: allow to any app Samba from any app Bind9
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+6: allow to any app Samba from any port 22
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+7: allow to any app Apache from any port 88
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+8: allow to 2001:db8::/32 app Samba
+WARN: Checks disabled
+Rule added (v6)
+
+
+9: allow from 2001:db8::/32 app Samba
+WARN: Checks disabled
+Rule added (v6)
+
+
+10: allow to 2001:db8::/32 app Samba from 2001:db8::/32 app Bind9
+WARN: Checks disabled
+Rule added (v6)
+
+
+11: allow to 2001:db8::/32 app Samba from 2001:db8::/32 port 22
+WARN: Checks disabled
+Rule added (v6)
+
+
+12: allow to 2001:db8::/32 app Apache from 2001:db8::/32 port 88
+WARN: Checks disabled
+Rule added (v6)
+
+
+13: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+Apache                     ALLOW       Anywhere
+Samba                      ALLOW       Anywhere
+Anywhere                   ALLOW       Samba
+Samba                      ALLOW       Bind9
+Samba                      ALLOW       22
+Apache                     ALLOW       88
+Apache (v6)                ALLOW       Anywhere (v6)
+Samba (v6)                 ALLOW       Anywhere (v6)
+Anywhere (v6)              ALLOW       Samba (v6)
+Samba (v6)                 ALLOW       Bind9 (v6)
+Samba (v6)                 ALLOW       22
+Apache (v6)                ALLOW       88
+2001:db8::/32 Samba        ALLOW       Anywhere (v6)
+Anywhere (v6)              ALLOW       2001:db8::/32 Samba
+2001:db8::/32 Samba        ALLOW       2001:db8::/32 Bind9
+2001:db8::/32 Samba        ALLOW       2001:db8::/32 22
+2001:db8::/32 Apache       ALLOW       2001:db8::/32 88
+
+
+
+14: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+80/tcp (Apache)            ALLOW IN    Anywhere
+137,138/udp (Samba)        ALLOW IN    Anywhere
+139,445/tcp (Samba)        ALLOW IN    Anywhere
+Anywhere                   ALLOW IN    137,138/udp (Samba)
+Anywhere                   ALLOW IN    139,445/tcp (Samba)
+137,138/udp (Samba)        ALLOW IN    53/udp (Bind9)
+139,445/tcp (Samba)        ALLOW IN    53/tcp (Bind9)
+137,138/udp (Samba)        ALLOW IN    22/udp
+139,445/tcp (Samba)        ALLOW IN    22/tcp
+80/tcp (Apache)            ALLOW IN    88/tcp
+80/tcp (Apache (v6))       ALLOW IN    Anywhere (v6)
+137,138/udp (Samba (v6))   ALLOW IN    Anywhere (v6)
+139,445/tcp (Samba (v6))   ALLOW IN    Anywhere (v6)
+Anywhere (v6)              ALLOW IN    137,138/udp (Samba (v6))
+Anywhere (v6)              ALLOW IN    139,445/tcp (Samba (v6))
+137,138/udp (Samba (v6))   ALLOW IN    53/udp (Bind9 (v6))
+139,445/tcp (Samba (v6))   ALLOW IN    53/tcp (Bind9 (v6))
+137,138/udp (Samba (v6))   ALLOW IN    22/udp
+139,445/tcp (Samba (v6))   ALLOW IN    22/tcp
+80/tcp (Apache (v6))       ALLOW IN    88/tcp
+2001:db8::/32 137,138/udp (Samba) ALLOW IN    Anywhere (v6)
+2001:db8::/32 139,445/tcp (Samba) ALLOW IN    Anywhere (v6)
+Anywhere (v6)              ALLOW IN    2001:db8::/32 137,138/udp (Samba)
+Anywhere (v6)              ALLOW IN    2001:db8::/32 139,445/tcp (Samba)
+2001:db8::/32 137,138/udp (Samba) ALLOW IN    2001:db8::/32 53/udp (Bind9)
+2001:db8::/32 139,445/tcp (Samba) ALLOW IN    2001:db8::/32 53/tcp (Bind9)
+2001:db8::/32 137,138/udp (Samba) ALLOW IN    2001:db8::/32 22/udp
+2001:db8::/32 139,445/tcp (Samba) ALLOW IN    2001:db8::/32 22/tcp
+2001:db8::/32 80/tcp (Apache) ALLOW IN    2001:db8::/32 88/tcp
+
+
+
+15: delete allow Apache
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+16: delete allow to any app Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+17: delete allow from any app Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+18: delete allow to any app Samba from any app Bind9
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+19: delete allow to any app Samba from any port 22
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+20: delete allow to any app Apache from any port 88
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+21: delete allow to 2001:db8::/32 app Samba
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+22: delete allow from 2001:db8::/32 app Samba
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+23: delete allow to 2001:db8::/32 app Samba from 2001:db8::/32 app Bind9
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+24: delete allow to 2001:db8::/32 app Samba from 2001:db8::/32 port 22
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+25: delete allow to 2001:db8::/32 app Apache from 2001:db8::/32 port 88
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+26: status
+WARN: Checks disabled
+Status: active
+
+
+Setting IPV6 to no
+27: disable
+
+
+28: enable
+
+
+29: allow Apache
+WARN: Checks disabled
+Rule added
+
+
+30: allow to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+31: allow from any app Samba
+WARN: Checks disabled
+Rule added
+
+
+32: allow to any app Samba from any app Bind9
+WARN: Checks disabled
+Rule added
+
+
+33: allow to any app Samba from any port 22
+WARN: Checks disabled
+Rule added
+
+
+34: allow to any app Apache from any port 88
+WARN: Checks disabled
+Rule added
+
+
+35: allow to 192.168.2.0/24 app Samba
+WARN: Checks disabled
+Rule added
+
+
+36: allow from 192.168.2.0/24 app Samba
+WARN: Checks disabled
+Rule added
+
+
+37: allow to 192.168.2.0/24 app Samba from 192.168.2.0/24 app Bind9
+WARN: Checks disabled
+Rule added
+
+
+38: allow to 192.168.2.0/24 app Samba from 192.168.2.0/24 port 22
+WARN: Checks disabled
+Rule added
+
+
+39: allow to 192.168.2.0/24 app Apache from 192.168.2.0/24 port 88
+WARN: Checks disabled
+Rule added
+
+
+40: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+Apache                     ALLOW       Anywhere
+Samba                      ALLOW       Anywhere
+Anywhere                   ALLOW       Samba
+Samba                      ALLOW       Bind9
+Samba                      ALLOW       22
+Apache                     ALLOW       88
+192.168.2.0/24 Samba       ALLOW       Anywhere
+Anywhere                   ALLOW       192.168.2.0/24 Samba
+192.168.2.0/24 Samba       ALLOW       192.168.2.0/24 Bind9
+192.168.2.0/24 Samba       ALLOW       192.168.2.0/24 22
+192.168.2.0/24 Apache      ALLOW       192.168.2.0/24 88
+
+
+
+41: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+80/tcp (Apache)            ALLOW IN    Anywhere
+137,138/udp (Samba)        ALLOW IN    Anywhere
+139,445/tcp (Samba)        ALLOW IN    Anywhere
+Anywhere                   ALLOW IN    137,138/udp (Samba)
+Anywhere                   ALLOW IN    139,445/tcp (Samba)
+137,138/udp (Samba)        ALLOW IN    53/udp (Bind9)
+139,445/tcp (Samba)        ALLOW IN    53/tcp (Bind9)
+137,138/udp (Samba)        ALLOW IN    22/udp
+139,445/tcp (Samba)        ALLOW IN    22/tcp
+80/tcp (Apache)            ALLOW IN    88/tcp
+192.168.2.0/24 137,138/udp (Samba) ALLOW IN    Anywhere
+192.168.2.0/24 139,445/tcp (Samba) ALLOW IN    Anywhere
+Anywhere                   ALLOW IN    192.168.2.0/24 137,138/udp (Samba)
+Anywhere                   ALLOW IN    192.168.2.0/24 139,445/tcp (Samba)
+192.168.2.0/24 137,138/udp (Samba) ALLOW IN    192.168.2.0/24 53/udp (Bind9)
+192.168.2.0/24 139,445/tcp (Samba) ALLOW IN    192.168.2.0/24 53/tcp (Bind9)
+192.168.2.0/24 137,138/udp (Samba) ALLOW IN    192.168.2.0/24 22/udp
+192.168.2.0/24 139,445/tcp (Samba) ALLOW IN    192.168.2.0/24 22/tcp
+192.168.2.0/24 80/tcp (Apache) ALLOW IN    192.168.2.0/24 88/tcp
+
+
+
+42: delete allow Apache
+WARN: Checks disabled
+Rule deleted
+
+
+43: delete allow to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+44: delete allow from any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+45: delete allow to any app Samba from any app Bind9
+WARN: Checks disabled
+Rule deleted
+
+
+46: delete allow to any app Samba from any port 22
+WARN: Checks disabled
+Rule deleted
+
+
+47: delete allow to any app Apache from any port 88
+WARN: Checks disabled
+Rule deleted
+
+
+48: delete allow to 192.168.2.0/24 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+49: delete allow from 192.168.2.0/24 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+50: delete allow to 192.168.2.0/24 app Samba from 192.168.2.0/24 app Bind9
+WARN: Checks disabled
+Rule deleted
+
+
+51: delete allow to 192.168.2.0/24 app Samba from 192.168.2.0/24 port 22
+WARN: Checks disabled
+Rule deleted
+
+
+52: delete allow to 192.168.2.0/24 app Apache from 192.168.2.0/24 port 88
+WARN: Checks disabled
+Rule deleted
+
+
+53: status
+WARN: Checks disabled
+Status: active
+
+
+Adding and deleting updated app rules
+Setting IPV6 to yes
+54: disable
+
+
+55: enable
+
+
+56: allow Apache
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+57: allow to any app Samba
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+58: allow from any app Samba
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+59: allow to any app Samba from any app Bind9
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+60: allow to any app Samba from any port 22
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+61: allow to any app Apache from any port 88
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+62: allow to 2001:db8::/32 app Samba
+WARN: Checks disabled
+Rule added (v6)
+
+
+63: allow from 2001:db8::/32 app Samba
+WARN: Checks disabled
+Rule added (v6)
+
+
+64: allow to 2001:db8::/32 app Samba from 2001:db8::/32 app Bind9
+WARN: Checks disabled
+Rule added (v6)
+
+
+65: allow to 2001:db8::/32 app Samba from 2001:db8::/32 port 22
+WARN: Checks disabled
+Rule added (v6)
+
+
+66: allow to 2001:db8::/32 app Apache from 2001:db8::/32 port 88
+WARN: Checks disabled
+Rule added (v6)
+
+
+67: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+Apache                     ALLOW       Anywhere
+Samba                      ALLOW       Anywhere
+Anywhere                   ALLOW       Samba
+Samba                      ALLOW       Bind9
+Samba                      ALLOW       22
+Apache                     ALLOW       88
+Apache (v6)                ALLOW       Anywhere (v6)
+Samba (v6)                 ALLOW       Anywhere (v6)
+Anywhere (v6)              ALLOW       Samba (v6)
+Samba (v6)                 ALLOW       Bind9 (v6)
+Samba (v6)                 ALLOW       22
+Apache (v6)                ALLOW       88
+2001:db8::/32 Samba        ALLOW       Anywhere (v6)
+Anywhere (v6)              ALLOW       2001:db8::/32 Samba
+2001:db8::/32 Samba        ALLOW       2001:db8::/32 Bind9
+2001:db8::/32 Samba        ALLOW       2001:db8::/32 22
+2001:db8::/32 Apache       ALLOW       2001:db8::/32 88
+
+
+
+68: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+80/tcp (Apache)            ALLOW IN    Anywhere
+137,138/udp (Samba)        ALLOW IN    Anywhere
+139,445/tcp (Samba)        ALLOW IN    Anywhere
+Anywhere                   ALLOW IN    137,138/udp (Samba)
+Anywhere                   ALLOW IN    139,445/tcp (Samba)
+137,138/udp (Samba)        ALLOW IN    53/udp (Bind9)
+139,445/tcp (Samba)        ALLOW IN    53/tcp (Bind9)
+137,138/udp (Samba)        ALLOW IN    22/udp
+139,445/tcp (Samba)        ALLOW IN    22/tcp
+80/tcp (Apache)            ALLOW IN    88/tcp
+80/tcp (Apache (v6))       ALLOW IN    Anywhere (v6)
+137,138/udp (Samba (v6))   ALLOW IN    Anywhere (v6)
+139,445/tcp (Samba (v6))   ALLOW IN    Anywhere (v6)
+Anywhere (v6)              ALLOW IN    137,138/udp (Samba (v6))
+Anywhere (v6)              ALLOW IN    139,445/tcp (Samba (v6))
+137,138/udp (Samba (v6))   ALLOW IN    53/udp (Bind9 (v6))
+139,445/tcp (Samba (v6))   ALLOW IN    53/tcp (Bind9 (v6))
+137,138/udp (Samba (v6))   ALLOW IN    22/udp
+139,445/tcp (Samba (v6))   ALLOW IN    22/tcp
+80/tcp (Apache (v6))       ALLOW IN    88/tcp
+2001:db8::/32 137,138/udp (Samba) ALLOW IN    Anywhere (v6)
+2001:db8::/32 139,445/tcp (Samba) ALLOW IN    Anywhere (v6)
+Anywhere (v6)              ALLOW IN    2001:db8::/32 137,138/udp (Samba)
+Anywhere (v6)              ALLOW IN    2001:db8::/32 139,445/tcp (Samba)
+2001:db8::/32 137,138/udp (Samba) ALLOW IN    2001:db8::/32 53/udp (Bind9)
+2001:db8::/32 139,445/tcp (Samba) ALLOW IN    2001:db8::/32 53/tcp (Bind9)
+2001:db8::/32 137,138/udp (Samba) ALLOW IN    2001:db8::/32 22/udp
+2001:db8::/32 139,445/tcp (Samba) ALLOW IN    2001:db8::/32 22/tcp
+2001:db8::/32 80/tcp (Apache) ALLOW IN    2001:db8::/32 88/tcp
+
+
+
+69: app update Apache
+WARN: Checks disabled
+Rules updated for profile 'Apache'
+Firewall reloaded
+
+
+70: app update Samba
+WARN: Checks disabled
+Rules updated for profile 'Samba'
+Firewall reloaded
+
+
+71: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+Apache                     ALLOW       Anywhere
+Samba                      ALLOW       Anywhere
+Anywhere                   ALLOW       Samba
+Samba                      ALLOW       Bind9
+Samba                      ALLOW       22
+Apache                     ALLOW       88
+Apache (v6)                ALLOW       Anywhere (v6)
+Samba (v6)                 ALLOW       Anywhere (v6)
+Anywhere (v6)              ALLOW       Samba (v6)
+Samba (v6)                 ALLOW       Bind9 (v6)
+Samba (v6)                 ALLOW       22
+Apache (v6)                ALLOW       88
+2001:db8::/32 Samba        ALLOW       Anywhere (v6)
+Anywhere (v6)              ALLOW       2001:db8::/32 Samba
+2001:db8::/32 Samba        ALLOW       2001:db8::/32 Bind9
+2001:db8::/32 Samba        ALLOW       2001:db8::/32 22
+2001:db8::/32 Apache       ALLOW       2001:db8::/32 88
+
+
+
+72: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+8888/tcp (Apache)          ALLOW IN    Anywhere
+138,9999/udp (Samba)       ALLOW IN    Anywhere
+139,445/tcp (Samba)        ALLOW IN    Anywhere
+Anywhere                   ALLOW IN    138,9999/udp (Samba)
+Anywhere                   ALLOW IN    139,445/tcp (Samba)
+138,9999/udp (Samba)       ALLOW IN    53/udp (Bind9)
+139,445/tcp (Samba)        ALLOW IN    53/tcp (Bind9)
+138,9999/udp (Samba)       ALLOW IN    22/udp
+139,445/tcp (Samba)        ALLOW IN    22/tcp
+8888/tcp (Apache)          ALLOW IN    88/tcp
+8888/tcp (Apache (v6))     ALLOW IN    Anywhere (v6)
+138,9999/udp (Samba (v6))  ALLOW IN    Anywhere (v6)
+139,445/tcp (Samba (v6))   ALLOW IN    Anywhere (v6)
+Anywhere (v6)              ALLOW IN    138,9999/udp (Samba (v6))
+Anywhere (v6)              ALLOW IN    139,445/tcp (Samba (v6))
+138,9999/udp (Samba (v6))  ALLOW IN    53/udp (Bind9 (v6))
+139,445/tcp (Samba (v6))   ALLOW IN    53/tcp (Bind9 (v6))
+138,9999/udp (Samba (v6))  ALLOW IN    22/udp
+139,445/tcp (Samba (v6))   ALLOW IN    22/tcp
+8888/tcp (Apache (v6))     ALLOW IN    88/tcp
+2001:db8::/32 138,9999/udp (Samba) ALLOW IN    Anywhere (v6)
+2001:db8::/32 139,445/tcp (Samba) ALLOW IN    Anywhere (v6)
+Anywhere (v6)              ALLOW IN    2001:db8::/32 138,9999/udp (Samba)
+Anywhere (v6)              ALLOW IN    2001:db8::/32 139,445/tcp (Samba)
+2001:db8::/32 138,9999/udp (Samba) ALLOW IN    2001:db8::/32 53/udp (Bind9)
+2001:db8::/32 139,445/tcp (Samba) ALLOW IN    2001:db8::/32 53/tcp (Bind9)
+2001:db8::/32 138,9999/udp (Samba) ALLOW IN    2001:db8::/32 22/udp
+2001:db8::/32 139,445/tcp (Samba) ALLOW IN    2001:db8::/32 22/tcp
+2001:db8::/32 8888/tcp (Apache) ALLOW IN    2001:db8::/32 88/tcp
+
+
+
+73: delete allow Apache
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+74: delete allow to any app Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+75: delete allow from any app Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+76: delete allow to any app Samba from any app Bind9
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+77: delete allow to any app Samba from any port 22
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+78: delete allow to any app Apache from any port 88
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+79: delete allow to 2001:db8::/32 app Samba
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+80: delete allow from 2001:db8::/32 app Samba
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+81: delete allow to 2001:db8::/32 app Samba from 2001:db8::/32 app Bind9
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+82: delete allow to 2001:db8::/32 app Samba from 2001:db8::/32 port 22
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+83: delete allow to 2001:db8::/32 app Apache from 2001:db8::/32 port 88
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+84: status
+WARN: Checks disabled
+Status: active
+
+
+Setting IPV6 to no
+85: disable
+
+
+86: enable
+
+
+87: allow Apache
+WARN: Checks disabled
+Rule added
+
+
+88: allow to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+89: allow from any app Samba
+WARN: Checks disabled
+Rule added
+
+
+90: allow to any app Samba from any app Bind9
+WARN: Checks disabled
+Rule added
+
+
+91: allow to any app Samba from any port 22
+WARN: Checks disabled
+Rule added
+
+
+92: allow to any app Apache from any port 88
+WARN: Checks disabled
+Rule added
+
+
+93: allow to 192.168.2.0/24 app Samba
+WARN: Checks disabled
+Rule added
+
+
+94: allow from 192.168.2.0/24 app Samba
+WARN: Checks disabled
+Rule added
+
+
+95: allow to 192.168.2.0/24 app Samba from 192.168.2.0/24 app Bind9
+WARN: Checks disabled
+Rule added
+
+
+96: allow to 192.168.2.0/24 app Samba from 192.168.2.0/24 port 22
+WARN: Checks disabled
+Rule added
+
+
+97: allow to 192.168.2.0/24 app Apache from 192.168.2.0/24 port 88
+WARN: Checks disabled
+Rule added
+
+
+98: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+Apache                     ALLOW       Anywhere
+Samba                      ALLOW       Anywhere
+Anywhere                   ALLOW       Samba
+Samba                      ALLOW       Bind9
+Samba                      ALLOW       22
+Apache                     ALLOW       88
+192.168.2.0/24 Samba       ALLOW       Anywhere
+Anywhere                   ALLOW       192.168.2.0/24 Samba
+192.168.2.0/24 Samba       ALLOW       192.168.2.0/24 Bind9
+192.168.2.0/24 Samba       ALLOW       192.168.2.0/24 22
+192.168.2.0/24 Apache      ALLOW       192.168.2.0/24 88
+
+
+
+99: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+80/tcp (Apache)            ALLOW IN    Anywhere
+137,138/udp (Samba)        ALLOW IN    Anywhere
+139,445/tcp (Samba)        ALLOW IN    Anywhere
+Anywhere                   ALLOW IN    137,138/udp (Samba)
+Anywhere                   ALLOW IN    139,445/tcp (Samba)
+137,138/udp (Samba)        ALLOW IN    53/udp (Bind9)
+139,445/tcp (Samba)        ALLOW IN    53/tcp (Bind9)
+137,138/udp (Samba)        ALLOW IN    22/udp
+139,445/tcp (Samba)        ALLOW IN    22/tcp
+80/tcp (Apache)            ALLOW IN    88/tcp
+192.168.2.0/24 137,138/udp (Samba) ALLOW IN    Anywhere
+192.168.2.0/24 139,445/tcp (Samba) ALLOW IN    Anywhere
+Anywhere                   ALLOW IN    192.168.2.0/24 137,138/udp (Samba)
+Anywhere                   ALLOW IN    192.168.2.0/24 139,445/tcp (Samba)
+192.168.2.0/24 137,138/udp (Samba) ALLOW IN    192.168.2.0/24 53/udp (Bind9)
+192.168.2.0/24 139,445/tcp (Samba) ALLOW IN    192.168.2.0/24 53/tcp (Bind9)
+192.168.2.0/24 137,138/udp (Samba) ALLOW IN    192.168.2.0/24 22/udp
+192.168.2.0/24 139,445/tcp (Samba) ALLOW IN    192.168.2.0/24 22/tcp
+192.168.2.0/24 80/tcp (Apache) ALLOW IN    192.168.2.0/24 88/tcp
+
+
+
+100: app update Apache
+WARN: Checks disabled
+Rules updated for profile 'Apache'
+Firewall reloaded
+
+
+101: app update Samba
+WARN: Checks disabled
+Rules updated for profile 'Samba'
+Firewall reloaded
+
+
+102: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+Apache                     ALLOW       Anywhere
+Samba                      ALLOW       Anywhere
+Anywhere                   ALLOW       Samba
+Samba                      ALLOW       Bind9
+Samba                      ALLOW       22
+Apache                     ALLOW       88
+192.168.2.0/24 Samba       ALLOW       Anywhere
+Anywhere                   ALLOW       192.168.2.0/24 Samba
+192.168.2.0/24 Samba       ALLOW       192.168.2.0/24 Bind9
+192.168.2.0/24 Samba       ALLOW       192.168.2.0/24 22
+192.168.2.0/24 Apache      ALLOW       192.168.2.0/24 88
+
+
+
+103: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+8888/tcp (Apache)          ALLOW IN    Anywhere
+138,9999/udp (Samba)       ALLOW IN    Anywhere
+139,445/tcp (Samba)        ALLOW IN    Anywhere
+Anywhere                   ALLOW IN    138,9999/udp (Samba)
+Anywhere                   ALLOW IN    139,445/tcp (Samba)
+138,9999/udp (Samba)       ALLOW IN    53/udp (Bind9)
+139,445/tcp (Samba)        ALLOW IN    53/tcp (Bind9)
+138,9999/udp (Samba)       ALLOW IN    22/udp
+139,445/tcp (Samba)        ALLOW IN    22/tcp
+8888/tcp (Apache)          ALLOW IN    88/tcp
+192.168.2.0/24 138,9999/udp (Samba) ALLOW IN    Anywhere
+192.168.2.0/24 139,445/tcp (Samba) ALLOW IN    Anywhere
+Anywhere                   ALLOW IN    192.168.2.0/24 138,9999/udp (Samba)
+Anywhere                   ALLOW IN    192.168.2.0/24 139,445/tcp (Samba)
+192.168.2.0/24 138,9999/udp (Samba) ALLOW IN    192.168.2.0/24 53/udp (Bind9)
+192.168.2.0/24 139,445/tcp (Samba) ALLOW IN    192.168.2.0/24 53/tcp (Bind9)
+192.168.2.0/24 138,9999/udp (Samba) ALLOW IN    192.168.2.0/24 22/udp
+192.168.2.0/24 139,445/tcp (Samba) ALLOW IN    192.168.2.0/24 22/tcp
+192.168.2.0/24 8888/tcp (Apache) ALLOW IN    192.168.2.0/24 88/tcp
+
+
+
+104: delete allow Apache
+WARN: Checks disabled
+Rule deleted
+
+
+105: delete allow to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+106: delete allow from any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+107: delete allow to any app Samba from any app Bind9
+WARN: Checks disabled
+Rule deleted
+
+
+108: delete allow to any app Samba from any port 22
+WARN: Checks disabled
+Rule deleted
+
+
+109: delete allow to any app Apache from any port 88
+WARN: Checks disabled
+Rule deleted
+
+
+110: delete allow to 192.168.2.0/24 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+111: delete allow from 192.168.2.0/24 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+112: delete allow to 192.168.2.0/24 app Samba from 192.168.2.0/24 app Bind9
+WARN: Checks disabled
+Rule deleted
+
+
+113: delete allow to 192.168.2.0/24 app Samba from 192.168.2.0/24 port 22
+WARN: Checks disabled
+Rule deleted
+
+
+114: delete allow to 192.168.2.0/24 app Apache from 192.168.2.0/24 port 88
+WARN: Checks disabled
+Rule deleted
+
+
+115: status
+WARN: Checks disabled
+Status: active
+
+
+TESTING APPLICATION RULES (v6 delete app rules)
+Setting IPV6 to yes
+116: disable
+
+
+117: enable
+
+
+118: allow Apache
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+119: allow from 2001:db8::/32 to any app Apache
+WARN: Checks disabled
+Rule added (v6)
+
+
+120: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+80/tcp (Apache)            ALLOW IN    Anywhere
+80/tcp (Apache (v6))       ALLOW IN    Anywhere (v6)
+80/tcp (Apache (v6))       ALLOW IN    2001:db8::/32
+
+
+
+121: delete allow from 2001:db8::/32 to any app Apache
+WARN: Checks disabled
+Rule deleted (v6)
+
+
+122: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+80/tcp (Apache)            ALLOW IN    Anywhere
+80/tcp (Apache (v6))       ALLOW IN    Anywhere (v6)
+
+
+
+123: delete allow Apache
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+124: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+
+TESTING APPLICATION RULES (update)
+125: app update Bind9
+WARN: Checks disabled
+
+
+126: app default allow
+WARN: Checks disabled
+Default application policy changed to 'allow'
+
+
+127: app update --add-new Apache
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+128: app default deny
+WARN: Checks disabled
+Default application policy changed to 'deny'
+
+
+129: app update --add-new Samba
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+130: app default skip
+WARN: Checks disabled
+Default application policy changed to 'skip'
+
+
+131: app update --add-new Bind9
+WARN: Checks disabled
+
+
+132: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+80/tcp (Apache)            ALLOW IN    Anywhere
+137,138/udp (Samba)        DENY IN     Anywhere
+139,445/tcp (Samba)        DENY IN     Anywhere
+80/tcp (Apache (v6))       ALLOW IN    Anywhere (v6)
+137,138/udp (Samba (v6))   DENY IN     Anywhere (v6)
+139,445/tcp (Samba (v6))   DENY IN     Anywhere (v6)
+
+
+
+133: delete allow Apache
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+134: delete deny Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+135: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+
+TESTING APPLICATION INTEGRATION (exact vs multi)
+136: allow RunTest2
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+137: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+24/tcp (RunTest2)          ALLOW IN    Anywhere
+24/tcp (RunTest2 (v6))     ALLOW IN    Anywhere (v6)
+
+
+
+138: delete allow RunTest2
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+139: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+
+TESTING APPLICATION INTEGRATION (case insensitive)
+140: allow runtest
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+141: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+26/tcp (runtest)           ALLOW IN    Anywhere
+26/tcp (runtest (v6))      ALLOW IN    Anywhere (v6)
+
+
+
+142: deny RunTest
+WARN: Checks disabled
+Rule updated
+Rule updated (v6)
+
+
+143: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+26/tcp (runtest)           DENY IN     Anywhere
+26/tcp (runtest (v6))      DENY IN     Anywhere (v6)
+
+
+
+144: delete deny RUNTESt
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+TESTING APPLICATION INTEGRATION (reject)
+145: reject to any from any app Samba
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+146: reject Samba
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+147: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+Anywhere                   REJECT IN   137,138/udp (Samba)
+Anywhere                   REJECT IN   139,445/tcp (Samba)
+137,138/udp (Samba)        REJECT IN   Anywhere
+139,445/tcp (Samba)        REJECT IN   Anywhere
+Anywhere (v6)              REJECT IN   137,138/udp (Samba (v6))
+Anywhere (v6)              REJECT IN   139,445/tcp (Samba (v6))
+137,138/udp (Samba (v6))   REJECT IN   Anywhere (v6)
+139,445/tcp (Samba (v6))   REJECT IN   Anywhere (v6)
+
+
+
+148: delete reject to any from any app Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+149: delete reject Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+150: status verbose
+WARN: Checks disabled
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing)
+New profiles: skip
+
+
+TESTING INSERT
+Setting IPV6 to no
+151: disable
+
+
+152: enable
+
+
+153: allow Apache
+WARN: Checks disabled
+Rule added
+
+
+154: allow Bind9
+WARN: Checks disabled
+Rule added
+
+
+155: insert 1 allow Samba
+WARN: Checks disabled
+Rule inserted
+
+
+156: insert 2 reject Dovecot POP3
+WARN: Checks disabled
+Rule inserted
+
+
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-before-logging-input - [0:0]
+:ufw-before-logging-output - [0:0]
+:ufw-before-logging-forward - [0:0]
+:ufw-user-logging-input - [0:0]
+:ufw-user-logging-output - [0:0]
+:ufw-user-logging-forward - [0:0]
+:ufw-after-logging-input - [0:0]
+:ufw-after-logging-output - [0:0]
+:ufw-after-logging-forward - [0:0]
+:ufw-logging-deny - [0:0]
+:ufw-logging-allow - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### reject tcp 110 0.0.0.0/0 any 0.0.0.0/0 Dovecot%20POP3 - in
+-A ufw-user-input -p tcp --dport 110 -j REJECT --reject-with tcp-reset -m comment --comment 'dapp_Dovecot%20POP3'
+
+### tuple ### allow tcp 80 0.0.0.0/0 any 0.0.0.0/0 Apache - in
+-A ufw-user-input -p tcp --dport 80 -j ACCEPT -m comment --comment 'dapp_Apache'
+
+### tuple ### allow any 53 0.0.0.0/0 any 0.0.0.0/0 Bind9 - in
+-A ufw-user-input -p tcp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+-A ufw-user-input -p udp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+
+### RATE LIMITING ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+### END RATE LIMITING ###
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+:ufw6-before-logging-input - [0:0]
+:ufw6-before-logging-output - [0:0]
+:ufw6-before-logging-forward - [0:0]
+:ufw6-user-logging-input - [0:0]
+:ufw6-user-logging-output - [0:0]
+:ufw6-user-logging-forward - [0:0]
+:ufw6-after-logging-input - [0:0]
+:ufw6-after-logging-output - [0:0]
+:ufw6-after-logging-forward - [0:0]
+:ufw6-logging-deny - [0:0]
+:ufw6-logging-allow - [0:0]
+### RULES ###
+
+### END RULES ###
+
+### LOGGING ###
+### END LOGGING ###
+COMMIT
+157: disable
+
+
+158: enable
+
+
+159: delete allow Apache
+WARN: Checks disabled
+Rule deleted
+
+
+160: delete allow Bind9
+WARN: Checks disabled
+Rule deleted
+
+
+161: delete allow Samba
+WARN: Checks disabled
+Rule deleted
+
+
+162: delete reject Dovecot POP3
+WARN: Checks disabled
+Rule deleted
+
+
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-before-logging-input - [0:0]
+:ufw-before-logging-output - [0:0]
+:ufw-before-logging-forward - [0:0]
+:ufw-user-logging-input - [0:0]
+:ufw-user-logging-output - [0:0]
+:ufw-user-logging-forward - [0:0]
+:ufw-after-logging-input - [0:0]
+:ufw-after-logging-output - [0:0]
+:ufw-after-logging-forward - [0:0]
+:ufw-logging-deny - [0:0]
+:ufw-logging-allow - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+
+### RATE LIMITING ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+### END RATE LIMITING ###
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+:ufw6-before-logging-input - [0:0]
+:ufw6-before-logging-output - [0:0]
+:ufw6-before-logging-forward - [0:0]
+:ufw6-user-logging-input - [0:0]
+:ufw6-user-logging-output - [0:0]
+:ufw6-user-logging-forward - [0:0]
+:ufw6-after-logging-input - [0:0]
+:ufw6-after-logging-output - [0:0]
+:ufw6-after-logging-forward - [0:0]
+:ufw6-logging-deny - [0:0]
+:ufw6-logging-allow - [0:0]
+### RULES ###
+
+### END RULES ###
+
+### LOGGING ###
+### END LOGGING ###
+COMMIT
+163: allow Samba
+WARN: Checks disabled
+Rule added
+
+
+164: allow 22
+WARN: Checks disabled
+Rule added
+
+
+165: insert 2 allow from any to any app Samba
+WARN: Checks disabled
+Skipping inserting existing rule
+
+
+166: insert 2 allow from 192.168.0.1 to 10.0.0.1 app Samba
+WARN: Checks disabled
+Rule inserted
+
+
+167: insert 2 allow from 192.168.0.1 to any app Samba
+WARN: Checks disabled
+Rule inserted
+
+
+168: insert 2 allow from 192.168.0.1 app Samba to 10.0.0.1
+WARN: Checks disabled
+Rule inserted
+
+
+169: insert 2 allow from any app Samba to 10.0.0.1
+WARN: Checks disabled
+Rule inserted
+
+
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-before-logging-input - [0:0]
+:ufw-before-logging-output - [0:0]
+:ufw-before-logging-forward - [0:0]
+:ufw-user-logging-input - [0:0]
+:ufw-user-logging-output - [0:0]
+:ufw-user-logging-forward - [0:0]
+:ufw-after-logging-input - [0:0]
+:ufw-after-logging-output - [0:0]
+:ufw-after-logging-forward - [0:0]
+:ufw-logging-deny - [0:0]
+:ufw-logging-allow - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow udp any 10.0.0.1 137,138 0.0.0.0/0 - Samba in
+-A ufw-user-input -p udp -m multiport --sports 137,138 -d 10.0.0.1 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any 10.0.0.1 139,445 0.0.0.0/0 - Samba in
+-A ufw-user-input -p tcp -m multiport --sports 139,445 -d 10.0.0.1 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow udp any 10.0.0.1 137,138 192.168.0.1 - Samba in
+-A ufw-user-input -p udp -m multiport --sports 137,138 -d 10.0.0.1 -s 192.168.0.1 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any 10.0.0.1 139,445 192.168.0.1 - Samba in
+-A ufw-user-input -p tcp -m multiport --sports 139,445 -d 10.0.0.1 -s 192.168.0.1 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 192.168.0.1 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -s 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 192.168.0.1 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -s 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow udp 137,138 10.0.0.1 any 192.168.0.1 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -d 10.0.0.1 -s 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 10.0.0.1 any 192.168.0.1 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -d 10.0.0.1 -s 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow any 22 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 22 -j ACCEPT
+-A ufw-user-input -p udp --dport 22 -j ACCEPT
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+
+### RATE LIMITING ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+### END RATE LIMITING ###
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+:ufw6-before-logging-input - [0:0]
+:ufw6-before-logging-output - [0:0]
+:ufw6-before-logging-forward - [0:0]
+:ufw6-user-logging-input - [0:0]
+:ufw6-user-logging-output - [0:0]
+:ufw6-user-logging-forward - [0:0]
+:ufw6-after-logging-input - [0:0]
+:ufw6-after-logging-output - [0:0]
+:ufw6-after-logging-forward - [0:0]
+:ufw6-logging-deny - [0:0]
+:ufw6-logging-allow - [0:0]
+### RULES ###
+
+### END RULES ###
+
+### LOGGING ###
+### END LOGGING ###
+COMMIT
+170: disable
+
+
+171: enable
+
+
+172: delete allow Samba
+WARN: Checks disabled
+Rule deleted
+
+
+173: delete allow 22
+WARN: Checks disabled
+Rule deleted
+
+
+174: delete allow from any to any app Samba
+WARN: Checks disabled
+Could not delete non-existent rule
+Could not delete non-existent rule (v6)
+
+
+175: delete allow from 192.168.0.1 to 10.0.0.1 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+176: delete allow from 192.168.0.1 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+177: delete allow from 192.168.0.1 app Samba to 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+178: delete allow from any app Samba to 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-before-logging-input - [0:0]
+:ufw-before-logging-output - [0:0]
+:ufw-before-logging-forward - [0:0]
+:ufw-user-logging-input - [0:0]
+:ufw-user-logging-output - [0:0]
+:ufw-user-logging-forward - [0:0]
+:ufw-after-logging-input - [0:0]
+:ufw-after-logging-output - [0:0]
+:ufw-after-logging-forward - [0:0]
+:ufw-logging-deny - [0:0]
+:ufw-logging-allow - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+
+### RATE LIMITING ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+### END RATE LIMITING ###
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+:ufw6-before-logging-input - [0:0]
+:ufw6-before-logging-output - [0:0]
+:ufw6-before-logging-forward - [0:0]
+:ufw6-user-logging-input - [0:0]
+:ufw6-user-logging-output - [0:0]
+:ufw6-user-logging-forward - [0:0]
+:ufw6-after-logging-input - [0:0]
+:ufw6-after-logging-output - [0:0]
+:ufw6-after-logging-forward - [0:0]
+:ufw6-logging-deny - [0:0]
+:ufw6-logging-allow - [0:0]
+### RULES ###
+
+### END RULES ###
+
+### LOGGING ###
+### END LOGGING ###
+COMMIT
+Setting IPV6 to yes
+179: disable
+
+
+180: enable
+
+
+181: allow Apache
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+182: allow Bind9
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+183: insert 1 allow Samba
+WARN: Checks disabled
+Rule inserted
+Rule inserted (v6)
+
+
+184: insert 2 reject Dovecot POP3
+WARN: Checks disabled
+Rule inserted
+Rule inserted (v6)
+
+
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-before-logging-input - [0:0]
+:ufw-before-logging-output - [0:0]
+:ufw-before-logging-forward - [0:0]
+:ufw-user-logging-input - [0:0]
+:ufw-user-logging-output - [0:0]
+:ufw-user-logging-forward - [0:0]
+:ufw-after-logging-input - [0:0]
+:ufw-after-logging-output - [0:0]
+:ufw-after-logging-forward - [0:0]
+:ufw-logging-deny - [0:0]
+:ufw-logging-allow - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### reject tcp 110 0.0.0.0/0 any 0.0.0.0/0 Dovecot%20POP3 - in
+-A ufw-user-input -p tcp --dport 110 -j REJECT --reject-with tcp-reset -m comment --comment 'dapp_Dovecot%20POP3'
+
+### tuple ### allow tcp 80 0.0.0.0/0 any 0.0.0.0/0 Apache - in
+-A ufw-user-input -p tcp --dport 80 -j ACCEPT -m comment --comment 'dapp_Apache'
+
+### tuple ### allow any 53 0.0.0.0/0 any 0.0.0.0/0 Bind9 - in
+-A ufw-user-input -p tcp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+-A ufw-user-input -p udp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+
+### RATE LIMITING ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+### END RATE LIMITING ###
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+:ufw6-before-logging-input - [0:0]
+:ufw6-before-logging-output - [0:0]
+:ufw6-before-logging-forward - [0:0]
+:ufw6-user-logging-input - [0:0]
+:ufw6-user-logging-output - [0:0]
+:ufw6-user-logging-forward - [0:0]
+:ufw6-after-logging-input - [0:0]
+:ufw6-after-logging-output - [0:0]
+:ufw6-after-logging-forward - [0:0]
+:ufw6-logging-deny - [0:0]
+:ufw6-logging-allow - [0:0]
+### RULES ###
+
+### tuple ### allow udp 137,138 ::/0 any ::/0 Samba - in
+-A ufw6-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 ::/0 any ::/0 Samba - in
+-A ufw6-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### reject tcp 110 ::/0 any ::/0 Dovecot%20POP3 - in
+-A ufw6-user-input -p tcp --dport 110 -j REJECT --reject-with tcp-reset -m comment --comment 'dapp_Dovecot%20POP3'
+
+### tuple ### allow tcp 80 ::/0 any ::/0 Apache - in
+-A ufw6-user-input -p tcp --dport 80 -j ACCEPT -m comment --comment 'dapp_Apache'
+
+### tuple ### allow any 53 ::/0 any ::/0 Bind9 - in
+-A ufw6-user-input -p tcp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+-A ufw6-user-input -p udp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw6-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw6-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw6-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw6-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw6-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+COMMIT
+185: disable
+
+
+186: enable
+
+
+187: delete allow Apache
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+188: delete allow Bind9
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+189: delete allow Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+190: delete reject Dovecot POP3
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-before-logging-input - [0:0]
+:ufw-before-logging-output - [0:0]
+:ufw-before-logging-forward - [0:0]
+:ufw-user-logging-input - [0:0]
+:ufw-user-logging-output - [0:0]
+:ufw-user-logging-forward - [0:0]
+:ufw-after-logging-input - [0:0]
+:ufw-after-logging-output - [0:0]
+:ufw-after-logging-forward - [0:0]
+:ufw-logging-deny - [0:0]
+:ufw-logging-allow - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+
+### RATE LIMITING ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+### END RATE LIMITING ###
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+:ufw6-before-logging-input - [0:0]
+:ufw6-before-logging-output - [0:0]
+:ufw6-before-logging-forward - [0:0]
+:ufw6-user-logging-input - [0:0]
+:ufw6-user-logging-output - [0:0]
+:ufw6-user-logging-forward - [0:0]
+:ufw6-after-logging-input - [0:0]
+:ufw6-after-logging-output - [0:0]
+:ufw6-after-logging-forward - [0:0]
+:ufw6-logging-deny - [0:0]
+:ufw6-logging-allow - [0:0]
+### RULES ###
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw6-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw6-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw6-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw6-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw6-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+COMMIT
+191: allow Samba
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+192: allow 22
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+193: insert 2 allow from any to any app Samba
+WARN: Checks disabled
+Skipping inserting existing rule
+Skipping inserting existing rule (v6)
+
+
+194: insert 2 allow from 192.168.0.1 to 10.0.0.1 app Samba
+WARN: Checks disabled
+Rule inserted
+
+
+195: insert 2 allow from 192.168.0.1 to any app Samba
+WARN: Checks disabled
+Rule inserted
+
+
+196: insert 2 allow from 192.168.0.1 app Samba to 10.0.0.1
+WARN: Checks disabled
+Rule inserted
+
+
+197: insert 2 allow from any app Samba to 10.0.0.1
+WARN: Checks disabled
+Rule inserted
+
+
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-before-logging-input - [0:0]
+:ufw-before-logging-output - [0:0]
+:ufw-before-logging-forward - [0:0]
+:ufw-user-logging-input - [0:0]
+:ufw-user-logging-output - [0:0]
+:ufw-user-logging-forward - [0:0]
+:ufw-after-logging-input - [0:0]
+:ufw-after-logging-output - [0:0]
+:ufw-after-logging-forward - [0:0]
+:ufw-logging-deny - [0:0]
+:ufw-logging-allow - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow udp any 10.0.0.1 137,138 0.0.0.0/0 - Samba in
+-A ufw-user-input -p udp -m multiport --sports 137,138 -d 10.0.0.1 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any 10.0.0.1 139,445 0.0.0.0/0 - Samba in
+-A ufw-user-input -p tcp -m multiport --sports 139,445 -d 10.0.0.1 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow udp any 10.0.0.1 137,138 192.168.0.1 - Samba in
+-A ufw-user-input -p udp -m multiport --sports 137,138 -d 10.0.0.1 -s 192.168.0.1 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any 10.0.0.1 139,445 192.168.0.1 - Samba in
+-A ufw-user-input -p tcp -m multiport --sports 139,445 -d 10.0.0.1 -s 192.168.0.1 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 192.168.0.1 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -s 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 192.168.0.1 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -s 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow udp 137,138 10.0.0.1 any 192.168.0.1 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -d 10.0.0.1 -s 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 10.0.0.1 any 192.168.0.1 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -d 10.0.0.1 -s 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow any 22 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 22 -j ACCEPT
+-A ufw-user-input -p udp --dport 22 -j ACCEPT
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+
+### RATE LIMITING ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+### END RATE LIMITING ###
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+:ufw6-before-logging-input - [0:0]
+:ufw6-before-logging-output - [0:0]
+:ufw6-before-logging-forward - [0:0]
+:ufw6-user-logging-input - [0:0]
+:ufw6-user-logging-output - [0:0]
+:ufw6-user-logging-forward - [0:0]
+:ufw6-after-logging-input - [0:0]
+:ufw6-after-logging-output - [0:0]
+:ufw6-after-logging-forward - [0:0]
+:ufw6-logging-deny - [0:0]
+:ufw6-logging-allow - [0:0]
+### RULES ###
+
+### tuple ### allow udp 137,138 ::/0 any ::/0 Samba - in
+-A ufw6-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 ::/0 any ::/0 Samba - in
+-A ufw6-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow any 22 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 22 -j ACCEPT
+-A ufw6-user-input -p udp --dport 22 -j ACCEPT
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw6-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw6-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw6-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw6-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw6-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+COMMIT
+198: disable
+
+
+199: enable
+
+
+200: delete allow Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+201: delete allow 22
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+202: delete allow from any to any app Samba
+WARN: Checks disabled
+Could not delete non-existent rule
+Could not delete non-existent rule (v6)
+
+
+203: delete allow from 192.168.0.1 to 10.0.0.1 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+204: delete allow from 192.168.0.1 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+205: delete allow from 192.168.0.1 app Samba to 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+206: delete allow from any app Samba to 10.0.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-before-logging-input - [0:0]
+:ufw-before-logging-output - [0:0]
+:ufw-before-logging-forward - [0:0]
+:ufw-user-logging-input - [0:0]
+:ufw-user-logging-output - [0:0]
+:ufw-user-logging-forward - [0:0]
+:ufw-after-logging-input - [0:0]
+:ufw-after-logging-output - [0:0]
+:ufw-after-logging-forward - [0:0]
+:ufw-logging-deny - [0:0]
+:ufw-logging-allow - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+
+### RATE LIMITING ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+### END RATE LIMITING ###
+COMMIT
+*filter
+:ufw6-user-input - [0:0]
+:ufw6-user-output - [0:0]
+:ufw6-user-forward - [0:0]
+:ufw6-before-logging-input - [0:0]
+:ufw6-before-logging-output - [0:0]
+:ufw6-before-logging-forward - [0:0]
+:ufw6-user-logging-input - [0:0]
+:ufw6-user-logging-output - [0:0]
+:ufw6-user-logging-forward - [0:0]
+:ufw6-after-logging-input - [0:0]
+:ufw6-after-logging-output - [0:0]
+:ufw6-after-logging-forward - [0:0]
+:ufw6-logging-deny - [0:0]
+:ufw6-logging-allow - [0:0]
+### RULES ###
+
+### END RULES ###
+
+### LOGGING ###
+-A ufw6-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw6-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw6-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw6-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw6-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+COMMIT
+TESTING APPLICATION INTEGRATION (interfaces)
+207: allow in on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule added
+
+
+208: allow in on eth0:1 from 10.0.0.1 app Samba
+
+
+209: allow in on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+210: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+192.168.0.1 Samba on eth0  ALLOW       Anywhere
+Samba on eth0              ALLOW       10.0.0.1
+
+
+
+### tuple ### allow udp 137,138 192.168.0.1 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 192.168.0.1 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 10.0.0.1 Samba - in_eth0
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 10.0.0.1 Samba - in_eth0
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+211: delete allow in on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+212: delete allow in on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+213: status
+WARN: Checks disabled
+Status: active
+
+
+214: deny in on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule added
+
+
+215: deny in on eth0:1 from 10.0.0.1 app Samba
+
+
+216: deny in on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+217: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+192.168.0.1 Samba on eth0  DENY        Anywhere
+Samba on eth0              DENY        10.0.0.1
+
+
+
+### tuple ### deny udp 137,138 192.168.0.1 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -j DROP -m comment --comment 'dapp_Samba'
+
+### tuple ### deny tcp 139,445 192.168.0.1 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -j DROP -m comment --comment 'dapp_Samba'
+
+### tuple ### deny udp 137,138 0.0.0.0/0 any 10.0.0.1 Samba - in_eth0
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -j DROP -m comment --comment 'dapp_Samba'
+
+### tuple ### deny tcp 139,445 0.0.0.0/0 any 10.0.0.1 Samba - in_eth0
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -j DROP -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+218: delete deny in on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+219: delete deny in on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+220: status
+WARN: Checks disabled
+Status: active
+
+
+221: limit in on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule added
+
+
+222: limit in on eth0:1 from 10.0.0.1 app Samba
+
+
+223: limit in on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+224: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+192.168.0.1 Samba on eth0  LIMIT       Anywhere
+Samba on eth0              LIMIT       10.0.0.1
+
+
+
+### tuple ### limit udp 137,138 192.168.0.1 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+--
+### tuple ### limit tcp 139,445 192.168.0.1 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+--
+### tuple ### limit udp 137,138 0.0.0.0/0 any 10.0.0.1 Samba - in_eth0
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+--
+### tuple ### limit tcp 139,445 0.0.0.0/0 any 10.0.0.1 Samba - in_eth0
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+225: delete limit in on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+226: delete limit in on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+227: status
+WARN: Checks disabled
+Status: active
+
+
+228: reject in on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule added
+
+
+229: reject in on eth0:1 from 10.0.0.1 app Samba
+
+
+230: reject in on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+231: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+192.168.0.1 Samba on eth0  REJECT      Anywhere
+Samba on eth0              REJECT      10.0.0.1
+
+
+
+### tuple ### reject udp 137,138 192.168.0.1 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -j REJECT -m comment --comment 'dapp_Samba'
+
+### tuple ### reject tcp 139,445 192.168.0.1 any 0.0.0.0/0 Samba - in_eth0
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -j REJECT --reject-with tcp-reset -m comment --comment 'dapp_Samba'
+
+### tuple ### reject udp 137,138 0.0.0.0/0 any 10.0.0.1 Samba - in_eth0
+-A ufw-user-input -i eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -j REJECT -m comment --comment 'dapp_Samba'
+
+### tuple ### reject tcp 139,445 0.0.0.0/0 any 10.0.0.1 Samba - in_eth0
+-A ufw-user-input -i eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -j REJECT --reject-with tcp-reset -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+232: delete reject in on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+233: delete reject in on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+234: status
+WARN: Checks disabled
+Status: active
+
+
+235: allow in on eth0 to any app Bind9
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+236: insert 1 allow in on eth2 to any app Samba
+WARN: Checks disabled
+Rule inserted
+Rule inserted (v6)
+
+
+237: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+Samba on eth2              ALLOW       Anywhere
+Bind9 on eth0              ALLOW       Anywhere
+Samba (v6) on eth2         ALLOW       Anywhere (v6)
+Bind9 (v6) on eth0         ALLOW       Anywhere (v6)
+
+
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth2
+-A ufw-user-input -i eth2 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth2
+-A ufw-user-input -i eth2 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow any 53 0.0.0.0/0 any 0.0.0.0/0 Bind9 - in_eth0
+-A ufw-user-input -i eth0 -p tcp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+-A ufw-user-input -i eth0 -p udp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+### tuple ### allow udp 137,138 ::/0 any ::/0 Samba - in_eth2
+-A ufw6-user-input -i eth2 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 ::/0 any ::/0 Samba - in_eth2
+-A ufw6-user-input -i eth2 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow any 53 ::/0 any ::/0 Bind9 - in_eth0
+-A ufw6-user-input -i eth0 -p tcp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+-A ufw6-user-input -i eth0 -p udp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+238: delete allow in on eth0 to any app Bind9
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+239: delete allow in on eth2 to any app Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+240: status
+WARN: Checks disabled
+Status: active
+
+
+241: allow out on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule added
+
+
+242: allow out on eth0:1 from 10.0.0.1 app Samba
+
+
+243: allow out on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+244: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+192.168.0.1 Samba          ALLOW OUT   Anywhere on eth0
+Samba                      ALLOW OUT   10.0.0.1 on eth0
+
+
+
+### tuple ### allow udp 137,138 192.168.0.1 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 192.168.0.1 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 10.0.0.1 Samba - out_eth0
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 10.0.0.1 Samba - out_eth0
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+245: delete allow out on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+246: delete allow out on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+247: status
+WARN: Checks disabled
+Status: active
+
+
+248: deny out on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule added
+
+
+249: deny out on eth0:1 from 10.0.0.1 app Samba
+
+
+250: deny out on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+251: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+192.168.0.1 Samba          DENY OUT    Anywhere on eth0
+Samba                      DENY OUT    10.0.0.1 on eth0
+
+
+
+### tuple ### deny udp 137,138 192.168.0.1 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -j DROP -m comment --comment 'dapp_Samba'
+
+### tuple ### deny tcp 139,445 192.168.0.1 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -j DROP -m comment --comment 'dapp_Samba'
+
+### tuple ### deny udp 137,138 0.0.0.0/0 any 10.0.0.1 Samba - out_eth0
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -j DROP -m comment --comment 'dapp_Samba'
+
+### tuple ### deny tcp 139,445 0.0.0.0/0 any 10.0.0.1 Samba - out_eth0
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -j DROP -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+252: delete deny out on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+253: delete deny out on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+254: status
+WARN: Checks disabled
+Status: active
+
+
+255: limit out on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule added
+
+
+256: limit out on eth0:1 from 10.0.0.1 app Samba
+
+
+257: limit out on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+258: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+192.168.0.1 Samba          LIMIT OUT   Anywhere on eth0
+Samba                      LIMIT OUT   10.0.0.1 on eth0
+
+
+
+### tuple ### limit udp 137,138 192.168.0.1 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+--
+### tuple ### limit tcp 139,445 192.168.0.1 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+--
+### tuple ### limit udp 137,138 0.0.0.0/0 any 10.0.0.1 Samba - out_eth0
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+--
+### tuple ### limit tcp 139,445 0.0.0.0/0 any 10.0.0.1 Samba - out_eth0
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -m state --state NEW -m recent --set -m comment --comment 'dapp_Samba'
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit -m comment --comment 'dapp_Samba'
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -j ufw-user-limit-accept -m comment --comment 'dapp_Samba'
+259: delete limit out on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+260: delete limit out on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+261: status
+WARN: Checks disabled
+Status: active
+
+
+262: reject out on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule added
+
+
+263: reject out on eth0:1 from 10.0.0.1 app Samba
+
+
+264: reject out on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule added
+
+
+265: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+192.168.0.1 Samba          REJECT OUT  Anywhere on eth0
+Samba                      REJECT OUT  10.0.0.1 on eth0
+
+
+
+### tuple ### reject udp 137,138 192.168.0.1 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -d 192.168.0.1 -j REJECT -m comment --comment 'dapp_Samba'
+
+### tuple ### reject tcp 139,445 192.168.0.1 any 0.0.0.0/0 Samba - out_eth0
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -d 192.168.0.1 -j REJECT --reject-with tcp-reset -m comment --comment 'dapp_Samba'
+
+### tuple ### reject udp 137,138 0.0.0.0/0 any 10.0.0.1 Samba - out_eth0
+-A ufw-user-output -o eth0 -p udp -m multiport --dports 137,138 -s 10.0.0.1 -j REJECT -m comment --comment 'dapp_Samba'
+
+### tuple ### reject tcp 139,445 0.0.0.0/0 any 10.0.0.1 Samba - out_eth0
+-A ufw-user-output -o eth0 -p tcp -m multiport --dports 139,445 -s 10.0.0.1 -j REJECT --reject-with tcp-reset -m comment --comment 'dapp_Samba'
+
+### END RULES ###
+266: delete reject out on eth0 to 192.168.0.1 app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+267: delete reject out on eth0 from 10.0.0.1 to any app Samba
+WARN: Checks disabled
+Rule deleted
+
+
+268: status
+WARN: Checks disabled
+Status: active
+
+
+269: allow out on eth0 to any app Bind9
+WARN: Checks disabled
+Rule added
+Rule added (v6)
+
+
+270: insert 1 allow out on eth2 to any app Samba
+WARN: Checks disabled
+Rule inserted
+Rule inserted (v6)
+
+
+271: status
+WARN: Checks disabled
+Status: active
+
+To                         Action      From
+--                         ------      ----
+Samba                      ALLOW OUT   Anywhere on eth2
+Bind9                      ALLOW OUT   Anywhere on eth0
+Samba (v6)                 ALLOW OUT   Anywhere (v6) on eth2
+Bind9 (v6)                 ALLOW OUT   Anywhere (v6) on eth0
+
+
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - out_eth2
+-A ufw-user-output -o eth2 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - out_eth2
+-A ufw-user-output -o eth2 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow any 53 0.0.0.0/0 any 0.0.0.0/0 Bind9 - out_eth0
+-A ufw-user-output -o eth0 -p tcp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+-A ufw-user-output -o eth0 -p udp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+### tuple ### allow udp 137,138 ::/0 any ::/0 Samba - out_eth2
+-A ufw6-user-output -o eth2 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 ::/0 any ::/0 Samba - out_eth2
+-A ufw6-user-output -o eth2 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow any 53 ::/0 any ::/0 Bind9 - out_eth0
+-A ufw6-user-output -o eth0 -p tcp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+-A ufw6-user-output -o eth0 -p udp --dport 53 -j ACCEPT -m comment --comment 'dapp_Bind9'
+272: delete allow out on eth0 to any app Bind9
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+273: delete allow out on eth2 to any app Samba
+WARN: Checks disabled
+Rule deleted
+Rule deleted (v6)
+
+
+274: status
+WARN: Checks disabled
+Status: active
+
+
+Delete by number
+Setting IPV6 to yes
+275: disable
+
+
+276: enable
+
+
+277: allow from any app Samba
+
+
+278: allow Samba
+
+
+279: allow 22/tcp
+
+
+### tuple ### allow udp any 0.0.0.0/0 137,138 0.0.0.0/0 - Samba in
+-A ufw-user-input -p udp -m multiport --sports 137,138 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any 0.0.0.0/0 139,445 0.0.0.0/0 - Samba in
+-A ufw-user-input -p tcp -m multiport --sports 139,445 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 22 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 22 -j ACCEPT
+
+### tuple ### allow udp any ::/0 137,138 ::/0 - Samba in
+-A ufw6-user-input -p udp -m multiport --sports 137,138 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any ::/0 139,445 ::/0 - Samba in
+-A ufw6-user-input -p tcp -m multiport --sports 139,445 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow udp 137,138 ::/0 any ::/0 Samba - in
+-A ufw6-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 ::/0 any ::/0 Samba - in
+-A ufw6-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 22 ::/0 any ::/0 in
+-A ufw6-user-input -p tcp --dport 22 -j ACCEPT
+
+280: --force delete 6
+
+
+### tuple ### allow udp any ::/0 137,138 ::/0 - Samba in
+-A ufw6-user-input -p udp -m multiport --sports 137,138 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any ::/0 139,445 ::/0 - Samba in
+-A ufw6-user-input -p tcp -m multiport --sports 139,445 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow udp 137,138 ::/0 any ::/0 Samba - in
+-A ufw6-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 ::/0 any ::/0 Samba - in
+-A ufw6-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+281: --force delete 3
+
+
+### tuple ### allow udp any 0.0.0.0/0 137,138 0.0.0.0/0 - Samba in
+-A ufw-user-input -p udp -m multiport --sports 137,138 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any 0.0.0.0/0 139,445 0.0.0.0/0 - Samba in
+-A ufw-user-input -p tcp -m multiport --sports 139,445 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+282: --force delete 4
+
+
+### tuple ### allow udp any ::/0 137,138 ::/0 - Samba in
+-A ufw6-user-input -p udp -m multiport --sports 137,138 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any ::/0 139,445 ::/0 - Samba in
+-A ufw6-user-input -p tcp -m multiport --sports 139,445 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+283: --force delete 2
+
+
+### tuple ### allow udp any 0.0.0.0/0 137,138 0.0.0.0/0 - Samba in
+-A ufw-user-input -p udp -m multiport --sports 137,138 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any 0.0.0.0/0 139,445 0.0.0.0/0 - Samba in
+-A ufw-user-input -p tcp -m multiport --sports 139,445 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+284: --force delete 2
+
+
+285: --force delete 1
+
+
+Setting IPV6 to no
+286: disable
+
+
+287: enable
+
+
+288: allow from any app Samba
+
+
+289: allow Samba
+
+
+290: allow 22/tcp
+
+
+### tuple ### allow udp any 0.0.0.0/0 137,138 0.0.0.0/0 - Samba in
+-A ufw-user-input -p udp -m multiport --sports 137,138 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any 0.0.0.0/0 139,445 0.0.0.0/0 - Samba in
+-A ufw-user-input -p tcp -m multiport --sports 139,445 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 22 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 22 -j ACCEPT
+
+291: --force delete 3
+
+
+### tuple ### allow udp any 0.0.0.0/0 137,138 0.0.0.0/0 - Samba in
+-A ufw-user-input -p udp -m multiport --sports 137,138 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any 0.0.0.0/0 139,445 0.0.0.0/0 - Samba in
+-A ufw-user-input -p tcp -m multiport --sports 139,445 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+292: --force delete 2
+
+
+### tuple ### allow udp any 0.0.0.0/0 137,138 0.0.0.0/0 - Samba in
+-A ufw-user-input -p udp -m multiport --sports 137,138 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+### tuple ### allow tcp any 0.0.0.0/0 139,445 0.0.0.0/0 - Samba in
+-A ufw-user-input -p tcp -m multiport --sports 139,445 -j ACCEPT -m comment --comment 'sapp_Samba'
+
+293: --force delete 1
+
+
+294: disable
+
+
+295: disable
+
+

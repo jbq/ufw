@@ -1,0 +1,198 @@
+Bug (Samba IPV4 tuple text wrong when IPV6 is enabled
+0: allow in on eth1 to any app Samba
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+### tuple ### allow udp 137,138 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth1
+-A ufw-user-input -i eth1 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 0.0.0.0/0 any 0.0.0.0/0 Samba - in_eth1
+-A ufw-user-input -i eth1 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow udp 137,138 ::/0 any ::/0 Samba - in_eth1
+-A ufw6-user-input -i eth1 -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+### tuple ### allow tcp 139,445 ::/0 any ::/0 Samba - in_eth1
+-A ufw6-user-input -i eth1 -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_Samba'
+
+1: delete allow in on eth1 to any app Samba
+
+
+Bug (inserted Samba rules out of order when IPV6 is enabled
+2: allow in on eth0
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+3: allow to 192.168.0.2
+WARN: Checks disabled
+Rules updated
+
+
+4: allow to 192.168.0.3
+WARN: Checks disabled
+Rules updated
+
+
+5: allow in on eth1
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+6: allow in on eth2
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+7: insert 8 deny to any app Bind9
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+-A ufw-user-input -i eth0 -j ACCEPT
+-A ufw-user-input -d 192.168.0.2 -j ACCEPT
+-A ufw-user-input -d 192.168.0.3 -j ACCEPT
+-A ufw-user-input -i eth1 -j ACCEPT
+-A ufw-user-input -p tcp --dport 53 -j DROP -m comment --comment 'dapp_Bind9'
+-A ufw-user-input -p udp --dport 53 -j DROP -m comment --comment 'dapp_Bind9'
+-A ufw-user-input -i eth2 -j ACCEPT
+-A ufw6-user-input -i eth0 -j ACCEPT
+-A ufw6-user-input -i eth1 -j ACCEPT
+-A ufw6-user-input -p tcp --dport 53 -j DROP -m comment --comment 'dapp_Bind9'
+-A ufw6-user-input -p udp --dport 53 -j DROP -m comment --comment 'dapp_Bind9'
+-A ufw6-user-input -i eth2 -j ACCEPT
+8: delete deny to any app Bind9
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+9: insert 8 deny to any app Samba
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+-A ufw-user-input -i eth0 -j ACCEPT
+-A ufw-user-input -d 192.168.0.2 -j ACCEPT
+-A ufw-user-input -d 192.168.0.3 -j ACCEPT
+-A ufw-user-input -i eth1 -j ACCEPT
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j DROP -m comment --comment 'dapp_Samba'
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j DROP -m comment --comment 'dapp_Samba'
+-A ufw-user-input -i eth2 -j ACCEPT
+-A ufw6-user-input -i eth0 -j ACCEPT
+-A ufw6-user-input -i eth1 -j ACCEPT
+-A ufw6-user-input -p udp -m multiport --dports 137,138 -j DROP -m comment --comment 'dapp_Samba'
+-A ufw6-user-input -p tcp -m multiport --dports 139,445 -j DROP -m comment --comment 'dapp_Samba'
+-A ufw6-user-input -i eth2 -j ACCEPT
+10: delete deny to any app Samba
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+11: insert 5 deny to any app Bind9
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+-A ufw-user-input -i eth0 -j ACCEPT
+-A ufw-user-input -d 192.168.0.2 -j ACCEPT
+-A ufw-user-input -d 192.168.0.3 -j ACCEPT
+-A ufw-user-input -i eth1 -j ACCEPT
+-A ufw-user-input -p tcp --dport 53 -j DROP -m comment --comment 'dapp_Bind9'
+-A ufw-user-input -p udp --dport 53 -j DROP -m comment --comment 'dapp_Bind9'
+-A ufw-user-input -i eth2 -j ACCEPT
+-A ufw6-user-input -i eth0 -j ACCEPT
+-A ufw6-user-input -i eth1 -j ACCEPT
+-A ufw6-user-input -p tcp --dport 53 -j DROP -m comment --comment 'dapp_Bind9'
+-A ufw6-user-input -p udp --dport 53 -j DROP -m comment --comment 'dapp_Bind9'
+-A ufw6-user-input -i eth2 -j ACCEPT
+12: delete deny to any app Bind9
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+13: insert 5 deny to any app Samba
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+-A ufw-user-input -i eth0 -j ACCEPT
+-A ufw-user-input -d 192.168.0.2 -j ACCEPT
+-A ufw-user-input -d 192.168.0.3 -j ACCEPT
+-A ufw-user-input -i eth1 -j ACCEPT
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j DROP -m comment --comment 'dapp_Samba'
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j DROP -m comment --comment 'dapp_Samba'
+-A ufw-user-input -i eth2 -j ACCEPT
+-A ufw6-user-input -i eth0 -j ACCEPT
+-A ufw6-user-input -i eth1 -j ACCEPT
+-A ufw6-user-input -p udp -m multiport --dports 137,138 -j DROP -m comment --comment 'dapp_Samba'
+-A ufw6-user-input -p tcp -m multiport --dports 139,445 -j DROP -m comment --comment 'dapp_Samba'
+-A ufw6-user-input -i eth2 -j ACCEPT
+14: delete allow in on eth0
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+15: delete allow to 192.168.0.2
+WARN: Checks disabled
+Rules updated
+
+
+16: delete allow to 192.168.0.3
+WARN: Checks disabled
+Rules updated
+
+
+17: delete allow in on eth1
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+18: delete allow in on eth2
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+19: delete deny to any app Samba
+WARN: Checks disabled
+Rules updated
+Rules updated (v6)
+
+
+Bug #407810
+20: app info bug407810
+WARN: Checks disabled
+Profile: bug407810
+Title: LanManager-like file and printer server for Unix
+Description: The bug407810 software suite is a collection of programs that
+implements the SMB/CIFS protocol for unix systems, allowing you to serve
+files and printers to Windows, NT, OS/2 and DOS clients. This protocol is
+sometimes also referred to as the LanManager or NetBIOS protocol.
+
+Ports:
+  137,138/udp
+  139,445/tcp
+
+
+21: allow bug407810
+
+
+-A ufw-user-input -p udp -m multiport --dports 137,138 -j ACCEPT -m comment --comment 'dapp_bug407810'
+-A ufw-user-input -p tcp -m multiport --dports 139,445 -j ACCEPT -m comment --comment 'dapp_bug407810'
+22: delete allow bug407810
+
+

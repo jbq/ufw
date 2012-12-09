@@ -1,0 +1,10 @@
+[bad-description1]
+title=Example title
+description=
+ports=80
+
+[bad-description2]
+title=Example title
+descriptin=Example description
+ports=80
+

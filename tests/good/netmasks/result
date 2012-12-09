@@ -1,0 +1,341 @@
+TESTING VALID CIDR
+0: --dry-run allow from 10.0.0.1/0
+
+
+1: --dry-run allow from 10.0.0.1/1
+
+
+2: --dry-run allow from 10.0.0.1/2
+
+
+3: --dry-run allow from 10.0.0.1/3
+
+
+4: --dry-run allow from 10.0.0.1/4
+
+
+5: --dry-run allow from 10.0.0.1/5
+
+
+6: --dry-run allow from 10.0.0.1/6
+
+
+7: --dry-run allow from 10.0.0.1/7
+
+
+8: --dry-run allow from 10.0.0.1/8
+
+
+9: --dry-run allow from 10.0.0.1/9
+
+
+10: --dry-run allow from 10.0.0.1/10
+
+
+11: --dry-run allow from 10.0.0.1/11
+
+
+12: --dry-run allow from 10.0.0.1/12
+
+
+13: --dry-run allow from 10.0.0.1/13
+
+
+14: --dry-run allow from 10.0.0.1/14
+
+
+15: --dry-run allow from 10.0.0.1/15
+
+
+16: --dry-run allow from 10.0.0.1/16
+
+
+17: --dry-run allow from 10.0.0.1/17
+
+
+18: --dry-run allow from 10.0.0.1/18
+
+
+19: --dry-run allow from 10.0.0.1/19
+
+
+20: --dry-run allow from 10.0.0.1/20
+
+
+21: --dry-run allow from 10.0.0.1/21
+
+
+22: --dry-run allow from 10.0.0.1/22
+
+
+23: --dry-run allow from 10.0.0.1/23
+
+
+24: --dry-run allow from 10.0.0.1/24
+
+
+25: --dry-run allow from 10.0.0.1/25
+
+
+26: --dry-run allow from 10.0.0.1/26
+
+
+27: --dry-run allow from 10.0.0.1/27
+
+
+28: --dry-run allow from 10.0.0.1/28
+
+
+29: --dry-run allow from 10.0.0.1/29
+
+
+30: --dry-run allow from 10.0.0.1/30
+
+
+31: --dry-run allow from 10.0.0.1/31
+
+
+32: --dry-run allow from 10.0.0.1/32
+
+
+TESTING VALID DOTTED
+33: --dry-run allow from 10.0.0.1/255.255.255.0
+
+
+34: --dry-run allow from 10.0.0.1/255.255.0.255
+
+
+35: --dry-run allow from 10.0.0.1/255.0.255.255
+
+
+36: --dry-run allow from 10.0.0.1/0.255.255.255
+
+
+37: --dry-run allow from 10.0.0.1/0.0.0.0
+
+
+38: --dry-run allow from 10.0.0.1/255.255.255.16
+
+
+39: --dry-run allow from 10.0.0.1/255.255.16.255
+
+
+40: --dry-run allow from 10.0.0.1/255.16.255.255
+
+
+41: --dry-run allow from 10.0.0.1/16.255.255.255
+
+
+42: --dry-run allow from 10.0.0.1/16.16.16.16
+
+
+43: --dry-run allow from 10.0.0.1/255.255.255.32
+
+
+44: --dry-run allow from 10.0.0.1/255.255.32.255
+
+
+45: --dry-run allow from 10.0.0.1/255.32.255.255
+
+
+46: --dry-run allow from 10.0.0.1/32.255.255.255
+
+
+47: --dry-run allow from 10.0.0.1/32.32.32.32
+
+
+48: --dry-run allow from 10.0.0.1/255.255.255.48
+
+
+49: --dry-run allow from 10.0.0.1/255.255.48.255
+
+
+50: --dry-run allow from 10.0.0.1/255.48.255.255
+
+
+51: --dry-run allow from 10.0.0.1/48.255.255.255
+
+
+52: --dry-run allow from 10.0.0.1/48.48.48.48
+
+
+53: --dry-run allow from 10.0.0.1/255.255.255.64
+
+
+54: --dry-run allow from 10.0.0.1/255.255.64.255
+
+
+55: --dry-run allow from 10.0.0.1/255.64.255.255
+
+
+56: --dry-run allow from 10.0.0.1/64.255.255.255
+
+
+57: --dry-run allow from 10.0.0.1/64.64.64.64
+
+
+58: --dry-run allow from 10.0.0.1/255.255.255.80
+
+
+59: --dry-run allow from 10.0.0.1/255.255.80.255
+
+
+60: --dry-run allow from 10.0.0.1/255.80.255.255
+
+
+61: --dry-run allow from 10.0.0.1/80.255.255.255
+
+
+62: --dry-run allow from 10.0.0.1/80.80.80.80
+
+
+63: --dry-run allow from 10.0.0.1/255.255.255.96
+
+
+64: --dry-run allow from 10.0.0.1/255.255.96.255
+
+
+65: --dry-run allow from 10.0.0.1/255.96.255.255
+
+
+66: --dry-run allow from 10.0.0.1/96.255.255.255
+
+
+67: --dry-run allow from 10.0.0.1/96.96.96.96
+
+
+68: --dry-run allow from 10.0.0.1/255.255.255.112
+
+
+69: --dry-run allow from 10.0.0.1/255.255.112.255
+
+
+70: --dry-run allow from 10.0.0.1/255.112.255.255
+
+
+71: --dry-run allow from 10.0.0.1/112.255.255.255
+
+
+72: --dry-run allow from 10.0.0.1/112.112.112.112
+
+
+73: --dry-run allow from 10.0.0.1/255.255.255.128
+
+
+74: --dry-run allow from 10.0.0.1/255.255.128.255
+
+
+75: --dry-run allow from 10.0.0.1/255.128.255.255
+
+
+76: --dry-run allow from 10.0.0.1/128.255.255.255
+
+
+77: --dry-run allow from 10.0.0.1/128.128.128.128
+
+
+78: --dry-run allow from 10.0.0.1/255.255.255.144
+
+
+79: --dry-run allow from 10.0.0.1/255.255.144.255
+
+
+80: --dry-run allow from 10.0.0.1/255.144.255.255
+
+
+81: --dry-run allow from 10.0.0.1/144.255.255.255
+
+
+82: --dry-run allow from 10.0.0.1/144.144.144.144
+
+
+83: --dry-run allow from 10.0.0.1/255.255.255.160
+
+
+84: --dry-run allow from 10.0.0.1/255.255.160.255
+
+
+85: --dry-run allow from 10.0.0.1/255.160.255.255
+
+
+86: --dry-run allow from 10.0.0.1/160.255.255.255
+
+
+87: --dry-run allow from 10.0.0.1/160.160.160.160
+
+
+88: --dry-run allow from 10.0.0.1/255.255.255.176
+
+
+89: --dry-run allow from 10.0.0.1/255.255.176.255
+
+
+90: --dry-run allow from 10.0.0.1/255.176.255.255
+
+
+91: --dry-run allow from 10.0.0.1/176.255.255.255
+
+
+92: --dry-run allow from 10.0.0.1/176.176.176.176
+
+
+93: --dry-run allow from 10.0.0.1/255.255.255.192
+
+
+94: --dry-run allow from 10.0.0.1/255.255.192.255
+
+
+95: --dry-run allow from 10.0.0.1/255.192.255.255
+
+
+96: --dry-run allow from 10.0.0.1/192.255.255.255
+
+
+97: --dry-run allow from 10.0.0.1/192.192.192.192
+
+
+98: --dry-run allow from 10.0.0.1/255.255.255.208
+
+
+99: --dry-run allow from 10.0.0.1/255.255.208.255
+
+
+100: --dry-run allow from 10.0.0.1/255.208.255.255
+
+
+101: --dry-run allow from 10.0.0.1/208.255.255.255
+
+
+102: --dry-run allow from 10.0.0.1/208.208.208.208
+
+
+103: --dry-run allow from 10.0.0.1/255.255.255.224
+
+
+104: --dry-run allow from 10.0.0.1/255.255.224.255
+
+
+105: --dry-run allow from 10.0.0.1/255.224.255.255
+
+
+106: --dry-run allow from 10.0.0.1/224.255.255.255
+
+
+107: --dry-run allow from 10.0.0.1/224.224.224.224
+
+
+108: --dry-run allow from 10.0.0.1/255.255.255.240
+
+
+109: --dry-run allow from 10.0.0.1/255.255.240.255
+
+
+110: --dry-run allow from 10.0.0.1/255.240.255.255
+
+
+111: --dry-run allow from 10.0.0.1/240.255.255.255
+
+
+112: --dry-run allow from 10.0.0.1/240.240.240.240
+
+

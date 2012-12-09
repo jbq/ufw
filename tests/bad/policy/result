@@ -1,0 +1,133 @@
+TESTING BAD DEFAULT POLICY
+Setting DEFAULT_INPUT_POLICY to 
+0: --dry-run status
+WARN: Checks disabled
+ERROR: Missing policy for 'input'
+
+
+Setting DEFAULT_INPUT_POLICY to ACCEP
+1: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'accep' for 'input'
+
+
+Setting DEFAULT_INPUT_POLICY to DRP
+2: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'drp' for 'input'
+
+
+Setting DEFAULT_INPUT_POLICY to REJCT
+3: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'rejct' for 'input'
+
+
+Setting DEFAULT_INPUT_POLICY to ALLOW
+4: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'allow' for 'input'
+
+
+Setting DEFAULT_INPUT_POLICY to DENY
+5: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'deny' for 'input'
+
+
+Setting DEFAULT_INPUT_POLICY to LIMIT
+6: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'limit' for 'input'
+
+
+Setting DEFAULT_OUTPUT_POLICY to 
+7: --dry-run status
+WARN: Checks disabled
+ERROR: Missing policy for 'output'
+
+
+Setting DEFAULT_OUTPUT_POLICY to ACCEP
+8: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'accep' for 'output'
+
+
+Setting DEFAULT_OUTPUT_POLICY to DRP
+9: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'drp' for 'output'
+
+
+Setting DEFAULT_OUTPUT_POLICY to REJCT
+10: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'rejct' for 'output'
+
+
+Setting DEFAULT_OUTPUT_POLICY to ALLOW
+11: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'allow' for 'output'
+
+
+Setting DEFAULT_OUTPUT_POLICY to DENY
+12: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'deny' for 'output'
+
+
+Setting DEFAULT_OUTPUT_POLICY to LIMIT
+13: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'limit' for 'output'
+
+
+Setting DEFAULT_FORWARD_POLICY to 
+14: --dry-run status
+WARN: Checks disabled
+ERROR: Missing policy for 'forward'
+
+
+Setting DEFAULT_FORWARD_POLICY to ACCEP
+15: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'accep' for 'forward'
+
+
+Setting DEFAULT_FORWARD_POLICY to DRP
+16: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'drp' for 'forward'
+
+
+Setting DEFAULT_FORWARD_POLICY to REJCT
+17: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'rejct' for 'forward'
+
+
+Setting DEFAULT_FORWARD_POLICY to ALLOW
+18: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'allow' for 'forward'
+
+
+Setting DEFAULT_FORWARD_POLICY to DENY
+19: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'deny' for 'forward'
+
+
+Setting DEFAULT_FORWARD_POLICY to LIMIT
+20: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'limit' for 'forward'
+
+
+Setting DEFAULT_FORWARD_POLICY to ACCEPT_NO_TRACK
+21: --dry-run status
+WARN: Checks disabled
+ERROR: Invalid policy 'accept_no_track' for 'forward'
+
+

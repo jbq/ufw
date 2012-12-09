@@ -1,0 +1,12 @@
+Internationalization
+--------------------
+gettext files are placed in messages/. To update the main .pot file, do:
+$ pygettext -d ufw -p messages -S GNU src/ufw src/[a-z]*.py
+
+and adjust messages/ufw.pot accordingly.
+
+Translations are handled in Launchpad. Please see:
+https://translations.launchpad.net/ufw/
+
+
+Copyright 2008 Canonical Ltd.

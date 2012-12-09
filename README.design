@@ -1,0 +1,48 @@
+Design
+------
+The design of ufw is pretty straightforward.  It's object oriented and consists
+of basically two types of objects:
+
+UFWFrontend: 	user-interface
+UFWBackend:	application logic
+
+UFWBackend is an interface that any number of backends will inherit from, which
+allows for using ufw with any pre-existing or future firewall application. The
+reference backend, UFWBackendIptables, uses simple 'iptables' and
+'iptables-restore' commands and is suitable for a host-based firewall use-case.
+It is envisioned that other backends will be written as the use-cases for ufw
+grow.  Perhaps a UFWShorewallBackend (for shorewall) or UFWPFBackend (for
+OpenBSD PF).
+
+UFWFrontend uses with the UFWBackend interface and src/ufw provides the UI.
+src/ufw uses UFWFrontend object and is CLI, but other front-ends like GUI
+applications could build on top of ufw by either interacting with the installed
+CLI ufw or by creating another frontend that uses UFWFrontend.
+
+Implementation
+--------------
+The application is written in python, just because it is so easy to work with.
+:)
+
+IPV6
+----
+IPv6 support is included in ufw. To keep IPv4 addressing easy to use, the IPv4
+and IPv6 configuration are kept completely separate (ie there are no IPv4
+mapped addresses).
+
+Contributing
+------------
+Before submitting patches for ufw, please do the following:
+
+$ make syntax-check    # basic syntax checker
+$ make check           # runs non-root tests
+# ./run-tests -r root  # runs root tests (modifies running firewall)
+
+CAUTION: root tests will flush the firewall and use iptables commands on the
+host.
+
+Contributions should follow PEP-8 and have an accompanying test case added to
+tests/.
+
+
+Copyright 2011 Canonical Ltd.

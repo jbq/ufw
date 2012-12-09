@@ -1,0 +1,5 @@
+[Apache-rpmnew]
+title=Apache Web Server
+description=Apache v2 is the next generation of the omnipresent Apache web server.
+ports=80,443/tcp
+

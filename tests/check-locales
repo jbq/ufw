@@ -1,0 +1,236 @@
+#!/bin/sh
+# check-locales: verify ufw with the existing locales. This is Ubuntu/Debian
+# specific
+#
+# Copyright 2012 Canonical Ltd.
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License version 3,
+#    as published by the Free Software Foundation.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+set -e
+
+usage() {
+    cat <<EOM
+`basename $0` [OPTIONS] [<directory with ufw mo files>]
+ -f   force installation of locales
+ -d   directory with ufw mo files
+ -p   directory with ufw po files
+ -D   directory with to place mo files after converting from po
+ -l   locale to test
+ -v   verbose output
+
+Eg:
+# Run the C tests
+$ sudo `basename $0` -l C
+
+# Run the en tests
+$ sudo `basename $0` -l en
+
+# Run the sk tests, installing language-pack-sk* if needed
+$ sudo `basename $0` -l sk -i
+
+# Run the C tests
+$ sudo `basename $0` -d /tmp/ufw-translations
+
+# Run the all tests where we have translations, installing language-packs as
+# needed.
+$ sudo `basename $0` -l sk -i
+EOM
+}
+
+is_root() {
+    if id | egrep -q '^uid=0' ; then
+        return 0
+    fi
+    return 1
+}
+
+install_langpack() {
+    local myloc=`echo "$1" | sed 's#_.*$##'`
+    langpack="language-pack-$myloc*"
+    if ! dpkg-query -l "$langpack" 2>&1 | egrep -q '^ii' ; then
+        echo "Installing '$langpack'"
+        apt-get install -y --force-yes "$langpack"
+    fi
+}
+
+has_locale() {
+    local myloc="$1"
+    if locale -a | egrep -q "^${myloc}.utf8$" ; then
+        return 0
+    elif locale -a | egrep -q "^${myloc}_.*.utf8$" ; then
+        return 0
+    fi
+    return 1
+}
+
+gen_locale() {
+    local myloc="${1}".UTF-8
+    echo "Running 'locale-gen $myloc'"
+    locale-gen "$myloc"
+    echo ""
+}
+
+runcmd() {
+    local myloc="$1"
+    shift
+    myargs=$*
+
+    echo "Test ($myloc): $myargs"
+    count=$((count+1))
+    if [ "$verbose" = "yes" ]; then
+        LC_ALL="$myloc" ufw $myargs || {
+            err_count=$((err_count+1))
+            return 1
+        }
+    else
+        LC_ALL="$myloc" ufw $myargs >/dev/null || {
+            err_count=$((err_count+1))
+            return 1
+        }
+    fi
+    echo ""
+}
+
+run_tests() {
+    local myloc="$1"
+
+    local locales="$myloc"
+    if [ "$myloc" != "C" ] && echo "$myloc" | grep -qv "_" ; then
+        locales="${myloc}.utf8 `locale -a | egrep "^${myloc}_.*.utf8$"`"
+    fi
+
+    local loc=
+    myerr=""
+    for loc in $locales ; do
+        runcmd "$loc" status || myerr="yes"
+        runcmd "$loc" allow 22/tcp || myerr="yes"
+        runcmd "$loc" --force enable || myerr="yes"
+        runcmd "$loc" allow 80 || myerr="yes"
+        runcmd "$loc" allow from 192.168.254.1 || myerr="yes"
+
+        runcmd "$loc" status || myerr="yes"
+        runcmd "$loc" status verbose || myerr="yes"
+        runcmd "$loc" status numbered || myerr="yes"
+
+        runcmd "$loc" delete allow from 192.168.254.1 || myerr="yes"
+        runcmd "$loc" delete allow 80 || myerr="yes"
+        runcmd "$loc" delete allow 22/tcp || myerr="yes"
+
+        # nonexistent rules
+        runcmd "$loc" delete allow 23 || myerr="yes"
+
+        # disable
+        runcmd "$loc" disable || myerr="yes"
+    done
+    if [ "$myerr" = "yes" ]; then
+        return 1
+    fi
+    return 0
+}
+
+#
+# Main
+#
+
+if ! is_root ; then
+    echo "Must be root to run this script" >&2
+    exit 2
+fi
+
+force=
+ufw_locales="/usr/share/ufw/messages"
+ufw_locale="*"
+verbose=
+install=
+while getopts "hfid:l:v" opt
+do
+    case "$opt" in
+        f) force="yes";;
+        d) ufw_locales=`echo "$OPTARG" | sed 's#/\+$##'`;;
+        l) ufw_locale="$OPTARG";;
+        i) install="yes";;
+        v) verbose="yes";;
+        h) usage ; exit 0;;
+        ?) usage;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+if [ "$ufw_locale" != "*" ]; then
+    if [ "$ufw_locale" = "C" ]; then
+        ufw_locale="C"
+    elif ls -1 "$ufw_locales/$ufw_locale"*.mo >/dev/null 2>&1 ; then
+        ufw_locale="${ufw_locale}*"
+    fi
+fi
+if [ ! -d "$ufw_locales" ]; then
+    echo "'$ufw_locales' is not a directory" >&2
+    usage
+    exit 1
+fi
+
+if [ "$force" != "yes" ]; then
+    echo "This script will alter your system by generating locales and running"
+    echo "various ufw commands. It will not clean up generated locales and may"
+    echo "alter your system in other ways. This should not be used on a"
+    echo -n "production system. Proceed (y|N)? "
+    read ans
+    if [ "$ans" != "y" ] && [ "$ans" != "Y" ]; then
+        echo "Aborting" >&2
+        exit 2
+    fi
+fi
+
+if [ "$install" = "yes" ] && [ "$ufw_locale" != "C" ]; then
+    echo "Configuring locales..."
+    if ls -1 "$ufw_locales"/$ufw_locale.mo >/dev/null 2>&1 ; then
+        for i in `ls "$ufw_locales"/$ufw_locale.mo` ; do
+            loc=`basename $i | sed 's#\.mo$##'`
+            if ! install_langpack "$loc" ; then
+                echo "Could not install langpack for '$loc'. Skipping"
+                continue
+            fi
+            if ! has_locale "$loc" ; then
+                gen_locale "$loc"
+            fi
+        done
+    else
+        if ! install_langpack "$ufw_locale" ; then
+            echo "Could not install langpack for '$ufw_locale'. Skipping"
+            continue
+        fi
+        if ! has_locale "$ufw_locale" ; then
+            gen_locale "$ufw_locale"
+        fi
+    fi
+    echo "Done configuring locales"
+fi
+
+count=0
+err_count=0
+if [ "$ufw_locale" = "C" ] || ! ls -1 "$ufw_locales"/$ufw_locale.mo >/dev/null 2>&1 ; then
+    run_tests "$ufw_locale" || echo FAIL
+else
+    echo "Testing locales in '$ufw_locales'"
+    for i in `ls "$ufw_locales"/$ufw_locale.mo` ; do
+        loc=`basename $i | sed 's#\.mo$##'`
+        run_tests "$loc" || echo FAIL
+    done
+fi
+
+echo "--"
+echo "Test summary: $count tests, $err_count failures"
+
+if [ $err_count -ne 0 ]; then
+    exit 1
+fi

@@ -1,0 +1,10 @@
+[Multi TCP]
+title=Mutli TCP
+description=Example description
+ports=1234,5678/tcp
+
+[Multi UDP]
+title=Multi UDP
+description=Example description
+ports=1234,5678/udp
+

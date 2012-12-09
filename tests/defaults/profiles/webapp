@@ -1,0 +1,10 @@
+[Custom Web App]
+title=Example profile for a custom web application
+description=Some nice descriptive text here
+ports=8080/tcp
+
+[Custom Web App2]
+title=Example profile for a custom web application
+description=Some nice descriptive text here
+ports=8080:8089/tcp
+

@@ -1,0 +1,44 @@
+Bug #262451 (part 2)
+0: disable
+WARN: Checks disabled
+Firewall stopped and disabled on system startup
+
+
+1: status
+WARN: Checks disabled
+Status: not loaded
+
+
+2: enable
+WARN: Checks disabled
+ERROR: problem running init script
+
+
+3: status
+WARN: Checks disabled
+Status: not loaded
+
+
+Bug #268084
+4: disable
+Firewall stopped and disabled on system startup
+
+
+5: enable
+WARN: Couldn't find pid (is /proc mounted?)
+ERROR: problem running init script
+
+
+6: status
+Status: not loaded
+
+
+7: app update all
+WARN: Couldn't find pid (is /proc mounted?)
+
+
+8: disable
+WARN: Checks disabled
+Firewall stopped and disabled on system startup
+
+

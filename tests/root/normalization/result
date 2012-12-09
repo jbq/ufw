@@ -1,0 +1,817 @@
+0: enable
+
+
+TESTING EQUIVALENT PORTS
+1: allow http
+WARN: Checks disabled
+Rule added
+
+
+2: delete allow 80/tcp
+WARN: Checks disabled
+Rule deleted
+
+
+3: allow 80/tcp
+WARN: Checks disabled
+Rule added
+
+
+4: delete allow http
+WARN: Checks disabled
+Rule deleted
+
+
+5: allow http
+WARN: Checks disabled
+Rule added
+
+
+6: delete allow to any port 80 proto tcp
+WARN: Checks disabled
+Rule deleted
+
+
+7: allow to any port 80 proto tcp
+WARN: Checks disabled
+Rule added
+
+
+8: delete allow http
+WARN: Checks disabled
+Rule deleted
+
+
+9: allow 80/tcp
+WARN: Checks disabled
+Rule added
+
+
+10: delete allow to any port 80 proto tcp
+WARN: Checks disabled
+Rule deleted
+
+
+11: allow to any port 80 proto tcp
+WARN: Checks disabled
+Rule added
+
+
+12: delete allow 80/tcp
+WARN: Checks disabled
+Rule deleted
+
+
+TESTING EQUIVALENT NETMASKS (HOST)
+13: allow from 192.168.0.1/255.255.255.255
+WARN: Checks disabled
+Rule added
+
+
+14: delete allow from 192.168.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+15: allow from 192.168.0.1/255.255.255.255
+WARN: Checks disabled
+Rule added
+
+
+16: delete allow from 192.168.0.1/32
+WARN: Checks disabled
+Rule deleted
+
+
+17: allow from 192.168.0.1
+WARN: Checks disabled
+Rule added
+
+
+18: delete allow from 192.168.0.1/32
+WARN: Checks disabled
+Rule deleted
+
+
+19: allow from 192.168.0.1
+WARN: Checks disabled
+Rule added
+
+
+20: delete allow from 192.168.0.1/255.255.255.255
+WARN: Checks disabled
+Rule deleted
+
+
+21: allow from 192.168.0.1/32
+WARN: Checks disabled
+Rule added
+
+
+22: delete allow from 192.168.0.1
+WARN: Checks disabled
+Rule deleted
+
+
+23: allow from 192.168.0.1/32
+WARN: Checks disabled
+Rule added
+
+
+24: delete allow from 192.168.0.1/255.255.255.255
+WARN: Checks disabled
+Rule deleted
+
+
+TESTING EQUIVALENT NETMASKS (NETWORK)
+25: allow from 192.168.0.0/255.255.255.255
+WARN: Checks disabled
+Rule added
+
+
+26: delete allow from 192.168.0.0/32
+WARN: Checks disabled
+Rule deleted
+
+
+27: allow from 192.168.0.0/32
+WARN: Checks disabled
+Rule added
+
+
+28: delete allow from 192.168.0.0/255.255.255.255
+WARN: Checks disabled
+Rule deleted
+
+
+29: allow from 192.168.0.0/255.255.255.254
+WARN: Checks disabled
+Rule added
+
+
+30: delete allow from 192.168.0.0/31
+WARN: Checks disabled
+Rule deleted
+
+
+31: allow from 192.168.0.0/31
+WARN: Checks disabled
+Rule added
+
+
+32: delete allow from 192.168.0.0/255.255.255.254
+WARN: Checks disabled
+Rule deleted
+
+
+33: allow from 192.168.0.0/255.255.255.252
+WARN: Checks disabled
+Rule added
+
+
+34: delete allow from 192.168.0.0/30
+WARN: Checks disabled
+Rule deleted
+
+
+35: allow from 192.168.0.0/30
+WARN: Checks disabled
+Rule added
+
+
+36: delete allow from 192.168.0.0/255.255.255.252
+WARN: Checks disabled
+Rule deleted
+
+
+37: allow from 192.168.0.0/255.255.255.248
+WARN: Checks disabled
+Rule added
+
+
+38: delete allow from 192.168.0.0/29
+WARN: Checks disabled
+Rule deleted
+
+
+39: allow from 192.168.0.0/29
+WARN: Checks disabled
+Rule added
+
+
+40: delete allow from 192.168.0.0/255.255.255.248
+WARN: Checks disabled
+Rule deleted
+
+
+41: allow from 192.168.0.0/255.255.255.240
+WARN: Checks disabled
+Rule added
+
+
+42: delete allow from 192.168.0.0/28
+WARN: Checks disabled
+Rule deleted
+
+
+43: allow from 192.168.0.0/28
+WARN: Checks disabled
+Rule added
+
+
+44: delete allow from 192.168.0.0/255.255.255.240
+WARN: Checks disabled
+Rule deleted
+
+
+45: allow from 192.168.0.0/255.255.255.224
+WARN: Checks disabled
+Rule added
+
+
+46: delete allow from 192.168.0.0/27
+WARN: Checks disabled
+Rule deleted
+
+
+47: allow from 192.168.0.0/27
+WARN: Checks disabled
+Rule added
+
+
+48: delete allow from 192.168.0.0/255.255.255.224
+WARN: Checks disabled
+Rule deleted
+
+
+49: allow from 192.168.0.0/255.255.255.192
+WARN: Checks disabled
+Rule added
+
+
+50: delete allow from 192.168.0.0/26
+WARN: Checks disabled
+Rule deleted
+
+
+51: allow from 192.168.0.0/26
+WARN: Checks disabled
+Rule added
+
+
+52: delete allow from 192.168.0.0/255.255.255.192
+WARN: Checks disabled
+Rule deleted
+
+
+53: allow from 192.168.0.0/255.255.255.128
+WARN: Checks disabled
+Rule added
+
+
+54: delete allow from 192.168.0.0/25
+WARN: Checks disabled
+Rule deleted
+
+
+55: allow from 192.168.0.0/25
+WARN: Checks disabled
+Rule added
+
+
+56: delete allow from 192.168.0.0/255.255.255.128
+WARN: Checks disabled
+Rule deleted
+
+
+57: allow from 192.168.0.0/255.255.255.0
+WARN: Checks disabled
+Rule added
+
+
+58: delete allow from 192.168.0.0/24
+WARN: Checks disabled
+Rule deleted
+
+
+59: allow from 192.168.0.0/24
+WARN: Checks disabled
+Rule added
+
+
+60: delete allow from 192.168.0.0/255.255.255.0
+WARN: Checks disabled
+Rule deleted
+
+
+61: allow from 192.168.0.0/255.255.254.0
+WARN: Checks disabled
+Rule added
+
+
+62: delete allow from 192.168.0.0/23
+WARN: Checks disabled
+Rule deleted
+
+
+63: allow from 192.168.0.0/23
+WARN: Checks disabled
+Rule added
+
+
+64: delete allow from 192.168.0.0/255.255.254.0
+WARN: Checks disabled
+Rule deleted
+
+
+65: allow from 192.168.0.0/255.255.252.0
+WARN: Checks disabled
+Rule added
+
+
+66: delete allow from 192.168.0.0/22
+WARN: Checks disabled
+Rule deleted
+
+
+67: allow from 192.168.0.0/22
+WARN: Checks disabled
+Rule added
+
+
+68: delete allow from 192.168.0.0/255.255.252.0
+WARN: Checks disabled
+Rule deleted
+
+
+69: allow from 192.168.0.0/255.255.248.0
+WARN: Checks disabled
+Rule added
+
+
+70: delete allow from 192.168.0.0/21
+WARN: Checks disabled
+Rule deleted
+
+
+71: allow from 192.168.0.0/21
+WARN: Checks disabled
+Rule added
+
+
+72: delete allow from 192.168.0.0/255.255.248.0
+WARN: Checks disabled
+Rule deleted
+
+
+73: allow from 192.168.0.0/255.255.240.0
+WARN: Checks disabled
+Rule added
+
+
+74: delete allow from 192.168.0.0/20
+WARN: Checks disabled
+Rule deleted
+
+
+75: allow from 192.168.0.0/20
+WARN: Checks disabled
+Rule added
+
+
+76: delete allow from 192.168.0.0/255.255.240.0
+WARN: Checks disabled
+Rule deleted
+
+
+77: allow from 192.168.0.0/255.255.224.0
+WARN: Checks disabled
+Rule added
+
+
+78: delete allow from 192.168.0.0/19
+WARN: Checks disabled
+Rule deleted
+
+
+79: allow from 192.168.0.0/19
+WARN: Checks disabled
+Rule added
+
+
+80: delete allow from 192.168.0.0/255.255.224.0
+WARN: Checks disabled
+Rule deleted
+
+
+81: allow from 192.168.0.0/255.255.192.0
+WARN: Checks disabled
+Rule added
+
+
+82: delete allow from 192.168.0.0/18
+WARN: Checks disabled
+Rule deleted
+
+
+83: allow from 192.168.0.0/18
+WARN: Checks disabled
+Rule added
+
+
+84: delete allow from 192.168.0.0/255.255.192.0
+WARN: Checks disabled
+Rule deleted
+
+
+85: allow from 192.168.0.0/255.255.128.0
+WARN: Checks disabled
+Rule added
+
+
+86: delete allow from 192.168.0.0/17
+WARN: Checks disabled
+Rule deleted
+
+
+87: allow from 192.168.0.0/17
+WARN: Checks disabled
+Rule added
+
+
+88: delete allow from 192.168.0.0/255.255.128.0
+WARN: Checks disabled
+Rule deleted
+
+
+89: allow from 192.168.0.0/255.255.0.0
+WARN: Checks disabled
+Rule added
+
+
+90: delete allow from 192.168.0.0/16
+WARN: Checks disabled
+Rule deleted
+
+
+91: allow from 192.168.0.0/16
+WARN: Checks disabled
+Rule added
+
+
+92: delete allow from 192.168.0.0/255.255.0.0
+WARN: Checks disabled
+Rule deleted
+
+
+93: allow from 192.168.0.0/255.254.0.0
+WARN: Checks disabled
+Rule added
+
+
+94: delete allow from 192.168.0.0/15
+WARN: Checks disabled
+Rule deleted
+
+
+95: allow from 192.168.0.0/15
+WARN: Checks disabled
+Rule added
+
+
+96: delete allow from 192.168.0.0/255.254.0.0
+WARN: Checks disabled
+Rule deleted
+
+
+97: allow from 192.168.0.0/255.252.0.0
+WARN: Checks disabled
+Rule added
+
+
+98: delete allow from 192.168.0.0/14
+WARN: Checks disabled
+Rule deleted
+
+
+99: allow from 192.168.0.0/14
+WARN: Checks disabled
+Rule added
+
+
+100: delete allow from 192.168.0.0/255.252.0.0
+WARN: Checks disabled
+Rule deleted
+
+
+101: allow from 192.168.0.0/255.248.0.0
+WARN: Checks disabled
+Rule added
+
+
+102: delete allow from 192.168.0.0/13
+WARN: Checks disabled
+Rule deleted
+
+
+103: allow from 192.168.0.0/13
+WARN: Checks disabled
+Rule added
+
+
+104: delete allow from 192.168.0.0/255.248.0.0
+WARN: Checks disabled
+Rule deleted
+
+
+105: allow from 192.168.0.0/255.240.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+106: delete allow from 192.168.0.0/12
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+107: allow from 192.168.0.0/12
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+108: delete allow from 192.168.0.0/255.240.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+109: allow from 192.168.0.0/255.224.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+110: delete allow from 192.168.0.0/11
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+111: allow from 192.168.0.0/11
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+112: delete allow from 192.168.0.0/255.224.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+113: allow from 192.168.0.0/255.192.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+114: delete allow from 192.168.0.0/10
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+115: allow from 192.168.0.0/10
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+116: delete allow from 192.168.0.0/255.192.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+117: allow from 192.168.0.0/255.128.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+118: delete allow from 192.168.0.0/9
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+119: allow from 192.168.0.0/9
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+120: delete allow from 192.168.0.0/255.128.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+121: allow from 192.168.0.0/255.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+122: delete allow from 192.168.0.0/8
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+123: allow from 192.168.0.0/8
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+124: delete allow from 192.168.0.0/255.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+125: allow from 192.168.0.0/254.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+126: delete allow from 192.168.0.0/7
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+127: allow from 192.168.0.0/7
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+128: delete allow from 192.168.0.0/254.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+129: allow from 192.168.0.0/252.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+130: delete allow from 192.168.0.0/6
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+131: allow from 192.168.0.0/6
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+132: delete allow from 192.168.0.0/252.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+133: allow from 192.168.0.0/248.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+134: delete allow from 192.168.0.0/5
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+135: allow from 192.168.0.0/5
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+136: delete allow from 192.168.0.0/248.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+137: allow from 192.168.0.0/240.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+138: delete allow from 192.168.0.0/4
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+139: allow from 192.168.0.0/4
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+140: delete allow from 192.168.0.0/240.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+141: allow from 192.168.0.0/224.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+142: delete allow from 192.168.0.0/3
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+143: allow from 192.168.0.0/3
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+144: delete allow from 192.168.0.0/224.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+145: allow from 192.168.0.0/192.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+146: delete allow from 192.168.0.0/2
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+147: allow from 192.168.0.0/2
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+148: delete allow from 192.168.0.0/192.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+149: allow from 192.168.0.0/128.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+150: delete allow from 192.168.0.0/1
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+151: allow from 192.168.0.0/1
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule added
+
+
+152: delete allow from 192.168.0.0/128.0.0.0
+WARN: Checks disabled
+WARN: Rule changed after normalization
+Rule deleted
+
+
+153: disable
+
+

@@ -1,0 +1,5 @@
+[OpenNTPD]
+title=OpenBSD NTP daemon
+description=NTP, the Network Time Protocol, is used to keep the computer clocks synchronized. It provides the ability to sync the local clock to remote NTP servers and can act as NTP server itself, redistributing the local clock.
+ports=123/udp
+

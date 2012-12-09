@@ -1,0 +1,375 @@
+TESTING BAD PROFILE (command name)
+0: app info foo
+
+
+1: app info Custom Web App
+
+
+TESTING BAD PROFILE (name)
+2: app info bad-description1
+
+
+3: app info bad-description2
+
+
+4: app info bad-title1
+
+
+5: app info bad-title2
+
+
+6: app info bad-ports1
+
+
+7: app info bad-ports2
+
+
+8: app info bad-ports3
+
+
+9: app info bad-ports4
+
+
+10: app info bad-ports5
+
+
+11: app info bad-ports6
+
+
+12: app info ssh
+
+
+13: app update --add-new all
+
+
+TESTING APPLICATION INTEGRATION (bad simple rules)
+14: allow NONEXISTENT
+
+
+15: allow Apache/tcp
+
+
+16: deny NONEXISTENT
+
+
+17: deny Apache/tcp
+
+
+18: limit NONEXISTENT
+
+
+19: limit Apache/tcp
+
+
+TESTING APPLICATION INTEGRATION (bad extended rules)
+20: --dry-run allow to 192.168.0.0/16 app NONEXISTENT
+
+
+21: --dry-run allow to 192.168.0.0/16 app Apache proto tcp
+
+
+22: --dry-run allow to 192.168.0.0/16 app Apache proto udp
+
+
+23: --dry-run allow to 192.168.0.0/16 app No Protocol Multi
+
+
+24: --dry-run allow to 192.168.0.0/16 app Samba from 192.168.0.0/16 port http
+
+
+25: --dry-run allow to 192.168.0.0/16 app Samba from 192.168.0.0/16 port 22 proto tcp
+
+
+26: --dry-run allow to any app NONEXISTENT
+
+
+27: --dry-run allow to any app Apache proto tcp
+
+
+28: --dry-run allow to any app Apache proto udp
+
+
+29: --dry-run allow to any app No Protocol Multi
+
+
+30: --dry-run allow to any app Samba from any port http
+
+
+31: --dry-run allow to any app Samba from any port 22 proto tcp
+
+
+32: --dry-run allow from 192.168.0.0/16 app NONEXISTENT
+
+
+33: --dry-run allow from 192.168.0.0/16 app Apache proto tcp
+
+
+34: --dry-run allow from 192.168.0.0/16 app Apache proto udp
+
+
+35: --dry-run allow from 192.168.0.0/16 app No Protocol Multi
+
+
+36: --dry-run allow from 192.168.0.0/16 app Samba to 192.168.0.0/16 port http
+
+
+37: --dry-run allow from 192.168.0.0/16 app Samba to 192.168.0.0/16 port 22 proto tcp
+
+
+38: --dry-run allow from any app NONEXISTENT
+
+
+39: --dry-run allow from any app Apache proto tcp
+
+
+40: --dry-run allow from any app Apache proto udp
+
+
+41: --dry-run allow from any app No Protocol Multi
+
+
+42: --dry-run allow from any app Samba to any port http
+
+
+43: --dry-run allow from any app Samba to any port 22 proto tcp
+
+
+44: --dry-run deny to 192.168.0.0/16 app NONEXISTENT
+
+
+45: --dry-run deny to 192.168.0.0/16 app Apache proto tcp
+
+
+46: --dry-run deny to 192.168.0.0/16 app Apache proto udp
+
+
+47: --dry-run deny to 192.168.0.0/16 app No Protocol Multi
+
+
+48: --dry-run deny to 192.168.0.0/16 app Samba from 192.168.0.0/16 port http
+
+
+49: --dry-run deny to 192.168.0.0/16 app Samba from 192.168.0.0/16 port 22 proto tcp
+
+
+50: --dry-run deny to any app NONEXISTENT
+
+
+51: --dry-run deny to any app Apache proto tcp
+
+
+52: --dry-run deny to any app Apache proto udp
+
+
+53: --dry-run deny to any app No Protocol Multi
+
+
+54: --dry-run deny to any app Samba from any port http
+
+
+55: --dry-run deny to any app Samba from any port 22 proto tcp
+
+
+56: --dry-run deny from 192.168.0.0/16 app NONEXISTENT
+
+
+57: --dry-run deny from 192.168.0.0/16 app Apache proto tcp
+
+
+58: --dry-run deny from 192.168.0.0/16 app Apache proto udp
+
+
+59: --dry-run deny from 192.168.0.0/16 app No Protocol Multi
+
+
+60: --dry-run deny from 192.168.0.0/16 app Samba to 192.168.0.0/16 port http
+
+
+61: --dry-run deny from 192.168.0.0/16 app Samba to 192.168.0.0/16 port 22 proto tcp
+
+
+62: --dry-run deny from any app NONEXISTENT
+
+
+63: --dry-run deny from any app Apache proto tcp
+
+
+64: --dry-run deny from any app Apache proto udp
+
+
+65: --dry-run deny from any app No Protocol Multi
+
+
+66: --dry-run deny from any app Samba to any port http
+
+
+67: --dry-run deny from any app Samba to any port 22 proto tcp
+
+
+68: --dry-run limit to 192.168.0.0/16 app NONEXISTENT
+
+
+69: --dry-run limit to 192.168.0.0/16 app Apache proto tcp
+
+
+70: --dry-run limit to 192.168.0.0/16 app Apache proto udp
+
+
+71: --dry-run limit to 192.168.0.0/16 app No Protocol Multi
+
+
+72: --dry-run limit to 192.168.0.0/16 app Samba from 192.168.0.0/16 port http
+
+
+73: --dry-run limit to 192.168.0.0/16 app Samba from 192.168.0.0/16 port 22 proto tcp
+
+
+74: --dry-run limit to any app NONEXISTENT
+
+
+75: --dry-run limit to any app Apache proto tcp
+
+
+76: --dry-run limit to any app Apache proto udp
+
+
+77: --dry-run limit to any app No Protocol Multi
+
+
+78: --dry-run limit to any app Samba from any port http
+
+
+79: --dry-run limit to any app Samba from any port 22 proto tcp
+
+
+80: --dry-run limit from 192.168.0.0/16 app NONEXISTENT
+
+
+81: --dry-run limit from 192.168.0.0/16 app Apache proto tcp
+
+
+82: --dry-run limit from 192.168.0.0/16 app Apache proto udp
+
+
+83: --dry-run limit from 192.168.0.0/16 app No Protocol Multi
+
+
+84: --dry-run limit from 192.168.0.0/16 app Samba to 192.168.0.0/16 port http
+
+
+85: --dry-run limit from 192.168.0.0/16 app Samba to 192.168.0.0/16 port 22 proto tcp
+
+
+86: --dry-run limit from any app NONEXISTENT
+
+
+87: --dry-run limit from any app Apache proto tcp
+
+
+88: --dry-run limit from any app Apache proto udp
+
+
+89: --dry-run limit from any app No Protocol Multi
+
+
+90: --dry-run limit from any app Samba to any port http
+
+
+91: --dry-run limit from any app Samba to any port 22 proto tcp
+
+
+TESTING APPLICATION INTEGRATION (case sensitive)
+92: --dry-run allow runtest
+
+
+TESTING ARGS (interfaces)
+93: --dry-run allow in on eth0:1 to any app Bind9
+
+
+94: --dry-run allow on eth0 to any app Bind9
+
+
+95: --dry-run allow in ina on eth0 to any app Bind9
+
+
+96: --dry-run allow in ona eth0 to any app Bind9
+
+
+97: --dry-run allow in eth0 to any app Bind9
+
+
+98: --dry-run deny in on eth0:1 to any app Bind9
+
+
+99: --dry-run deny on eth0 to any app Bind9
+
+
+100: --dry-run deny in ina on eth0 to any app Bind9
+
+
+101: --dry-run deny in ona eth0 to any app Bind9
+
+
+102: --dry-run deny in eth0 to any app Bind9
+
+
+103: --dry-run limit in on eth0:1 to any app Bind9
+
+
+104: --dry-run limit on eth0 to any app Bind9
+
+
+105: --dry-run limit in ina on eth0 to any app Bind9
+
+
+106: --dry-run limit in ona eth0 to any app Bind9
+
+
+107: --dry-run limit in eth0 to any app Bind9
+
+
+108: --dry-run allow out on eth0:1 to any app Bind9
+
+
+109: --dry-run allow on eth0 to any app Bind9
+
+
+110: --dry-run allow out ina on eth0 to any app Bind9
+
+
+111: --dry-run allow out ona eth0 to any app Bind9
+
+
+112: --dry-run allow out eth0 to any app Bind9
+
+
+113: --dry-run deny out on eth0:1 to any app Bind9
+
+
+114: --dry-run deny on eth0 to any app Bind9
+
+
+115: --dry-run deny out ina on eth0 to any app Bind9
+
+
+116: --dry-run deny out ona eth0 to any app Bind9
+
+
+117: --dry-run deny out eth0 to any app Bind9
+
+
+118: --dry-run limit out on eth0:1 to any app Bind9
+
+
+119: --dry-run limit on eth0 to any app Bind9
+
+
+120: --dry-run limit out ina on eth0 to any app Bind9
+
+
+121: --dry-run limit out ona eth0 to any app Bind9
+
+
+122: --dry-run limit out eth0 to any app Bind9
+
+
